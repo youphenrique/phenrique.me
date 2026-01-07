@@ -21,7 +21,7 @@
     "basehub": "^9.5.0",
     "geist": "^1.5.1",
     "motion": "^12.23.20",
-    "next": "^15.6.0-canary.26",
+    "next": "^15.6.0-canary.60",
     "next-mdx-remote-client": "^2.1.5",
     "react": "^19.1.0",
     "react-aria-components": "^1.12.2",
