@@ -7,4 +7,4 @@ const dictionaries = {
   pt: () => import("./pt.json").then((module) => module.default),
 };
 
-export const getAppDictionary = (locale: Languages) => dictionaries[locale]();
+export const getLinkbioDictionary = (locale: Languages) => dictionaries[locale]();

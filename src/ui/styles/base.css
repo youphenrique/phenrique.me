@@ -1,4 +1,5 @@
-@import "@prose-ui/next/prose-ui.css";
+@import "@prose-ui/style/prose-ui.css";
+@import "@prose-ui/style/katex.min.css";
 
 @layer reset, base, tokens, recipes, utilities;
 
@@ -9,6 +10,7 @@
   --p-body-color-bg: transparent;
   --p-link-text-color: var(--colors-emerald-600);
   --p-link-text-decoration-color: var(--colors-emerald-600);
+  --p-content-gap-heading: 1.5rem;
   --p-content-gap: 1rem;
 }
 
@@ -22,12 +24,27 @@
   }
 }
 
-.prose-ui blockquote {
-  padding-left: 1rem;
-}
+.prose-ui {
+  &.formal-text {
+    :is(h1, h2, h3, h4) {
+      --p-body-font-family: Vollkorn;
+      font-family: var(--p-body-font-family), sans-serif;
+    }
 
-@keyframes pulse-custom {
-  50% {
-    opacity: 0.5;
+    :is(h2) {
+      font-size: 2.25rem;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+  }
+
+  blockquote {
+    padding-left: 1rem;
+  }
+
+  @keyframes pulse-custom {
+    50% {
+      opacity: 0.5;
+    }
   }
 }

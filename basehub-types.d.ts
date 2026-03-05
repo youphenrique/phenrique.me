@@ -98,6 +98,8 @@ export interface BioSection {
     _sys: BlockDocumentSys
     _title: Scalars['String']
     description: Description
+    image: BlockImage
+    title: Scalars['String']
     __typename: 'BioSection'
 }
 
@@ -572,6 +574,8 @@ export interface Reading {
 
 export interface RepoSys {
     branches: _Branches
+    dashboardUrl: Scalars['String']
+    forkUrl: Scalars['String']
     hash: Scalars['String']
     id: Scalars['ID']
     playgroundInfo: (_PlaygroundInfo | null)
@@ -980,6 +984,8 @@ export interface BioSectionGenqlSelection{
     _sys?: BlockDocumentSysGenqlSelection
     _title?: boolean | number
     description?: DescriptionGenqlSelection
+    image?: BlockImageGenqlSelection
+    title?: boolean | number
     __typename?: boolean | number
     __fragmentOn?: "BioSection"
 }
@@ -1806,6 +1812,8 @@ export interface ReadingGenqlSelection{
 
 export interface RepoSysGenqlSelection{
     branches?: (_BranchesGenqlSelection & { __args?: {limit?: (Scalars['Int'] | null), offset?: (Scalars['Int'] | null)} })
+    dashboardUrl?: boolean | number
+    forkUrl?: boolean | number
     hash?: boolean | number
     id?: boolean | number
     playgroundInfo?: _PlaygroundInfoGenqlSelection
