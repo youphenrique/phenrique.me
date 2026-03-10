@@ -1,9 +1,10 @@
 import Image from "next/image";
+import { Suspense } from "react";
 import { basehub } from "basehub";
 import { draftMode } from "next/headers";
-import { vstack } from "@/panda/patterns";
 
 import { css } from "@/panda/css";
+import { vstack } from "@/panda/patterns";
 import { MDX } from "@/app/_components/mdx";
 import type { Languages } from "@/types/app";
 import { InnerContainer } from "@/app/_components/inner-container";
@@ -66,12 +67,14 @@ export default async function AboutPage(props: AboutPageProps) {
           boxShadow: "0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -4px rgba(0, 0, 0, .1)",
         })}
       />
-      <MDX
-        displayLanguage={displayLanguage}
-        internalMdxComponents={{ CurrentAge }}
-        data={data.about.bioSection.description.markdown}
-        wrapper={(props) => <AboutMdProcessor>{props.children}</AboutMdProcessor>}
-      />
+      <Suspense fallback={<div>Loading...</div>}>
+        <MDX
+          displayLanguage={displayLanguage}
+          internalMdxComponents={{ CurrentAge }}
+          data={data.about.bioSection.description.markdown}
+          wrapper={(props) => <AboutMdProcessor>{props.children}</AboutMdProcessor>}
+        />
+      </Suspense>
     </InnerContainer>
   );
 }
