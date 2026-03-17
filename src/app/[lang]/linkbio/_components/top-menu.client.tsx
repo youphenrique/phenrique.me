@@ -16,7 +16,7 @@ import type { Languages } from "@/types/app";
 import { flex, hstack } from "@/panda/patterns";
 import { MenuIcon } from "@/app/_components/menu-icon";
 import { CheckIcon } from "@/app/_components/close-icon";
-import { languageItems } from "@/app/_content/language-items";
+import { languageItems } from "@/app/_data/language-items";
 import { getLinkbioDictionary } from "@/app/[lang]/linkbio/_dictionaries/dictionaries";
 
 const shareLinks = [

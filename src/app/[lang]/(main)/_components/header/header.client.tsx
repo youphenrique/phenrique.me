@@ -12,7 +12,7 @@ import type { Languages } from "@/types/app";
 import type { MediaData } from "@/types/basehub";
 import { center, flex, hstack, vstack } from "@/panda/patterns";
 import { useMediaQuery } from "@/app/_hooks/use-media-query";
-import { languageItems } from "@/app/_content/language-items";
+import { languageItems } from "@/app/_data/language-items";
 import { LanguagesIcon } from "@/app/_components/languages-icon";
 import { getAppDictionary } from "@/app/_dictionaries/dictionaries";
 import { ThemeToggle } from "@/app/[lang]/(main)/_components/header/theme-toggle";

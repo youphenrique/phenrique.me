@@ -6,7 +6,7 @@ import { css } from "@/panda/css";
 import type { Languages } from "@/types/app";
 import { center, flex } from "@/panda/patterns";
 import { CheckIcon } from "@/app/_components/close-icon";
-import { languageItems } from "@/app/_content/language-items";
+import { languageItems } from "@/app/_data/language-items";
 import { LanguagesIcon } from "@/app/_components/languages-icon";
 import { getAppDictionary } from "@/app/_dictionaries/dictionaries";
 
