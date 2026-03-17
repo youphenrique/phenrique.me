@@ -18,8 +18,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    params: Promise.resolve({}),
-    searchParams: Promise.resolve({ lang: "en" }),
+    params: Promise.resolve({ lang: "en" }),
   },
   async play(context) {
     const canvas = within(context.canvasElement);
