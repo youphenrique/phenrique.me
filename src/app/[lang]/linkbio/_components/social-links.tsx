@@ -1,34 +1,14 @@
 import Image from "next/image";
-import { basehub } from "basehub";
 
 import { css } from "@/panda/css";
 import { vstack } from "@/panda/patterns";
+import type { LinkbioPage } from "content-collections";
 
-export async function SocialLinks() {
-  const data = await basehub().query({
-    linkbio: {
-      socialLinks: {
-        items: {
-          _title: true,
-          mediaName: true,
-          mediaSlug: true,
-          mediaLink: true,
-          mediaLogo: {
-            on_BlockFile: {
-              url: true,
-            },
-            on_BlockImage: {
-              url: true,
-              alt: true,
-              width: true,
-              height: true,
-            },
-          },
-        },
-      },
-    },
-  });
+type SocialLinksProps = {
+  linkbioPage: LinkbioPage;
+};
 
+export async function SocialLinks(props: SocialLinksProps) {
   return (
     <div
       className={vstack({
@@ -36,11 +16,11 @@ export async function SocialLinks() {
         marginTop: { base: 12, md: 16 },
       })}
     >
-      {data.linkbio.socialLinks.items.map((item) => (
+      {props.linkbioPage.socialLinks.map((item, idx) => (
         <a
-          key={item._title}
+          key={idx}
           target="_blank"
-          href={item.mediaLink}
+          href={item.link}
           className={css({
             py: 2,
             px: 4,
@@ -62,15 +42,7 @@ export async function SocialLinks() {
               display: "block",
             })}
           >
-            <Image
-              src={item.mediaLogo.url}
-              // @ts-ignore
-              width={item.mediaLogo.width ?? "32"}
-              // @ts-ignore
-              height={item.mediaLogo.height ?? "32"}
-              // @ts-ignore
-              alt={item.mediaLogo.alt ?? `${item.mediaName} logo`}
-            />
+            <Image src={item.logoUrl} width={32} height={32} alt={`${item.name} logo`} />
           </span>
           <div
             className={css({
@@ -86,7 +58,7 @@ export async function SocialLinks() {
                 fontWeight: "medium",
               })}
             >
-              {item.mediaName}
+              {item.name}
             </span>
             <span
               className={css({
@@ -96,7 +68,7 @@ export async function SocialLinks() {
                 fontWeight: "medium",
               })}
             >
-              {item.mediaSlug}
+              {item.slug}
             </span>
           </div>
         </a>

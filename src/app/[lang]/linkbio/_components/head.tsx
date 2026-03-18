@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { basehub } from "basehub";
 import type { PropsWithChildren } from "react";
 
 import { css } from "@/panda/css";
@@ -7,34 +6,15 @@ import { css } from "@/panda/css";
 type HeadProps = PropsWithChildren;
 
 export async function Head(props: HeadProps) {
-  const data = await basehub().query({
-    linkbio: {
-      bioSection: {
-        name: true,
-        avatar: {
-          on_BlockImage: {
-            url: true,
-            alt: true,
-            width: true,
-            height: true,
-          },
-        },
-      },
-    },
-  });
-
   return (
     <div className={css({ mt: 2, textAlign: "center" })}>
       <div className={css({ maxW: 24, mx: "auto" })}>
         <Image
           priority
-          src={data.linkbio.bioSection.avatar.url}
-          // @ts-ignore
-          alt={data.linkbio.bioSection.avatar.alt}
-          // @ts-ignore
-          width={data.linkbio.bioSection.avatar.width}
-          // @ts-ignore
-          height={data.linkbio.bioSection.avatar.height}
+          src="https://assets.basehub.com/f4f66b1c/e908c4c73870138d738f48eadc6089fa/wmremove-transformed-edit.jpg"
+          alt="A black and white photo of me smiling"
+          width={1048}
+          height={1048}
           className={css({
             mb: 6,
             mx: "auto",
@@ -54,7 +34,7 @@ export async function Head(props: HeadProps) {
           backgroundImage: `linear-gradient(to bottom, #F5F5F5, #F5F5F5 40%, #999999)`,
         })}
       >
-        {data.linkbio.bioSection.name}
+        Paulo Henrique
       </h1>
       {props.children}
     </div>
