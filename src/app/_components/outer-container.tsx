@@ -23,10 +23,6 @@ export function OuterContainer(props: OuterContainerProps) {
         className={css(
           {
             position: "relative",
-            borderInline: {
-              base: "none",
-              md: "1px dashed token(colors.clr_neutral_300_700)",
-            },
             _before: {
               top: 0,
               left: 0,

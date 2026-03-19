@@ -1,10 +1,8 @@
 import type { NextConfig } from "next";
+import { withContentCollections } from "@content-collections/next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    reactCompiler: true,
-    ppr: "incremental",
-  },
+  reactCompiler: true,
   images: {
     remotePatterns: [
       {
@@ -15,4 +13,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withContentCollections(nextConfig);

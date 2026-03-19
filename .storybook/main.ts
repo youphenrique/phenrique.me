@@ -9,6 +9,7 @@ const config: StorybookConfig = {
     name: "@storybook/nextjs",
     options: {},
   },
+  staticDirs: ["../public"],
   features: {
     experimentalRSC: true,
   },
@@ -19,16 +20,10 @@ const config: StorybookConfig = {
     config.resolve.plugins = [
       ...(config.resolve.plugins || []),
       new TsconfigPathsPlugin({
-        configFile: path.resolve(__dirname, "../tsconfig.json"),
+        configFile: path.resolve(process.cwd(), "./tsconfig.json"),
         extensions: [".ts", ".tsx", ".js", ".jsx", ".mjs"],
       }),
     ];
-
-    config.resolve.alias = {
-      ...(config.resolve.alias || {}),
-      // Swap basehub for a browser-only mock inside Storybook
-      basehub: path.resolve(__dirname, "../src/app/_api/mocks/basehub.mock.ts"),
-    };
 
     return config;
   },
