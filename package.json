@@ -4,8 +4,8 @@
   "description": "Paulo Henrique's website",
   "private": true,
   "scripts": {
-    "dev": "basehub dev & next dev --turbopack",
-    "build": "basehub & next build --turbopack",
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
     "start": "next start",
     "lint": "next lint",
     "prepare": "panda codegen",
@@ -18,10 +18,9 @@
     "@prose-ui/style": "^2.0.8",
     "@vercel/analytics": "^2.0.0",
     "@vercel/speed-insights": "^2.0.0",
-    "basehub": "^9.5.3",
     "geist": "^1.7.0",
     "motion": "^12.35.2",
-    "next": "16.1.7",
+    "next": "16.2.0",
     "next-mdx-remote-client": "^2.1.9",
     "react": "19.2.4",
     "react-aria-components": "^1.16.0",
@@ -29,6 +28,9 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@content-collections/core": "^0.14.2",
+    "@content-collections/mdx": "^0.2.2",
+    "@content-collections/next": "^0.2.11",
     "@pandacss/dev": "^1.9.0",
     "@storybook/nextjs": "^10.2.19",
     "@types/node": "^22",

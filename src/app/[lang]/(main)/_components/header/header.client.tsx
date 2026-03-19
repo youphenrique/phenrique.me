@@ -8,8 +8,7 @@ import { Fragment, useEffect, useState, useRef } from "react";
 import { Separator, ToggleButton } from "react-aria-components";
 
 import { css } from "@/panda/css";
-import type { Languages } from "@/types/app";
-import type { MediaData } from "@/types/basehub";
+import type { Languages } from "@/app/_types/app";
 import { center, flex, hstack, vstack } from "@/panda/patterns";
 import { useMediaQuery } from "@/app/_hooks/use-media-query";
 import { languageItems } from "@/app/_data/language-items";
@@ -17,21 +16,9 @@ import { LanguagesIcon } from "@/app/_components/languages-icon";
 import { getAppDictionary } from "@/app/_dictionaries/dictionaries";
 import { ThemeToggle } from "@/app/[lang]/(main)/_components/header/theme-toggle";
 import { LanguagesMenu } from "@/app/[lang]/(main)/_components/header/languages-menu";
-
-type NavLink = {
-  _title: string;
-  label: string;
-  path: string;
-  icon: string | null;
-};
-
-type NavLinks = {
-  items: NavLink[];
-};
+import { navLinks } from "@/app/[lang]/(main)/_data/nav-links";
 
 type CHeaderProps = {
-  avatar: MediaData;
-  navLinks: NavLinks;
   displayLanguage: Languages;
   dict: Awaited<ReturnType<typeof getAppDictionary>>;
 };
@@ -138,10 +125,10 @@ export function CHeader(props: CHeaderProps) {
               >
                 <Image
                   priority
-                  src={props.avatar.url}
-                  width={props.avatar.width}
-                  height={props.avatar.height}
-                  alt={props.avatar.alt ?? "Avatar"}
+                  src="https://assets.basehub.com/f4f66b1c/0ac4add581e424dfc36462a08d571655/me.website.jpg"
+                  width={1036}
+                  height={1040}
+                  alt="A black and white photo of a young man"
                   className={css({
                     border: "1px solid",
                     borderRadius: "full",
@@ -159,13 +146,12 @@ export function CHeader(props: CHeaderProps) {
               />
             </div>
             <nav className={hstack({ gap: 4, fontSize: "sm", px: 5, hideBelow: "sm" })}>
-              {props.navLinks.items.map((link, index) => (
+              {navLinks.map((link, index) => (
                 <Link
-                  key={link._title}
+                  key={index}
                   href={`/${props.displayLanguage}` + link.path}
                   className={css({
-                    pointerEvents:
-                      link.path !== "/reading" && link.path !== "/about" ? "none" : "default", // Remove later when menu pages are ready
+                    pointerEvents: link.path !== "/reading" && link.path !== "/about" ? "none" : "default", // Remove later when menu pages are ready
                     p: 1.5,
                     position: "relative",
                     fontWeight: "medium",
@@ -174,9 +160,8 @@ export function CHeader(props: CHeaderProps) {
                     _hover: { color: "clr_coral_flame" },
                   })}
                 >
-                  {link.label}
-                  {(pathname.includes("reading") && index === 3) ||
-                  (pathname.includes("about") && index === 0) ? (
+                  {props.dict.header[`${link.title}-label`]}
+                  {(pathname.includes("reading") && index === 3) || (pathname.includes("about") && index === 0) ? (
                     <span
                       className={css({
                         left: 0,
@@ -191,7 +176,7 @@ export function CHeader(props: CHeaderProps) {
                       })}
                     />
                   ) : null}
-                  {link.path !== "/" && link.path !== "/reading" && link.path !== "/about" ? (
+                  {link.path !== "/reading" ? (
                     <span
                       className={css({
                         position: "absolute",
@@ -207,7 +192,7 @@ export function CHeader(props: CHeaderProps) {
                         transform: "rotate(10deg)",
                       })}
                     >
-                      {props.dict.header["soon-link"]}
+                      {props.dict.header["soon-label"]}
                     </span>
                   ) : null}
                 </Link>
@@ -288,13 +273,12 @@ export function CHeader(props: CHeaderProps) {
                     gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
                   })}
                 >
-                  {props.navLinks.items.map((link) => (
+                  {navLinks.map((link, index) => (
                     <Link
-                      key={link._title}
+                      key={index}
                       href={`/${props.displayLanguage}` + link.path}
                       className={hstack({
-                        pointerEvents:
-                          link.path !== "/reading" && link.path !== "/about" ? "none" : "default", // Remove later when menu pages are ready
+                        pointerEvents: link.path !== "/reading" && link.path !== "/about" ? "none" : "default", // Remove later when menu pages are ready
                         p: 1.5,
                         fontSize: "sm",
                         position: "relative",
@@ -305,8 +289,8 @@ export function CHeader(props: CHeaderProps) {
                       })}
                     >
                       <span dangerouslySetInnerHTML={{ __html: link.icon! }} />
-                      {link.label}
-                      {link.path !== "/" && link.path !== "/reading" && link.path !== "/about" ? (
+                      {props.dict.header[`${link.title}-label`]}
+                      {link.path !== "/reading" ? (
                         <span
                           className={css({
                             position: "absolute",
@@ -322,7 +306,7 @@ export function CHeader(props: CHeaderProps) {
                             transform: "rotate(10deg)",
                           })}
                         >
-                          {props.dict.header["soon-link"]}
+                          {props.dict.header["soon-label"]}
                         </span>
                       ) : null}
                     </Link>
@@ -363,9 +347,7 @@ export function CHeader(props: CHeaderProps) {
                             className={css({
                               fontWeight: "semibold",
                               color:
-                                props.displayLanguage === language.id
-                                  ? "clr_neutral_900_50"
-                                  : "clr_neutral_400_500",
+                                props.displayLanguage === language.id ? "clr_neutral_900_50" : "clr_neutral_400_500",
                             })}
                           >
                             {language.id}

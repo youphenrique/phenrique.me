@@ -1,6 +1,10 @@
 {
   "header": {
-    "soon-link": "Em breve",
+    "about-label": "Sobre",
+    "reading-label": "Leitura",
+    "work-label": "Trabalho",
+    "writing-label": "Escrita",
+    "soon-label": "Em breve",
     "menu-label": "Idioma"
   },
   "footer": {

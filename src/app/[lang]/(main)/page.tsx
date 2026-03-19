@@ -1,30 +1,22 @@
-import { basehub } from "basehub";
+import { notFound } from "next/navigation";
+import { mdxComponents } from "@prose-ui/next";
+import { MDXContent } from "@content-collections/mdx/react";
 
 import { css } from "@/panda/css";
-import { MDX } from "@/app/_components/mdx";
-import type { Languages } from "@/types/app";
+import type { Languages } from "@/app/_types/app";
+import { getHomePage } from "@/app/[lang]/(main)/_utils/content";
 import { InnerContainer } from "@/app/_components/inner-container";
-
-export const dynamic = "force-static";
 
 type HomePageProps = Pick<PageProps<"/[lang]">, "params">;
 
 export default async function HomePage(props: HomePageProps) {
   const displayLanguage = ((await props.params)?.lang ?? "en") as Languages;
 
-  const data = await basehub().query({
-    home: {
-      bioSection: {
-        __args: {
-          variants: { language: displayLanguage },
-        },
-        title: true,
-        description: {
-          markdown: true,
-        },
-      },
-    },
-  });
+  const homePage = getHomePage(displayLanguage);
+
+  if (homePage === undefined) {
+    notFound();
+  }
 
   return (
     <InnerContainer styles={css.raw({ py: { base: 32, sm: 44, "2xl": 52 } })}>
@@ -38,17 +30,11 @@ export default async function HomePage(props: HomePageProps) {
           backgroundImage: `linear-gradient(to bottom, token(colors.clr_neutral_950_snow), token(colors.clr_neutral_950_snow) 40%, #999999)`,
         })}
       >
-        {data.home.bioSection.title}
+        Paulo Henrique
       </h1>
-      <MDX
-        displayLanguage={displayLanguage}
-        data={data.home.bioSection.description.markdown}
-        wrapper={(props) => (
-          <div className={"prose-ui antialiased " + css({ mt: 4, maxW: "xl" })}>
-            {props.children}
-          </div>
-        )}
-      />
+      <div className={"prose-ui antialiased " + css({ mt: 4, maxW: "xl" })}>
+        <MDXContent code={homePage.mdx} components={mdxComponents} />
+      </div>
     </InnerContainer>
   );
 }

@@ -1,4 +1,4 @@
-import type { Languages } from "@/types/app";
+import type { Languages } from "@/app/_types/app";
 import { CTopMenu } from "@/app/[lang]/linkbio/_components/top-menu.client";
 import { getLinkbioDictionary } from "@/app/[lang]/linkbio/_dictionaries/dictionaries";
 

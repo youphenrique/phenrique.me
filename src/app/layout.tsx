@@ -1,4 +1,3 @@
-import { basehub } from "basehub";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Vollkorn } from "next/font/google";
@@ -8,6 +7,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "@/ui/styles/base.css";
 import { css } from "@/panda/css";
+import type { Languages } from "@/app/_types/app";
+import { getMetadata } from "@/app/_utils/content";
 import { Provider } from "@/app/_components/provider";
 import { themeEffect } from "@/app/_utils/theme-effect";
 
@@ -22,35 +23,30 @@ export const viewport: Viewport = {
   ],
 };
 
-export async function generateMetadata(): Promise<Metadata> {
-  const meta = await basehub({ cache: "force-cache" }).query({
-    home: {
-      metadata: {
-        title: true,
-        xUsername: true,
-        description: true,
-        ogImage: {
-          url: true,
-        },
-      },
-    },
-  });
+export async function generateMetadata(props: Pick<PageProps<"/[lang]/linkbio">, "params">): Promise<Metadata> {
+  const displayLanguage = ((await props.params)?.lang ?? "en") as Languages;
+
+  const metadata = getMetadata(displayLanguage);
+  const imageUrl = `https://assets.basehub.com/f4f66b1c/e92b9d5936efdd1b7839ce9c56af1b62/opengraph-image.png`;
+
+  const title = metadata?.title ?? "Paulo Henrique";
+  const description = metadata?.description ?? "Paulo Henrique's personal website";
 
   return {
-    title: meta.home.metadata.title,
-    description: meta.home.metadata.description,
+    title,
+    description,
     openGraph: {
       type: "website",
       siteName: "Paulo Henrique",
       title: {
         template: "%s − Paulo Henrique",
-        default: meta.home.metadata.title,
+        default: title,
       },
       images: [
         {
           width: 1200,
           height: 630,
-          url: meta.home.metadata.ogImage.url,
+          url: imageUrl,
         },
       ],
     },
@@ -58,12 +54,12 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: {
         template: "%s − Paulo Henrique",
-        default: meta.home.metadata.title,
+        default: title,
       },
-      site: "@__phenrique7",
-      creator: "@__phenrique7",
-      description: meta.home.metadata.description,
-      images: [{ url: meta.home.metadata.ogImage.url }],
+      description,
+      site: "@youphenrique",
+      creator: "@youphenrique",
+      images: [{ url: imageUrl }],
     },
   };
 }

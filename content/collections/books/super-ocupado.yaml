@@ -1,0 +1,15 @@
+title: "Super ocupado"
+rating: 4
+finishedDate: "2017-04-15"
+authors:
+  - "Kevin DeYoung"
+status: "finished"
+progress: 100
+genres:
+  - "Christian"
+  - "Personal Development"
+cover:
+  url: "https://assets.basehub.com/f4f66b1c/d1c7ad4c7eea77d7a14f7bc1a7d2a55c/super-ocupado.jpg"
+  alt: "A red book cover with a cartoon character in a hamster wheel"
+  width: 484
+  height: 728

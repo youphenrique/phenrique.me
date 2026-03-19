@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import type { Languages } from "@/types/app";
+import type { Languages } from "@/app/_types/app";
 
 function normalizeUserLanguage(language: string | undefined): Languages {
   if (language === undefined) return "en";
@@ -35,9 +35,7 @@ export function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  return NextResponse.redirect(
-    new URL(`/${displayLanguage}${request.nextUrl.pathname}`, request.url),
-  );
+  return NextResponse.redirect(new URL(`/${displayLanguage}${request.nextUrl.pathname}`, request.url));
 }
 
 export const config = {

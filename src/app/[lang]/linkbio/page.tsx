@@ -1,52 +1,41 @@
-import { basehub } from "basehub";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 import { css } from "@/panda/css";
-import type { Languages } from "@/types/app";
-import { Head } from "@/app/[lang]/linkbio/_components/head";
+import type { Languages } from "@/app/_types/app";
 import { TopMenu } from "@/app/[lang]/linkbio/_components/top-menu";
+import { getLinkbioPage } from "@/app/[lang]/linkbio/_utils/content";
 import { SocialLinks } from "@/app/[lang]/linkbio/_components/social-links";
 import { Presentation } from "@/app/[lang]/linkbio/_components/presentation";
 
-export async function generateMetadata(
-  props: Pick<PageProps<"/[lang]/linkbio">, "params">,
-): Promise<Metadata> {
+export async function generateMetadata(props: Pick<PageProps<"/[lang]/linkbio">, "params">): Promise<Metadata> {
   const displayLanguage = ((await props.params)?.lang ?? "en") as Languages;
 
-  const meta = await basehub().query({
-    linkbio: {
-      metadata: {
-        __args: {
-          variants: { language: displayLanguage },
-        },
-        title: true,
-        xUsername: true,
-        description: true,
-        ogImage: {
-          url: true,
-        },
-      },
-    },
-  });
+  const linkbioPage = getLinkbioPage(displayLanguage);
+  const imageUrl = `https://assets.basehub.com/f4f66b1c/e92b9d5936efdd1b7839ce9c56af1b62/opengraph-image.png`;
 
   return {
-    title: meta.linkbio.metadata.title,
-    description: meta.linkbio.metadata.description,
-    openGraph: {
-      title: meta.linkbio.metadata.title,
-      images: [
-        {
-          width: 1200,
-          height: 630,
-          url: meta.linkbio.metadata.ogImage.url,
-        },
-      ],
-    },
-    twitter: {
-      title: meta.linkbio.metadata.title,
-      description: meta.linkbio.metadata.description,
-      images: [{ url: meta.linkbio.metadata.ogImage.url }],
-    },
+    title: "Linkbio",
+    description: linkbioPage?.metadata.description ?? "Check out Paulo Henrique's Linkbio",
+    ...(linkbioPage !== undefined && {
+      openGraph: {
+        title: "Linkbio",
+        images: [
+          {
+            width: 1200,
+            height: 630,
+            url: imageUrl,
+          },
+        ],
+      },
+    }),
+    ...(linkbioPage !== undefined && {
+      twitter: {
+        title: "Linkbio",
+        description: linkbioPage.metadata.description,
+        images: [{ url: imageUrl }],
+      },
+    }),
   };
 }
 
@@ -54,6 +43,12 @@ type LinkbioPageProps = Pick<PageProps<"/[lang]/linkbio">, "params">;
 
 export default async function LinkbioPage(props: LinkbioPageProps) {
   const displayLanguage = ((await props.params)?.lang ?? "en") as Languages;
+
+  const linkbioPage = getLinkbioPage(displayLanguage);
+
+  if (linkbioPage === undefined) {
+    notFound();
+  }
 
   return (
     <>
@@ -104,10 +99,8 @@ export default async function LinkbioPage(props: LinkbioPageProps) {
         })}
       >
         <TopMenu displayLanguage={displayLanguage} />
-        <Head>
-          <Presentation displayLanguage={displayLanguage} />
-        </Head>
-        <SocialLinks />
+        <Presentation linkbioPage={linkbioPage} displayLanguage={displayLanguage} />
+        <SocialLinks linkbioPage={linkbioPage} />
       </main>
     </>
   );
