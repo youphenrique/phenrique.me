@@ -4,8 +4,8 @@
   "description": "Paulo Henrique's website",
   "private": true,
   "scripts": {
-    "dev": "basehub dev & next dev --turbopack",
-    "build": "basehub & next build --turbopack",
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
     "start": "next start",
     "lint": "next lint",
     "prepare": "panda codegen",
@@ -18,7 +18,6 @@
     "@prose-ui/style": "^2.0.8",
     "@vercel/analytics": "^2.0.0",
     "@vercel/speed-insights": "^2.0.0",
-    "basehub": "^9.5.3",
     "geist": "^1.7.0",
     "motion": "^12.35.2",
     "next": "16.2.0",

@@ -1,6 +1,6 @@
 # phenrique.me
 
-This is my personal website/portfolio built with Next.js and other modern web technologies. 
+This is my personal website/portfolio built with Next.js and other modern web technologies.
 
 ## Technologies
 
@@ -9,6 +9,5 @@ This is my personal website/portfolio built with Next.js and other modern web te
 - [TypeScript](https://www.typescriptlang.org/) - Type safety
 - [PandaCSS](https://panda-css.com/) - CSS-in-JS styling solution
 - [Geist Font](https://vercel.com/font) - Typography
-- [BaseHub](https://basehub.com/) - Content management
 - [React Aria Components](https://react-spectrum.adobe.com/react-aria/index.html) - World-class accessible components with custom styles
 - [Vercel](https://vercel.com/) - Deployment platform
