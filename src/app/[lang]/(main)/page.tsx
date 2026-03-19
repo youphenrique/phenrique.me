@@ -3,7 +3,7 @@ import { mdxComponents } from "@prose-ui/next";
 import { MDXContent } from "@content-collections/mdx/react";
 
 import { css } from "@/panda/css";
-import type { Languages } from "@/types/app";
+import type { Languages } from "@/app/_types/app";
 import { getHomePage } from "@/app/[lang]/(main)/_utils/content";
 import { InnerContainer } from "@/app/_components/inner-container";
 

@@ -24,12 +24,6 @@ const config: StorybookConfig = {
       }),
     ];
 
-    config.resolve.alias = {
-      ...(config.resolve.alias || {}),
-      // Swap basehub for a browser-only mock inside Storybook
-      basehub: path.resolve(process.cwd(), "./src/app/_api/mocks/basehub.mock.ts"),
-    };
-
     return config;
   },
 };

@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { Button, Menu, MenuItem, MenuTrigger, Popover } from "react-aria-components";
 import { css } from "@/panda/css";
-import type { Languages } from "@/types/app";
+import type { Languages } from "@/app/_types/app";
 import { center, flex } from "@/panda/patterns";
 import { CheckIcon } from "@/app/_components/close-icon";
 import { languageItems } from "@/app/_data/language-items";

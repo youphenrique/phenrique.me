@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { css } from "@/panda/css";
-import type { Languages } from "@/types/app";
+import type { Languages } from "@/app/_types/app";
 import { TopMenu } from "@/app/[lang]/linkbio/_components/top-menu";
 import { getLinkbioPage } from "@/app/[lang]/linkbio/_utils/content";
 import { SocialLinks } from "@/app/[lang]/linkbio/_components/social-links";

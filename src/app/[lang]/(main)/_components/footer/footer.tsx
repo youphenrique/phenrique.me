@@ -1,7 +1,7 @@
-import { basehub } from "basehub";
 import { css } from "@/panda/css";
 import { hstack } from "@/panda/patterns";
-import type { Languages } from "@/types/app";
+import type { Languages } from "@/app/_types/app";
+import { allSocialLinks } from "content-collections";
 import { InnerContainer } from "@/app/_components/inner-container";
 import { getAppDictionary } from "@/app/_dictionaries/dictionaries";
 
@@ -12,21 +12,7 @@ type FooterProps = {
 export async function Footer(props: FooterProps) {
   const dict = await getAppDictionary(props.displayLanguage);
 
-  const data = await basehub().query({
-    layout: {
-      footer: {
-        socialLinks: {
-          items: {
-            _title: true,
-            label: true,
-            icon: true,
-            href: true,
-          },
-        },
-        source: true,
-      },
-    },
-  });
+  const socialLinks = allSocialLinks.filter((link) => link.icon !== undefined);
 
   return (
     <footer>
@@ -38,12 +24,12 @@ export async function Footer(props: FooterProps) {
         })}
       >
         <div className={hstack({ gap: { base: 6, lg: 4 } })}>
-          {data.layout.footer.socialLinks.items.map((item) => (
+          {socialLinks.map((item, idx) => (
             <a
-              key={item._title}
+              key={idx}
               target="_blank"
-              href={item.href}
-              title={item.label}
+              href={item.link}
+              title={item.name}
               rel="noopener noreferrer"
               dangerouslySetInnerHTML={{ __html: item.icon }}
               className={css({
@@ -60,7 +46,7 @@ export async function Footer(props: FooterProps) {
           ))}
         </div>
         <a
-          href={data.layout.footer.source}
+          href="https://github.com/youphenrique/phenrique.me"
           target="_blank"
           rel="noopener noreferrer"
           className={css({

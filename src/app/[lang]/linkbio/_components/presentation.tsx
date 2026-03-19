@@ -1,6 +1,6 @@
 import { css } from "@/panda/css";
 import { vstack } from "@/panda/patterns";
-import type { Languages } from "@/types/app";
+import type { Languages } from "@/app/_types/app";
 import type { LinkbioPage } from "content-collections";
 import Image from "next/image";
 

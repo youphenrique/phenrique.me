@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import type { Languages } from "@/types/app";
+import type { Languages } from "@/app/_types/app";
 
 function normalizeUserLanguage(language: string | undefined): Languages {
   if (language === undefined) return "en";

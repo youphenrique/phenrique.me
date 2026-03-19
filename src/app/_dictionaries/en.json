@@ -1,6 +1,10 @@
 {
   "header": {
-    "soon-link": "Soon",
+    "about-label": "About",
+    "reading-label": "Reading",
+    "work-label": "Work",
+    "writing-label": "Writing",
+    "soon-label": "Soon",
     "menu-label": "Languages"
   },
   "footer": {

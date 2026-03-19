@@ -7,7 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "@/ui/styles/base.css";
 import { css } from "@/panda/css";
-import type { Languages } from "@/types/app";
+import type { Languages } from "@/app/_types/app";
 import { getMetadata } from "@/app/_utils/content";
 import { Provider } from "@/app/_components/provider";
 import { themeEffect } from "@/app/_utils/theme-effect";

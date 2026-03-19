@@ -1,6 +1,10 @@
 {
   "header": {
-    "soon-link": "Bald",
+    "about-label": "Über",
+    "reading-label": "Lesen",
+    "work-label": "Arbeit",
+    "writing-label": "Schreiben",
+    "soon-label": "Bald",
     "menu-label": "Sprache"
   },
   "footer": {

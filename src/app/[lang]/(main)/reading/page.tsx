@@ -2,7 +2,7 @@ import { basehub } from "basehub";
 import type { Metadata } from "next";
 
 import { css } from "@/panda/css";
-import type { Languages } from "@/types/app";
+import type { Languages } from "@/app/_types/app";
 import { grid, vstack } from "@/panda/patterns";
 import { InnerContainer } from "@/app/_components/inner-container";
 import { BookItem } from "@/app/[lang]/(main)/reading/_components/book-item";
