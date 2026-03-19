@@ -31,7 +31,7 @@ export async function Footer(props: FooterProps) {
               href={item.link}
               title={item.name}
               rel="noopener noreferrer"
-              dangerouslySetInnerHTML={{ __html: item.icon }}
+              dangerouslySetInnerHTML={{ __html: item.icon! }}
               className={css({
                 w: 4,
                 color: "clr_neutral_700_400",
