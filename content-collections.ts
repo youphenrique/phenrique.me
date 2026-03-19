@@ -102,6 +102,74 @@ const linkbioPages = defineCollection({
   },
 });
 
+//////////////////////////////////////////
+//////////////////////////////////////////
+//////////                      //////////
+//////////         Books        //////////
+//////////                      //////////
+//////////////////////////////////////////
+//////////////////////////////////////////
+
+const books = defineCollection({
+  name: "books",
+  directory: "content/collections/books",
+  include: "**/*.yaml",
+  parser: "yaml",
+  schema: z.object({
+    title: z.string(),
+    status: z.enum(["reading", "finished"]),
+    genres: z.array(z.string()),
+    authors: z.array(z.string()),
+    finishedDate: z.coerce.date().nullable(),
+    progress: z.number(),
+    rating: z.number(),
+    cover: z.object({
+      url: z.string(),
+      alt: z.string(),
+      width: z.number(),
+      height: z.number(),
+    }),
+  }),
+});
+
+//////////////////////////////////////////
+//////////////////////////////////////////
+//////////                      //////////
+//////////     Reading page     //////////
+//////////                      //////////
+//////////////////////////////////////////
+//////////////////////////////////////////
+
+const readingPages = defineCollection({
+  name: "readingPages",
+  directory: "content/collections/pages/reading",
+  include: "**/*.yaml",
+  parser: "yaml",
+  schema: z.object({
+    metadata: z.object({
+      title: z.string(),
+      description: z.string(),
+    }),
+  }),
+  transform(document, context) {
+    const currentlyReads = context.documents(books).filter((book) => book.status === "reading");
+    const finishedBooks = context
+      .documents(books)
+      .filter((book) => book.status === "finished")
+      .sort((a, b) => {
+        if (a.finishedDate === null || b.finishedDate === null) {
+          throw new Error(`Book "${a.title}" or "${b.title}" has no finished date`);
+        }
+        return b.finishedDate.getTime() - a.finishedDate.getTime();
+      });
+    return {
+      ...document,
+      currentlyReads,
+      finishedBooks,
+    };
+  },
+});
+
 export default defineConfig({
-  content: [metadatum, homePages, linkbioPages, socialLinks],
+  content: [metadatum, homePages, linkbioPages, socialLinks, books, readingPages],
 });
