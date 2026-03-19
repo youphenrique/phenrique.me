@@ -9,6 +9,7 @@ const config: StorybookConfig = {
     name: "@storybook/nextjs",
     options: {},
   },
+  staticDirs: ["../public"],
   features: {
     experimentalRSC: true,
   },
