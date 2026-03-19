@@ -176,7 +176,7 @@ export function CHeader(props: CHeaderProps) {
                       })}
                     />
                   ) : null}
-                  {link.path !== "/reading" && link.path !== "/about" ? (
+                  {link.path !== "/reading" ? (
                     <span
                       className={css({
                         position: "absolute",
@@ -290,7 +290,7 @@ export function CHeader(props: CHeaderProps) {
                     >
                       <span dangerouslySetInnerHTML={{ __html: link.icon! }} />
                       {props.dict.header[`${link.title}-label`]}
-                      {link.path !== "/reading" && link.path !== "/about" ? (
+                      {link.path !== "/reading" ? (
                         <span
                           className={css({
                             position: "absolute",
