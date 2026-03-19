@@ -35,9 +35,7 @@ export function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  return NextResponse.redirect(
-    new URL(`/${displayLanguage}${request.nextUrl.pathname}`, request.url),
-  );
+  return NextResponse.redirect(new URL(`/${displayLanguage}${request.nextUrl.pathname}`, request.url));
 }
 
 export const config = {
