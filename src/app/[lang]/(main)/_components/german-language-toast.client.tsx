@@ -23,8 +23,8 @@ const toastMotion = {
 };
 
 const germanToastContent: TToastContent = {
-  title: "Hinweis",
-  description: `Mein Deutsch ist noch im Aufbau 🚧 Ich bin noch Anfänger, daher kann der Inhalt manchmal etwas seltsam klingen.`,
+  title: "Mein Deutsch ist noch im Aufbau",
+  description: `Ich bin noch Anfänger, daher kann der Inhalt manchmal etwas seltsam klingen.`,
 };
 
 function subscribe(callback: () => void) {
@@ -93,7 +93,8 @@ export function GermanLanguageToastClient(props: GermanLanguageToastClientProps)
           toast={toast}
           className={css({
             w: "full",
-            maxW: "sm",
+            maxW: { base: "calc(100% - 1rem)", md: "sm" },
+            ml: { base: "auto", md: 0 },
             pointerEvents: "auto",
           })}
         >
@@ -136,7 +137,9 @@ export function GermanLanguageToastClient(props: GermanLanguageToastClientProps)
                 </svg>
               </div>
               <div className={flex({ direction: "column", gap: 1, flex: 1 })}>
-                <p className={css({ fontWeight: "semibold", letterSpacing: "0.01em" })}>{toast.content.title}</p>
+                <p className={css({ fontWeight: "semibold", letterSpacing: "0.01em", fontSize: "sm" })}>
+                  {toast.content.title}
+                </p>
                 <p className={css({ lineHeight: 1.5, color: "rgba(255,255,255,0.85)", fontSize: "sm" })}>
                   {toast.content.description}
                 </p>
@@ -153,7 +156,7 @@ export function GermanLanguageToastClient(props: GermanLanguageToastClientProps)
                   _focusVisible: { boxShadow: "0 0 0 2px rgba(251, 191, 36, 0.45)" },
                 })}
               >
-                <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
                   <path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12l-4.9 4.89a1 1 0 1 0 1.41 1.42L12 13.41l4.89 4.9a1 1 0 0 0 1.42-1.42L13.41 12l4.9-4.89a1 1 0 0 0-.01-1.4" />
                 </svg>
               </Button>
