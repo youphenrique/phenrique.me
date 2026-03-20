@@ -151,17 +151,17 @@ export function HeaderClient(props: HeaderClientProps) {
                   key={index}
                   href={`/${props.displayLanguage}` + link.path}
                   className={css({
-                    pointerEvents: link.path !== "/reading" && link.path !== "/about" ? "none" : "default", // Remove later when menu pages are ready
+                    pointerEvents: link.path !== "/reading" ? "none" : "default", // Remove later when menu pages are ready
                     p: 1.5,
                     position: "relative",
                     fontWeight: "medium",
-                    color: "clr_neutral_800_200",
+                    color: pathname.includes(link.path) ? "clr_coral_flame" : "clr_neutral_800_200",
                     transition: "color 0.15s ease-in-out",
                     _hover: { color: "clr_coral_flame" },
                   })}
                 >
                   {props.dict.header[`${link.title}-label`]}
-                  {(pathname.includes("reading") && index === 3) || (pathname.includes("about") && index === 0) ? (
+                  {pathname.includes("reading") && index === 3 ? (
                     <span
                       className={css({
                         left: 0,
@@ -278,12 +278,12 @@ export function HeaderClient(props: HeaderClientProps) {
                       key={index}
                       href={`/${props.displayLanguage}` + link.path}
                       className={hstack({
-                        pointerEvents: link.path !== "/reading" && link.path !== "/about" ? "none" : "default", // Remove later when menu pages are ready
+                        pointerEvents: link.path !== "/reading" ? "none" : "default", // Remove later when menu pages are ready
                         p: 1.5,
                         fontSize: "sm",
                         position: "relative",
                         fontWeight: "medium",
-                        color: "clr_neutral_800_200",
+                        color: pathname.includes(link.path) ? "clr_coral_flame" : "clr_neutral_800_200",
                         transition: "color 0.15s ease-in-out",
                         _hover: { color: "clr_coral_flame" },
                       })}
