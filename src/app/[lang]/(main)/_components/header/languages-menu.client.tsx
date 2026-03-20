@@ -10,12 +10,12 @@ import { languageItems } from "@/app/_data/language-items";
 import { LanguagesIcon } from "@/app/_components/languages-icon";
 import { getAppDictionary } from "@/app/_dictionaries/dictionaries";
 
-type LanguagesMenuProps = {
+type LanguagesMenuClientProps = {
   displayLanguage: Languages;
   dict: Awaited<ReturnType<typeof getAppDictionary>>;
 };
 
-export function LanguagesMenu(props: LanguagesMenuProps) {
+export function LanguagesMenuClient(props: LanguagesMenuClientProps) {
   const pathname = usePathname();
 
   return (

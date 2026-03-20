@@ -2,7 +2,7 @@ import type { Preview } from "@storybook/nextjs";
 
 import "@/ui/styles/base.css";
 import { css } from "@/panda/css";
-import { Provider } from "@/app/_components/provider";
+import { ProviderClient } from "@/app/_components/provider.client";
 
 const preview: Preview = {
   parameters: {
@@ -19,9 +19,9 @@ const preview: Preview = {
   decorators: [
     (Story) => (
       <div className={css({ fontFamily: "Geist", "--p-body-font-family": "Geist" })}>
-        <Provider>
+        <ProviderClient>
           <Story />
-        </Provider>
+        </ProviderClient>
       </div>
     ),
   ],

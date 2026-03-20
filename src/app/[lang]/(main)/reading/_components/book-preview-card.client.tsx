@@ -8,7 +8,7 @@ import { flex, hstack, vstack } from "@/panda/patterns";
 import { useOverflow } from "@/app/_hooks/use-overflow";
 import { BookGenreBadge } from "@/app/[lang]/(main)/reading/_components/book-genre-badge";
 
-type BookPreviewCardProps = {
+type BookPreviewCardClientProps = {
   title: string;
   genres: string[];
   authors: string[];
@@ -16,7 +16,7 @@ type BookPreviewCardProps = {
   progress: number | null;
 };
 
-export function BookPreviewCard(props: BookPreviewCardProps) {
+export function BookPreviewCardClient(props: BookPreviewCardClientProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { isOverflowing, scrollPos } = useOverflow<HTMLDivElement>(ref);
 
@@ -127,9 +127,7 @@ export function BookPreviewCard(props: BookPreviewCardProps) {
                 })}
               />
             </div>
-            <span className={css({ fontSize: "sm", color: "clr_neutral_700_400" })}>
-              {bookProgress}%
-            </span>
+            <span className={css({ fontSize: "sm", color: "clr_neutral_700_400" })}>{bookProgress}%</span>
           </div>
         </div>
       </div>

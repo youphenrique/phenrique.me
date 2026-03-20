@@ -15,15 +15,15 @@ import { languageItems } from "@/app/_data/language-items";
 import { LanguagesIcon } from "@/app/_components/languages-icon";
 import { getAppDictionary } from "@/app/_dictionaries/dictionaries";
 import { ThemeToggle } from "@/app/[lang]/(main)/_components/header/theme-toggle";
-import { LanguagesMenu } from "@/app/[lang]/(main)/_components/header/languages-menu";
+import { LanguagesMenuClient } from "@/app/[lang]/(main)/_components/header/languages-menu.client";
 import { navLinks } from "@/app/[lang]/(main)/_data/nav-links";
 
-type CHeaderProps = {
+type HeaderClientProps = {
   displayLanguage: Languages;
   dict: Awaited<ReturnType<typeof getAppDictionary>>;
 };
 
-export function CHeader(props: CHeaderProps) {
+export function HeaderClient(props: HeaderClientProps) {
   const pathname = usePathname();
   const lastScrollY = useRef(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -245,7 +245,7 @@ export function CHeader(props: CHeaderProps) {
                   bgColor: "clr_neutral_300_700",
                 })}
               />
-              <LanguagesMenu displayLanguage={props.displayLanguage} dict={props.dict} />
+              <LanguagesMenuClient displayLanguage={props.displayLanguage} dict={props.dict} />
               <ThemeToggle />
             </div>
           </motion.div>
