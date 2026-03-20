@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+// ToastQueue is currently exposed as an unstable API in react-aria-components.
 import { UNSTABLE_ToastQueue as ToastQueue } from "react-aria-components";
 import type { Languages } from "@/app/_types/app";
 import { hasSeenGermanToast, markGermanToastSeen } from "@/app/[lang]/(main)/_components/german-language-toast-storage";
@@ -18,10 +19,15 @@ const germanToastCopy: GermanToastContent = {
 export function useGermanLanguageToast(displayLanguage: Languages) {
   const [queue] = useState(() => new ToastQueue<GermanToastContent>({ maxVisibleToasts: 1 }));
   const lastToastKey = useRef<string | null>(null);
+  const visibleToasts = useSyncExternalStore(
+    queue.subscribe.bind(queue),
+    () => queue.visibleToasts,
+    () => []
+  );
 
   useEffect(() => {
     if (displayLanguage !== "de") {
-      if (queue.visibleToasts.length > 0) {
+      if (visibleToasts.length > 0) {
         queue.clear();
       }
 
@@ -29,19 +35,27 @@ export function useGermanLanguageToast(displayLanguage: Languages) {
       return;
     }
 
-    if (hasSeenGermanToast()) {
+    if (hasSeenGermanToast() || lastToastKey.current) {
       return;
     }
 
     lastToastKey.current = queue.add(germanToastCopy);
-    markGermanToastSeen();
-  }, [displayLanguage, queue]);
+  }, [displayLanguage, queue, visibleToasts.length]);
+
+  useEffect(() => {
+    if (displayLanguage === "de" && !hasSeenGermanToast() && visibleToasts.length > 0) {
+      markGermanToastSeen();
+    }
+  }, [displayLanguage, visibleToasts.length]);
 
   const dismiss = () => {
     if (lastToastKey.current) {
       queue.close(lastToastKey.current);
       lastToastKey.current = null;
-    } else {
+      return;
+    }
+
+    if (visibleToasts.length > 0) {
       queue.clear();
     }
   };

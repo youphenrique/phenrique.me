@@ -1,9 +1,10 @@
 const STORAGE_KEY = "german-language-toast-seen";
 
-const isBrowserSession = () => typeof window !== "undefined" && typeof window.sessionStorage !== "undefined";
+const isSessionStorageAvailable = () =>
+  typeof window !== "undefined" && typeof window.sessionStorage !== "undefined";
 
 export function hasSeenGermanToast(): boolean {
-  if (!isBrowserSession()) {
+  if (!isSessionStorageAvailable()) {
     return false;
   }
 
@@ -15,7 +16,7 @@ export function hasSeenGermanToast(): boolean {
 }
 
 export function markGermanToastSeen() {
-  if (!isBrowserSession()) {
+  if (!isSessionStorageAvailable()) {
     return;
   }
 

@@ -1,5 +1,6 @@
 "use client";
 
+// Toast primitives are currently exported as unstable APIs by react-aria-components.
 import { UNSTABLE_Toast as Toast, UNSTABLE_ToastContent as ToastContent, UNSTABLE_ToastRegion as ToastRegion, Button } from "react-aria-components";
 import type { Languages } from "@/app/_types/app";
 import { css } from "@/panda/css";
