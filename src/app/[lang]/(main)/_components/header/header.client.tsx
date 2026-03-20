@@ -15,15 +15,15 @@ import { languageItems } from "@/app/_data/language-items";
 import { LanguagesIcon } from "@/app/_components/languages-icon";
 import { getAppDictionary } from "@/app/_dictionaries/dictionaries";
 import { ThemeToggle } from "@/app/[lang]/(main)/_components/header/theme-toggle";
-import { LanguagesMenu } from "@/app/[lang]/(main)/_components/header/languages-menu";
+import { LanguagesMenuClient } from "@/app/[lang]/(main)/_components/header/languages-menu.client";
 import { navLinks } from "@/app/[lang]/(main)/_data/nav-links";
 
-type CHeaderProps = {
+type HeaderClientProps = {
   displayLanguage: Languages;
   dict: Awaited<ReturnType<typeof getAppDictionary>>;
 };
 
-export function CHeader(props: CHeaderProps) {
+export function HeaderClient(props: HeaderClientProps) {
   const pathname = usePathname();
   const lastScrollY = useRef(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -151,17 +151,17 @@ export function CHeader(props: CHeaderProps) {
                   key={index}
                   href={`/${props.displayLanguage}` + link.path}
                   className={css({
-                    pointerEvents: link.path !== "/reading" && link.path !== "/about" ? "none" : "default", // Remove later when menu pages are ready
+                    pointerEvents: link.path !== "/reading" ? "none" : "default", // Remove later when menu pages are ready
                     p: 1.5,
                     position: "relative",
                     fontWeight: "medium",
-                    color: "clr_neutral_800_200",
+                    color: pathname.includes(link.path) ? "clr_coral_flame" : "clr_neutral_800_200",
                     transition: "color 0.15s ease-in-out",
                     _hover: { color: "clr_coral_flame" },
                   })}
                 >
                   {props.dict.header[`${link.title}-label`]}
-                  {(pathname.includes("reading") && index === 3) || (pathname.includes("about") && index === 0) ? (
+                  {pathname.includes("reading") && index === 3 ? (
                     <span
                       className={css({
                         left: 0,
@@ -245,7 +245,7 @@ export function CHeader(props: CHeaderProps) {
                   bgColor: "clr_neutral_300_700",
                 })}
               />
-              <LanguagesMenu displayLanguage={props.displayLanguage} dict={props.dict} />
+              <LanguagesMenuClient displayLanguage={props.displayLanguage} dict={props.dict} />
               <ThemeToggle />
             </div>
           </motion.div>
@@ -278,12 +278,12 @@ export function CHeader(props: CHeaderProps) {
                       key={index}
                       href={`/${props.displayLanguage}` + link.path}
                       className={hstack({
-                        pointerEvents: link.path !== "/reading" && link.path !== "/about" ? "none" : "default", // Remove later when menu pages are ready
+                        pointerEvents: link.path !== "/reading" ? "none" : "default", // Remove later when menu pages are ready
                         p: 1.5,
                         fontSize: "sm",
                         position: "relative",
                         fontWeight: "medium",
-                        color: "clr_neutral_800_200",
+                        color: pathname.includes(link.path) ? "clr_coral_flame" : "clr_neutral_800_200",
                         transition: "color 0.15s ease-in-out",
                         _hover: { color: "clr_coral_flame" },
                       })}

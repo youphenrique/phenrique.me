@@ -1,5 +1,5 @@
 import type { Languages } from "@/app/_types/app";
-import { CTopMenu } from "@/app/[lang]/linkbio/_components/top-menu.client";
+import { TopMenuClient } from "@/app/[lang]/linkbio/_components/top-menu.client";
 import { getLinkbioDictionary } from "@/app/[lang]/linkbio/_dictionaries/dictionaries";
 
 type TopMenuProps = {
@@ -9,5 +9,5 @@ type TopMenuProps = {
 export async function TopMenu(props: TopMenuProps) {
   const dict = await getLinkbioDictionary(props.displayLanguage);
 
-  return <CTopMenu displayLanguage={props.displayLanguage} dict={dict} />;
+  return <TopMenuClient displayLanguage={props.displayLanguage} dict={dict} />;
 }

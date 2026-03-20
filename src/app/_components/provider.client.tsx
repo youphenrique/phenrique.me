@@ -10,9 +10,9 @@ declare module "react-aria-components" {
   }
 }
 
-type ProviderProps = PropsWithChildren;
+type ProviderClientProps = PropsWithChildren;
 
-export function Provider(props: ProviderProps) {
+export function ProviderClient(props: ProviderClientProps) {
   const router = useRouter();
 
   return <RouterProvider navigate={router.push}>{props.children}</RouterProvider>;

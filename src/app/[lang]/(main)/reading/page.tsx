@@ -8,7 +8,7 @@ import { InnerContainer } from "@/app/_components/inner-container";
 import { getReadingPage } from "@/app/[lang]/(main)/reading/_utils/content";
 import { BookItem } from "@/app/[lang]/(main)/reading/_components/book-item";
 import { getAppDictionary } from "@/app/[lang]/(main)/reading/_dictionaries/dictionaries";
-import { BookPreviewCard } from "@/app/[lang]/(main)/reading/_components/book-preview-card";
+import { BookPreviewCardClient } from "@/app/[lang]/(main)/reading/_components/book-preview-card.client";
 
 type ReadingPageProps = Pick<PageProps<"/[lang]/reading">, "params">;
 
@@ -127,7 +127,7 @@ export default async function ReadingPage(props: ReadingPageProps) {
           })}
         >
           {readingPage.currentlyReads.map((book) => (
-            <BookPreviewCard
+            <BookPreviewCardClient
               key={book._meta.fileName}
               title={book.title}
               genres={book.genres}
