@@ -1,18 +1,77 @@
 "use client";
 
-// Toast primitives are currently exported as unstable APIs by react-aria-components.
-import { UNSTABLE_Toast as Toast, UNSTABLE_ToastContent as ToastContent, UNSTABLE_ToastRegion as ToastRegion, Button } from "react-aria-components";
-import type { Languages } from "@/app/_types/app";
+import * as React from "react";
+import {
+  Button,
+  QueuedToast,
+  UNSTABLE_Toast as Toast,
+  UNSTABLE_ToastRegion as ToastRegion,
+  UNSTABLE_ToastContent as ToastContent,
+} from "react-aria-components";
+
 import { css } from "@/panda/css";
 import { flex } from "@/panda/patterns";
-import { useGermanLanguageToast } from "@/app/[lang]/(main)/_hooks/use-german-language-toast";
+import type { Languages } from "@/app/_types/app";
+import { queue, type TToastContent } from "@/lib/toast";
+
+const STORAGE_KEY = "phenrique.me@german-language-toast-seen";
+// const initialServerVisibleToasts = [] as QueuedToast<TToastContent>[];
+
+const germanToastContent: TToastContent = {
+  title: "Hinweis",
+  description: `Mein Deutsch ist noch im Aufbau 🚧 Ich bin noch Anfänger, daher kann der Inhalt manchmal etwas seltsam klingen.`,
+};
+
+function subscribe(callback: () => void) {
+  queue.subscribe(callback);
+  return () => {};
+}
+
+function getSnapshot() {
+  return queue.visibleToasts;
+}
 
 type GermanLanguageToastClientProps = {
   displayLanguage: Languages;
 };
 
 export function GermanLanguageToastClient(props: GermanLanguageToastClientProps) {
-  const { queue, dismiss } = useGermanLanguageToast(props.displayLanguage);
+  const lastToastKey = React.useRef<string | null>(null);
+  // This useRef (it could also be a useState) is necessary to prevent the error "The result of getServerSnapshot should be cached to avoid an infinite loop"
+  const initialServerVisibleToasts = React.useRef<QueuedToast<TToastContent>[]>([]);
+  const visibleToasts = React.useSyncExternalStore(subscribe, getSnapshot, function getServerSnapshot() {
+    return initialServerVisibleToasts.current;
+  });
+
+  React.useEffect(() => {
+    if (props.displayLanguage !== "de") {
+      if (visibleToasts.length > 0) {
+        queue.clear();
+        lastToastKey.current = null;
+      }
+    } else if (!hasSeenGermanToast() && lastToastKey.current === null) {
+      console.log("aaaaaaaaaaaaaaaaaaaaaa");
+      lastToastKey.current = queue.add(germanToastContent);
+      markGermanToastSeen();
+    }
+  }, [props.displayLanguage, visibleToasts.length]);
+
+  function hasSeenGermanToast() {
+    return window.sessionStorage.getItem(STORAGE_KEY) === "true";
+  }
+
+  function markGermanToastSeen() {
+    window.sessionStorage.setItem(STORAGE_KEY, "true");
+  }
+
+  function dismiss() {
+    if (lastToastKey.current !== null) {
+      queue.close(lastToastKey.current);
+      lastToastKey.current = null;
+    } else if (visibleToasts.length > 0) {
+      queue.clear();
+    }
+  }
 
   return (
     <ToastRegion
@@ -41,7 +100,7 @@ export function GermanLanguageToastClient(props: GermanLanguageToastClientProps)
               p: 4,
               boxShadow: "lg",
               alignItems: "flex-start",
-              borderRadius: "2xl",
+              borderRadius: "md",
               border: "1px solid",
               color: "white",
               bgColor: "rgba(18, 18, 18, 0.9)",
@@ -52,9 +111,9 @@ export function GermanLanguageToastClient(props: GermanLanguageToastClientProps)
             <div
               aria-hidden
               className={flex({
-                w: 9,
-                h: 9,
-                rounded: "xl",
+                w: 7,
+                h: 7,
+                rounded: "md",
                 alignItems: "center",
                 justifyContent: "center",
                 bgColor: "rgba(234, 179, 8, 0.18)",
@@ -69,7 +128,9 @@ export function GermanLanguageToastClient(props: GermanLanguageToastClientProps)
             </div>
             <div className={flex({ direction: "column", gap: 1, flex: 1 })}>
               <p className={css({ fontWeight: "semibold", letterSpacing: "0.01em" })}>{toast.content.title}</p>
-              <p className={css({ lineHeight: 1.5, color: "rgba(255,255,255,0.85)", fontSize: "sm" })}>{toast.content.message}</p>
+              <p className={css({ lineHeight: 1.5, color: "rgba(255,255,255,0.85)", fontSize: "sm" })}>
+                {toast.content.description}
+              </p>
             </div>
             <Button
               slot="close"
