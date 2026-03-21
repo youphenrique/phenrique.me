@@ -1,4 +1,4 @@
-# phenrique.me
+# [phenrique.me](https://phenrique.me)
 
 This is my personal website/portfolio built with Next.js and other modern web technologies.
 
