@@ -125,7 +125,7 @@ export function HeaderClient(props: HeaderClientProps) {
               >
                 <Image
                   priority
-                  src="https://assets.basehub.com/f4f66b1c/0ac4add581e424dfc36462a08d571655/me.website.jpg"
+                  src={`${process.env.NEXT_PUBLIC_VERCEL_BLOB_STORAGE_URL}/me.website.webp`}
                   width={1036}
                   height={1040}
                   alt="A black and white photo of a young man"

@@ -8,7 +8,7 @@ progress: 100
 genres:
   - "Christian"
 cover:
-  url: "https://assets.basehub.com/f4f66b1c/5a08646aa203d917ceb17f59d525956f/mentalidade-de-vida-eterna.png"
+  urlPath: "/reading-page.mentalidade-de-vida-eterna.webp"
   alt: "The cover of a book with a golden key on it"
   width: 470
   height: 728

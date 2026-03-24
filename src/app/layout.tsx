@@ -27,7 +27,7 @@ export async function generateMetadata(props: Pick<PageProps<"/[lang]/linkbio">,
   const displayLanguage = ((await props.params)?.lang ?? "en") as Languages;
 
   const metadata = getMetadata(displayLanguage);
-  const imageUrl = `https://assets.basehub.com/f4f66b1c/e92b9d5936efdd1b7839ce9c56af1b62/opengraph-image.png`;
+  const imageUrl = `${process.env.NEXT_PUBLIC_VERCEL_BLOB_STORAGE_URL}/opengraph-image.webp`;
 
   const title = metadata?.title ?? "Paulo Henrique";
   const description = metadata?.description ?? "Paulo Henrique's personal website";

@@ -8,7 +8,7 @@ progress: 100
 genres:
   - "Christian"
 cover:
-  url: "https://assets.basehub.com/f4f66b1c/0362b86d8a4c321ed8d290223c2955d5/escatologia-e-a-influencia-do-futuro-no-dia-a-dia-do-cristao.jpg"
+  urlPath: "/reading-page.escatologia-e-a-influencia-do-futuro-no-dia-a-dia-do-cristao.webp"
   alt: "The cover of the book containing two hands reaching out to each other"
   width: 312
   height: 466

@@ -10,7 +10,7 @@ genres:
   - "Personal Development"
 progress: 100
 cover:
-  url: "https://assets.basehub.com/f4f66b1c/4f8a457131b758651d1a315b373dad0c/a-vida-intelectual.jpg"
+  urlPath: "/reading-page.a-vida-intelectual.webp"
   alt: "The cover of a book with a black background and the title 'A vida intelectual'"
   width: 485
   height: 728

@@ -8,7 +8,7 @@ progress: 100
 genres:
   - "Christian"
 cover:
-  url: "https://assets.basehub.com/f4f66b1c/200ee7890b6f88ef25623a56fe5a0bf3/ego-transformado.png"
+  urlPath: "/reading-page.ego-transformado.webp"
   alt: "The word EGO standing out from the cover"
   width: 484
   height: 728

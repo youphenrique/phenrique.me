@@ -15,7 +15,7 @@ export async function Presentation(props: PresentationProps) {
       <div className={css({ maxW: 24, mx: "auto" })}>
         <Image
           priority
-          src="https://assets.basehub.com/f4f66b1c/e908c4c73870138d738f48eadc6089fa/wmremove-transformed-edit.jpg"
+          src={`${process.env.NEXT_PUBLIC_VERCEL_BLOB_STORAGE_URL}/linkbio-page.me.webp`}
           alt="A black and white photo of me smiling"
           width={1048}
           height={1048}

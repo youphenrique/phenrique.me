@@ -8,7 +8,7 @@ progress: 100
 genres:
   - "Christian"
 cover:
-  url: "https://assets.basehub.com/f4f66b1c/30d5b57b1c147140b5a66aded1759c59/viciados-em-si-mesmos.jpg"
+  urlPath: "/reading-page.viciados-em-si-mesmos.webp"
   alt: "A book cover with a painting of a man looking himself in the mirror"
   width: 483
   height: 728

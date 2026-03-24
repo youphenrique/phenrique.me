@@ -8,7 +8,7 @@ progress: 100
 genres:
   - "Christian"
 cover:
-  url: "https://assets.basehub.com/f4f66b1c/be7155829b7bb373b9d89bde1fb46a96/a-graca-do-arrependimento.jpg"
+  urlPath: "/reading-page.a-graca-do-arrependimento.webp"
   alt: "A red book cover with a gold frame and the title 'A graça do arrependimento'"
   width: 546
   height: 728
