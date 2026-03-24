@@ -18,7 +18,7 @@ const vollkorn = Vollkorn({
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: light)", color: "#FFFFF8" },
     { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
   ],
 };
