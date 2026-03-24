@@ -8,7 +8,7 @@ progress: 1
 genres:
   - "Christian"
 cover:
-  url: "https://assets.basehub.com/f4f66b1c/e57ba4c9dfed6dd3dbd039b61f4d4579/deus-tem-um-nome.jpg"
+  urlPath: "/reading-page.deus-tem-um-nome.webp"
   alt: "A black and white photo with the words 'Deus tem um nome' written in the top"
   width: 479
   height: 728

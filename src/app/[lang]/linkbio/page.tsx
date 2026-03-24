@@ -12,7 +12,7 @@ export async function generateMetadata(props: Pick<PageProps<"/[lang]/linkbio">,
   const displayLanguage = ((await props.params)?.lang ?? "en") as Languages;
 
   const linkbioPage = getLinkbioPage(displayLanguage);
-  const imageUrl = `https://assets.basehub.com/f4f66b1c/e92b9d5936efdd1b7839ce9c56af1b62/opengraph-image.png`;
+  const imageUrl = `${process.env.NEXT_PUBLIC_VERCEL_BLOG_STORAGE}/opengraph-image.webp`;
 
   return {
     title: "Linkbio",

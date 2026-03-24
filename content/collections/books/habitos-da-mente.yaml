@@ -9,7 +9,7 @@ genres:
   - "Christian"
   - "Philosophy"
 cover:
-  url: "https://assets.basehub.com/f4f66b1c/6c34597f876bea1558dc1f5cb2310a19/habitos-da-mente.png"
+  urlPath: "/reading-page.habitos-da-mente.webp"
   alt: "A chair in front of a bookshelf filled with books"
   width: 482
   height: 728
