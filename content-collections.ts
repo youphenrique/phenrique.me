@@ -67,7 +67,7 @@ const socialLinks = defineCollection({
     slug: z.string(),
     link: z.url(),
     icon: z.string().optional(),
-    logoUrl: z.url(),
+    logoUrl: z.string(),
   }),
 });
 
@@ -124,7 +124,7 @@ const books = defineCollection({
     progress: z.number(),
     rating: z.number(),
     cover: z.object({
-      url: z.string(),
+      urlPath: z.string(),
       alt: z.string(),
       width: z.number(),
       height: z.number(),
@@ -152,7 +152,17 @@ const readingPages = defineCollection({
     }),
   }),
   transform(document, context) {
-    const currentlyReads = context.documents(books).filter((book) => book.status === "reading");
+    const currentlyReads = context
+      .documents(books)
+      .filter((book) => book.status === "reading")
+      .map((book) => ({
+        ...book,
+        cover: {
+          ...book.cover,
+          url: `${process.env.NEXT_PUBLIC_VERCEL_BLOB_STORAGE_URL}${book.cover.urlPath}`,
+        },
+      }));
+
     const finishedBooks = context
       .documents(books)
       .filter((book) => book.status === "finished")
@@ -162,6 +172,7 @@ const readingPages = defineCollection({
         }
         return b.finishedDate.getTime() - a.finishedDate.getTime();
       });
+
     return {
       ...document,
       currentlyReads,
