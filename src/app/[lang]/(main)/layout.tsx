@@ -1,7 +1,7 @@
 import { css } from "@/panda/css";
 import { flex } from "@/panda/patterns";
 import type { Languages } from "@/app/_types/app";
-import { Header } from "@/app/[lang]/(main)/_components/header/header";
+import { Header } from "@/app/[lang]/(main)/_components/header";
 import { Footer } from "@/app/[lang]/(main)/_components/footer";
 import { GermanLanguageToastClient } from "@/app/[lang]/(main)/_components/german-language-toast.client";
 

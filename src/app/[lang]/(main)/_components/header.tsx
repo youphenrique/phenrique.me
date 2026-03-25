@@ -1,5 +1,5 @@
 import type { Languages } from "@/app/_types/app";
-import { HeaderClient } from "@/app/[lang]/(main)/_components/header/header.client";
+import { HeaderClient } from "@/app/[lang]/(main)/_components/header.client";
 import { getAppDictionary } from "@/app/_dictionaries/dictionaries";
 
 type HeaderProps = {

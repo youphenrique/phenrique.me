@@ -14,8 +14,8 @@ import { useMediaQuery } from "@/app/_hooks/use-media-query";
 import { languageItems } from "@/app/_data/language-items";
 import { LanguagesIcon } from "@/app/_components/languages-icon";
 import { getAppDictionary } from "@/app/_dictionaries/dictionaries";
-import { ThemeToggle } from "@/app/[lang]/(main)/_components/header/theme-toggle";
-import { LanguagesMenuClient } from "@/app/[lang]/(main)/_components/header/languages-menu.client";
+import { ThemeToggle } from "@/app/[lang]/(main)/_components/theme-toggle";
+import { LanguagesMenuClient } from "@/app/[lang]/(main)/_components/languages-menu.client";
 import { navLinks } from "@/app/[lang]/(main)/_data/nav-links";
 
 type HeaderClientProps = {
