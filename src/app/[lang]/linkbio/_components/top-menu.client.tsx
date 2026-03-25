@@ -84,7 +84,7 @@ export function TopMenuClient(props: TopMenuClientProps) {
 
   function onCopyLinkbio() {
     if (!isToastShown) {
-      navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_SITE_URL}/linkbio`).then(
+      navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_SITE_URL}/${props.displayLanguage}/linkbio`).then(
         () => {
           setIsToastShown(true);
           setTimeout(() => {
@@ -99,14 +99,7 @@ export function TopMenuClient(props: TopMenuClientProps) {
   }
 
   return (
-    <div
-      lang={props.displayLanguage}
-      className={css({
-        mb: 6,
-        display: "flex",
-        justifyContent: "flex-end",
-      })}
-    >
+    <>
       <MenuTrigger>
         <Button
           aria-label={props.dict["top-menu"]["menu-label"]}
@@ -277,6 +270,6 @@ export function TopMenuClient(props: TopMenuClientProps) {
           </motion.div>
         ) : null}
       </AnimatePresence>
-    </div>
+    </>
   );
 }
