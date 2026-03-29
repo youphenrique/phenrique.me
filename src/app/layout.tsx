@@ -9,7 +9,6 @@ import "@/ui/styles/base.css";
 import { css } from "@/panda/css";
 import type { Languages } from "@/app/_types/app";
 import { getMetadata } from "@/app/_utils/content";
-import { ProviderClient } from "@/app/_components/provider.client";
 import { themeEffect } from "@/app/_utils/theme-effect";
 
 const vollkorn = Vollkorn({
@@ -79,7 +78,7 @@ export default function AppLayout(props: Readonly<React.PropsWithChildren>) {
         />
       </head>
       <body className={css({ fontFamily: "GeistSans" })}>
-        <ProviderClient>{props.children}</ProviderClient>
+        {props.children}
         <Analytics />
         <SpeedInsights />
       </body>

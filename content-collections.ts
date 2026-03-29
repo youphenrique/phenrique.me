@@ -181,6 +181,51 @@ const readingPages = defineCollection({
   },
 });
 
+//////////////////////////////////////////
+//////////////////////////////////////////
+//////////                      //////////
+//////////      About page      //////////
+//////////                      //////////
+//////////////////////////////////////////
+//////////////////////////////////////////
+
+const aboutMainContents = defineCollection({
+  name: "aboutMainContents",
+  directory: "content/collections/pages/about",
+  include: "**/*.mdx",
+  schema: z.object({
+    content: z.string(),
+  }),
+});
+
+const aboutPages = defineCollection({
+  name: "aboutPages",
+  directory: "content/collections/pages/about",
+  include: "**/*.yaml",
+  parser: "yaml",
+  schema: z.object({
+    metadata: z.object({
+      title: z.string(),
+      description: z.string(),
+    }),
+    bioSection: z.object({
+      title: z.string(),
+      imageAltText: z.string(),
+    }),
+  }),
+  // async transform(document, context) {
+  //   const
+  //   const mdx = await compileMDX(context, document, {
+  //     remarkPlugins: remarkPlugins(),
+  //   });
+  //
+  //   return {
+  //     ...document,
+  //     mdx,
+  //   };
+  // },
+});
+
 export default defineConfig({
-  content: [metadatum, homePages, linkbioPages, socialLinks, books, readingPages],
+  content: [metadatum, homePages, linkbioPages, socialLinks, books, readingPages, aboutPages, aboutMainContents],
 });
