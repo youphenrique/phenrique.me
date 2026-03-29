@@ -41,7 +41,7 @@ const shareLinks = [
   {
     id: "linkedin",
     name: "LinkedIn",
-    link: (_: string) => "https://www.linkedin.com/sharing/share-offsite/?url=https://phenrique.me/linkbio",
+    link: () => "https://www.linkedin.com/sharing/share-offsite/?url=https://phenrique.me/linkbio",
     icon: (
       <svg viewBox="0 0 24 24">
         <circle cx="50%" cy="50%" r="50%" fill="#0A66C2"></circle>

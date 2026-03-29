@@ -1,4 +1,6 @@
-import * as React from "react";
+"use client";
+
+import { useEffect } from "react";
 
 import { css } from "@/panda/css";
 import { flex } from "@/panda/patterns";
@@ -16,7 +18,15 @@ type GermanLanguageToastClientProps = {
 };
 
 export function GermanLanguageToast(props: GermanLanguageToastClientProps) {
-  React.useEffect(() => {
+  function hasSeenGermanToast() {
+    return window.sessionStorage.getItem(STORAGE_KEY) === "true";
+  }
+
+  function markGermanToastSeen() {
+    window.sessionStorage.setItem(STORAGE_KEY, "true");
+  }
+
+  useEffect(() => {
     if (props.displayLanguage !== "de") {
       // if (visibleToasts.length > 0) {
       //   queue.clear();
@@ -27,14 +37,6 @@ export function GermanLanguageToast(props: GermanLanguageToastClientProps) {
       markGermanToastSeen();
     }
   }, [props.displayLanguage]);
-
-  function hasSeenGermanToast() {
-    return window.sessionStorage.getItem(STORAGE_KEY) === "true";
-  }
-
-  function markGermanToastSeen() {
-    window.sessionStorage.setItem(STORAGE_KEY, "true");
-  }
 
   return (
     <div

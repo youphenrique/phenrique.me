@@ -40,6 +40,7 @@ export function HeaderClient(props: HeaderClientProps) {
     if (isMenuOpen) {
       setIsMenuOpen(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   useEffect(() => {

@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type RefObject } from "react";
 
 type UseOverflowOptions = Partial<{
   horizontal: boolean;
   vertical: boolean;
 }>;
 
-export function useOverflow<T extends HTMLElement>(
-  ref: React.RefObject<T | null>,
-  opts: UseOverflowOptions = {},
-) {
+export function useOverflow<T extends HTMLElement>(ref: RefObject<T | null>, opts: UseOverflowOptions = {}) {
   const { horizontal = true, vertical = false } = opts;
   const [isOverflowing, setIsOverflowing] = useState(false);
   const [scrollPos, setScrollPos] = useState({ atStart: true, atEnd: false });
@@ -52,6 +49,7 @@ export function useOverflow<T extends HTMLElement>(
       mo.disconnect();
       window.removeEventListener("resize", onResize);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [horizontal, vertical]);
 
   return { isOverflowing, scrollPos };
