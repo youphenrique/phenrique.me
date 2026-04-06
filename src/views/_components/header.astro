@@ -9,7 +9,6 @@ interface Props {
 }
 
 const { lang, dict } = Astro.props;
-
 const pathname = Astro.url.pathname;
 
 const navLinks = [
@@ -72,9 +71,8 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
         id="header-row"
         class={flex({
           alignItems: "center",
-          pt: "7px",
+          py: "8px",
           px: "12px",
-          pb: "7px",
           transition: "padding 0.3s ease",
         })}
       >
@@ -417,6 +415,7 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
         id="mobile-menu"
         data-open="false"
         class={css({
+          mb: "-6px",
           display: "grid",
           gridTemplateRows: "0fr",
           transition: "grid-template-rows 0.3s ease",
@@ -663,11 +662,12 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
     // --- Scroll hide/show ---
     function handleScroll() {
       clearTimeout(scrollTimeout);
+
       scrollTimeout = setTimeout(function () {
         const currentScrollY = window.scrollY;
         const diff = Math.abs(currentScrollY - lastScrollY);
         if (currentScrollY > lastScrollY && diff > 50) {
-          headerWrapper.style.transform = "translateY(-4.5rem)";
+          headerWrapper.style.transform = "translateY(-5rem)";
           if (isMenuOpen) closeMenu();
         } else if (diff > 50 || currentScrollY < 10) {
           headerWrapper.style.transform = "translateY(0)";
@@ -681,6 +681,7 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
     // --- Mobile menu toggle ---
     function openMenu() {
       isMenuOpen = true;
+      mobileMenu.style.display = "grid";
       mobileMenu.style.gridTemplateRows = "1fr";
       headerPill.style.borderRadius = "1.875rem";
       headerRow.style.paddingTop = "16px";

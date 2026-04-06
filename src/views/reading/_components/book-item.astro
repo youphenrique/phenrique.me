@@ -11,6 +11,7 @@ interface Props {
 
 const { title, rating, authors } = Astro.props;
 ---
+
 <div
   class={grid({
     py: 2,
@@ -35,12 +36,14 @@ const { title, rating, authors } = Astro.props;
     {authors.length === 0 ? "Unknown" : authors.join(", ")}
   </span>
   <div class={css({ display: "flex", justifySelf: { base: "start", lg: "end" }, gap: 1 })}>
-    {Array.from({ length: 5 }).map((_, index) => (
-      <StarIcon
-        size={16}
-        fill={index < rating}
-        color={index < rating ? "token(colors.amber.500)" : "token(colors.clr_neutral_300_700)"}
-      />
-    ))}
+    {
+      Array.from({ length: 5 }).map((_, index) => (
+        <StarIcon
+          size={16}
+          fill={index < rating}
+          color={index < rating ? "token(colors.amber.500)" : "token(colors.clr_neutral_300_700)"}
+        />
+      ))
+    }
   </div>
 </div>
