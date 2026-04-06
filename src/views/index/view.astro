@@ -4,17 +4,22 @@ import MainLayout from "../../layouts/main-layout.astro";
 import Container from "../_components/container.astro";
 
 interface Props {
-  lang: string;
   title: string;
 }
 ---
 
-<MainLayout title="Home" description="Paulo Henrique's personal website" lang={Astro.props.lang}>
+<MainLayout title="Home" description="Paulo Henrique's personal website" lang={Astro.currentLocale!}>
   <Container styles={css.raw({ py: { base: 32, sm: 44, "2xl": 52 } })}>
-    <h1 class={css({ fontSize: "lg", fontWeight: "semibold", color: "clr_neutral_900_50" })}>
+    <h1
+      class={css({
+        fontSize: "4xl",
+        color: "clr_neutral_900_50",
+        fontFamily: "'Fraunces Variable', serif",
+      })}
+    >
       {Astro.props.title}
     </h1>
-    <div class={"prose-ui antialiased " + css({ mt: 4, maxW: "xl" })}>
+    <div class={"prose-ui antialiased " + css({ mt: 6, maxW: "xl" })}>
       <slot />
     </div>
   </Container>

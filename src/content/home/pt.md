@@ -1,5 +1,5 @@
 ---
-title: "Olá, eu sou Paulo Henrique!"
+title: "Paulo Henrique"
 ---
 
 Bem-vindo(a) ao meu website. Sou um cristão e engenheiro de software morando em Fortaleza, Brasil.
