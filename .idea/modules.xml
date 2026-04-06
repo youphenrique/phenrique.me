@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/astro-nano.iml" filepath="$PROJECT_DIR$/.idea/astro-nano.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/phenrique.me.iml" filepath="$PROJECT_DIR$/.idea/phenrique.me.iml" />
     </modules>
   </component>
 </project>
