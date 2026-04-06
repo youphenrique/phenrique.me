@@ -1,0 +1,45 @@
+---
+import { getCollection, render } from "astro:content";
+import MainLayout from "../../layouts/main-layout.astro";
+import Container from "../../views/_components/container.astro";
+import { dateRange } from "../../lib/utils";
+import { WORK } from "../../consts";
+import { css } from "../../../styled-system/css";
+
+const collection = (await getCollection("work")).sort(
+  (a, b) => new Date(b.data.dateStart).valueOf() - new Date(a.data.dateStart).valueOf(),
+);
+
+const work = await Promise.all(
+  collection.map(async (item) => {
+    const { Content } = await render(item);
+    return { ...item, Content };
+  }),
+);
+---
+
+<MainLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
+  <Container>
+    <div class={css({ "& > * + *": { mt: 10 } })}>
+      <div class={`animate ${css({ fontWeight: "semibold", color: { base: "black", _dark: "white" } })}`}>Work</div>
+      <ul class={css({ display: "flex", flexDirection: "column", gap: 4 })}>
+        {
+          work.map((entry) => (
+            <li class="animate">
+              <div class={css({ fontSize: "sm", opacity: 0.75 })}>
+                {dateRange(entry.data.dateStart, entry.data.dateEnd)}
+              </div>
+              <div class={css({ fontWeight: "semibold", color: { base: "black", _dark: "white" } })}>
+                {entry.data.company}
+              </div>
+              <div class={css({ fontSize: "sm", opacity: 0.75 })}>{entry.data.role}</div>
+              <article>
+                <entry.Content />
+              </article>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Container>
+</MainLayout>

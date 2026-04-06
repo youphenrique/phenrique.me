@@ -1,0 +1,86 @@
+---
+import { Image } from "astro:assets";
+
+import { css } from "../../../../styled-system/css";
+import { vstack } from "../../../../styled-system/patterns";
+
+interface SocialLink {
+  name: string;
+  handle: string;
+  link: string;
+  logoUrl: string;
+}
+
+interface Props {
+  socialLinks: SocialLink[];
+}
+
+const { socialLinks } = Astro.props;
+---
+
+<div
+  class={vstack({
+    alignItems: "stretch",
+    marginTop: { base: 12, md: 16 },
+  })}
+>
+  {
+    socialLinks.map((item) => (
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href={item.link}
+        class={css({
+          py: 2,
+          px: 4,
+          display: "flex",
+          borderRadius: "lg",
+          border: "1px solid",
+          alignItems: "center",
+          borderColor: "hsla(0, 0%, 100%, .15)",
+          backgroundColor: "rgba(0, 0, 0, .65)",
+          transition: "transform 0.15s ease-in-out",
+          _hover: {
+            transform: "scale(1.02)",
+          },
+        })}
+      >
+        <span
+          class={css({
+            width: 8,
+            display: "block",
+          })}
+        >
+          <Image src={item.logoUrl} width="32" height="32" alt={`${item.name} logo`} loading="eager" />
+        </span>
+        <div
+          class={css({
+            ml: 4,
+            display: "flex",
+            flexDirection: "column",
+          })}
+        >
+          <span
+            class={css({
+              color: "#EEE",
+              textAlign: "left",
+              fontWeight: "medium",
+            })}
+          >
+            {item.name}
+          </span>
+          <span
+            class={css({
+              fontSize: "sm",
+              textAlign: "left",
+              color: "#fffcf4b0",
+              fontWeight: "medium",
+            })}
+          >
+            {item.handle}
+          </span>
+        </div>
+      </a>
+    ))
+  }
+</div>

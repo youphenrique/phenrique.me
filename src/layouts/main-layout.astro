@@ -1,0 +1,62 @@
+---
+import "@fontsource-variable/fraunces";
+import { getCollection } from "astro:content";
+
+import "../styles/global.css";
+import Head from "../views/_components/head.astro";
+import Header from "../views/_components/header.astro";
+import Footer from "../views/_components/footer.astro";
+import { css } from "../../styled-system/css";
+import { flex } from "../../styled-system/patterns";
+import enDict from "../i18n/main/en";
+import deDict from "../i18n/main/de";
+import ptDict from "../i18n/main/pt";
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: string;
+}
+
+const { title, description, lang = "en" } = Astro.props;
+
+const dictionaries = { en: enDict, de: deDict, pt: ptDict } as const;
+const dict = dictionaries[lang as keyof typeof dictionaries] ?? enDict;
+
+const metadatumEntries = await getCollection("metadatum");
+const metadatum = metadatumEntries.find((m) => m.id === `metadata.${lang}`);
+const pageTitle = metadatum?.data.title ?? title;
+const pageDescription = metadatum?.data.description ?? description;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <Head title={pageTitle} description={pageDescription} />
+    <script is:inline>
+      (function themeEffect() {
+        const pref = localStorage.getItem("theme");
+        if (pref === "dark" || (pref === null && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.add("light");
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div
+      class={flex({
+        minH: "100dvh",
+        bgColor: "clr_white_neutral_900",
+        flexDirection: "column",
+      })}
+    >
+      <Header lang={lang} dict={dict} />
+      <div class={css({ flex: 1 })}>
+        <slot />
+      </div>
+      <Footer lang={lang} dict={dict} />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+import type { ReadingDictionary } from "./types";
+
+const en: ReadingDictionary = {
+  "page-title": "Reading",
+  "currently-reads": {
+    "section-title": "Currently reading",
+    "no-reads": {
+      "title": "No reads",
+      "description": "Paulo Henrique is not reading any literature at the moment."
+    }
+  },
+  "more-reads": "More reads"
+};
+
+export default en;

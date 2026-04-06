@@ -1,0 +1,79 @@
+---
+import { css } from "../../../styled-system/css";
+---
+
+<button
+  id="back-to-top"
+  class={`group ${css({
+    position: "relative",
+    width: "fit-content",
+    display: "flex",
+    pl: 8,
+    pr: 3,
+    py: 1.5,
+    flexWrap: "nowrap",
+    borderRadius: "sm",
+    border: "1px solid",
+    borderColor: {
+      base: "rgba(0, 0, 0, 0.15)",
+      _dark: "rgba(255, 255, 255, 0.2)",
+    },
+    _hover: {
+      backgroundColor: {
+        base: "rgba(0, 0, 0, 0.05)",
+        _dark: "rgba(255, 255, 255, 0.05)",
+      },
+      color: {
+        base: "black",
+        _dark: "white",
+      },
+    },
+    transitionProperty: "color, background-color, border-color, text-decoration-color, fill, stroke",
+    transitionDuration: "300ms",
+    transitionTimingFunction: "ease-in-out",
+  })}`}
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    class={css({
+      position: "absolute",
+      top: "50%",
+      left: 2,
+      transform: "translateY(-50%) rotate(90deg)",
+      width: 4,
+      height: 4,
+      strokeWidth: "2",
+      fill: "none",
+      stroke: "currentColor",
+    })}
+  >
+    <line
+      x1="5"
+      y1="12"
+      x2="19"
+      y2="12"
+      class={css({
+        transform: "translateX(8px) scaleX(0)",
+        _groupHover: {
+          transform: "translateX(0) scaleX(1)",
+        },
+        transitionProperty: "transform",
+        transitionDuration: "300ms",
+        transitionTimingFunction: "ease-in-out",
+      })}
+    ></line>
+    <polyline
+      points="12 5 5 12 12 19"
+      class={css({
+        transform: "translateX(4px)",
+        _groupHover: {
+          transform: "translateX(0)",
+        },
+        transitionProperty: "transform",
+        transitionDuration: "300ms",
+        transitionTimingFunction: "ease-in-out",
+      })}></polyline>
+  </svg>
+  <div class={css({ fontSize: "sm" })}>Back to top</div>
+</button>

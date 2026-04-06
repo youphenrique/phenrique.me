@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "../../layouts/main-layout.astro";
+import Container from "../../views/_components/container.astro";
+import ArrowCard from "../../views/_components/arrow-card.astro";
+import { PROJECTS } from "../../consts";
+import { css } from "../../../styled-system/css";
+
+const projects = (await getCollection("projects"))
+  .filter((project) => !project.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<MainLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
+  <Container>
+    <div class={css({ "& > * + *": { mt: 10 } })}>
+      <div class={`animate ${css({ fontWeight: "semibold", color: { base: "black", _dark: "white" } })}`}>
+        Projects
+      </div>
+      <ul class={`animate ${css({ display: "flex", flexDirection: "column", gap: 4 })}`}>
+        {
+          projects.map((project) => (
+            <li>
+              <ArrowCard entry={project} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Container>
+</MainLayout>

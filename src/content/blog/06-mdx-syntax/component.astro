@@ -1,0 +1,26 @@
+---
+import { css } from "../../../../styled-system/css";
+---
+
+<button
+  onclick="alert(`You clicked the button!`)"
+  class={css({
+    p: 2,
+    border: "1px solid",
+    borderColor: {
+      base: "rgba(0, 0, 0, 0.1)",
+      _dark: "rgba(255, 255, 255, 0.1)",
+    },
+    _hover: {
+      backgroundColor: {
+        base: "rgba(0, 0, 0, 0.05)",
+        _dark: "rgba(255, 255, 255, 0.1)",
+      },
+    },
+    transitionProperty: "color, background-color, border-color, text-decoration-color, fill, stroke",
+    transitionDuration: "300ms",
+    transitionTimingFunction: "ease-in-out",
+  })}
+>
+  Relative Button
+</button>

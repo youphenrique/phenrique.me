@@ -1,0 +1,17 @@
+---
+import { getEntry, render } from "astro:content";
+
+import IndexView from "../views/index/index.astro";
+
+const homePageEntry = await getEntry("homePages", Astro.currentLocale!);
+
+if (homePageEntry === undefined) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = await render(homePageEntry);
+---
+
+<IndexView lang="en" title={homePageEntry.data.title}>
+  <Content />
+</IndexView>

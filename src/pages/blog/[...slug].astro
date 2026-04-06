@@ -1,0 +1,56 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+
+import MainLayout from "../../layouts/main-layout.astro";
+import Container from "../../views/_components/container.astro";
+import FormattedDate from "../../views/_components/formatted-date.astro";
+import BackToPrev from "../../views/_components/back-to-prev.astro";
+import { readingTime } from "../../lib/utils";
+import { css } from "../../../styled-system/css";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog"))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: post,
+  }));
+}
+
+type Props = CollectionEntry<"blog">;
+
+const post = Astro.props;
+const { Content } = await render(post);
+---
+
+<MainLayout title={post.data.title} description={post.data.description}>
+  <Container>
+    <div class="animate">
+      <BackToPrev href="/blog"> Back to blog </BackToPrev>
+    </div>
+    <div class={css({ "& > * + *": { mt: 1 }, my: 10 })}>
+      <div class={`animate ${css({ display: "flex", alignItems: "center", gap: 1.5 })}`}>
+        <div class={css({ fontSize: "sm" })}>
+          <FormattedDate date={post.data.date} />
+        </div>
+        &bull;
+        <div class={css({ fontSize: "sm" })}>
+          {readingTime(post.body!)}
+        </div>
+      </div>
+      <div
+        class={`animate ${css({
+          fontSize: "2xl",
+          fontWeight: "semibold",
+          color: { base: "black", _dark: "white" },
+        })}`}
+      >
+        {post.data.title}
+      </div>
+    </div>
+    <article class="animate">
+      <Content />
+    </article>
+  </Container>
+</MainLayout>

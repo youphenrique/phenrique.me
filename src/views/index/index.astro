@@ -1,0 +1,21 @@
+---
+import { css } from "../../../styled-system/css";
+import MainLayout from "../../layouts/main-layout.astro";
+import Container from "../_components/container.astro";
+
+interface Props {
+  lang: string;
+  title: string;
+}
+---
+
+<MainLayout title="Home" description="Paulo Henrique's personal website" lang={Astro.props.lang}>
+  <Container styles={css.raw({ py: { base: 32, sm: 44, "2xl": 52 } })}>
+    <h1 class={css({ fontSize: "lg", fontWeight: "semibold", color: "clr_neutral_900_50" })}>
+      {Astro.props.title}
+    </h1>
+    <div class={"prose-ui antialiased " + css({ mt: 4, maxW: "xl" })}>
+      <slot />
+    </div>
+  </Container>
+</MainLayout>

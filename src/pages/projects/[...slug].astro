@@ -1,0 +1,72 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import MainLayout from "../../layouts/main-layout.astro";
+import Container from "../../views/_components/container.astro";
+import FormattedDate from "../../views/_components/formatted-date.astro";
+import { readingTime } from "../../lib/utils";
+import BackToPrev from "../../views/_components/back-to-prev.astro";
+import Link from "../../views/_components/link.astro";
+import { css } from "../../../styled-system/css";
+
+export async function getStaticPaths() {
+  const projects = (await getCollection("projects"))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: project,
+  }));
+}
+type Props = CollectionEntry<"projects">;
+
+const project = Astro.props;
+const { Content } = await render(project);
+---
+
+<MainLayout title={project.data.title} description={project.data.description}>
+  <Container>
+    <div class="animate">
+      <BackToPrev href="/projects"> Back to projects </BackToPrev>
+    </div>
+    <div class={css({ "& > * + *": { mt: 1 }, my: 10 })}>
+      <div class={`animate ${css({ display: "flex", alignItems: "center", gap: 1.5 })}`}>
+        <div class={css({ fontSize: "sm" })}>
+          <FormattedDate date={project.data.date} />
+        </div>
+        &bull;
+        <div class={css({ fontSize: "sm" })}>
+          {readingTime(project.body!)}
+        </div>
+      </div>
+      <div
+        class={`animate ${css({
+          fontSize: "2xl",
+          fontWeight: "semibold",
+          color: { base: "black", _dark: "white" },
+        })}`}
+      >
+        {project.data.title}
+      </div>
+      {
+        (project.data.demoURL || project.data.repoURL) && (
+          <nav class={`animate ${css({ display: "flex", gap: 1 })}`}>
+            {project.data.demoURL && (
+              <Link href={project.data.demoURL} external>
+                demo
+              </Link>
+            )}
+            {project.data.demoURL && project.data.repoURL && <span>/</span>}
+            {project.data.repoURL && (
+              <Link href={project.data.repoURL} external>
+                repo
+              </Link>
+            )}
+          </nav>
+        )
+      }
+    </div>
+    <article class="animate">
+      <Content />
+    </article>
+  </Container>
+</MainLayout>

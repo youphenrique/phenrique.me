@@ -1,0 +1,46 @@
+---
+import { css } from "../../../../styled-system/css";
+import { grid } from "../../../../styled-system/patterns";
+import StarIcon from "./star-icon.astro";
+
+interface Props {
+  title: string;
+  rating: number;
+  authors: string[];
+}
+
+const { title, rating, authors } = Astro.props;
+---
+<div
+  class={grid({
+    py: 2,
+    alignItems: "center",
+    gap: { base: 2, lg: 4 },
+    gridTemplateColumns: { base: "2fr 1fr", lg: "3fr 2fr auto" },
+  })}
+>
+  <h1 class={css({ color: "clr_neutral_800_200", fontWeight: "medium", fontSize: "sm" })}>
+    {title}
+  </h1>
+  <span
+    class={css({
+      fontSize: "sm",
+      lineHeight: "tight",
+      fontWeight: "medium",
+      color: "clr_neutral_700_400",
+      textAlign: { base: "right", lg: "left" },
+      justifySelf: { base: "end", lg: "start" },
+    })}
+  >
+    {authors.length === 0 ? "Unknown" : authors.join(", ")}
+  </span>
+  <div class={css({ display: "flex", justifySelf: { base: "start", lg: "end" }, gap: 1 })}>
+    {Array.from({ length: 5 }).map((_, index) => (
+      <StarIcon
+        size={16}
+        fill={index < rating}
+        color={index < rating ? "token(colors.amber.500)" : "token(colors.clr_neutral_300_700)"}
+      />
+    ))}
+  </div>
+</div>

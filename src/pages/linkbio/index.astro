@@ -1,0 +1,44 @@
+---
+import { getCollection } from "astro:content";
+import LinkbioLayout from "../../layouts/linkbio-layout.astro";
+import TopMenu from "./_components/top-menu.astro";
+import Presentation from "./_components/presentation.astro";
+import SocialLinks from "./_components/social-links.astro";
+import dict from "../../i18n/linkbio/en";
+
+const LOCALE = "en";
+const LINKBIO_URL = "https://phenrique.me/linkbio";
+
+const pages = await getCollection("linkbioPages");
+const page = pages.find((p) => p.id === "en");
+
+if (!page) {
+  return Astro.redirect("/404");
+}
+
+const allSocialLinks = await getCollection("socialLinks");
+const socialLinks = allSocialLinks.sort((a, b) => a.id.localeCompare(b.id));
+
+const languages = [
+  { id: "pt", name: "Português" },
+  { id: "en", name: "English" },
+  { id: "de", name: "Deutsch" },
+];
+---
+
+<LinkbioLayout title="Linkbio" description={page.data.metadata.description} locale={LOCALE}>
+  <TopMenu locale={LOCALE} dict={dict} languages={languages} linkbioUrl={LINKBIO_URL} />
+  <Presentation
+    locale={LOCALE}
+    bioDescription={page.data.bioSection.description}
+    bioQuote={page.data.bioSection.quote}
+  />
+  <SocialLinks
+    socialLinks={socialLinks.map((s) => ({
+      name: s.data.name,
+      handle: s.data.handle,
+      link: s.data.link,
+      logoUrl: s.data.logoUrl,
+    }))}
+  />
+</LinkbioLayout>

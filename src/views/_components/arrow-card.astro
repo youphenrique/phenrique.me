@@ -1,0 +1,101 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { css } from "../../../styled-system/css";
+
+interface Props {
+  entry: CollectionEntry<"blog"> | CollectionEntry<"projects">;
+}
+
+const { entry } = Astro.props;
+---
+
+<a
+  href={`/${entry.collection}/${entry.id}`}
+  class={`group ${css({
+    position: "relative",
+    display: "flex",
+    flexWrap: "nowrap",
+    py: 3,
+    px: 4,
+    pr: 10,
+    borderRadius: "lg",
+    border: "1px solid",
+    borderColor: {
+      base: "rgba(0, 0, 0, 0.15)",
+      _dark: "rgba(255, 255, 255, 0.2)",
+    },
+    _hover: {
+      backgroundColor: {
+        base: "rgba(0, 0, 0, 0.05)",
+        _dark: "rgba(255, 255, 255, 0.05)",
+      },
+      color: {
+        base: "black",
+        _dark: "white",
+      },
+    },
+    transitionProperty: "color, background-color, border-color, text-decoration-color, fill, stroke",
+    transitionDuration: "300ms",
+    transitionTimingFunction: "ease-in-out",
+  })}`}
+>
+  <div
+    class={css({
+      display: "flex",
+      flexDirection: "column",
+      flex: 1,
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+    })}
+  >
+    <div class={css({ fontWeight: "semibold" })}>
+      {entry.data.title}
+    </div>
+    <div class={css({ fontSize: "sm" })}>
+      {entry.data.description}
+    </div>
+  </div>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    class={css({
+      position: "absolute",
+      top: "50%",
+      right: 2,
+      transform: "translateY(-50%)",
+      width: 5,
+      height: 5,
+      strokeWidth: "2",
+      fill: "none",
+      stroke: "currentColor",
+    })}
+  >
+    <line
+      x1="5"
+      y1="12"
+      x2="19"
+      y2="12"
+      class={css({
+        transform: "translateX(12px) scaleX(0)",
+        _groupHover: {
+          transform: "translateX(0) scaleX(1)",
+        },
+        transitionProperty: "transform",
+        transitionDuration: "300ms",
+        transitionTimingFunction: "ease-in-out",
+      })}
+    ></line>
+    <polyline
+      points="12 5 19 12 12 19"
+      class={css({
+        transform: "translateX(-4px)",
+        _groupHover: {
+          transform: "translateX(0)",
+        },
+        transitionProperty: "transform",
+        transitionDuration: "300ms",
+        transitionTimingFunction: "ease-in-out",
+      })}></polyline>
+  </svg>
+</a>

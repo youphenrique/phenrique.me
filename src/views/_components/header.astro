@@ -1,0 +1,781 @@
+---
+import { css } from "../../../styled-system/css";
+import { flex, hstack, vstack } from "../../../styled-system/patterns";
+import type { MainDictionary } from "../../i18n/main/en.ts";
+
+interface Props {
+  lang: string;
+  dict: MainDictionary;
+}
+
+const { lang, dict } = Astro.props;
+
+const pathname = Astro.url.pathname;
+
+const navLinks = [
+  { title: "about", path: "/about", soon: false },
+  { title: "work", path: "/work", soon: false },
+  { title: "writing", path: "/writing", soon: true },
+  { title: "reading", path: "/reading", soon: false },
+] as const;
+
+const languageItems = [
+  { id: "pt", name: "Português" },
+  { id: "en", name: "English" },
+  { id: "de", name: "Deutsch" },
+] as const;
+
+function getLocaleSwitchUrl(targetLang: string) {
+  let basePath = pathname;
+  basePath = basePath.replace(/^\/(de|pt|en)(\/|$)/, "/");
+  if (!basePath || basePath === "/") basePath = "/";
+  if (targetLang === "en") return basePath;
+  return `/${targetLang}${basePath === "/" ? "" : basePath}`;
+}
+
+function getNavHref(linkPath: string) {
+  if (lang === "en") return linkPath;
+  return `/${lang}${linkPath}`;
+}
+
+const homeHref = lang === "en" ? "/" : `/${lang}`;
+---
+
+<div
+  id="header-wrapper"
+  class={flex({
+    top: 4,
+    zIndex: 2,
+    width: "100%",
+    position: "fixed",
+    transition: "transform 0.3s ease",
+  })}
+>
+  <header class={css({ w: "full", px: { base: 5, md: 0 } })}>
+    <div
+      id="header-pill"
+      data-open="false"
+      class={vstack({
+        mx: "auto",
+        overflow: "hidden",
+        alignItems: "stretch",
+        bgColor: "clr_neutral_100_950_alpha_20",
+        w: { base: "full", sm: "fit-content" },
+        border: "1px solid token(colors.clr_neutral_300_700)",
+        transition: "border-radius 0.3s ease",
+        borderRadius: "2rem",
+      })}
+      style="backdrop-filter: blur(8px);"
+    >
+      <!-- Main header row -->
+      <div
+        id="header-row"
+        class={flex({
+          alignItems: "center",
+          pt: "7px",
+          px: "12px",
+          pb: "7px",
+          transition: "padding 0.3s ease",
+        })}
+      >
+        <!-- Logo + left separator -->
+        <div class={hstack({ gap: 6 })}>
+          <a
+            href={homeHref}
+            class={css({
+              h: 10,
+              w: 10,
+              display: "block",
+              borderRadius: "full",
+              border: "2px solid token(colors.clr_coral_flame)",
+              flexShrink: 0,
+            })}
+          >
+            <img
+              src="/images/me.website.png"
+              width={40}
+              height={40}
+              alt="A black and white photo of a young man"
+              class={css({
+                border: "1px solid",
+                borderRadius: "full",
+                borderColor: "neutral.900",
+                w: "full",
+                h: "full",
+                objectFit: "cover",
+              })}
+            />
+          </a>
+          <div
+            class={css({
+              height: 5,
+              width: "1px",
+              hideBelow: "sm",
+              bgColor: "clr_neutral_300_700",
+            })}
+          >
+          </div>
+        </div>
+
+        <!-- Desktop nav -->
+        <nav class={hstack({ gap: 4, fontSize: "sm", px: 5, hideBelow: "sm" })}>
+          {
+            navLinks.map((link) => {
+              const isActive = pathname.includes(link.path);
+              return (
+                <a
+                  href={link.soon ? undefined : getNavHref(link.path)}
+                  class={css({
+                    pointerEvents: link.soon ? "none" : "auto",
+                    p: 1.5,
+                    position: "relative",
+                    fontWeight: "medium",
+                    color: isActive ? "clr_coral_flame" : "clr_neutral_800_200",
+                    transition: "color 0.15s ease-in-out",
+                    _hover: { color: "clr_coral_flame" },
+                  })}
+                >
+                  {dict.header[`${link.title}-label`]}
+                  {link.soon && (
+                    <span
+                      class={css({
+                        position: "absolute",
+                        top: "-8px",
+                        right: "-16px",
+                        fontSize: "xs",
+                        fontWeight: "semibold",
+                        color: "white",
+                        bg: "clr_coral_flame",
+                        px: 1.5,
+                        py: 0.5,
+                        borderRadius: "full",
+                        transform: "rotate(10deg)",
+                      })}
+                    >
+                      {dict.header["soon-label"]}
+                    </span>
+                  )}
+                  {!link.soon && isActive && (
+                    <span
+                      class={css({
+                        left: 0,
+                        right: 0,
+                        height: "2px",
+                        bottom: "-11px",
+                        bgGradient: "to-r",
+                        position: "absolute",
+                        gradientFrom: "red.400/0",
+                        gradientVia: "red.400/40",
+                        gradientTo: "red.400/0",
+                      })}
+                    />
+                  )}
+                </a>
+              );
+            })
+          }
+        </nav>
+
+        <!-- Mobile menu button (hidden on sm+) -->
+        <div class={flex({ hideFrom: "sm", flex: 1, justifyContent: "flex-end" })}>
+          <button
+            id="menu-toggle"
+            aria-label="Menu"
+            aria-expanded="false"
+            data-open="false"
+            class={vstack({
+              ml: 6,
+              width: 10,
+              height: 10,
+              borderRadius: "full",
+              border: "1px dashed",
+              borderColor: "clr_neutral_300_700",
+              justifyContent: "center",
+              position: "relative",
+              cursor: "pointer",
+            })}
+          >
+            <span
+              id="menu-bar-top"
+              class={css({
+                width: 5,
+                height: "1px",
+                position: "absolute",
+                bg: "clr_neutral_950_snow",
+                transition: "transform 0.2s ease",
+                transform: "translateY(-4px)",
+              })}></span>
+            <span
+              id="menu-bar-bottom"
+              class={css({
+                width: 5,
+                height: "1px",
+                position: "absolute",
+                bg: "clr_neutral_950_snow",
+                transition: "transform 0.2s ease",
+                transform: "translateY(4px)",
+              })}></span>
+          </button>
+        </div>
+
+        <!-- Right controls: separator + language menu + theme toggle -->
+        <div class={hstack({ gap: 6, hideBelow: "sm" })}>
+          <div
+            class={css({
+              height: 5,
+              width: "1px",
+              bgColor: "clr_neutral_300_700",
+            })}
+          >
+          </div>
+
+          <!-- Language switcher -->
+          <div class={css({ position: "relative" })}>
+            <button
+              id="lang-menu-btn"
+              aria-label={dict.header["menu-label"]}
+              aria-haspopup="true"
+              aria-expanded="false"
+              class={css({
+                display: "flex",
+                cursor: "pointer",
+                alignItems: "center",
+                borderRadius: "full",
+                justifyContent: "center",
+                color: "clr_neutral_800_200",
+                w: 5,
+                h: 5,
+              })}
+            >
+              <!-- Globe / languages icon -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m5 8 6 6"></path>
+                <path d="m4 14 6-6 2-3"></path>
+                <path d="M2 5h12"></path>
+                <path d="M7 2h1"></path>
+                <path d="m22 22-5-10-5 10"></path>
+                <path d="M14 18h6"></path>
+              </svg>
+            </button>
+            <div
+              id="lang-menu-content"
+              role="menu"
+              data-open="false"
+              class={css({
+                position: "absolute",
+                top: "calc(100% + 12px)",
+                right: "-8px",
+                p: 1,
+                minW: 48,
+                boxShadow: "sm",
+                borderRadius: "lg",
+                border: "1px solid",
+                bgColor: "clr_neutral_100_800",
+                borderColor: "clr_neutral_300_700",
+                display: "none",
+                zIndex: 10,
+              })}
+            >
+              {
+                languageItems.map((language) => (
+                  <a
+                    href={getLocaleSwitchUrl(language.id)}
+                    role="menuitem"
+                    class={flex({
+                      p: 2,
+                      borderRadius: "md",
+                      alignItems: "center",
+                      color: "clr_neutral_800_200",
+                      justifyContent: "space-between",
+                      transition: "background-color 0.15s ease-in-out",
+                      _hover: { bg: "clr_neutral_300_700", cursor: "default" },
+                      textDecoration: "none",
+                    })}
+                  >
+                    <span class={css({ fontSize: "sm", fontWeight: "medium" })}>{language.name}</span>
+                    {language.id === lang && (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M20 6 9 17l-5-5" />
+                      </svg>
+                    )}
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+
+          <!-- Theme toggle -->
+          <div
+            id="theme-toggle"
+            class={flex({
+              p: "3px",
+              mr: "-2px",
+              w: "fit-content",
+              alignItems: "center",
+              borderRadius: "full",
+              border: "1px dashed token(colors.clr_neutral_300_700)",
+            })}
+          >
+            <button
+              id="light-theme-button"
+              aria-label="Light theme"
+              title="Light theme"
+              class={css({
+                w: 8,
+                h: 8,
+                borderRadius: "full",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "clr_neutral_800_200",
+                transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
+                _hover: { cursor: "pointer", color: "clr_neutral_900_50" },
+              })}
+            >
+              <svg width="16" height="16" stroke-linejoin="round" viewBox="0 0 16 16">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M8.75 0.75V0H7.25V0.75V2V2.75H8.75V2V0.75ZM11.182 3.75732L11.7123 3.22699L12.0659 2.87344L12.5962 2.34311L13.6569 3.40377L13.1265 3.9341L12.773 4.28765L12.2426 4.81798L11.182 3.75732ZM8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5ZM8 12C10.2091 12 12 10.2091 12 8C12 5.79086 10.2091 4 8 4C5.79086 4 4 5.79086 4 8C4 10.2091 5.79086 12 8 12ZM13.25 7.25H14H15.25H16V8.75H15.25H14H13.25V7.25ZM0.75 7.25H0V8.75H0.75H2H2.75V7.25H2H0.75ZM2.87348 12.0659L2.34315 12.5962L3.40381 13.6569L3.93414 13.1265L4.28769 12.773L4.81802 12.2426L3.75736 11.182L3.22703 11.7123L2.87348 12.0659ZM3.75735 4.81798L3.22702 4.28765L2.87347 3.9341L2.34314 3.40377L3.4038 2.34311L3.93413 2.87344L4.28768 3.22699L4.81802 3.75732L3.75735 4.81798ZM12.0659 13.1265L12.5962 13.6569L13.6569 12.5962L13.1265 12.0659L12.773 11.7123L12.2426 11.182L11.182 12.2426L11.7123 12.773L12.0659 13.1265ZM8.75 13.25V14V15.25V16H7.25V15.25V14V13.25H8.75Z"
+                  fill="currentColor"></path>
+              </svg>
+            </button>
+            <button
+              id="system-theme-button"
+              aria-label="System theme"
+              title="System theme"
+              class={css({
+                w: 8,
+                h: 8,
+                borderRadius: "full",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "clr_neutral_800_200",
+                transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
+                _hover: { cursor: "pointer", color: "clr_neutral_900_50" },
+              })}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" stroke-linejoin="round">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M0 2C0 1.44772 0.447715 1 1 1H15C15.5523 1 16 1.44772 16 2V10.5C16 11.0523 15.5523 11.5 15 11.5H8.75V14.5H9.75H10.5V16H9.75H6.25H5.5V14.5H6.25H7.25V11.5H1C0.447714 11.5 0 11.0523 0 10.5V2ZM1.5 2.5V10H14.5V2.5H1.5Z"
+                  fill="currentColor"></path>
+              </svg>
+            </button>
+            <button
+              id="dark-theme-button"
+              aria-label="Dark theme"
+              title="Dark theme"
+              class={css({
+                w: 8,
+                h: 8,
+                borderRadius: "full",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "clr_neutral_800_200",
+                transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
+                _hover: { cursor: "pointer", color: "clr_neutral_900_50" },
+              })}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" stroke-linejoin="round">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M1.5 8.00005C1.5 5.53089 2.99198 3.40932 5.12349 2.48889C4.88136 3.19858 4.75 3.95936 4.75 4.7501C4.75 8.61609 7.88401 11.7501 11.75 11.7501C11.8995 11.7501 12.048 11.7454 12.1953 11.7361C11.0955 13.1164 9.40047 14.0001 7.5 14.0001C4.18629 14.0001 1.5 11.3138 1.5 8.00005ZM6.41706 0.577759C2.78784 1.1031 0 4.22536 0 8.00005C0 12.1422 3.35786 15.5001 7.5 15.5001C10.5798 15.5001 13.2244 13.6438 14.3792 10.9921L13.4588 9.9797C12.9218 10.155 12.3478 10.2501 11.75 10.2501C8.71243 10.2501 6.25 7.78767 6.25 4.7501C6.25 3.63431 6.58146 2.59823 7.15111 1.73217L6.41706 0.577759ZM13.25 1V1.75V2.75L14.25 2.75H15V4.25H14.25H13.25V5.25V6H11.75V5.25V4.25H10.75L10 4.25V2.75H10.75L11.75 2.75V1.75V1H13.25Z"
+                  fill="currentColor"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu (hidden by default, shown when open) -->
+      <div
+        id="mobile-menu"
+        data-open="false"
+        class={css({
+          display: "grid",
+          gridTemplateRows: "0fr",
+          transition: "grid-template-rows 0.3s ease",
+          pb: 0,
+        })}
+      >
+        <div class={css({ overflow: "hidden" })}>
+          <!-- Mobile nav grid -->
+          <nav
+            class={css({
+              mb: 4,
+              pt: 4,
+              gap: 3,
+              px: "1rem",
+              display: "grid",
+              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+            })}
+          >
+            {
+              navLinks.map((link) => {
+                const isActive = pathname.includes(link.path);
+                return (
+                  <a
+                    href={link.soon ? undefined : getNavHref(link.path)}
+                    class={hstack({
+                      pointerEvents: link.soon ? "none" : "auto",
+                      p: 1.5,
+                      fontSize: "sm",
+                      position: "relative",
+                      fontWeight: "medium",
+                      color: isActive ? "clr_coral_flame" : "clr_neutral_800_200",
+                      transition: "color 0.15s ease-in-out",
+                      _hover: { color: "clr_coral_flame" },
+                      textDecoration: "none",
+                    })}
+                  >
+                    {link.soon && (
+                      <span
+                        class={css({
+                          position: "absolute",
+                          top: "-8px",
+                          left: "16px",
+                          fontSize: "xs",
+                          fontWeight: "bold",
+                          color: "white",
+                          bg: "clr_coral_flame",
+                          px: 1.5,
+                          py: 0.5,
+                          borderRadius: "full",
+                          transform: "rotate(10deg)",
+                        })}
+                      >
+                        {dict.header["soon-label"]}
+                      </span>
+                    )}
+                    {dict.header[`${link.title}-label`]}
+                  </a>
+                );
+              })
+            }
+          </nav>
+
+          <!-- Mobile bottom row: language switcher + theme toggle -->
+          <div
+            class={flex({
+              alignItems: "center",
+              justifyContent: "space-between",
+              pt: 5,
+              px: 5,
+              pb: 4,
+            })}
+          >
+            <div class={hstack({ gap: 5 })}>
+              <span
+                class={css({
+                  display: "flex",
+                  w: 5,
+                  h: 5,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "clr_neutral_800_200",
+                })}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m5 8 6 6"></path>
+                  <path d="m4 14 6-6 2-3"></path>
+                  <path d="M2 5h12"></path>
+                  <path d="M7 2h1"></path>
+                  <path d="m22 22-5-10-5 10"></path>
+                  <path d="M14 18h6"></path>
+                </svg>
+              </span>
+              <div class={hstack({ gap: 2 })}>
+                {
+                  languageItems.map((language, index) => (
+                    <>
+                      {index !== 0 && (
+                        <span
+                          class={css({
+                            height: 5,
+                            width: "1px",
+                            bgColor: "clr_neutral_300_700",
+                          })}
+                        />
+                      )}
+                      <a
+                        href={getLocaleSwitchUrl(language.id)}
+                        class={css({
+                          fontWeight: "semibold",
+                          color: lang === language.id ? "clr_neutral_900_50" : "clr_neutral_400_500",
+                          textDecoration: "none",
+                        })}
+                      >
+                        {language.id}
+                      </a>
+                    </>
+                  ))
+                }
+              </div>
+            </div>
+
+            <!-- Mobile theme toggle -->
+            <div
+              class={flex({
+                p: "3px",
+                mr: "-2px",
+                w: "fit-content",
+                alignItems: "center",
+                borderRadius: "full",
+                border: "1px dashed token(colors.clr_neutral_300_700)",
+              })}
+            >
+              <button
+                id="light-theme-button-mobile"
+                aria-label="Light theme"
+                title="Light theme"
+                data-theme-btn="light"
+                class={css({
+                  w: 8,
+                  h: 8,
+                  borderRadius: "full",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "clr_neutral_800_200",
+                  transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
+                  _hover: { cursor: "pointer", color: "clr_neutral_900_50" },
+                })}
+              >
+                <svg width="16" height="16" stroke-linejoin="round" viewBox="0 0 16 16">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M8.75 0.75V0H7.25V0.75V2V2.75H8.75V2V0.75ZM11.182 3.75732L11.7123 3.22699L12.0659 2.87344L12.5962 2.34311L13.6569 3.40377L13.1265 3.9341L12.773 4.28765L12.2426 4.81798L11.182 3.75732ZM8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5ZM8 12C10.2091 12 12 10.2091 12 8C12 5.79086 10.2091 4 8 4C5.79086 4 4 5.79086 4 8C4 10.2091 5.79086 12 8 12ZM13.25 7.25H14H15.25H16V8.75H15.25H14H13.25V7.25ZM0.75 7.25H0V8.75H0.75H2H2.75V7.25H2H0.75ZM2.87348 12.0659L2.34315 12.5962L3.40381 13.6569L3.93414 13.1265L4.28769 12.773L4.81802 12.2426L3.75736 11.182L3.22703 11.7123L2.87348 12.0659ZM3.75735 4.81798L3.22702 4.28765L2.87347 3.9341L2.34314 3.40377L3.4038 2.34311L3.93413 2.87344L4.28768 3.22699L4.81802 3.75732L3.75735 4.81798ZM12.0659 13.1265L12.5962 13.6569L13.6569 12.5962L13.1265 12.0659L12.773 11.7123L12.2426 11.182L11.182 12.2426L11.7123 12.773L12.0659 13.1265ZM8.75 13.25V14V15.25V16H7.25V15.25V14V13.25H8.75Z"
+                    fill="currentColor"></path>
+                </svg>
+              </button>
+              <button
+                id="system-theme-button-mobile"
+                aria-label="System theme"
+                title="System theme"
+                data-theme-btn="system"
+                class={css({
+                  w: 8,
+                  h: 8,
+                  borderRadius: "full",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "clr_neutral_800_200",
+                  transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
+                  _hover: { cursor: "pointer", color: "clr_neutral_900_50" },
+                })}
+              >
+                <svg width="16" height="16" viewBox="0 0 16 16" stroke-linejoin="round">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M0 2C0 1.44772 0.447715 1 1 1H15C15.5523 1 16 1.44772 16 2V10.5C16 11.0523 15.5523 11.5 15 11.5H8.75V14.5H9.75H10.5V16H9.75H6.25H5.5V14.5H6.25H7.25V11.5H1C0.447714 11.5 0 11.0523 0 10.5V2ZM1.5 2.5V10H14.5V2.5H1.5Z"
+                    fill="currentColor"></path>
+                </svg>
+              </button>
+              <button
+                id="dark-theme-button-mobile"
+                aria-label="Dark theme"
+                title="Dark theme"
+                data-theme-btn="dark"
+                class={css({
+                  w: 8,
+                  h: 8,
+                  borderRadius: "full",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "clr_neutral_800_200",
+                  transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
+                  _hover: { cursor: "pointer", color: "clr_neutral_900_50" },
+                })}
+              >
+                <svg width="16" height="16" viewBox="0 0 16 16" stroke-linejoin="round">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M1.5 8.00005C1.5 5.53089 2.99198 3.40932 5.12349 2.48889C4.88136 3.19858 4.75 3.95936 4.75 4.7501C4.75 8.61609 7.88401 11.7501 11.75 11.7501C11.8995 11.7501 12.048 11.7454 12.1953 11.7361C11.0955 13.1164 9.40047 14.0001 7.5 14.0001C4.18629 14.0001 1.5 11.3138 1.5 8.00005ZM6.41706 0.577759C2.78784 1.1031 0 4.22536 0 8.00005C0 12.1422 3.35786 15.5001 7.5 15.5001C10.5798 15.5001 13.2244 13.6438 14.3792 10.9921L13.4588 9.9797C12.9218 10.155 12.3478 10.2501 11.75 10.2501C8.71243 10.2501 6.25 7.78767 6.25 4.7501C6.25 3.63431 6.58146 2.59823 7.15111 1.73217L6.41706 0.577759ZM13.25 1V1.75V2.75L14.25 2.75H15V4.25H14.25H13.25V5.25V6H11.75V5.25V4.25H10.75L10 4.25V2.75H10.75L11.75 2.75V1.75V1H13.25Z"
+                    fill="currentColor"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<script is:inline>
+  function initHeader() {
+    const headerWrapper = document.getElementById("header-wrapper");
+    const headerPill = document.getElementById("header-pill");
+    const headerRow = document.getElementById("header-row");
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const menuBarTop = document.getElementById("menu-bar-top");
+    const menuBarBottom = document.getElementById("menu-bar-bottom");
+    const langMenuBtn = document.getElementById("lang-menu-btn");
+    const langMenuContent = document.getElementById("lang-menu-content");
+
+    if (!headerWrapper || !headerPill || !menuToggle || !mobileMenu) return;
+
+    let lastScrollY = 0;
+    let scrollTimeout;
+    let isMenuOpen = false;
+
+    // --- Scroll hide/show ---
+    function handleScroll() {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(function () {
+        const currentScrollY = window.scrollY;
+        const diff = Math.abs(currentScrollY - lastScrollY);
+        if (currentScrollY > lastScrollY && diff > 50) {
+          headerWrapper.style.transform = "translateY(-4.5rem)";
+          if (isMenuOpen) closeMenu();
+        } else if (diff > 50 || currentScrollY < 10) {
+          headerWrapper.style.transform = "translateY(0)";
+        }
+        lastScrollY = currentScrollY;
+      }, 50);
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // --- Mobile menu toggle ---
+    function openMenu() {
+      isMenuOpen = true;
+      mobileMenu.style.gridTemplateRows = "1fr";
+      headerPill.style.borderRadius = "1.875rem";
+      headerRow.style.paddingTop = "16px";
+      headerRow.style.paddingInline = "18px";
+      menuToggle.setAttribute("aria-expanded", "true");
+      if (menuBarTop) menuBarTop.style.transform = "rotate(45deg)";
+      if (menuBarBottom) menuBarBottom.style.transform = "rotate(-45deg)";
+    }
+
+    function closeMenu() {
+      isMenuOpen = false;
+      mobileMenu.style.gridTemplateRows = "0fr";
+      headerPill.style.borderRadius = "2rem";
+      headerRow.style.paddingTop = "7px";
+      headerRow.style.paddingInline = "12px";
+      menuToggle.setAttribute("aria-expanded", "false");
+      if (menuBarTop) menuBarTop.style.transform = "translateY(-4px)";
+      if (menuBarBottom) menuBarBottom.style.transform = "translateY(4px)";
+    }
+
+    menuToggle.addEventListener("click", function () {
+      if (isMenuOpen) closeMenu();
+      else openMenu();
+    });
+
+    // Close on resize to sm+
+    window.addEventListener("resize", function () {
+      if (window.innerWidth >= 640 && isMenuOpen) closeMenu();
+    });
+
+    // --- Language dropdown ---
+    if (langMenuBtn && langMenuContent) {
+      function closeLangMenu() {
+        langMenuContent.style.display = "none";
+        langMenuBtn.setAttribute("aria-expanded", "false");
+      }
+
+      langMenuBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        const isOpen = langMenuContent.style.display === "block";
+        if (isOpen) {
+          closeLangMenu();
+        } else {
+          langMenuContent.style.display = "block";
+          langMenuBtn.setAttribute("aria-expanded", "true");
+        }
+      });
+
+      document.addEventListener("click", function (e) {
+        if (!langMenuContent.contains(e.target) && e.target !== langMenuBtn) {
+          closeLangMenu();
+        }
+      });
+    }
+
+    // --- Theme toggle visual state ---
+    function updateThemeButtons() {
+      var theme = localStorage.getItem("theme") || "system";
+      var themeMap = {
+        light: ["light-theme-button", "light-theme-button-mobile"],
+        system: ["system-theme-button", "system-theme-button-mobile"],
+        dark: ["dark-theme-button", "dark-theme-button-mobile"],
+      };
+      var activeToken = "var(--colors-clr_neutral_300_700)";
+      var inactiveToken = "transparent";
+
+      Object.entries(themeMap).forEach(function ([key, ids]) {
+        ids.forEach(function (id) {
+          var btn = document.getElementById(id);
+          if (btn) btn.style.backgroundColor = key === theme ? activeToken : inactiveToken;
+        });
+      });
+    }
+
+    // Mobile theme buttons mirror desktop
+    ["light-theme-button-mobile", "system-theme-button-mobile", "dark-theme-button-mobile"].forEach(function (id) {
+      var btn = document.getElementById(id);
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var desktopId = id.replace("-mobile", "");
+        var desktopBtn = document.getElementById(desktopId);
+        if (desktopBtn) desktopBtn.click();
+      });
+    });
+
+    updateThemeButtons();
+
+    // Re-run after theme changes
+    var origToggle = window.__themeToggleCallback;
+    window.__themeToggleCallback = function () {
+      updateThemeButtons();
+      if (origToggle) origToggle();
+    };
+  }
+
+  document.addEventListener("DOMContentLoaded", initHeader);
+  document.addEventListener("astro:after-swap", initHeader);
+</script>
