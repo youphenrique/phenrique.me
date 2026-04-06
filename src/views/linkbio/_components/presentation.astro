@@ -1,16 +1,15 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 
 import { css } from "../../../../styled-system/css";
 import { vstack } from "../../../../styled-system/patterns";
 
 interface Props {
-  locale: string;
   bioDescription: string;
   bioQuote?: string;
 }
 
-const { locale, bioDescription, bioQuote } = Astro.props;
+const { bioDescription, bioQuote } = Astro.props;
 ---
 
 <div class={css({ mt: 2, textAlign: "center" })}>
@@ -43,7 +42,7 @@ const { locale, bioDescription, bioQuote } = Astro.props;
   >
     Paulo Henrique
   </h1>
-  <div lang={locale} class={vstack({ mt: 3, gap: 0.5 })}>
+  <div lang={Astro.currentLocale} class={vstack({ mt: 3, gap: 0.5 })}>
     <h2
       class={css({
         fontSize: "sm",

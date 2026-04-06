@@ -3,42 +3,45 @@ import { css } from "../../../../styled-system/css";
 import { hstack } from "../../../../styled-system/patterns";
 import type { LinkbioDictionary } from "../../../i18n/linkbio/en.ts";
 
-type Language = { id: string; name: string };
-
 interface Props {
-  locale: string;
   dict: LinkbioDictionary;
-  languages: Language[];
-  linkbioUrl: string;
 }
 
-const { locale, dict, languages, linkbioUrl } = Astro.props;
+const { dict } = Astro.props;
+
+const LINKBIO_URL = "https://phenrique.me/linkbio";
 
 const shareLinks = [
   {
     id: "x-twitter",
     name: "X (Twitter)",
-    href: `https://x.com/intent/tweet?text=${dict["top-menu"].menu["link-text"]}! - ${linkbioUrl}`,
+    href: `https://x.com/intent/tweet?text=${dict["top-menu"].menu["link-text"]}! - ${LINKBIO_URL}`,
     iconHtml: `<svg viewBox="0 0 48 48"><circle cx="50%" cy="50%" r="50%" fill="black"></circle><path d="M11.559 12.251L20.825 25.1736L11.5 35.6775H13.6L21.763 26.4794L28.359 35.6786H35.5L25.712 22.029L34.392 12.25H32.293L24.775 20.7211L18.7 12.251H11.559ZM14.645 13.8625H17.925L32.413 34.0661H29.133L14.644 13.8635L14.645 13.8625Z" fill="white"></path></svg>`,
   },
   {
     id: "whatsapp",
     name: "WhatsApp",
-    href: `https://wa.me/?text=${dict["top-menu"].menu["link-text"]}! - ${linkbioUrl}`,
+    href: `https://wa.me/?text=${dict["top-menu"].menu["link-text"]}! - ${LINKBIO_URL}`,
     iconHtml: `<svg viewBox="0 0 24 24"><circle cx="50%" cy="50%" r="50%" fill="#22C55E"></circle><path d="M16.201 7.746a5.9 5.9 0 0 0-4.205-1.745c-3.276 0-5.945 2.669-5.948 5.945 0 1.049.274 2.07.793 2.973L6 18.001l3.153-.826a5.95 5.95 0 0 0 2.843.724h.003c3.275 0 5.944-2.669 5.947-5.948A5.92 5.92 0 0 0 16.2 7.746m-4.205 9.146c-.89 0-1.76-.24-2.518-.69l-.18-.108-1.87.49.5-1.824-.118-.188a4.9 4.9 0 0 1-.755-2.63 4.95 4.95 0 0 1 4.944-4.937c1.32 0 2.56.516 3.495 1.448a4.92 4.92 0 0 1 1.445 3.496 4.95 4.95 0 0 1-4.943 4.943m2.711-3.7a27 27 0 0 0-1.015-.485c-.137-.049-.236-.074-.334.074-.1.148-.384.485-.47.582-.085.1-.174.11-.322.037s-.627-.231-1.195-.739a4.5 4.5 0 0 1-.827-1.029c-.085-.148-.008-.228.066-.302.066-.066.148-.174.223-.26.074-.085.1-.148.148-.248s.025-.185-.012-.259-.333-.807-.459-1.103c-.12-.291-.242-.251-.333-.254C10.09 9.2 9.99 9.2 9.892 9.2c-.1 0-.26.037-.397.185-.136.149-.519.508-.519 1.24 0 .733.534 1.438.608 1.537.074.1 1.046 1.6 2.537 2.244.354.154.63.245.847.314.356.114.678.097.935.06.285-.043.878-.36 1.004-.707.122-.348.122-.645.085-.707-.037-.063-.137-.1-.285-.174" fill="#fff"></path></svg>`,
   },
   {
     id: "linkedin",
     name: "LinkedIn",
-    href: `https://www.linkedin.com/sharing/share-offsite/?url=${linkbioUrl}`,
+    href: `https://www.linkedin.com/sharing/share-offsite/?url=${LINKBIO_URL}`,
     iconHtml: `<svg viewBox="0 0 24 24"><circle cx="50%" cy="50%" r="50%" fill="#0A66C2"></circle><path d="M8.656 10.132h-2.46V18h2.46zm.221-2.705A1.417 1.417 0 0 0 7.47 6h-.044a1.426 1.426 0 0 0 0 2.852A1.416 1.416 0 0 0 8.877 7.47zM18 13.22c0-2.365-1.505-3.285-3-3.285a2.8 2.8 0 0 0-2.488 1.269h-.07v-1.072h-2.31V18h2.458v-4.186a1.633 1.633 0 0 1 1.476-1.76h.093c.782 0 1.362.492 1.362 1.731V18h2.46z" fill="#fff"></path></svg>`,
   },
   {
     id: "email",
     name: "E-mail",
-    href: `mailto:?subject=${dict["top-menu"].menu["link-text"]}!&body=${dict["top-menu"].menu["link-text"]} - ${linkbioUrl}`,
+    href: `mailto:?subject=${dict["top-menu"].menu["link-text"]}!&body=${dict["top-menu"].menu["link-text"]} - ${LINKBIO_URL}`,
     iconHtml: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#60696c"/><g transform="translate(4.5 4.5)"><path d="M1 2C0.447715 2 0 2.44772 0 3V12C0 12.5523 0.447715 13 1 13H14C14.5523 13 15 12.5523 15 12V3C15 2.44772 14.5523 2 14 2H1ZM1 3L14 3V3.92494C13.9174 3.92486 13.8338 3.94751 13.7589 3.99505L7.5 7.96703L1.24112 3.99505C1.16621 3.94751 1.0826 3.92486 1 3.92494V3ZM1 4.90797V12H14V4.90797L7.74112 8.87995C7.59394 8.97335 7.40606 8.97335 7.25888 8.87995L1 4.90797Z" fill="white" fill-rule="evenodd" clip-rule="evenodd"/></g></svg>`,
   },
+];
+
+const languages = [
+  { id: "pt", name: "Português" },
+  { id: "en", name: "English" },
+  { id: "de", name: "Deutsch" },
 ];
 
 const popoverHeaderClass = css({
@@ -94,7 +97,7 @@ const menuIconSvg = `<svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.o
 ---
 
 <div
-  lang={locale}
+  lang={Astro.currentLocale}
   class={css({
     mb: 6,
     display: "flex",
@@ -158,14 +161,14 @@ const menuIconSvg = `<svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.o
         languages.map((language) => (
           <a href={language.id === "en" ? "/linkbio" : `/linkbio/${language.id}`} class={itemClass}>
             <span>{language.name}</span>
-            {language.id === locale && <span set:html={checkIconSvg} />}
+            {language.id === Astro.currentLocale && <span set:html={checkIconSvg} />}
           </a>
         ))
       }
     </div>
     <div>
       <header class={popoverHeaderClass}>{dict["top-menu"].menu.share}</header>
-      <button id="copy-linkbio-btn" data-url={linkbioUrl} data-feedback={dict.toast.feedback} class={shareItemClass}>
+      <button id="copy-linkbio-btn" data-url={LINKBIO_URL} data-feedback={dict.toast.feedback} class={shareItemClass}>
         <div class={css({ w: 6, h: 6 })} set:html={copyIconSvg} />
         <span>{dict["top-menu"].menu.copy}</span>
       </button>

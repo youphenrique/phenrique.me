@@ -12,10 +12,10 @@ interface SocialLink {
 }
 
 interface Props {
-  socialLinks: SocialLink[];
+  links: SocialLink[];
 }
 
-const { socialLinks } = Astro.props;
+const { links } = Astro.props;
 ---
 
 <div
@@ -25,7 +25,7 @@ const { socialLinks } = Astro.props;
   })}
 >
   {
-    socialLinks.map((item) => (
+    links.map((item) => (
       <a
         target="_blank"
         rel="noopener noreferrer"

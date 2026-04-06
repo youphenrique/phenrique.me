@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import LinkbioLayout from "../../layouts/linkbio-layout.astro";
+import TopMenu from "./_components/top-menu.astro";
+import Presentation from "./_components/presentation.astro";
+import SocialLinks from "./_components/social-links.astro";
+import { type LinkbioDictionary } from "../../i18n/linkbio/en";
+
+interface Props {
+  dict: LinkbioDictionary;
+  page: CollectionEntry<"linkbioPages">;
+  socialLinks: CollectionEntry<"socialLinks">[];
+}
+---
+
+<LinkbioLayout title="Linkbio" description={Astro.props.page.data.metadata.description} locale={Astro.currentLocale!}>
+  <TopMenu dict={Astro.props.dict} />
+  <Presentation
+    bioDescription={Astro.props.page.data.bioSection.description}
+    bioQuote={Astro.props.page.data.bioSection.quote}
+  />
+  <SocialLinks
+    links={Astro.props.socialLinks.map((socialLink) => ({
+      name: socialLink.data.name,
+      handle: socialLink.data.handle,
+      link: socialLink.data.link,
+      logoUrl: socialLink.data.logoUrl,
+    }))}
+  />
+</LinkbioLayout>
