@@ -129,6 +129,7 @@ const bookProgress = progress ?? 0;
 <script>
   function updateOverflow() {
     const containers = document.querySelectorAll(".genre-container");
+
     containers.forEach((el) => {
       const container = el as HTMLElement;
       const update = () => {
@@ -147,7 +148,6 @@ const bookProgress = progress ?? 0;
           gradient = "linear-gradient(to right, transparent 0, black 2rem, black calc(100% - 2rem), transparent 100%)";
         }
 
-        container.style.webkitMaskImage = gradient;
         container.style.maskImage = gradient;
       };
 
