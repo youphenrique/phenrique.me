@@ -12,6 +12,6 @@ if (homePageEntry === undefined) {
 const { Content } = await render(homePageEntry);
 ---
 
-<IndexView title={homePageEntry.data.title}>
+<IndexView title={homePageEntry.data.title} subtitle={homePageEntry.data.subtitle}>
   <Content />
 </IndexView>

@@ -6,6 +6,7 @@ const homePages = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/home" }),
   schema: z.object({
     title: z.string(),
+    subtitle: z.string(),
   }),
 });
 
