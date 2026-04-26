@@ -17,7 +17,7 @@ export default defineConfig({
       colors: {
         clr_white_neutral_900: {
           // app-bg
-          value: { base: "#FFFFF8", _dark: "#111" },
+          value: { base: "#f6f5ed", _dark: "#111" },
         },
         clr_neutral_50_800: {
           // error-fallback-bg

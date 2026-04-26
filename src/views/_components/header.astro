@@ -739,18 +739,18 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
 
     // --- Theme toggle visual state ---
     function updateThemeButtons() {
-      var theme = localStorage.getItem("theme") || "system";
-      var themeMap = {
+      const theme = localStorage.getItem("theme") || "system";
+      const themeMap = {
         light: ["light-theme-button", "light-theme-button-mobile"],
         system: ["system-theme-button", "system-theme-button-mobile"],
         dark: ["dark-theme-button", "dark-theme-button-mobile"],
       };
-      var activeToken = "var(--colors-clr_neutral_300_700)";
-      var inactiveToken = "transparent";
+      const activeToken = "var(--colors-clr_neutral_300_700)";
+      const inactiveToken = "transparent";
 
       Object.entries(themeMap).forEach(function ([key, ids]) {
         ids.forEach(function (id) {
-          var btn = document.getElementById(id);
+          const btn = document.getElementById(id);
           if (btn) btn.style.backgroundColor = key === theme ? activeToken : inactiveToken;
         });
       });
@@ -758,11 +758,11 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
 
     // Mobile theme buttons mirror desktop
     ["light-theme-button-mobile", "system-theme-button-mobile", "dark-theme-button-mobile"].forEach(function (id) {
-      var btn = document.getElementById(id);
+      const btn = document.getElementById(id);
       if (!btn) return;
       btn.addEventListener("click", function () {
-        var desktopId = id.replace("-mobile", "");
-        var desktopBtn = document.getElementById(desktopId);
+        const desktopId = id.replace("-mobile", "");
+        const desktopBtn = document.getElementById(desktopId);
         if (desktopBtn) desktopBtn.click();
       });
     });
@@ -770,7 +770,7 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
     updateThemeButtons();
 
     // Re-run after theme changes
-    var origToggle = window.__themeToggleCallback;
+    const origToggle = window.__themeToggleCallback;
     window.__themeToggleCallback = function () {
       updateThemeButtons();
       if (origToggle) origToggle();
