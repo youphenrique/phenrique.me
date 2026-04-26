@@ -5,7 +5,7 @@ import MainLayout from "../../layouts/main-layout.astro";
 import Container from "../../views/_components/container.astro";
 import FormattedDate from "../../views/_components/formatted-date.astro";
 import BackToPrev from "../../views/_components/back-to-prev.astro";
-import { readingTime } from "../../lib/utils";
+import { readingTime } from "../../utils/helpers.ts";
 import { css } from "../../../styled-system/css";
 
 export async function getStaticPaths() {

@@ -8,7 +8,7 @@ Astro Nano is a static, minimalist, and lightweight portfolio and blog theme bui
 - **Styling:** [Panda CSS](https://panda-css.com/) (Modern CSS-in-JS/Build-time CSS)
 - **Content:** Astro Content Layer with Markdown and MDX support.
 - **Language:** TypeScript
-- **i18n:** Built-in support for English (default), German, and Portuguese.
+- **i18n:** Built-in support for English (default) and Portuguese.
 - **Deployment:** Optimized for Vercel (static output).
 
 ## 📁 Project Structure

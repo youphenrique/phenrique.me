@@ -7,7 +7,7 @@ export default defineConfig({
   site: "https://www.phenrique.me",
   integrations: [mdx(), sitemap()],
   i18n: {
-    locales: ["de", "en", "pt"],
+    locales: ["en", "pt"],
     defaultLocale: "en",
   },
   output: "static",

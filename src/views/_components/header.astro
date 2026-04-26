@@ -2,6 +2,7 @@
 import { css } from "../../../styled-system/css";
 import { flex, hstack, vstack } from "../../../styled-system/patterns";
 import type { MainDictionary } from "../../i18n/main/en.ts";
+import { languages } from "../../utils/constants.ts";
 
 interface Props {
   lang: string;
@@ -16,12 +17,6 @@ const navLinks = [
   { title: "work", path: "/work", soon: false },
   { title: "writing", path: "/writing", soon: true },
   { title: "reading", path: "/reading", soon: false },
-] as const;
-
-const languageItems = [
-  { id: "pt", name: "Português" },
-  { id: "en", name: "English" },
-  { id: "de", name: "Deutsch" },
 ] as const;
 
 function getLocaleSwitchUrl(targetLang: string) {
@@ -285,7 +280,7 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
               })}
             >
               {
-                languageItems.map((language) => (
+                languages.map((language) => (
                   <a
                     href={getLocaleSwitchUrl(language.id)}
                     role="menuitem"
@@ -520,7 +515,7 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
               </span>
               <div class={hstack({ gap: 2 })}>
                 {
-                  languageItems.map((language, index) => (
+                  languages.map((language, index) => (
                     <>
                       {index !== 0 && (
                         <span
