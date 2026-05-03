@@ -60,35 +60,7 @@ function HtmlIcon({ className, html }: { className?: string; html: string }) {
   return <span aria-hidden="true" className={className} dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
-export default function Menu(props: TopMenuProps) {
-  const [open, setOpen] = React.useState(false);
-  const [toast, setToast] = React.useState<{ id: number; message: string } | null>(null);
-  const toastTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  React.useEffect(() => {
-    return () => {
-      if (toastTimerRef.current !== null) {
-        clearTimeout(toastTimerRef.current);
-      }
-    };
-  }, []);
-
-  function showToast(message: string) {
-    if (toastTimerRef.current !== null) {
-      clearTimeout(toastTimerRef.current);
-    }
-
-    setToast({
-      id: Date.now(),
-      message,
-    });
-
-    toastTimerRef.current = setTimeout(() => {
-      setToast(null);
-      toastTimerRef.current = null;
-    }, 2500);
-  }
-
+export default function TopMenu(props: TopMenuProps) {
   function handleCopyLink() {
     if (!("clipboard" in navigator)) {
       console.warn("Clipboard write failed");
@@ -97,8 +69,7 @@ export default function Menu(props: TopMenuProps) {
 
     void navigator.clipboard.writeText(props.linkbioUrl).then(
       () => {
-        setOpen(false);
-        showToast(props.dict.toast.feedback);
+        // toastManager.add({ title: "Link copied to clipboard" });
       },
       () => {
         console.warn("Clipboard write failed");
@@ -115,7 +86,7 @@ export default function Menu(props: TopMenuProps) {
         justifyContent: "flex-end",
       })}
     >
-      <BaseMenu.Root modal={false} open={open} onOpenChange={setOpen}>
+      <BaseMenu.Root modal={false}>
         <BaseMenu.Trigger
           aria-label={props.dict["top-menu"]["menu-label"]}
           id="top-menu-trigger"
@@ -233,12 +204,6 @@ export default function Menu(props: TopMenuProps) {
           </BaseMenu.Positioner>
         </BaseMenu.Portal>
       </BaseMenu.Root>
-
-      {toast !== null && (
-        <div key={toast.id} id="linkbio-toast" role="alert" aria-live="assertive">
-          {toast.message}
-        </div>
-      )}
     </div>
   );
 }

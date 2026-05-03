@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
-import Menu from "./_components/menu";
+import TopMenu from "./_components/top-menu";
 import LinkbioLayout from "../../layouts/linkbio-layout.astro";
 import Presentation from "./_components/presentation.astro";
 import SocialLinks from "./_components/social-links.astro";
@@ -89,8 +89,8 @@ const menuIconSvg = `
 ---
 
 <LinkbioLayout title="Linkbio" description={Astro.props.page.data.metadata.description} locale={Astro.currentLocale!}>
-  <Menu
-    client:load
+  <TopMenu
+    client:only="react"
     dict={dict}
     currentLocale={Astro.currentLocale ?? "en"}
     linkbioUrl={LINKBIO_URL}
