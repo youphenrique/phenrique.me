@@ -5,42 +5,15 @@ import Container from "../../ui/common/container.astro";
 
 interface Props {
   title: string;
-  subtitle: string;
+  bioImageResource: string;
 }
 ---
 
 <MainLayout title="Home" description="Paulo Henrique's personal website" lang={Astro.currentLocale!}>
   <Container styles={css.raw({ py: { base: 32, sm: 44, "2xl": 52 } })}>
-    <div
-      class={css({
-        zIndex: 0,
-        pointerEvents: "none",
-        background: "radial-gradient(#ffffff08 0%, #0000 70%)",
-        width: { base: "full", md: "600px" },
-        height: "400px",
-        position: "absolute",
-        top: 0,
-        left: "50%",
-        transform: "translate(-50%)",
-      })}
-    >
-    </div>
-    <p
-      class={css({
-        color: "clr_neutral_700_400",
-        textTransform: "uppercase",
-        fontWeight: "medium",
-        fontSize: "sm",
-        wordSpacing: "0.2em",
-        letterSpacing: "0.1em",
-      })}
-    >
-      {Astro.props.subtitle}
-    </p>
     <h1
       class={css({
-        mt: 4,
-        maxW: "xs",
+        maxW: "3xl",
         fontSize: { base: "5xl", md: "6xl" },
         color: "clr_neutral_900_50",
         lineHeight: "1.1",

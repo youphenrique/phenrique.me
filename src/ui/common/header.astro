@@ -13,10 +13,10 @@ const { lang, dict } = Astro.props;
 const pathname = Astro.url.pathname;
 
 const navLinks = [
-  { title: "about", path: "/about", soon: false },
-  { title: "work", path: "/work", soon: false },
-  { title: "writing", path: "/writing", soon: true },
-  { title: "reading", path: "/reading", soon: false },
+  { title: "about", path: "/about" },
+  { title: "work", path: "/work" },
+  { title: "writing", path: "/writing" },
+  { title: "reading", path: "/reading" },
 ] as const;
 
 function getLocaleSwitchUrl(targetLang: string) {
@@ -117,9 +117,8 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
               const isActive = pathname.includes(link.path);
               return (
                 <a
-                  href={link.soon ? undefined : getNavHref(link.path)}
+                  href={getNavHref(link.path)}
                   class={css({
-                    pointerEvents: link.soon ? "none" : "auto",
                     p: 1.5,
                     position: "relative",
                     fontWeight: "medium",
@@ -129,32 +128,13 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
                   })}
                 >
                   {dict.header[`${link.title}-label`]}
-                  {link.soon && (
-                    <span
-                      class={css({
-                        position: "absolute",
-                        top: "-8px",
-                        right: "-16px",
-                        fontSize: "xs",
-                        fontWeight: "semibold",
-                        color: "white",
-                        bg: "clr_coral_flame",
-                        px: 1.5,
-                        py: 0.5,
-                        borderRadius: "full",
-                        transform: "rotate(10deg)",
-                      })}
-                    >
-                      {dict.header["soon-label"]}
-                    </span>
-                  )}
-                  {!link.soon && isActive && (
+                  {isActive ? (
                     <span
                       class={css({
                         left: 0,
                         right: 0,
                         height: "2px",
-                        bottom: "-11px",
+                        bottom: "-12px",
                         bgGradient: "to-r",
                         position: "absolute",
                         gradientFrom: "red.400/0",
@@ -162,7 +142,7 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
                         gradientTo: "red.400/0",
                       })}
                     />
-                  )}
+                  ) : null}
                 </a>
               );
             })
@@ -296,7 +276,7 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
                     })}
                   >
                     <span class={css({ fontSize: "sm", fontWeight: "medium" })}>{language.name}</span>
-                    {language.id === lang && (
+                    {language.id === lang ? (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -310,7 +290,7 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
                       >
                         <path d="M20 6 9 17l-5-5" />
                       </svg>
-                    )}
+                    ) : null}
                   </a>
                 ))
               }
@@ -410,7 +390,7 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
         id="mobile-menu"
         data-open="false"
         class={css({
-          mb: "-6px",
+          mb: "-8px",
           display: "grid",
           gridTemplateRows: "0fr",
           transition: "grid-template-rows 0.3s ease",
@@ -434,9 +414,8 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
                 const isActive = pathname.includes(link.path);
                 return (
                   <a
-                    href={link.soon ? undefined : getNavHref(link.path)}
+                    href={getNavHref(link.path)}
                     class={hstack({
-                      pointerEvents: link.soon ? "none" : "auto",
                       p: 1.5,
                       fontSize: "sm",
                       position: "relative",
@@ -447,25 +426,6 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
                       textDecoration: "none",
                     })}
                   >
-                    {link.soon && (
-                      <span
-                        class={css({
-                          position: "absolute",
-                          top: "-8px",
-                          left: "16px",
-                          fontSize: "xs",
-                          fontWeight: "bold",
-                          color: "white",
-                          bg: "clr_coral_flame",
-                          px: 1.5,
-                          py: 0.5,
-                          borderRadius: "full",
-                          transform: "rotate(10deg)",
-                        })}
-                      >
-                        {dict.header["soon-label"]}
-                      </span>
-                    )}
                     {dict.header[`${link.title}-label`]}
                   </a>
                 );
@@ -682,8 +642,8 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
       headerRow.style.paddingTop = "16px";
       headerRow.style.paddingInline = "18px";
       menuToggle.setAttribute("aria-expanded", "true");
-      if (menuBarTop) menuBarTop.style.transform = "rotate(45deg)";
-      if (menuBarBottom) menuBarBottom.style.transform = "rotate(-45deg)";
+      if (menuBarTop !== null) menuBarTop.style.transform = "rotate(45deg)";
+      if (menuBarBottom !== null) menuBarBottom.style.transform = "rotate(-45deg)";
     }
 
     function closeMenu() {
@@ -693,8 +653,8 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
       headerRow.style.paddingTop = "7px";
       headerRow.style.paddingInline = "12px";
       menuToggle.setAttribute("aria-expanded", "false");
-      if (menuBarTop) menuBarTop.style.transform = "translateY(-4px)";
-      if (menuBarBottom) menuBarBottom.style.transform = "translateY(4px)";
+      if (menuBarTop !== null) menuBarTop.style.transform = "translateY(-4px)";
+      if (menuBarBottom !== null) menuBarBottom.style.transform = "translateY(4px)";
     }
 
     menuToggle.addEventListener("click", function () {

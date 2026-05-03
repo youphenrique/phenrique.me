@@ -2,14 +2,13 @@
 import "@fontsource-variable/fraunces";
 import { getCollection } from "astro:content";
 
-import "../styles/global.css";
-import Head from "../views/_components/head.astro";
-import Header from "../views/_components/header.astro";
-import Footer from "../views/_components/footer.astro";
+import "../ui/styles/global.css";
+import Head from "../ui/common/head.astro";
+import Header from "../ui/common/header.astro";
+import Footer from "../ui/common/footer.astro";
 import { css } from "../../styled-system/css";
 import { flex } from "../../styled-system/patterns";
 import enDict from "../i18n/main/en";
-import deDict from "../i18n/main/de";
 import ptDict from "../i18n/main/pt";
 
 interface Props {
@@ -20,7 +19,7 @@ interface Props {
 
 const { title, description, lang = "en" } = Astro.props;
 
-const dictionaries = { en: enDict, de: deDict, pt: ptDict } as const;
+const dictionaries = { en: enDict, pt: ptDict } as const;
 const dict = dictionaries[lang as keyof typeof dictionaries] ?? enDict;
 
 const metadatumEntries = await getCollection("metadatum");

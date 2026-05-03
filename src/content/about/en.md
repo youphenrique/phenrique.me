@@ -1,0 +1,82 @@
+---
+title: "Crafting quality, delivering excellence, living by faith."
+bioImageResource: "/about-page.me.webp"
+---
+
+My name is Paulo Henrique<sup>1</sup>. I am a software engineer from Fortaleza<sup>2</sup>, Brazil, and someone who
+enjoys researching, thinking, and solving problems at the intersection of the technical and social challenges.
+
+## My ethos
+
+Although I initially intended to pursue a career in electrical engineering, "destiny"<sup>3</sup> ultimately led me to
+study computer science. In the early years, I wasn't sure if this was the professional career I wanted to pursue, but
+after being introduced to competitive programming, everything changed. Since then, I dedicated most of my study time
+solving algorithmic problems.
+
+The result of that competitive programming passion went on to shape my university experience, earning me a scholarship,
+internship opportunities, and the chance to compete in programming contests. By the way, between 2014 and 2016, I
+competed in the Maratona de Programação Brasileira, winning the regional championship in 2016<sup>4</sup> and reaching
+the national finals stage that same year. Ultimately, all these experiences solidified my desire to pursue a
+professional career in software engineer.
+
+In late 2019, I earned my B.Sc. in Computer Science from Universidade Estadual do Ceará. But since 2017, I've taken my
+first steps as a professional software developer when I joined a company as an intern due to my good results and
+performance in programming competitions. What started in competition arenas eventually became a career built around
+solving real problems — writing production code, working across the full stack, and paying close attention to the craft
+of quality software that users care about.
+
+## What I do (professionally)
+
+Nowadays, I work as a full-stack software engineer<sup>5</sup>, with a particular focus on the frontend. There's
+something deeply satisfying about crafting a beautiful, responsive, thoughtful user interface and seamless
+experiences<sup>6</sup> whether on mobile, web, or desktop applications. I think the following Paul Irish’s idea
+captures my natural inclination toward UI work:
+
+> Crafting a UI holds a lot of responsibility. For more niche topics, the UI may influence, or become (!), the mental
+> model that people retain for these concepts and systems. At the same time, a UI can delight the user in a way that
+> backend never can… ([one of my favorite examples](https://youtu.be/0Goz0PnhEg8?si=0pA3RZbSS2f6_MUf)). <sup>7</sup>
+
+Despite my expertise lies on the frontend side, I bring a solid foundation in backend systems, which enables me to work
+effectively across the entire stack. I actively try to lean into technologies and skill sets outside my main expertise,
+aiming to grow into a more versatile and well-rounded professional — a true T-shaped engineer <sup> 8, 9</sup>,
+especially in the era of agentic engineering.
+
+## Faith & Community
+
+I'm a Protestant Christian<sup>10</sup>, and that's not a detail I tuck away from the rest of my life. My faith in God
+and his son Jesus shapes how I think about everything: my work, how I relate to people, and what I ultimately think
+technology is for. As Mortimer Adler observed, our conclusion about God impacts every area of our lives. It is the key
+to finding the ultimate meaning in life. It is literally the most important question for every human being to
+address. <sup>11</sup>
+
+I hold a graduate degree in Sacred Scripture from FCTP, which reflects how seriously I take the life of the rational
+mind alongside the life of faith. My intention is not to become a theologian in the academic sense. However, I believe
+understanding the Bible well helps me to understand God, myself, the other people, and the universe/world we all live
+in.
+
+> If you want to know more about my beliefs and how they shape my identity, you can check out my
+> article ["What I believe and why I believe in what I believe"](https://phenrique.me/writing/what-i-believe-and-why-i-believe-in-what-i-believe).
+
+When I'm not coding or writing, you’ll find me spending time with my family, friends, serving at my church community as
+a Bible teacher and musical leader, working out at the gym, reading a book, playing chess, or playing guitar or keyboard
+with my gig partners somewhere. That's where a lot of my most meaningful relationships live, and honestly, where I feel
+most like myself.
+
+## Tech behind this website
+
+This website is built with [Astro](https://astro.build) and hosted on [Vercel](https://vercel.com). I do not use LLMs or
+AI tools to publish anything content-related on this website.
+
+# References
+
+1. Some people call me “Paulo”, “Henrique”, “Paulinho”, “Rique” (my sister) and, most frequently, “PH”.
+2. https://revistaaber.org.br/rberu/article/view/1069/432
+3. I tried the entrance exam for electrical engineering three times, but I didn't get into the university…
+4. https://www.facebook.com/maratona/posts/10154135897899118:0
+5. The “full stack” meme on Twitter
+6. Maybe this website can be a compelling testimonial of how much a care about good design and quality software.
+7. Irish, Paul. *About* [online]. [s.d.]. [Accessed 26 April 2026]. Available at: https://www.paulirish.com/about/
+8. https://paulo.com.br/blog/vibecoding-hipsters-novo-dev/
+9. https://engineering.atspotify.com/2021/03/why-you-should-pair-with-non-engineers
+10. Protestant Christian
+11. Norman L. Geisler; Frank Turek. *I don't have enough faith to be an atheist*. p. 33

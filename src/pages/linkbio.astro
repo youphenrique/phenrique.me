@@ -1,10 +1,10 @@
 ---
 import { getCollection } from "astro:content";
 
-import dict from "../../../i18n/linkbio/pt";
-import LinkbioView from "../../../views/linkbio/view.astro";
+import dict from "../i18n/linkbio/en";
+import LinkbioView from "../views/linkbio/view.astro";
 
-const page = await getCollection("linkbioPages", (collection) => collection.id === "pt");
+const page = await getCollection("linkbioPages", (collection) => collection.id === "en");
 
 if (page.length === 0) {
   return Astro.redirect("/404");

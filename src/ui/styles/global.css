@@ -1,11 +1,4 @@
 @import "@prose-ui/style/prose-ui.css";
-@import "@prose-ui/style/katex.min.css";
-
-/*
-    The CSS in this style tag is based off of Bear Blog's default CSS.
-    https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/sty
-    License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
-*/
 
 :root {
   --accent: #2337ff;

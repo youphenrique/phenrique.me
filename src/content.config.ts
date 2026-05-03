@@ -10,6 +10,14 @@ const homePages = defineCollection({
   }),
 });
 
+const aboutPages = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/about" }),
+  schema: z.object({
+    title: z.string(),
+    bioImageResource: z.string(),
+  }),
+});
+
 const metadatum = defineCollection({
   loader: glob({ pattern: "**/[^_]*.yaml", base: "./src/content/metadatum" }),
   schema: z.object({
@@ -112,5 +120,6 @@ export const collections = {
   books,
   readingPages,
   homePages,
+  aboutPages,
   metadatum,
 };

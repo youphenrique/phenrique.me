@@ -1,11 +1,11 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
 import MainLayout from "../../layouts/main-layout.astro";
-import Container from "../../views/_components/container.astro";
-import FormattedDate from "../../views/_components/formatted-date.astro";
+import Container from "../../ui/common/container.astro";
+import FormattedDate from "../../ui/common/formatted-date.astro";
 import { readingTime } from "../../utils/helpers.ts";
-import BackToPrev from "../../views/_components/back-to-prev.astro";
-import Link from "../../views/_components/link.astro";
+import BackToPrev from "../../ui/common/back-to-prev.astro";
+import Link from "../../ui/common/link.astro";
 import { css } from "../../../styled-system/css";
 
 export async function getStaticPaths() {

@@ -1,6 +1,6 @@
 ---
-title: "Paulo Henrique"
-subtitle: "Software Engineer"
+title: "Crafting quality, delivering excellence, living by faith."
+bioImageResource: "/about-page.me.webp"
 ---
 
 My name is Paulo Henrique<sup>1</sup>. I am a software engineer from Fortaleza<sup>2</sup>, Brazil, and someone who enjoys researching, thinking, and solving problems at the intersection of the technical and social challenges.
