@@ -10,9 +10,7 @@ const pt: LinkbioDictionary = {
       "link-text": "Confira este Linkbio!",
     },
   },
-  toast: {
-    feedback: "Link copiado!",
-  },
+  "copy-action-feedback": "Link copiado!",
 };
 
 export default pt;

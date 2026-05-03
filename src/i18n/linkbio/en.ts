@@ -8,9 +8,7 @@ export interface LinkbioDictionary {
       "link-text": string;
     };
   };
-  toast: {
-    feedback: string;
-  };
+  "copy-action-feedback": string;
 }
 
 const en: LinkbioDictionary = {
@@ -23,9 +21,7 @@ const en: LinkbioDictionary = {
       "link-text": "Check out this Linkbio!",
     },
   },
-  toast: {
-    feedback: "Link copied!",
-  },
+  "copy-action-feedback": "Link copied!",
 };
 
 export default en;

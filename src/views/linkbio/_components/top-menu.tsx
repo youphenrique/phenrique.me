@@ -23,6 +23,7 @@ interface TopMenuProps {
     copy: string;
     external: string;
     menu: string;
+    largerCheck: string;
   };
 }
 
@@ -61,6 +62,8 @@ function HtmlIcon({ className, html }: { className?: string; html: string }) {
 }
 
 export default function TopMenu(props: TopMenuProps) {
+  const [copied, setCopied] = React.useState(false);
+
   function handleCopyLink() {
     if (!("clipboard" in navigator)) {
       console.warn("Clipboard write failed");
@@ -69,7 +72,8 @@ export default function TopMenu(props: TopMenuProps) {
 
     void navigator.clipboard.writeText(props.linkbioUrl).then(
       () => {
-        // toastManager.add({ title: "Link copied to clipboard" });
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
       },
       () => {
         console.warn("Clipboard write failed");
@@ -141,7 +145,6 @@ export default function TopMenu(props: TopMenuProps) {
             >
               <BaseMenu.Group>
                 <BaseMenu.GroupLabel className={labelClass}>{props.dict["top-menu"].menu.language}</BaseMenu.GroupLabel>
-
                 {languages.map((language) => (
                   <BaseMenu.LinkItem
                     key={language.id}
@@ -183,12 +186,10 @@ export default function TopMenu(props: TopMenuProps) {
 
               <BaseMenu.Group>
                 <BaseMenu.GroupLabel className={labelClass}>{props.dict["top-menu"].menu.share}</BaseMenu.GroupLabel>
-
                 <BaseMenu.Item closeOnClick={false} onClick={handleCopyLink} className={shareItemClass}>
-                  <HtmlIcon className={shareIconClass} html={props.icons.copy} />
-                  <span>{props.dict["top-menu"].menu.copy}</span>
+                  <HtmlIcon className={shareIconClass} html={copied ? props.icons.largerCheck : props.icons.copy} />
+                  <span>{copied ? props.dict["copy-action-feedback"] : props.dict["top-menu"].menu.copy}</span>
                 </BaseMenu.Item>
-
                 {props.shareLinks.map((item) => (
                   <BaseMenu.LinkItem key={item.id} className={shareItemClass} href={item.href} target="_blank">
                     <HtmlIcon className={shareIconClass} html={item.iconHtml} />
