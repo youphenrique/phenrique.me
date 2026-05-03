@@ -1,6 +1,6 @@
 ---
+import TopMenu from "./top-menu";
 import { css } from "../../../../styled-system/css";
-import { languages } from "../../../../utils/constants.ts";
 import { hstack } from "../../../../styled-system/patterns";
 import type { LinkbioDictionary } from "../../../i18n/linkbio/en.ts";
 
@@ -47,23 +47,6 @@ const popoverHeaderClass = css({
   textTransform: "uppercase",
 });
 
-const itemClass = css({
-  p: 2,
-  width: "full",
-  color: "#EEE",
-  borderRadius: "md",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  transition: "background-color 0.15s ease-in-out",
-  _hover: { bg: "neutral.700", cursor: "default" },
-  textDecoration: "none",
-  textAlign: "left",
-  background: "none",
-  border: "none",
-  font: "inherit",
-});
-
 const shareItemClass = hstack({
   p: 2,
   width: "full",
@@ -80,6 +63,29 @@ const shareItemClass = hstack({
   border: "none",
   font: "inherit",
   gap: 2,
+  "&[data-highlighted]": {
+    bg: "neutral.700",
+  },
+});
+
+const languageItemClass = css({
+  p: 2,
+  width: "full",
+  color: "#EEE",
+  borderRadius: "md",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  transition: "background-color 0.15s ease-in-out",
+  _hover: { bg: "neutral.700", cursor: "default" },
+  "&[data-highlighted]": {
+    bg: "neutral.700",
+  },
+  textDecoration: "none",
+  textAlign: "left",
+  background: "none",
+  border: "none",
+  font: "inherit",
 });
 
 const checkIconSvg = `<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>`;
@@ -88,99 +94,110 @@ const externalLinkSvg = `<svg width="7" height="7" viewBox="0 0 6 6" aria-hidden
 
 const copyIconSvg = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#e0e2d9"/><g transform="translate(4.5 4.5)"><path d="M4.62471 4.00001L4.56402 4.00001C4.04134 3.99993 3.70687 3.99988 3.4182 4.055C2.2379 4.28039 1.29846 5.17053 1.05815 6.33035C0.999538 6.61321 0.999604 6.93998 0.999703 7.43689L0.999711 7.50001L0.999703 7.56313C0.999604 8.06004 0.999538 8.38681 1.05815 8.66967C1.29846 9.8295 2.2379 10.7196 3.4182 10.945C3.70688 11.0001 4.04135 11.0001 4.56403 11L4.62471 11H5.49971C5.77585 11 5.99971 10.7762 5.99971 10.5C5.99971 10.2239 5.77585 10 5.49971 10H4.62471C4.02084 10 3.78907 9.99777 3.60577 9.96277C2.80262 9.8094 2.19157 9.21108 2.03735 8.46678C2.00233 8.29778 1.99971 8.08251 1.99971 7.50001C1.99971 6.91752 2.00233 6.70225 2.03735 6.53324C2.19157 5.78895 2.80262 5.19062 3.60577 5.03725C3.78907 5.00225 4.02084 5.00001 4.62471 5.00001H5.49971C5.77585 5.00001 5.99971 4.77615 5.99971 4.50001C5.99971 4.22387 5.77585 4.00001 5.49971 4.00001H4.62471ZM10.3747 5.00001C10.9786 5.00001 11.2104 5.00225 11.3937 5.03725C12.1968 5.19062 12.8079 5.78895 12.9621 6.53324C12.9971 6.70225 12.9997 6.91752 12.9997 7.50001C12.9997 8.08251 12.9971 8.29778 12.9621 8.46678C12.8079 9.21108 12.1968 9.8094 11.3937 9.96277C11.2104 9.99777 10.9786 10 10.3747 10H9.49971C9.22357 10 8.99971 10.2239 8.99971 10.5C8.99971 10.7762 9.22357 11 9.49971 11H10.3747L10.4354 11C10.9581 11.0001 11.2925 11.0001 11.5812 10.945C12.7615 10.7196 13.701 9.8295 13.9413 8.66967C13.9999 8.38681 13.9998 8.06005 13.9997 7.56314L13.9997 7.50001L13.9997 7.43688C13.9998 6.93998 13.9999 6.61321 13.9413 6.33035C13.701 5.17053 12.7615 4.28039 11.5812 4.055C11.2925 3.99988 10.9581 3.99993 10.4354 4.00001L10.3747 4.00001H9.49971C9.22357 4.00001 8.99971 4.22387 8.99971 4.50001C8.99971 4.77615 9.22357 5.00001 9.49971 5.00001H10.3747ZM5.00038 7C4.72424 7 4.50038 7.22386 4.50038 7.5C4.50038 7.77614 4.72424 8 5.00038 8H10.0004C10.2765 8 10.5004 7.77614 10.5004 7.5C10.5004 7.22386 10.2765 7 10.0004 7H5.00038Z" fill="black" fill-rule="evenodd" clip-rule="evenodd"/></g></svg>`;
 
-const menuIconSvg = `<svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M1.5 3C1.22386 3 1 3.22386 1 3.5C1 3.77614 1.22386 4 1.5 4H13.5C13.7761 4 14 3.77614 14 3.5C14 3.22386 13.7761 3 13.5 3H1.5ZM1 7.5C1 7.22386 1.22386 7 1.5 7H13.5C13.7761 7 14 7.22386 14 7.5C14 7.77614 13.7761 8 13.5 8H1.5C1.22386 8 1 7.77614 1 7.5ZM1 11.5C1 11.2239 1.22386 11 1.5 11H13.5C13.7761 11 14 11.2239 14 11.5C14 11.7761 13.7761 12 13.5 12H1.5C1.22386 12 1 11.7761 1 11.5Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>`;
+const menuIconSvg = `
+  <svg viewBox="0 0 16 16">
+    <path
+      fill="white"
+      stroke="white"
+      d="M12.6661 7.33348C12.2979 7.33348 11.9994 7.63195 11.9994 8.00014C11.9994 8.36833 12.2979 8.66681 12.6661 8.66681C13.0343 8.66681 13.3328 8.36833 13.3328 8.00014C13.3328 7.63195 13.0343 7.33348 12.6661 7.33348Z"
+    ></path>
+    <path
+      fill="white"
+      stroke="white"
+      d="M8.00057 7.33348C7.63238 7.33348 7.3339 7.63195 7.3339 8.00014C7.3339 8.36833 7.63238 8.66681 8.00057 8.66681C8.36876 8.66681 8.66724 8.36833 8.66724 8.00014C8.66724 7.63195 8.36876 7.33348 8.00057 7.33348Z"
+    ></path>
+    <path
+      fill="white"
+      stroke="white"
+      d="M3.33333 7.33348C2.96514 7.33348 2.66667 7.63195 2.66667 8.00014C2.66667 8.36833 2.96514 8.66681 3.33333 8.66681C3.70152 8.66681 4 8.36833 4 8.00014C4 7.63195 3.70152 7.33348 3.33333 7.33348Z"
+    ></path>
+  </svg>
+`;
+
+const triggerClass = css({
+  width: 10,
+  height: 10,
+  display: "flex",
+  cursor: "pointer",
+  alignItems: "center",
+  borderRadius: "full",
+  justifyContent: "center",
+  backgroundColor: "zinc.800",
+  transition: "background-color 0.15s ease-in-out",
+  _hover: {
+    backgroundColor: "zinc.900",
+  },
+  "&[data-popup-open]": {
+    backgroundColor: "zinc.900",
+  },
+});
+
+const triggerIconClass = css({
+  width: 5,
+  height: 5,
+  display: "block",
+  color: "white",
+});
+
+const rootClass = css({
+  mb: 6,
+  display: "flex",
+  justifyContent: "flex-end",
+});
+
+const contentClass = css({
+  m: 0,
+  p: 1,
+  minW: 48,
+  boxShadow: "2xl",
+  borderRadius: "lg",
+  border: "1px solid",
+  bg: "neutral.800",
+  borderColor: "rgb(37, 37, 37)",
+  outline: "none",
+});
+
+const positionerClass = css({
+  zIndex: 20,
+  outline: "none",
+});
+
+const shareIconClass = css({ w: 6, h: 6 });
+const externalIconClass = css({ top: -2, left: -1.5, position: "relative" });
+const separatorClass = css({
+  height: "1px",
+  mx: 2,
+  my: 1,
+  bg: "rgb(37, 37, 37)",
+});
 ---
 
-<div
-  lang={Astro.currentLocale}
-  class={css({
-    mb: 6,
-    display: "flex",
-    justifyContent: "flex-end",
-  })}
->
-  <button
-    id="top-menu-trigger"
-    popovertarget="top-menu-popover"
-    aria-label={dict["top-menu"]["menu-label"]}
-    class={css({
-      width: 10,
-      height: 10,
-      display: "flex",
-      cursor: "pointer",
-      alignItems: "center",
-      borderRadius: "full",
-      justifyContent: "center",
-      backgroundColor: "zinc.800",
-      transition: "background-color 0.15s ease-in-out",
-      _hover: {
-        backgroundColor: "zinc.900",
-      },
-    })}
-  >
-    <span
-      class={css({
-        width: 5,
-        height: 5,
-        display: "block",
-        color: "white",
-      })}
-      set:html={menuIconSvg}
-    />
-  </button>
-
-  <div
-    id="top-menu-popover"
-    popover="auto"
-    class={css({
-      m: 0,
-      p: 1,
-      minW: 48,
-      boxShadow: "2xl",
-      borderRadius: "lg",
-      border: "1px solid",
-      bg: "neutral.800",
-      borderColor: "rgb(37, 37, 37)",
-      position: "absolute",
-      top: "auto",
-      right: "1rem",
-      marginTop: "2",
-      "&:popover-open": {
-        display: "block",
-      },
-    })}
-  >
-    <div>
-      <header class={popoverHeaderClass}>{dict["top-menu"].menu.language}</header>
-      {
-        languages.map((language) => (
-          <a href={language.id === "en" ? "/linkbio" : `/linkbio/${language.id}`} class={itemClass}>
-            <span>{language.name}</span>
-            {language.id === Astro.currentLocale && <span set:html={checkIconSvg} />}
-          </a>
-        ))
-      }
-    </div>
-    <div>
-      <header class={popoverHeaderClass}>{dict["top-menu"].menu.share}</header>
-      <button id="copy-linkbio-btn" data-url={LINKBIO_URL} data-feedback={dict.toast.feedback} class={shareItemClass}>
-        <div class={css({ w: 6, h: 6 })} set:html={copyIconSvg} />
-        <span>{dict["top-menu"].menu.copy}</span>
-      </button>
-      {
-        shareLinks.map((item) => (
-          <a href={item.href} target="_blank" rel="noopener noreferrer" class={shareItemClass}>
-            <div class={css({ w: 6, h: 6 })} set:html={item.iconHtml} />
-            <span>{item.name}</span>
-            <span class={css({ top: -2, left: -1.5, position: "relative" })} set:html={externalLinkSvg} />
-          </a>
-        ))
-      }
-    </div>
-  </div>
-</div>
-
-<div id="linkbio-toast" role="alert" aria-live="assertive" style="display:none"></div>
+<TopMenu
+  client:load
+  currentLocale={Astro.currentLocale ?? "en"}
+  dict={dict}
+  linkbioUrl={LINKBIO_URL}
+  shareLinks={shareLinks}
+  icons={{
+    check: checkIconSvg,
+    copy: copyIconSvg,
+    external: externalLinkSvg,
+    menu: menuIconSvg,
+  }}
+  classNames={{
+    root: rootClass,
+    trigger: triggerClass,
+    triggerIcon: triggerIconClass,
+    content: contentClass,
+    positioner: positionerClass,
+    label: popoverHeaderClass,
+    languageItem: languageItemClass,
+    shareItem: shareItemClass,
+    shareIcon: shareIconClass,
+    externalIcon: externalIconClass,
+    separator: separatorClass,
+  }}
+/>
 
 <style>
   #linkbio-toast {
@@ -209,54 +226,3 @@ const menuIconSvg = `<svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.o
     }
   }
 </style>
-
-<script>
-  let toastTimer: ReturnType<typeof setTimeout> | null = null;
-
-  function showToast(message: string) {
-    const toast = document.getElementById("linkbio-toast") as HTMLElement;
-    if (!toast) return;
-
-    if (toastTimer) {
-      clearTimeout(toastTimer);
-    }
-
-    toast.textContent = message;
-    toast.style.display = "block";
-
-    toastTimer = setTimeout(() => {
-      toast.style.display = "none";
-      toastTimer = null;
-    }, 2500);
-  }
-
-  function closeMenu() {
-    const popover = document.getElementById("top-menu-popover") as HTMLElement & {
-      hidePopover?: () => void;
-    };
-    popover?.hidePopover?.();
-  }
-
-  function initCopyButton() {
-    const btn = document.getElementById("copy-linkbio-btn");
-    if (!btn) return;
-
-    btn.addEventListener("click", () => {
-      const url = btn.getAttribute("data-url") ?? window.location.href;
-      const feedback = btn.getAttribute("data-feedback") ?? "Link copied!";
-
-      navigator.clipboard.writeText(url).then(
-        () => {
-          closeMenu();
-          showToast(feedback);
-        },
-        () => {
-          console.warn("Clipboard write failed");
-        },
-      );
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", initCopyButton);
-  document.addEventListener("astro:after-swap", initCopyButton);
-</script>
