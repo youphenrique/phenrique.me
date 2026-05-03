@@ -41,7 +41,9 @@ const { title, rating, authors } = Astro.props;
         <StarIcon
           size={16}
           fill={index < rating}
-          color={index < rating ? "token(colors.amber.500)" : "token(colors.clr_neutral_300_700)"}
+          class={css({
+            color: index < rating ? "amber.500" : "clr_neutral_300_700",
+          })}
         />
       ))
     }
