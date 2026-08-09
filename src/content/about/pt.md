@@ -1,5 +1,5 @@
 ---
-title: "Crafting quality, delivering excellence, living by faith."
+title: "Construindo com maestria, pensando com profundidade, vivendo pela fé."
 bioImageResource: "/about-page.me.webp"
 ---
 
