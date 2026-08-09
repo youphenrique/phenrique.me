@@ -4,7 +4,7 @@ Astro Nano is a static, minimalist, and lightweight portfolio and blog theme bui
 
 ## 🛠 Technology Stack
 
-- **Framework:** [Astro](https://astro.build/) (v6+)
+- **Framework:** [Astro](https://astro.build/) (v7+)
 - **Styling:** [Panda CSS](https://panda-css.com/) (Modern CSS-in-JS/Build-time CSS)
 - **Content:** Astro Content Layer with Markdown and MDX support.
 - **Language:** TypeScript
