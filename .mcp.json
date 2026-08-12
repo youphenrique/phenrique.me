@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "panda": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@pandacss/mcp"
+      ]
+    }
+  }
+}
