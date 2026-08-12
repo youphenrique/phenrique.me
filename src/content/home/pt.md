@@ -1,6 +1,5 @@
 ---
 title: "Paulo Henrique"
-subtitle: "Engenheiro de Software"
 ---
 
 Sou uma pessoa que gosta de programar e de construir _software_ refinado e de qualidade. Valorizo profundamente o cuidado com os detalhes, a qualidade e a excelência, e gosto de fazer coisas que impactem as pessoas.
