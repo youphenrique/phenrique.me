@@ -1,11 +1,11 @@
 import { defineConfig } from "@pandacss/dev";
 
 export default defineConfig({
-  // Whether to use CSS reset
+  // Whether to use css reset
   preflight: true,
 
-  // Where to look for your CSS declarations
-  include: ["./src/**/*.{js,jsx,ts,tsx}", "./.storybook/**/*.{js,jsx,ts,tsx}"],
+  // Where to look for your css declarations
+  include: ["./src/**/*.{js,jsx,ts,tsx,astro}"],
 
   // Files to exclude
   exclude: [],
@@ -17,7 +17,7 @@ export default defineConfig({
       colors: {
         clr_white_neutral_900: {
           // app-bg
-          value: { base: "#FFFFF8", _dark: "{colors.neutral.900}" },
+          value: { base: "#f6f5ed", _dark: "#111" },
         },
         clr_neutral_50_800: {
           // error-fallback-bg
@@ -64,6 +64,6 @@ export default defineConfig({
     },
   },
 
-  // The output directory for your CSS system
+  // The output directory for your css system
   outdir: "styled-system",
 });

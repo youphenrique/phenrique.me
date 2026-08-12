@@ -1,0 +1,77 @@
+---
+import { css } from "../../../styled-system/css";
+import { hstack, container } from "../../../styled-system/patterns";
+import { getCollection } from "astro:content";
+import type { MainDictionary } from "../../i18n/main/en.ts";
+
+interface Props {
+  lang: string;
+  dict: MainDictionary;
+}
+
+const { dict } = Astro.props;
+
+const allSocialLinks = await getCollection("socialLinks");
+const socialLinks = allSocialLinks.filter((link) => link.data.icon !== undefined);
+
+const innerContainerClass = css(
+  container.raw({
+    w: "full",
+    px: { base: 5, md: 6 },
+    maxWidth: { base: "xl", sm: "2xl", lg: "3xl" },
+  }),
+  {
+    py: 6,
+    display: "flex",
+    justifyContent: "space-between",
+  },
+);
+---
+
+<footer>
+  <div class={innerContainerClass}>
+    <div class={hstack({ gap: { base: 6, lg: 4 } })}>
+      {
+        socialLinks.map((item) => (
+          <a
+            target="_blank"
+            href={item.data.link}
+            title={item.data.name}
+            rel="noopener noreferrer"
+            set:html={item.data.icon}
+            class={css({
+              w: 4,
+              color: "clr_neutral_700_400",
+              display: "block",
+              "& svg": { w: "full", h: "auto" },
+              "& svg path": {
+                transition: "fill 0.15s ease-in-out",
+              },
+              "& svg:hover path": {
+                fill: "clr_neutral_900_50",
+              },
+            })}
+          />
+        ))
+      }
+    </div>
+    <a
+      href="https://github.com/youphenrique/phenrique.me"
+      target="_blank"
+      rel="noopener noreferrer"
+      class={css({
+        fontSize: "xs",
+        fontWeight: "medium",
+        color: "clr_neutral_700_400",
+        textDecoration: "underline",
+        fontFamily: "GeistMono, 'Geist Mono'",
+        transition: "color 0.15s ease-in-out",
+        _hover: {
+          color: "clr_neutral_900_50",
+        },
+      })}
+    >
+      {dict.footer.source}
+    </a>
+  </div>
+</footer>

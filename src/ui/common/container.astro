@@ -1,0 +1,17 @@
+---
+import { css, type Styles } from "../../../styled-system/css";
+import { container } from "../../../styled-system/patterns";
+
+interface Props {
+  styles?: Styles;
+}
+
+const innerContainerStyles = container.raw({
+  px: { base: 5, md: 6 },
+  maxWidth: { base: "full", sm: "2xl", lg: "3xl" },
+});
+---
+
+<div class={css(innerContainerStyles, Astro.props.styles)}>
+  <slot />
+</div>

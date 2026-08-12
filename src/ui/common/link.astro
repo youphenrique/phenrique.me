@@ -1,0 +1,42 @@
+---
+import { css } from "../../../styled-system/css";
+
+interface Props {
+  href: string;
+  external?: boolean;
+  underline?: boolean;
+}
+
+const { href, external, underline = true, ...rest } = Astro.props;
+---
+
+<a
+  href={href}
+  target={external ? "_blank" : "_self"}
+  class={css({
+    display: "inline-block",
+    textDecorationColor: {
+      base: "rgba(0, 0, 0, 0.15)",
+      _dark: "rgba(255, 255, 255, 0.3)",
+    },
+    _hover: {
+      textDecorationColor: {
+        base: "rgba(0, 0, 0, 0.25)",
+        _dark: "rgba(255, 255, 255, 0.5)",
+      },
+      color: {
+        base: "black",
+        _dark: "white",
+      },
+    },
+    color: "currentcolor",
+    transitionProperty: "color, background-color, border-color, text-decoration-color, fill, stroke",
+    transitionDuration: "300ms",
+    transitionTimingFunction: "ease-in-out",
+    textDecoration: underline ? "underline" : "none",
+    textUnderlineOffset: underline ? "2px" : "none",
+  })}
+  {...rest}
+>
+  <slot />
+</a>
