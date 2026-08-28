@@ -30,7 +30,7 @@ export default defineConfig({
           value: { base: "#404040", _dark: "#E5E5E5" },
         },
         clr_coral_flame: {
-          value: { base: "#EB5E41", _dark: "#EB5E41" },
+          value: { base: "#D97757", _dark: "#D97757" },
         },
         clr_neutral_100_950_alpha_20: {
           // header-bg
