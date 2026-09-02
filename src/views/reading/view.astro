@@ -44,11 +44,10 @@ const finishedBooks = Astro.props.allBooks
   <Container>
     <div class={vstack({ mt: 32, alignItems: "stretch", gap: 8 })}>
       <h1
-        class={css({
+        class={"fraunces-font " + css({
           fontSize: "4xl",
           fontWeight: "semibold",
           color: "clr_neutral_900_50",
-          fontFamily: "'Fraunces Variable', serif",
         })}
       >
         {Astro.props.dict["page-title"]}
@@ -118,10 +117,7 @@ const finishedBooks = Astro.props.allBooks
           class={grid({
             mt: 6,
             gap: 8,
-            gridTemplateColumns: {
-              base: "repeat(1, minmax(0, 1fr))",
-              md: "repeat(2, minmax(0, 1fr))",
-            },
+            gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
           })}
         >
           {currentlyReads.map((book) => (

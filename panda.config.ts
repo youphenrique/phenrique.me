@@ -17,7 +17,15 @@ export default defineConfig({
       colors: {
         clr_white_neutral_900: {
           // app-bg
-          value: { base: "#f6f5ed", _dark: "#111" },
+          value: { base: "#faf6f2", _dark: "#111" },
+        },
+        clr_book_card_bg: {
+          // book-preview-card-bg
+          value: { base: "#f9f9fb", _dark: "#18191b" },
+        },
+        clr_book_card_bg_hover: {
+          // book-preview-card-bg (hovered)
+          value: { base: "#f0f0f3", _dark: "#212225" },
         },
         clr_neutral_50_800: {
           // error-fallback-bg
