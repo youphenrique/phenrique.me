@@ -25,13 +25,13 @@ interface Props {
     >
     </div>
     <h1
-      class={css({
+      class={"fraunces-font " + css({
         mt: 4,
         maxW: "xs",
-        fontSize: { base: "5xl", md: "6xl" },
+        fontWeight: "medium",
+        fontSize: { base: "3xl", md: "4xl" },
         color: "clr_neutral_900_50",
         lineHeight: "1.1",
-        fontFamily: "'Fraunces Variable', serif",
       })}
     >
       {Astro.props.title}

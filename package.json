@@ -21,7 +21,6 @@
     "@astrojs/vercel": "^11.0.7",
     "@base-ui/react": "^1.7.0",
     "@comark/react": "^0.6.2",
-    "@fontsource-variable/fraunces": "^5.3.0",
     "@prose-ui/style": "^2.0.8",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",

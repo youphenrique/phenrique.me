@@ -1,5 +1,4 @@
 ---
-import "@fontsource-variable/fraunces";
 import "../ui/styles/global.css";
 import { SITE } from "../consts";
 import { css } from "../../styled-system/css";
@@ -26,6 +25,10 @@ const pageTitle = `${title} | ${SITE.NAME}`;
     <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)" />
     <link rel="icon" type="image/x-icon" href="/favicon-light.svg" />
     <meta name="generator" content={Astro.generator} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
 
     <link rel="canonical" href={canonicalURL} />
 

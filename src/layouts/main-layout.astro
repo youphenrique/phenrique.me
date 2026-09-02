@@ -1,5 +1,4 @@
 ---
-import "@fontsource-variable/fraunces";
 import { getCollection } from "astro:content";
 
 import "../ui/styles/global.css";
@@ -32,6 +31,9 @@ const pageDescription = metadatum?.data.description ?? description;
 <html lang={lang}>
   <head>
     <Head title={pageTitle} description={pageDescription} />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
     <script is:inline>
       (function themeEffect() {
         const pref = localStorage.getItem("theme");

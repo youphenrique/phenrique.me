@@ -31,12 +31,11 @@ const { bioDescription, bioQuote } = Astro.props;
     />
   </div>
   <h1
-    class={css({
+    class={"fraunces-font " + css({
       fontSize: "4xl",
       color: "transparent",
       fontWeight: 400,
       backgroundClip: "text",
-      fontFamily: "'Fraunces Variable', serif",
       backgroundImage: "linear-gradient(to bottom, #F5F5F5, #F5F5F5 40%, #999999)",
     })}
   >
@@ -56,12 +55,12 @@ const { bioDescription, bioQuote } = Astro.props;
     {
       bioQuote ? (
         <h3
-          class={css({
+          class={"fraunces-font " + css({
             fontSize: "sm",
             display: "block",
             color: "#fffcf4b0",
             fontStyle: "italic",
-            fontWeight: "semibold",
+            fontWeight: "medium",
             maxWidth: { base: "sm", sm: "md" },
           })}
         >
