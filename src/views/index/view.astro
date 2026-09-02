@@ -5,12 +5,11 @@ import Container from "../../ui/common/container.astro";
 
 interface Props {
   title: string;
-  subtitle: string;
 }
 ---
 
 <MainLayout title="Home" description="Paulo Henrique's personal website" lang={Astro.currentLocale!}>
-  <Container styles={css.raw({ py: { base: 32, sm: 44, "2xl": 52 } })}>
+  <Container styles={css.raw({ py: { base: 32, sm: 44 } })}>
     <div
       class={css({
         zIndex: 0,
