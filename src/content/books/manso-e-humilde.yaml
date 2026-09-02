@@ -1,6 +1,6 @@
 title: "Manso e humilde"
 rating: 5
-finishedDate: "2026-03-17"
+finished_date: "2026-03-17"
 authors:
   - "Dane C. Ortlund"
 status: "finished"
@@ -8,7 +8,7 @@ progress: 100
 genres:
   - "Christian"
 cover:
-  urlPath: "/reading-page.manso-e-humilde.webp"
+  url_path: "/reading-page.manso-e-humilde.webp"
   alt: "The cover of a book with a painting of mountains in the background"
   width: 462
   height: 728

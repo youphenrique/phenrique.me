@@ -24,9 +24,9 @@ const currentlyReads = Astro.props.allBooks
     ...book.data,
     cover: {
       ...book.data.cover,
-      url: book.data.cover.urlPath.startsWith("http")
-        ? book.data.cover.urlPath
-        : `${BLOB_STORAGE_URL}${book.data.cover.urlPath}`,
+      url: book.data.cover.url_path.startsWith("http")
+        ? book.data.cover.url_path
+        : `${BLOB_STORAGE_URL}${book.data.cover.url_path}`,
     },
     id: book.id,
   }));
@@ -34,8 +34,8 @@ const currentlyReads = Astro.props.allBooks
 const finishedBooks = Astro.props.allBooks
   .filter((book) => book.data.status === "finished")
   .sort((a, b) => {
-    if (!a.data.finishedDate || !b.data.finishedDate) return 0;
-    return b.data.finishedDate.getTime() - a.data.finishedDate.getTime();
+    if (!a.data.finished_date || !b.data.finished_date) return 0;
+    return b.data.finished_date.getTime() - a.data.finished_date.getTime();
   })
   .map((book) => ({ ...book.data, id: book.id }));
 ---
@@ -126,7 +126,7 @@ const finishedBooks = Astro.props.allBooks
               genres={book.genres}
               authors={book.authors}
               progress={book.progress}
-              coverUrl={book.cover.urlPath ?? null}
+              coverUrl={book.cover.url_path ?? null}
             />
           ))}
         </div>

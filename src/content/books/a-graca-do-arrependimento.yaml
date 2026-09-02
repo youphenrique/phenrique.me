@@ -1,6 +1,6 @@
 title: "A graça do arrependimento"
 rating: 5
-finishedDate: "2019-04-15"
+finished_date: "2019-04-15"
 authors:
   - "Sinclair B. Ferguson"
 status: "finished"
@@ -8,7 +8,7 @@ progress: 100
 genres:
   - "Christian"
 cover:
-  urlPath: "/reading-page.a-graca-do-arrependimento.webp"
+  url_path: "/reading-page.a-graca-do-arrependimento.webp"
   alt: "A red book cover with a gold frame and the title 'A graça do arrependimento'"
   width: 546
   height: 728

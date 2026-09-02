@@ -63,7 +63,7 @@ const linkbioPages = defineCollection({
     metadata: z.object({
       description: z.string(),
     }),
-    bioSection: z.object({
+    bio_section: z.object({
       description: z.string(),
       quote: z.string().optional(),
     }),
@@ -76,7 +76,7 @@ const socialLinks = defineCollection({
     name: z.string(),
     handle: z.string(),
     link: z.string(),
-    logoUrl: z.string(),
+    logo_url: z.string(),
     icon: z.string().optional(),
   }),
 });
@@ -88,11 +88,11 @@ const books = defineCollection({
     status: z.enum(["reading", "finished"]),
     genres: z.array(z.string()),
     authors: z.array(z.string()),
-    finishedDate: z.coerce.date().nullable(),
+    finished_date: z.coerce.date().nullable(),
     progress: z.number(),
     rating: z.number(),
     cover: z.object({
-      urlPath: z.string(),
+      url_path: z.string(),
       alt: z.string(),
       width: z.number(),
       height: z.number(),

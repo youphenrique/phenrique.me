@@ -1,6 +1,6 @@
 title: "Hábitos da mente"
 rating: 5
-finishedDate: "2025-07-12"
+finished_date: "2025-07-12"
 authors:
   - "James W. Sire"
 status: "finished"
@@ -9,7 +9,7 @@ genres:
   - "Christian"
   - "Philosophy"
 cover:
-  urlPath: "/reading-page.habitos-da-mente.webp"
+  url_path: "/reading-page.habitos-da-mente.webp"
   alt: "A chair in front of a bookshelf filled with books"
   width: 482
   height: 728

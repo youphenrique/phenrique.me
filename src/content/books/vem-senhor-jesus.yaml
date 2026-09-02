@@ -1,6 +1,6 @@
 title: "Vem, Senhor Jesus"
 rating: 5
-finishedDate: "2024-05-29"
+finished_date: "2024-05-29"
 authors:
   - "John Piper"
 status: "finished"
@@ -8,7 +8,7 @@ progress: 100
 genres:
   - "Christian"
 cover:
-  urlPath: "/reading-page.vem-senhor-jesus.webp"
+  url_path: "/reading-page.vem-senhor-jesus.webp"
   alt: "A book cover with a picture of a wave on it and a cloud shining above it"
   width: 506
   height: 728

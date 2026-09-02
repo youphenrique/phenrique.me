@@ -1,6 +1,6 @@
 title: "Escatologia e a influência do futuro no dia a dia do Cristão"
 rating: 4
-finishedDate: "2024-05-25"
+finished_date: "2024-05-25"
 authors:
   - "Russell P. Shedd"
 status: "finished"
@@ -8,7 +8,7 @@ progress: 100
 genres:
   - "Christian"
 cover:
-  urlPath: "/reading-page.escatologia-e-a-influencia-do-futuro-no-dia-a-dia-do-cristao.webp"
+  url_path: "/reading-page.escatologia-e-a-influencia-do-futuro-no-dia-a-dia-do-cristao.webp"
   alt: "The cover of the book containing two hands reaching out to each other"
   width: 312
   height: 466

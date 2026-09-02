@@ -1,6 +1,6 @@
 title: "Viciados em si mesmos"
 rating: 5
-finishedDate: "2024-04-22"
+finished_date: "2024-04-22"
 authors:
   - "Larry Crabb"
 status: "finished"
@@ -8,7 +8,7 @@ progress: 100
 genres:
   - "Christian"
 cover:
-  urlPath: "/reading-page.viciados-em-si-mesmos.webp"
+  url_path: "/reading-page.viciados-em-si-mesmos.webp"
   alt: "A book cover with a painting of a man looking himself in the mirror"
   width: 483
   height: 728

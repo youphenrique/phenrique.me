@@ -1,6 +1,6 @@
 title: "A fé na era do ceticismo"
 rating: 5
-finishedDate: "2024-04-16"
+finished_date: "2024-04-16"
 authors:
   - "Timothy Keller"
 status: "finished"
@@ -9,7 +9,7 @@ genres:
   - "Christian"
   - "Apologetics"
 cover:
-  urlPath: "/reading-page.a-fe-na-era-do-cetismo.webp"
+  url_path: "/reading-page.a-fe-na-era-do-cetismo.webp"
   alt: "The cover of the book containing two hands reaching out to each other"
   width: 483
   height: 728

@@ -110,15 +110,15 @@ const menuIconSvg = `
     }}
   />
   <Presentation
-    bioDescription={Astro.props.page.data.bioSection.description}
-    bioQuote={Astro.props.page.data.bioSection.quote}
+    bioDescription={Astro.props.page.data.bio_section.description}
+    bioQuote={Astro.props.page.data.bio_section.quote}
   />
   <SocialLinks
     links={Astro.props.socialLinks.map((socialLink) => ({
       name: socialLink.data.name,
       handle: socialLink.data.handle,
       link: socialLink.data.link,
-      logoUrl: socialLink.data.logoUrl,
+      logoUrl: socialLink.data.logo_url,
     }))}
   />
 </LinkbioLayout>

@@ -1,6 +1,6 @@
 title: "A vida intelectual"
 rating: 5
-finishedDate: "2025-07-02"
+finished_date: "2025-07-02"
 authors:
   - "A.-D. Sertillanges"
 status: "finished"
@@ -10,7 +10,7 @@ genres:
   - "Personal Development"
 progress: 100
 cover:
-  urlPath: "/reading-page.a-vida-intelectual.webp"
+  url_path: "/reading-page.a-vida-intelectual.webp"
   alt: "The cover of a book with a black background and the title 'A vida intelectual'"
   width: 485
   height: 728

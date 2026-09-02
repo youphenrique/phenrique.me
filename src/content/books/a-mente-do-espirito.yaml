@@ -1,6 +1,6 @@
 title: "A mente do Espírito"
 rating: 0
-finishedDate: null
+finished_date: null
 authors:
   - "Craig S. Keener"
 status: "reading"
@@ -8,7 +8,7 @@ progress: 2
 genres:
   - "Theology"
 cover:
-  urlPath: "/reading-page.a-mente-do-espirito.webp"
+  url_path: "/reading-page.a-mente-do-espirito.webp"
   alt: "The cover of a book with an image of a penguin"
   width: 550
   height: 728

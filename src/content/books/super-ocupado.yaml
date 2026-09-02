@@ -1,6 +1,6 @@
 title: "Super ocupado"
 rating: 4
-finishedDate: "2017-04-15"
+finished_date: "2017-04-15"
 authors:
   - "Kevin DeYoung"
 status: "finished"
@@ -9,7 +9,7 @@ genres:
   - "Christian"
   - "Personal Development"
 cover:
-  urlPath: "/reading-page.super-ocupado.webp"
+  url_path: "/reading-page.super-ocupado.webp"
   alt: "A red book cover with a cartoon character in a hamster wheel"
   width: 484
   height: 728
