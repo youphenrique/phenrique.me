@@ -11,9 +11,12 @@ interface Props {
   authors: string[];
   coverUrl: string | null;
   progress: number | null;
+  summary?: string | null;
+  lastUpdate?: string | null;
+  lastUpdateLabel?: string;
 }
 
-const { title, genres, authors, coverUrl, progress } = Astro.props;
+const { title, genres, authors, coverUrl, progress, summary, lastUpdate, lastUpdateLabel } = Astro.props;
 const bookProgress = progress ?? 0;
 ---
 
@@ -21,7 +24,6 @@ const bookProgress = progress ?? 0;
   class={`book-card ${flex({
     boxShadow: "0 0 0 1px #77777714, 0 2px 2px -.5px #77777714",
     borderRadius: "xl",
-    // border: "1px solid",
     width: "full",
     bgColor: "clr_book_card_bg",
     borderColor: "clr_neutral_300_700",
@@ -63,16 +65,17 @@ const bookProgress = progress ?? 0;
       <div class={vstack({ gap: 2, alignItems: "stretch" })}>
         <h3
           title={title}
-          class={"fraunces-font " + flex({
-            fontSize: { base: "md", md: "xl" },
-            lineHeight: 1.25,
-            fontWeight: "medium",
-            color: "clr_neutral_900_50",
-            lineClamp: 2,
-            overflow: "hidden",
-            boxOrient: "vertical",
-            textOverflow: "ellipsis",
-          })}
+          class={"fraunces-font " +
+            flex({
+              fontSize: { base: "md", md: "xl" },
+              lineHeight: 1.25,
+              fontWeight: "medium",
+              color: "clr_neutral_900_50",
+              lineClamp: 2,
+              overflow: "hidden",
+              boxOrient: "vertical",
+              textOverflow: "ellipsis",
+            })}
         >
           {title}
         </h3>
@@ -87,6 +90,28 @@ const bookProgress = progress ?? 0;
           {authors.length === 0 ? "Unknown" : authors.join(", ")}
         </h4>
       </div>
+      {
+        summary ? (
+          // Hidden on the wrapper rather than the paragraph: Panda's lineClamp utility
+          // sets its own `display: -webkit-box`, and it wins the cascade over `display`.
+          // Below md the cover sits beside a ~190px column, where an excerpt reads as
+          // noise and stretches the cover well past its 2:3 crop.
+          <div class={css({ display: { base: "none", md: "block" } })}>
+            <p
+              class={css({
+                fontSize: "sm",
+                lineHeight: 1.6,
+                color: "clr_neutral_700_400",
+                lineClamp: 3,
+                boxOrient: "vertical",
+                overflow: "hidden",
+              })}
+            >
+              {summary}
+            </p>
+          </div>
+        ) : null
+      }
       <div
         class={`genre-container ${hstack({
           gap: 2,
@@ -98,7 +123,21 @@ const bookProgress = progress ?? 0;
         {genres.map((genre) => <BookGenreBadge>{genre}</BookGenreBadge>)}
       </div>
     </div>
-    <div class={vstack({ alignItems: "stretch", width: "full" })}>
+    <div class={vstack({ gap: 2, alignItems: "stretch", width: "full" })}>
+      {
+        lastUpdate ? (
+          <span
+            class={css({
+              fontSize: "xs",
+              fontWeight: "medium",
+              lineHeight: "tight",
+              color: "clr_neutral_400_500",
+            })}
+          >
+            {lastUpdateLabel} · {lastUpdate}
+          </span>
+        ) : null
+      }
       <div class={flex({ gap: 2, alignItems: "center" })}>
         <div
           class={css({

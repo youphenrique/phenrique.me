@@ -18,6 +18,15 @@ interface Props {
 
 const BLOB_STORAGE_URL = import.meta.env.VERCEL_BLOB_STORAGE_URL ?? "";
 
+const lastUpdateFormatter = new Intl.DateTimeFormat(Astro.currentLocale, {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+  // Dates are authored as plain YAML days and parsed as UTC midnight; formatting
+  // in the build machine's zone would render the previous day west of Greenwich.
+  timeZone: "UTC",
+});
+
 const currentlyReads = Astro.props.allBooks
   .filter((book) => book.data.status === "reading")
   .map((book) => ({
@@ -44,11 +53,12 @@ const finishedBooks = Astro.props.allBooks
   <Container>
     <div class={vstack({ mt: 32, alignItems: "stretch", gap: 8 })}>
       <h1
-        class={"fraunces-font " + css({
-          fontSize: "4xl",
-          fontWeight: "semibold",
-          color: "clr_neutral_900_50",
-        })}
+        class={"fraunces-font " +
+          css({
+            fontSize: "4xl",
+            fontWeight: "semibold",
+            color: "clr_neutral_900_50",
+          })}
       >
         {Astro.props.dict["page-title"]}
       </h1>
@@ -126,6 +136,9 @@ const finishedBooks = Astro.props.allBooks
               genres={book.genres}
               authors={book.authors}
               progress={book.progress}
+              summary={book.description}
+              lastUpdateLabel={Astro.props.dict["currently-reads"]["last-update"]}
+              lastUpdate={book.last_update === null ? null : lastUpdateFormatter.format(book.last_update)}
               coverUrl={book.cover.url_path ?? null}
             />
           ))}

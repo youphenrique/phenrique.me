@@ -3,9 +3,10 @@ export interface ReadingDictionary {
   "currently-reads": {
     "section-title": string;
     "no-reads": {
-      "title": string;
-      "description": string;
+      title: string;
+      description: string;
     };
+    "last-update": string;
   };
   "more-reads": string;
 }

@@ -85,10 +85,12 @@ const books = defineCollection({
   loader: glob({ pattern: "**/[^_]*.yaml", base: "./src/content/books" }),
   schema: z.object({
     title: z.string(),
+    description: z.string().nullable(),
     status: z.enum(["reading", "finished"]),
     genres: z.array(z.string()),
     authors: z.array(z.string()),
     finished_date: z.coerce.date().nullable(),
+    last_update: z.coerce.date().nullable(),
     progress: z.number(),
     rating: z.number(),
     cover: z.object({

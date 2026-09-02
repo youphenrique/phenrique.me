@@ -5,11 +5,12 @@ const de: ReadingDictionary = {
   "currently-reads": {
     "section-title": "Derzeit lesen",
     "no-reads": {
-      "title": "Keine Lesungen",
-      "description": "Paulo Henrique liest derzeit keine Literatur."
-    }
+      title: "Keine Lesungen",
+      description: "Paulo Henrique liest derzeit keine Literatur.",
+    },
+    "last-update": "Zuletzt aktualisiert",
   },
-  "more-reads": "Weitere Lesungen"
+  "more-reads": "Weitere Lesungen",
 };
 
 export default de;
