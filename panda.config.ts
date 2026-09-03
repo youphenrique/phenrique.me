@@ -68,6 +68,14 @@ export default defineConfig({
           // text-secondary
           value: { base: "{colors.neutral.700}", _dark: "{colors.neutral.400}" },
         },
+        clr_diff_added: {
+          // latest-commit insertions
+          value: { base: "#1a7f37", _dark: "#3fb950" },
+        },
+        clr_diff_removed: {
+          // latest-commit deletions
+          value: { base: "#cf222e", _dark: "#f85149" },
+        },
         clr_neutral_400_500: {
           // text-forty
           value: { base: "{colors.neutral.400}", _dark: "{colors.neutral.500}" },

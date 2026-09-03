@@ -8,7 +8,7 @@ export interface MainDictionary {
     "menu-label": string;
   };
   footer: {
-    source: string;
+    "latest-commit": string;
   };
 }
 
@@ -22,7 +22,7 @@ const dict: MainDictionary = {
     "menu-label": "Languages",
   },
   footer: {
-    source: "Source",
+    "latest-commit": "latest commit",
   },
 };
 

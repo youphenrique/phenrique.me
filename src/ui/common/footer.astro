@@ -1,6 +1,7 @@
 ---
 import { css } from "../../../styled-system/css";
 import { container } from "../../../styled-system/patterns";
+import LatestCommit from "./latest-commit.astro";
 import type { MainDictionary } from "../../i18n/main/en.ts";
 
 interface Props {
@@ -8,7 +9,7 @@ interface Props {
   dict: MainDictionary;
 }
 
-const { dict } = Astro.props;
+const { lang, dict } = Astro.props;
 
 const innerContainerClass = css(
   container.raw({
@@ -19,30 +20,13 @@ const innerContainerClass = css(
   {
     py: 6,
     display: "flex",
-    justifyContent: "flex-end",
+    alignItems: "center",
   },
 );
 ---
 
 <footer>
   <div class={innerContainerClass}>
-    <a
-      href="https://github.com/youphenrique/phenrique.me"
-      target="_blank"
-      rel="noopener noreferrer"
-      class={css({
-        fontSize: "xs",
-        fontWeight: "medium",
-        color: "clr_neutral_700_400",
-        textDecoration: "underline",
-        fontFamily: "GeistMono, 'Geist Mono'",
-        transition: "color 0.15s ease-in-out",
-        _hover: {
-          color: "clr_neutral_900_50",
-        },
-      })}
-    >
-      {dict.footer.source}
-    </a>
+    <LatestCommit lang={lang} dict={dict} />
   </div>
 </footer>

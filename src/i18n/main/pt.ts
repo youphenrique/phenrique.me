@@ -10,7 +10,7 @@ const dict: MainDictionary = {
     "menu-label": "Idioma",
   },
   footer: {
-    source: "Fonte",
+    "latest-commit": "último commit",
   },
 };
 
