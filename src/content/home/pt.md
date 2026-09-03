@@ -2,9 +2,10 @@
 title: "Paulo Henrique"
 ---
 
-Sou uma pessoa que gosta de programar e de construir _software_ refinado e de qualidade. Valorizo profundamente o cuidado com os detalhes, a qualidade e a excelência, e gosto de fazer coisas que impactem as pessoas.
+Olá! Sou um pensador, escritor (online) e engenheiro de software que ama programar e construir aplicativos, bibliotecas, ferramentas e outros artefatos de software bem projetados e refinados.
 
-Este é um espaço onde compartilho pensamentos e ideias sobre engenharia de _software_, ciência da computação, teologia, filosofia, música e a minha fé em Cristo.
+Me importo profundamente com o ofício, a qualidade, a excelência e o raciocínio envolvido na criação de coisas que ressoem com as crenças e os valores das pessoas, buscando apontar para o que é bom, belo e verdadeiro.
 
-Obrigado por estar aqui. Se quiser entrar em contato, fique à vontade para enviar uma mensagem
-em [pauloh1288@gmail.com](mailto:pauloh1288@gmail.com) ou pelas minhas redes sociais no final desta página.
+Aqui busco explorar novas ideias, experimentar diferentes técnicas, ensinar a mim mesmo e refletir sobre insights em engenharia de software, ciência da computação, teologia, filosofia e outros temas.
+
+Obrigado por estar aqui. Se quiser saber mais sobre mim, confira a página [sobre](https://phenrique.me/about). Se tiver interesse em se conectar, sinta-se à vontade para entrar em contato em [pauloh1288@gmail.com](mailto:pauloh1288@gmail.com) ou pelas minhas redes sociais.
