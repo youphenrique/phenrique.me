@@ -3,6 +3,7 @@ import { css } from "../../../styled-system/css";
 import { flex, hstack, vstack } from "../../../styled-system/patterns";
 import type { MainDictionary } from "../../i18n/main/en.ts";
 import { languages } from "../../utils/constants.ts";
+import LanguageMenu from "./_components/language-menu";
 
 interface Props {
   lang: string;
@@ -203,99 +204,16 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
           </div>
 
           <!-- Language switcher -->
-          <div class={css({ position: "relative" })}>
-            <button
-              id="lang-menu-btn"
-              aria-label={dict.header["menu-label"]}
-              aria-haspopup="true"
-              aria-expanded="false"
-              class={css({
-                display: "flex",
-                cursor: "pointer",
-                alignItems: "center",
-                borderRadius: "full",
-                justifyContent: "center",
-                color: "clr_neutral_800_200",
-                w: 5,
-                h: 5,
-              })}
-            >
-              <!-- Globe / languages icon -->
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="m5 8 6 6"></path>
-                <path d="m4 14 6-6 2-3"></path>
-                <path d="M2 5h12"></path>
-                <path d="M7 2h1"></path>
-                <path d="m22 22-5-10-5 10"></path>
-                <path d="M14 18h6"></path>
-              </svg>
-            </button>
-            <div
-              id="lang-menu-content"
-              role="menu"
-              data-open="false"
-              class={css({
-                position: "absolute",
-                top: "calc(100% + 12px)",
-                right: "-8px",
-                p: 1,
-                minW: 48,
-                boxShadow: "sm",
-                borderRadius: "lg",
-                border: "1px solid",
-                bgColor: "clr_neutral_100_800",
-                borderColor: "clr_neutral_300_700",
-                display: "none",
-                zIndex: 10,
-              })}
-            >
-              {
-                languages.map((language) => (
-                  <a
-                    href={getLocaleSwitchUrl(language.id)}
-                    role="menuitem"
-                    class={flex({
-                      p: 2,
-                      borderRadius: "md",
-                      alignItems: "center",
-                      color: "clr_neutral_800_200",
-                      justifyContent: "space-between",
-                      transition: "background-color 0.15s ease-in-out",
-                      _hover: { bg: "clr_neutral_300_700", cursor: "default" },
-                      textDecoration: "none",
-                    })}
-                  >
-                    <span class={css({ fontSize: "sm", fontWeight: "medium" })}>{language.name}</span>
-                    {language.id === lang ? (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="M20 6 9 17l-5-5" />
-                      </svg>
-                    ) : null}
-                  </a>
-                ))
-              }
-            </div>
-          </div>
+          <LanguageMenu
+            client:load
+            currentLocale={lang}
+            menuLabel={dict.header["menu-label"]}
+            languages={languages.map((language) => ({
+              id: language.id,
+              name: language.name,
+              href: getLocaleSwitchUrl(language.id),
+            }))}
+          />
 
           <!-- Theme toggle -->
           <div
@@ -605,8 +523,6 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
     const mobileMenu = document.getElementById("mobile-menu");
     const menuBarTop = document.getElementById("menu-bar-top");
     const menuBarBottom = document.getElementById("menu-bar-bottom");
-    const langMenuBtn = document.getElementById("lang-menu-btn");
-    const langMenuContent = document.getElementById("lang-menu-content");
 
     if (!headerWrapper || !headerPill || !menuToggle || !mobileMenu) return;
 
@@ -666,31 +582,6 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
     window.addEventListener("resize", function () {
       if (window.innerWidth >= 640 && isMenuOpen) closeMenu();
     });
-
-    // --- Language dropdown ---
-    if (langMenuBtn && langMenuContent) {
-      function closeLangMenu() {
-        langMenuContent.style.display = "none";
-        langMenuBtn.setAttribute("aria-expanded", "false");
-      }
-
-      langMenuBtn.addEventListener("click", function (e) {
-        e.stopPropagation();
-        const isOpen = langMenuContent.style.display === "block";
-        if (isOpen) {
-          closeLangMenu();
-        } else {
-          langMenuContent.style.display = "block";
-          langMenuBtn.setAttribute("aria-expanded", "true");
-        }
-      });
-
-      document.addEventListener("click", function (e) {
-        if (!langMenuContent.contains(e.target) && e.target !== langMenuBtn) {
-          closeLangMenu();
-        }
-      });
-    }
 
     // --- Theme toggle visual state ---
     function updateThemeButtons() {
