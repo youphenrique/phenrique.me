@@ -1,5 +1,7 @@
 ---
+import { getCollection } from "astro:content";
 import { css } from "../../../styled-system/css";
+import { hstack } from "../../../styled-system/patterns";
 import MainLayout from "../../layouts/main-layout.astro";
 import Container from "../../ui/common/container.astro";
 import PauloHenrique from "../../ui/common/paulo-henrique.astro";
@@ -7,6 +9,9 @@ import PauloHenrique from "../../ui/common/paulo-henrique.astro";
 interface Props {
   title: string;
 }
+
+const allSocialLinks = await getCollection("socialLinks");
+const socialLinks = allSocialLinks.filter((link) => link.data.icon !== undefined);
 ---
 
 <MainLayout title="Home" description="Paulo Henrique's personal website" lang={Astro.currentLocale!}>
@@ -36,6 +41,31 @@ interface Props {
     </h1>
     <div class={"prose-ui antialiased " + css({ mt: 10, maxW: "xl" })}>
       <slot />
+    </div>
+    <div class={hstack({ gap: { base: 6, lg: 4 }, mt: 12 })}>
+      {
+        socialLinks.map((item) => (
+          <a
+            target="_blank"
+            href={item.data.link}
+            title={item.data.name}
+            rel="noopener noreferrer"
+            set:html={item.data.icon}
+            class={css({
+              w: 4,
+              color: "clr_neutral_700_400",
+              display: "block",
+              "& svg": { w: "full", h: "auto" },
+              "& svg path": {
+                transition: "fill 0.15s ease-in-out",
+              },
+              "& svg:hover path": {
+                fill: "clr_neutral_900_50",
+              },
+            })}
+          />
+        ))
+      }
     </div>
   </Container>
 </MainLayout>

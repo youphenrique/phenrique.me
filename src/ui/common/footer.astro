@@ -1,7 +1,6 @@
 ---
 import { css } from "../../../styled-system/css";
-import { hstack, container } from "../../../styled-system/patterns";
-import { getCollection } from "astro:content";
+import { container } from "../../../styled-system/patterns";
 import type { MainDictionary } from "../../i18n/main/en.ts";
 
 interface Props {
@@ -10,9 +9,6 @@ interface Props {
 }
 
 const { dict } = Astro.props;
-
-const allSocialLinks = await getCollection("socialLinks");
-const socialLinks = allSocialLinks.filter((link) => link.data.icon !== undefined);
 
 const innerContainerClass = css(
   container.raw({
@@ -23,38 +19,13 @@ const innerContainerClass = css(
   {
     py: 6,
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
   },
 );
 ---
 
 <footer>
   <div class={innerContainerClass}>
-    <div class={hstack({ gap: { base: 6, lg: 4 } })}>
-      {
-        socialLinks.map((item) => (
-          <a
-            target="_blank"
-            href={item.data.link}
-            title={item.data.name}
-            rel="noopener noreferrer"
-            set:html={item.data.icon}
-            class={css({
-              w: 4,
-              color: "clr_neutral_700_400",
-              display: "block",
-              "& svg": { w: "full", h: "auto" },
-              "& svg path": {
-                transition: "fill 0.15s ease-in-out",
-              },
-              "& svg:hover path": {
-                fill: "clr_neutral_900_50",
-              },
-            })}
-          />
-        ))
-      }
-    </div>
     <a
       href="https://github.com/youphenrique/phenrique.me"
       target="_blank"
