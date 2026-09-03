@@ -67,6 +67,12 @@ const popupClass = css({
   bgColor: "clr_neutral_100_800",
   borderColor: "clr_neutral_300_700",
   outline: "none",
+  transformOrigin: "var(--transform-origin)",
+  transition: "opacity 0.15s ease-out, transform 0.15s ease-out",
+  "&[data-starting-style], &[data-ending-style]": {
+    opacity: 0,
+    transform: "scale(0.95) translateY(-4px)",
+  },
 });
 
 function GlobeIcon() {

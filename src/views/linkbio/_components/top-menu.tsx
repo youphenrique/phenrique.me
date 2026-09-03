@@ -141,6 +141,12 @@ export default function TopMenu(props: TopMenuProps) {
                 bg: "neutral.800",
                 borderColor: "rgb(37, 37, 37)",
                 outline: "none",
+                transformOrigin: "var(--transform-origin)",
+                transition: "opacity 0.15s ease-out, transform 0.15s ease-out",
+                "&[data-starting-style], &[data-ending-style]": {
+                  opacity: 0,
+                  transform: "scale(0.95) translateY(-4px)",
+                },
               })}
             >
               <BaseMenu.Group>
