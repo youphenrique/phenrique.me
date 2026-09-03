@@ -32,7 +32,9 @@ const triggerClass = css({
   "&[data-popup-open]": { color: "clr_neutral_900_50" },
 });
 
-const iconTriggerClass = css({ w: 5, h: 5, p: 0, border: "none" });
+// 40x40 hit area for pointer/touch targets; negative margins keep the icon's
+// visual spacing in the header row unchanged.
+const iconTriggerClass = css({ w: 10, h: 10, mx: "-10px", p: 0, border: "none" });
 
 const pillTriggerClass = hstack({
   h: 10,
