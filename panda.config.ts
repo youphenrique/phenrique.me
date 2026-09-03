@@ -42,7 +42,7 @@ export default defineConfig({
         },
         clr_neutral_100_950_alpha_20: {
           // header-bg
-          value: { base: "rgba(245, 245, 245, 0.2)", _dark: "rgba(10, 10, 10, 0.2)" },
+          value: { base: "rgba(249, 249, 251, 0.5)", _dark: "rgba(24, 25, 27, 0.5)" },
         },
         clr_neutral_100_800: {
           // languages-menu-bg
