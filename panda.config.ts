@@ -21,11 +21,11 @@ export default defineConfig({
         },
         clr_book_card_bg: {
           // book-preview-card-bg
-          value: { base: "#f9f9fb", _dark: "#18191b" },
+          value: { base: "#F0EEE6", _dark: "#18191B" },
         },
         clr_book_card_bg_hover: {
           // book-preview-card-bg (hovered)
-          value: { base: "#f0f0f3", _dark: "#212225" },
+          value: { base: "#e8e6dc", _dark: "#212225" },
         },
         clr_neutral_50_800: {
           // error-fallback-bg
@@ -47,6 +47,10 @@ export default defineConfig({
         clr_neutral_100_800: {
           // languages-menu-bg
           value: { base: "{colors.neutral.100}", _dark: "{colors.neutral.800}" },
+        },
+        bg_neutral_100_700: {
+          // menu-hover-bg, border-color
+          value: { base: "#e8e6dc", _dark: "{colors.neutral.700}" },
         },
         clr_neutral_300_700: {
           // menu-hover-bg, border-color
