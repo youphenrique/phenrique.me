@@ -34,6 +34,7 @@ function getNavHref(linkPath: string) {
 }
 
 const homeHref = lang === "en" ? "/" : `/${lang}`;
+const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `/${lang}/`;
 ---
 
 <div
@@ -56,7 +57,7 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
         alignItems: "stretch",
         bgColor: "clr_neutral_100_950_alpha_20",
         w: { base: "full", sm: "fit-content" },
-        border: "1px solid token(colors.clr_neutral_300_700)",
+        // border: "1px solid token(colors.clr_neutral_300_700)",
         transition: "border-radius 0.3s ease",
         borderRadius: "2rem",
       })}
@@ -81,7 +82,8 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
               w: 10,
               display: "block",
               borderRadius: "full",
-              border: "2px solid token(colors.clr_coral_flame)",
+              border: isHomePage ? "2px solid token(colors.clr_coral_flame)" : undefined,
+              boxShadow: "0 0 0 1px #77777714, 0 2px 2px -.5px #77777714",
               flexShrink: 0,
             })}
           >
@@ -91,24 +93,13 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
               height={40}
               alt="A black and white photo of a young man"
               class={css({
-                border: "1px solid",
                 borderRadius: "full",
-                borderColor: "neutral.900",
                 w: "full",
                 h: "full",
                 objectFit: "cover",
               })}
             />
           </a>
-          <div
-            class={css({
-              height: 5,
-              width: "1px",
-              hideBelow: "sm",
-              bgColor: "clr_neutral_300_700",
-            })}
-          >
-          </div>
         </div>
 
         <!-- Desktop nav -->
@@ -129,21 +120,6 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
                   })}
                 >
                   {dict.header[`${link.title}-label`]}
-                  {isActive ? (
-                    <span
-                      class={css({
-                        left: 0,
-                        right: 0,
-                        height: "2px",
-                        bottom: "-12px",
-                        bgGradient: "to-r",
-                        position: "absolute",
-                        gradientFrom: "red.400/0",
-                        gradientVia: "red.400/40",
-                        gradientTo: "red.400/0",
-                      })}
-                    />
-                  ) : null}
                 </a>
               );
             })
@@ -194,15 +170,6 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
 
         <!-- Right controls: separator + language menu + theme toggle -->
         <div class={hstack({ gap: 6, hideBelow: "sm" })}>
-          <div
-            class={css({
-              height: 5,
-              width: "1px",
-              bgColor: "clr_neutral_300_700",
-            })}
-          >
-          </div>
-
           <!-- Language switcher -->
           <LanguageMenu
             client:load

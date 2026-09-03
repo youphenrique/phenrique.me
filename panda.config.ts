@@ -17,7 +17,7 @@ export default defineConfig({
       colors: {
         clr_white_neutral_900: {
           // app-bg
-          value: { base: "#faf6f2", _dark: "#111" },
+          value: { base: "#faf6f2", _dark: "lab(5.26466% .56015 1.26457)" },
         },
         clr_book_card_bg: {
           // book-preview-card-bg
@@ -42,7 +42,7 @@ export default defineConfig({
         },
         clr_neutral_100_950_alpha_20: {
           // header-bg
-          value: { base: "rgba(249, 249, 251, 0.5)", _dark: "rgba(24, 25, 27, 0.5)" },
+          value: { base: "rgba(250, 246, 242, 0.5)", _dark: "rgba(17, 17, 17, 0.5)" },
         },
         clr_neutral_100_800: {
           // languages-menu-bg
