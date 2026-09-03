@@ -361,64 +361,18 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
               pb: 4,
             })}
           >
-            <div class={hstack({ gap: 5 })}>
-              <span
-                class={css({
-                  display: "flex",
-                  w: 5,
-                  h: 5,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "clr_neutral_800_200",
-                })}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="m5 8 6 6"></path>
-                  <path d="m4 14 6-6 2-3"></path>
-                  <path d="M2 5h12"></path>
-                  <path d="M7 2h1"></path>
-                  <path d="m22 22-5-10-5 10"></path>
-                  <path d="M14 18h6"></path>
-                </svg>
-              </span>
-              <div class={hstack({ gap: 2 })}>
-                {
-                  languages.map((language, index) => (
-                    <>
-                      {index !== 0 && (
-                        <span
-                          class={css({
-                            height: 5,
-                            width: "1px",
-                            bgColor: "clr_neutral_300_700",
-                          })}
-                        />
-                      )}
-                      <a
-                        href={getLocaleSwitchUrl(language.id)}
-                        class={css({
-                          fontWeight: "semibold",
-                          color: lang === language.id ? "clr_neutral_900_50" : "clr_neutral_400_500",
-                          textDecoration: "none",
-                        })}
-                      >
-                        {language.id}
-                      </a>
-                    </>
-                  ))
-                }
-              </div>
-            </div>
+            <LanguageMenu
+              client:load
+              align="start"
+              withLabel
+              currentLocale={lang}
+              menuLabel={dict.header["menu-label"]}
+              languages={languages.map((language) => ({
+                id: language.id,
+                name: language.name,
+                href: getLocaleSwitchUrl(language.id),
+              }))}
+            />
 
             <!-- Mobile theme toggle -->
             <div
