@@ -1,3 +1,13 @@
 allowBuilds:
   esbuild: true
   sharp: true
+
+# Security overrides for transitively pinned packages flagged by `pnpm audit`.
+# Each range covers only the affected versions, so unrelated majors are untouched.
+overrides:
+  browserslist@<4.28.7: ^4.28.7
+  next@>=16.0.0 <16.2.11: ^16.2.11
+  path-to-regexp@>=4.0.0 <6.3.0: ^6.3.0
+  postcss@<8.5.23: ^8.5.23
+  postcss-selector-parser@>=7.1.0 <7.1.3: ^7.1.3
+  sharp@<0.35.0: ^0.35.4

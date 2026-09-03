@@ -15,15 +15,15 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
-    "@astrojs/react": "^6.0.4",
+    "@astrojs/react": "^6.0.5",
     "@astrojs/rss": "^4.0.19",
-    "@astrojs/sitemap": "^3.7.3",
-    "@astrojs/vercel": "^11.0.7",
+    "@astrojs/sitemap": "^3.7.4",
+    "@astrojs/vercel": "^11.0.9",
     "@base-ui/react": "^1.7.0",
     "@comark/react": "^0.6.2",
     "@prose-ui/style": "^2.0.8",
     "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.4",
+    "@types/react-dom": "^19.2.5",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "astro": "7.2.4",
@@ -31,20 +31,20 @@
     "geist": "^1.7.2",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "sharp": "^0.35.3"
+    "sharp": "^0.35.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
     "@pandacss/dev": "^1.12.0",
-    "@typescript-eslint/eslint-plugin": "^8.67.0",
-    "@typescript-eslint/parser": "^8.67.0",
+    "@typescript-eslint/eslint-plugin": "^8.69.0",
+    "@typescript-eslint/parser": "^8.69.0",
     "eslint": "^9.39.5",
     "eslint-plugin-astro": "^1.7.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
-    "globals": "^17.11.0",
+    "globals": "^17.12.0",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.67.0"
+    "typescript-eslint": "^8.69.0"
   }
 }
