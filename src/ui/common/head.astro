@@ -149,6 +149,10 @@ const { title, description, image = "/nano.png" } = Astro.props;
 
     // window.getComputedStyle(css).opacity;
     document.head.removeChild(css);
+
+    if (typeof window.__themeToggleCallback === "function") {
+      window.__themeToggleCallback();
+    }
   }
 
   function preloadTheme() {

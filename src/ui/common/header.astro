@@ -570,11 +570,7 @@ const homeHref = lang === "en" ? "/" : `/${lang}`;
     updateThemeButtons();
 
     // Re-run after theme changes
-    const origToggle = window.__themeToggleCallback;
-    window.__themeToggleCallback = function () {
-      updateThemeButtons();
-      if (origToggle) origToggle();
-    };
+    window.__themeToggleCallback = updateThemeButtons;
   }
 
   document.addEventListener("DOMContentLoaded", initHeader);
