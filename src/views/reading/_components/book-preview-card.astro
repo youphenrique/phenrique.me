@@ -119,7 +119,7 @@ const bookProgress = progress ?? 0;
         })}`}
         style="scrollbar-width: none; -ms-overflow-style: none;"
       >
-        {genres.map((genre) => <BookGenreBadge>{genre}</BookGenreBadge>)}
+        {genres.map((genre) => <BookGenreBadge genre={genre} />)}
       </div>
     </div>
     <div class={vstack({ gap: 2, alignItems: "stretch", width: "full" })}>

@@ -1,22 +1,61 @@
 ---
-import { css } from "../../../../styled-system/css";
+import { css, cx } from "../../../../styled-system/css";
+import { tintForKey, tintKey, type TintHue } from "../../../utils/tint.ts";
+
+interface Props {
+  genre: string;
+}
+
+const { genre } = Astro.props;
+
+/**
+ * The reading list's genre vocabulary, pinned so the six current genres get six
+ * distinct hues — hashing alone collapses them onto two. Genres are authored in
+ * English in src/content/books/*.yaml and are not localised, so a genre keeps
+ * its hue across every locale.
+ *
+ * Anything not listed falls back to `tintForKey`, which is stable but may
+ * collide; add it here when it does.
+ */
+const GENRE_HUES: Record<string, TintHue> = {
+  christian: "sage",
+  theology: "periwinkle",
+  apologetics: "sky",
+  philosophy: "clay",
+  "personal development": "ochre",
+  education: "moss",
+};
+
+// Literal token strings per hue: Panda extracts styles statically, so a
+// template literal like `tint.${hue}.surface` would generate no CSS at all.
+const TINT_CLASS: Record<TintHue, string> = {
+  sage: css({ bg: "tint.sage.surface", color: "tint.sage.text" }),
+  moss: css({ bg: "tint.moss.surface", color: "tint.moss.text" }),
+  sky: css({ bg: "tint.sky.surface", color: "tint.sky.text" }),
+  periwinkle: css({ bg: "tint.periwinkle.surface", color: "tint.periwinkle.text" }),
+  clay: css({ bg: "tint.clay.surface", color: "tint.clay.text" }),
+  ochre: css({ bg: "tint.ochre.surface", color: "tint.ochre.text" }),
+};
+
+const key = tintKey(genre);
+const hue = GENRE_HUES[key] ?? tintForKey(key);
 ---
+
 <span
-  class={css({
-    px: 2,
-    py: 1,
-    fontSize: "xs",
-    w: "fit-content",
-    borderRadius: "md",
-    whiteSpace: "nowrap",
-    fontWeight: "medium",
-    alignItems: "center",
-    display: "inline-flex",
-    bg: "bg.raised",
-    color: "text.secondary",
-    ring: "1px solid",
-    ringColor: "border.subtle",
-  })}
+  class={cx(
+    css({
+      px: 2,
+      py: 1,
+      fontSize: "xs",
+      w: "fit-content",
+      borderRadius: "md",
+      whiteSpace: "nowrap",
+      fontWeight: "medium",
+      alignItems: "center",
+      display: "inline-flex",
+    }),
+    TINT_CLASS[hue],
+  )}
 >
-  <slot />
+  {genre}
 </span>
