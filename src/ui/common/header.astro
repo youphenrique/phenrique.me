@@ -431,18 +431,21 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
 </div>
 
 <style is:global>
-  /* Elevate the header pill only while it is on screen and the page is scrolled
-     away from the top. `.scrolled` is toggled on <html> in head.astro. */
-  html.scrolled #header-wrapper[data-hidden="false"] #header-pill {
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  /* Elevate the header pill while it is on screen and either the page is
+     scrolled away from the top (`.scrolled` is toggled on <html> in
+     head.astro) or the mobile menu is open. */
+  html.scrolled #header-wrapper[data-hidden="false"] #header-pill,
+  #header-wrapper[data-hidden="false"] #header-pill[data-open="true"] {
+    box-shadow: rgba(17, 12, 46, 0.15) 0 48px 100px 0;
   }
 
   /* Dark mode: the coloured ambient shadow disappears against a dark canvas,
      so lift the pill with a deeper cast shadow plus a hairline rim of light. */
-  html.dark.scrolled #header-wrapper[data-hidden="false"] #header-pill {
+  html.dark.scrolled #header-wrapper[data-hidden="false"] #header-pill,
+  html.dark #header-wrapper[data-hidden="false"] #header-pill[data-open="true"] {
     box-shadow:
-      rgba(0, 0, 0, 0.55) 0px 48px 100px 0px,
-      rgba(255, 255, 255, 0.06) 0px 0px 0px 1px;
+      rgba(0, 0, 0, 0.55) 0 48px 100px 0,
+      rgba(255, 255, 255, 0.06) 0 0 0 1px;
   }
 </style>
 
@@ -486,6 +489,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
     // --- Mobile menu toggle ---
     function openMenu() {
       isMenuOpen = true;
+      headerPill.dataset.open = "true";
       mobileMenu.style.display = "grid";
       mobileMenu.style.gridTemplateRows = "1fr";
       headerPill.style.borderRadius = "1.875rem";
@@ -498,6 +502,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
 
     function closeMenu() {
       isMenuOpen = false;
+      headerPill.dataset.open = "false";
       mobileMenu.style.gridTemplateRows = "0fr";
       headerPill.style.borderRadius = "2rem";
       headerRow.style.paddingTop = "7px";
