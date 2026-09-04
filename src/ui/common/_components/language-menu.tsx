@@ -19,64 +19,6 @@ interface LanguageMenuProps {
   withLabel?: boolean;
 }
 
-const triggerClass = css({
-  display: "flex",
-  cursor: "pointer",
-  alignItems: "center",
-  justifyContent: "center",
-  borderRadius: "full",
-  color: "clr_neutral_800_200",
-  background: "none",
-  transition: "color 0.15s ease-in-out",
-  _hover: { color: "clr_neutral_900_50" },
-  "&[data-popup-open]": { color: "clr_neutral_900_50" },
-});
-
-// 40x40 hit area for pointer/touch targets; negative margins keep the icon's
-// visual spacing in the header row unchanged.
-const iconTriggerClass = css({ w: 10, h: 10, mx: "-10px", p: 0, border: "none" });
-
-const pillTriggerClass = hstack({
-  h: 10,
-  px: 3,
-  gap: 2,
-  fontSize: "sm",
-  fontWeight: "semibold",
-  textTransform: "uppercase",
-  border: "1px dashed token(colors.clr_neutral_300_700)",
-});
-
-const itemClass = flex({
-  p: 2,
-  borderRadius: "md",
-  alignItems: "center",
-  color: "clr_neutral_800_200",
-  justifyContent: "space-between",
-  transition: "background-color 0.15s ease-in-out",
-  _hover: { bg: "clr_neutral_300_700", cursor: "default" },
-  "&[data-highlighted]": { bg: "clr_neutral_300_700" },
-  textDecoration: "none",
-  outline: "none",
-});
-
-const popupClass = css({
-  m: 0,
-  p: 1,
-  minW: 48,
-  boxShadow: "lg",
-  borderRadius: "lg",
-  border: "1px solid",
-  bgColor: "clr_neutral_100_800",
-  borderColor: "clr_neutral_300_700",
-  outline: "none",
-  transformOrigin: "var(--transform-origin)",
-  transition: "opacity 0.15s ease-out, transform 0.15s ease-out",
-  "&[data-starting-style], &[data-ending-style]": {
-    opacity: 0,
-    transform: "scale(0.95) translateY(-4px)",
-  },
-});
-
 function GlobeIcon() {
   return (
     <svg
@@ -125,7 +67,33 @@ export default function LanguageMenu(props: LanguageMenuProps) {
     <BaseMenu.Root modal={false}>
       <BaseMenu.Trigger
         aria-label={props.menuLabel}
-        className={cx(triggerClass, withLabel ? pillTriggerClass : iconTriggerClass)}
+        className={cx(
+          css({
+            display: "flex",
+            cursor: "pointer",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: "full",
+            color: "clr_neutral_800_200",
+            background: "none",
+            transition: "color 0.15s ease-in-out",
+            _hover: { color: "clr_neutral_900_50" },
+            "&[data-popup-open]": { color: "clr_neutral_900_50" },
+          }),
+          withLabel
+            ? hstack({
+                h: 10,
+                px: 3,
+                gap: 2,
+                fontSize: "sm",
+                fontWeight: "semibold",
+                textTransform: "uppercase",
+                border: "1px dashed token(colors.clr_neutral_300_700)",
+              })
+            : // 40x40 hit area for pointer/touch targets; negative margins keep the
+              // icon's visual spacing in the header row unchanged.
+              css({ w: 10, h: 10, mx: "-10px", p: 0, border: "none" }),
+        )}
       >
         <GlobeIcon />
         {withLabel && <span>{props.currentLocale}</span>}
@@ -133,9 +101,42 @@ export default function LanguageMenu(props: LanguageMenuProps) {
 
       <BaseMenu.Portal>
         <BaseMenu.Positioner align={align} sideOffset={12} className={css({ zIndex: 10, outline: "none" })}>
-          <BaseMenu.Popup className={popupClass}>
+          <BaseMenu.Popup
+            className={css({
+              m: 0,
+              p: 1,
+              minW: 48,
+              boxShadow: "lg",
+              borderRadius: "lg",
+              border: "1px solid",
+              bgColor: "clr_neutral_100_800",
+              borderColor: "clr_neutral_300_700",
+              outline: "none",
+              transformOrigin: "var(--transform-origin)",
+              transition: "opacity 0.15s ease-out, transform 0.15s ease-out",
+              "&[data-starting-style], &[data-ending-style]": {
+                opacity: 0,
+                transform: "scale(0.95) translateY(-4px)",
+              },
+            })}
+          >
             {props.languages.map((language) => (
-              <BaseMenu.LinkItem key={language.id} href={language.href} className={itemClass}>
+              <BaseMenu.LinkItem
+                key={language.id}
+                href={language.href}
+                className={flex({
+                  p: 2,
+                  borderRadius: "md",
+                  alignItems: "center",
+                  color: "clr_neutral_800_200",
+                  justifyContent: "space-between",
+                  transition: "background-color 0.15s ease-in-out",
+                  _hover: { bg: "clr_neutral_300_700", cursor: "pointer" },
+                  "&[data-highlighted]": { bg: "clr_neutral_300_700" },
+                  textDecoration: "none",
+                  outline: "none",
+                })}
+              >
                 <span className={css({ fontSize: "sm", fontWeight: "medium" })}>{language.name}</span>
                 {language.id === props.currentLocale && <CheckIcon />}
               </BaseMenu.LinkItem>
