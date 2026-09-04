@@ -32,7 +32,10 @@ const contentClass = css({
     borderTopRightRadius: "1.75rem",
     bgColor: "clr_sheet_bg",
     boxShadow: "0 -0.5px 0 rgba(10, 10, 10, 0.08), 0 -20px 60px rgba(10, 10, 10, 0.24)",
-    transform: "translateY(100%)",
+    // Past 100%: the shadow casts upward (-20px offset, 60px blur), so at exactly
+    // 100% it still hangs over the fold after the sheet itself has left. The extra
+    // 4rem carries the cast off-screen with the panel.
+    transform: "translateY(calc(100% + 4rem))",
   },
   "&[data-side=left]": {
     top: 0,
