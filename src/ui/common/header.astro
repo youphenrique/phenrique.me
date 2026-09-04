@@ -208,6 +208,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
               id="light-theme-button"
               aria-label="Light theme"
               title="Light theme"
+              data-theme-btn="light"
               class={css({
                 w: 8,
                 h: 8,
@@ -232,6 +233,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
               id="system-theme-button"
               aria-label="System theme"
               title="System theme"
+              data-theme-btn="system"
               class={css({
                 w: 8,
                 h: 8,
@@ -256,6 +258,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
               id="dark-theme-button"
               aria-label="Dark theme"
               title="Dark theme"
+              data-theme-btn="dark"
               class={css({
                 w: 8,
                 h: 8,
@@ -442,6 +445,14 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
        declaration covers both themes. */
     box-shadow: var(--shadows-elevation-pill);
   }
+
+  /* Selected theme in the light/system/dark switch. `data-theme-active` is set
+     by updateThemeButtons() below; both tokens carry their own dark variant, so
+     one rule covers both themes. */
+  #header-wrapper [data-theme-btn][data-theme-active="true"] {
+    background-color: var(--colors-bg-raised-hover);
+    color: var(--colors-text-primary);
+  }
 </style>
 
 <script is:inline>
@@ -518,21 +529,16 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
     });
 
     // --- Theme toggle visual state ---
+    // Marks the selected button with `data-theme-active`; the highlight itself
+    // is a CSS rule in this file's global style block, so the design token is
+    // referenced from CSS rather than assembled as a string here.
     function updateThemeButtons() {
       const theme = localStorage.getItem("theme") || "system";
-      const themeMap = {
-        light: ["light-theme-button", "light-theme-button-mobile"],
-        system: ["system-theme-button", "system-theme-button-mobile"],
-        dark: ["dark-theme-button", "dark-theme-button-mobile"],
-      };
-      const activeToken = "var(--colors-bg-raised-hover)";
-      const inactiveToken = "transparent";
 
-      Object.entries(themeMap).forEach(function ([key, ids]) {
-        ids.forEach(function (id) {
-          const btn = document.getElementById(id);
-          if (btn) btn.style.backgroundColor = key === theme ? activeToken : inactiveToken;
-        });
+      document.querySelectorAll("[data-theme-btn]").forEach(function (btn) {
+        const isActive = btn.dataset.themeBtn === theme;
+        btn.dataset.themeActive = isActive ? "true" : "false";
+        btn.setAttribute("aria-pressed", isActive ? "true" : "false");
       });
     }
 
