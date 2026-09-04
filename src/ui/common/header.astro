@@ -90,7 +90,9 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
               w: 10,
               display: "block",
               borderRadius: "full",
-              border: isHomePage ? "2px solid token(colors.clr_coral_flame)" : undefined,
+              border: isHomePage
+                ? "2px solid token(colors.clr_coral_flame)"
+                : "2px solid token(colors.clr_white_neutral_900)",
               boxShadow: "0 0 0 1px #77777714, 0 2px 2px -.5px #77777714",
               flexShrink: 0,
             })}
