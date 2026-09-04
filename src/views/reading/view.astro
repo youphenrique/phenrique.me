@@ -57,7 +57,7 @@ const finishedBooks = Astro.props.allBooks
           css({
             fontSize: "4xl",
             fontWeight: "semibold",
-            color: "clr_neutral_900_50",
+            color: "text.primary",
           })}
       >
         {Astro.props.dict["page-title"]}
@@ -66,7 +66,7 @@ const finishedBooks = Astro.props.allBooks
         class={css({
           fontSize: "sm",
           fontWeight: "medium",
-          color: "clr_neutral_700_400",
+          color: "text.muted",
         })}
       >
         {Astro.props.dict["currently-reads"]["section-title"]}
@@ -74,7 +74,7 @@ const finishedBooks = Astro.props.allBooks
     </div>
     {
       currentlyReads.length === 0 ? (
-        <div class={css({ mt: 12, color: "clr_neutral_700_400", textAlign: "center" })}>
+        <div class={css({ mt: 12, color: "text.muted", textAlign: "center" })}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -103,7 +103,7 @@ const finishedBooks = Astro.props.allBooks
             class={css({
               mt: 3.5,
               fontWeight: "semibold",
-              color: "clr_neutral_800_200",
+              color: "text.secondary",
               fontSize: "sm",
             })}
           >
@@ -116,7 +116,7 @@ const finishedBooks = Astro.props.allBooks
               maxW: "16rem",
               fontSize: "sm",
               lineHeight: 1.25,
-              color: "clr_neutral_700_400",
+              color: "text.muted",
             })}
           >
             {Astro.props.dict["currently-reads"]["no-reads"].description}
@@ -151,7 +151,7 @@ const finishedBooks = Astro.props.allBooks
           fontSize: "sm",
           position: "relative",
           fontWeight: "medium",
-          color: "clr_neutral_700_400",
+          color: "text.muted",
           _after: {
             content: '""',
             h: "2px",
@@ -162,7 +162,7 @@ const finishedBooks = Astro.props.allBooks
             display: "block",
             borderRadius: "sm",
             position: "absolute",
-            bgColor: "clr_neutral_300_700",
+            bgColor: "border.default",
           },
         })}
       >

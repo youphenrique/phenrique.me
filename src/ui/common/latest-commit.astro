@@ -30,10 +30,10 @@ const commit = getLatestCommit();
         css({
           fontSize: "xs",
           fontWeight: "medium",
-          color: "clr_neutral_700_400",
+          color: "text.muted",
           fontFamily: "GeistMono, 'Geist Mono'",
           transition: "color 0.15s ease-in-out",
-          _hover: { color: "clr_neutral_900_50" },
+          _hover: { color: "text.primary" },
         })
       }
     >
@@ -50,8 +50,8 @@ const commit = getLatestCommit();
       <span>
         {dict.footer["latest-commit"]} <time datetime={commit.date}>{commit.date.slice(0, 10)}</time>:
       </span>
-      <span class={css({ color: "clr_diff_added" })}>+{commit.additions}</span>
-      <span class={css({ color: "clr_diff_removed" })}>-{commit.deletions}</span>
+      <span class={css({ color: "status.success" })}>+{commit.additions}</span>
+      <span class={css({ color: "status.danger" })}>-{commit.deletions}</span>
     </a>
   )
 }

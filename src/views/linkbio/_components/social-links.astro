@@ -37,8 +37,8 @@ const { links } = Astro.props;
           borderRadius: "lg",
           border: "1px solid",
           alignItems: "center",
-          borderColor: "hsla(0, 0%, 100%, .15)",
-          backgroundColor: "rgba(0, 0, 0, .65)",
+          borderColor: "linkbio.border",
+          backgroundColor: "linkbio.surface",
           transition: "transform 0.15s ease-in-out",
           _hover: {
             transform: "scale(1.02)",
@@ -62,7 +62,7 @@ const { links } = Astro.props;
         >
           <span
             class={css({
-              color: "#EEE",
+              color: "linkbio.textPrimary",
               textAlign: "left",
               fontWeight: "medium",
             })}
@@ -73,7 +73,7 @@ const { links } = Astro.props;
             class={css({
               fontSize: "sm",
               textAlign: "left",
-              color: "#fffcf4b0",
+              color: "linkbio.textSecondary",
               fontWeight: "medium",
             })}
           >

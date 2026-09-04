@@ -20,19 +20,10 @@ const { entry } = Astro.props;
     pr: 10,
     borderRadius: "lg",
     border: "1px solid",
-    borderColor: {
-      base: "rgba(0, 0, 0, 0.15)",
-      _dark: "rgba(255, 255, 255, 0.2)",
-    },
+    borderColor: "border.subtle",
     _hover: {
-      backgroundColor: {
-        base: "rgba(0, 0, 0, 0.05)",
-        _dark: "rgba(255, 255, 255, 0.05)",
-      },
-      color: {
-        base: "black",
-        _dark: "white",
-      },
+      backgroundColor: "bg.hover",
+      color: "text.primary",
     },
     transitionProperty: "color, background-color, border-color, text-decoration-color, fill, stroke",
     transitionDuration: "300ms",

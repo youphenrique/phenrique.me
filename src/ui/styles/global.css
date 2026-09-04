@@ -7,22 +7,18 @@
     font-variation-settings: "SOFT" 50, "WONK" 1;
 }
 
+/* prose-ui reads its own custom properties; bind them to the design system's
+   semantic tokens so long-form content inherits the palette instead of
+   carrying prose-ui's defaults. See docs/design-system.md. */
 :root {
-    --accent: #2337ff;
-    --accent-dark: #000d8a;
-    --black: 15, 18, 25;
-    --gray: 96, 115, 159;
-    --gray-light: 229, 233, 240;
-    --gray-dark: 34, 41, 57;
-    --gray-gradient: rgba(var(--gray-light), 50%), #fff;
-    --box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%);
-
     --p-font-family: GeistSans;
     --p-font-family-heading: GeistSans;
     --p-font-family-mono: GeistMono;
     --p-body-color-bg: transparent;
-    --p-link-text-color: var(--colors-emerald-600);
-    --p-link-text-decoration-color: var(--colors-emerald-600);
+    --p-heading-text-color: var(--colors-text-primary);
+    --p-body-text-color: var(--colors-text-secondary);
+    --p-link-text-color: var(--colors-text-accent);
+    --p-link-text-decoration-color: var(--colors-border-underline);
     --p-content-gap-heading: 1.5rem;
     --p-content-gap: 1rem;
 }
@@ -69,10 +65,10 @@ body {
 
 .prose-ui :is(p, blockquote p) {
     line-height: 1.5;
-    color: var(--colors-clr_neutral_700_400);
+    color: var(--colors-text-secondary);
 
     & a:hover {
-        color: var(--colors-emerald-500);
-        text-decoration-color: var(--colors-emerald-500);
+        color: var(--colors-accent-hover);
+        text-decoration-color: var(--colors-accent-hover);
     }
 }

@@ -14,9 +14,9 @@ const contentClass = css({
   zIndex: 50,
   display: "flex",
   flexDirection: "column",
-  color: "clr_neutral_800_200",
-  bgColor: "clr_neutral_100_800",
-  boxShadow: "0 -16px 48px rgba(10, 10, 10, 0.18)",
+  color: "text.secondary",
+  bgColor: "bg.raised",
+  boxShadow: "elevation.sheet",
   transition: `opacity 320ms ${SHEET_EASE}, transform 620ms ${SHEET_EASE}`,
   outline: "none",
   // Edge-anchored sides slide fully off-screen instead of cross-fading, which is
@@ -30,8 +30,8 @@ const contentClass = css({
     maxH: "88dvh",
     borderTopLeftRadius: "1.75rem",
     borderTopRightRadius: "1.75rem",
-    bgColor: "clr_sheet_bg",
-    boxShadow: "0 -0.5px 0 rgba(10, 10, 10, 0.08), 0 -20px 60px rgba(10, 10, 10, 0.24)",
+    bgColor: "sheet.bg",
+    boxShadow: "elevation.sheetBottom",
     // Past 100%: the shadow casts upward (-20px offset, 60px blur), so at exactly
     // 100% it still hangs over the fold after the sheet itself has left. The extra
     // 4rem carries the cast off-screen with the panel.
@@ -95,7 +95,7 @@ function SheetOverlay({ className, ...props }: SheetPrimitive.Backdrop.Props) {
             position: "fixed",
             inset: 0,
             zIndex: 50,
-            bg: "rgba(10, 10, 10, 0.32)",
+            bg: "bg.scrim",
             backdropFilter: "blur(2px)",
             transition: `opacity 460ms ${SHEET_EASE}`,
             "&[data-starting-style], &[data-ending-style]": { opacity: 0 },
@@ -116,7 +116,7 @@ function SheetGrabber({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="sheet-grabber"
       aria-hidden="true"
       className={cx(
-        css({ w: "36px", h: "5px", mx: "auto", mt: 2, borderRadius: "full", bgColor: "clr_sheet_grabber" }),
+        css({ w: "36px", h: "5px", mx: "auto", mt: 2, borderRadius: "full", bgColor: "sheet.grabber" }),
         className,
       )}
       {...props}
@@ -162,18 +162,18 @@ function SheetContent({
               alignItems: "center",
               justifyContent: "center",
               borderRadius: "full",
-              color: "clr_neutral_700_400",
-              bgColor: "clr_sheet_group_bg",
-              boxShadow: "shadow_floating_control",
+              color: "text.muted",
+              bgColor: "sheet.group",
+              boxShadow: "elevation.control",
               transition:
                 "color 0.15s ease-in-out, background-color 0.15s ease-in-out, box-shadow 0.2s ease-out, transform 0.1s ease-out",
-              _hover: { color: "clr_neutral_900_50", cursor: "pointer" },
+              _hover: { color: "text.primary", cursor: "pointer" },
               _active: {
                 transform: "scale(0.92)",
-                bgColor: "clr_sheet_group_bg_active",
-                boxShadow: "shadow_floating_control_pressed",
+                bgColor: "sheet.groupActive",
+                boxShadow: "elevation.controlPressed",
               },
-              _focusVisible: { outline: "2px solid token(colors.clr_coral_flame)", outlineOffset: "2px" },
+              _focusVisible: { outline: "2px solid token(colors.border.accent)", outlineOffset: "2px" },
             })}
             style={{
               // Optically centred against the sheet title; bottom sheets sit lower
@@ -219,7 +219,7 @@ function SheetTitle({ className, ...props }: SheetPrimitive.Title.Props) {
       data-slot="sheet-title"
       className={(state) =>
         cx(
-          css({ fontSize: "lg", fontWeight: "semibold", color: "clr_neutral_900_50" }),
+          css({ fontSize: "lg", fontWeight: "semibold", color: "text.primary" }),
           typeof className === "function" ? className(state) : className,
         )
       }
@@ -234,7 +234,7 @@ function SheetDescription({ className, ...props }: SheetPrimitive.Description.Pr
       data-slot="sheet-description"
       className={(state) =>
         cx(
-          css({ mt: 1, fontSize: "sm", color: "clr_neutral_700_400" }),
+          css({ mt: 1, fontSize: "sm", color: "text.secondary" }),
           typeof className === "function" ? className(state) : className,
         )
       }

@@ -66,10 +66,10 @@ export default function MobileLanguageSheet({ currentLocale, languages, menuLabe
           alignItems: "center",
           justifyContent: "center",
           borderRadius: "full",
-          color: "clr_neutral_800_200",
+          color: "text.secondary",
           transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
-          _hover: { color: "clr_neutral_900_50", bgColor: "bg_neutral_100_700", cursor: "pointer" },
-          _focusVisible: { outline: "2px solid token(colors.clr_coral_flame)", outlineOffset: "2px" },
+          _hover: { color: "text.primary", bgColor: "bg.raisedHover", cursor: "pointer" },
+          _focusVisible: { outline: "2px solid token(colors.border.accent)", outlineOffset: "2px" },
         })}
       >
         <GlobeIcon />
@@ -92,7 +92,7 @@ export default function MobileLanguageSheet({ currentLocale, languages, menuLabe
             mb: "max(1.25rem, env(safe-area-inset-bottom))",
             listStyle: "none",
             borderRadius: "0.875rem",
-            bgColor: "clr_sheet_group_bg",
+            bgColor: "sheet.group",
             overflowY: "auto",
             overscrollBehavior: "contain",
             WebkitOverflowScrolling: "touch",
@@ -115,7 +115,7 @@ export default function MobileLanguageSheet({ currentLocale, languages, menuLabe
                     left: "1rem",
                     mr: "1rem",
                     h: "1px",
-                    bgColor: "clr_sheet_separator",
+                    bgColor: "border.hairline",
                   },
                 })}
               >
@@ -133,16 +133,16 @@ export default function MobileLanguageSheet({ currentLocale, languages, menuLabe
                     fontSize: "17px",
                     fontWeight: isCurrent ? "semibold" : "normal",
                     letterSpacing: "-0.01em",
-                    color: "clr_neutral_900_50",
+                    color: "text.primary",
                     textDecoration: "none",
                     transition: "background-color 0.12s ease-out",
-                    _active: { bgColor: "clr_sheet_group_bg_active" },
-                    _focusVisible: { outline: "2px solid token(colors.clr_coral_flame)", outlineOffset: "-2px" },
+                    _active: { bgColor: "sheet.groupActive" },
+                    _focusVisible: { outline: "2px solid token(colors.border.accent)", outlineOffset: "-2px" },
                   })}
                 >
                   <span>{language.name}</span>
                   {isCurrent && (
-                    <span className={css({ display: "flex", color: "clr_coral_flame" })}>
+                    <span className={css({ display: "flex", color: "text.accent" })}>
                       <CheckIcon />
                     </span>
                   )}

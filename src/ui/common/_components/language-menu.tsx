@@ -74,11 +74,11 @@ export default function LanguageMenu(props: LanguageMenuProps) {
             alignItems: "center",
             justifyContent: "center",
             borderRadius: "full",
-            color: "clr_neutral_800_200",
+            color: "text.secondary",
             background: "none",
             transition: "color 0.15s ease-in-out",
-            _hover: { color: "clr_neutral_900_50" },
-            "&[data-popup-open]": { color: "clr_neutral_900_50" },
+            _hover: { color: "text.primary" },
+            "&[data-popup-open]": { color: "text.primary" },
           }),
           withLabel
             ? hstack({
@@ -88,7 +88,7 @@ export default function LanguageMenu(props: LanguageMenuProps) {
                 fontSize: "sm",
                 fontWeight: "semibold",
                 textTransform: "uppercase",
-                border: "1px dashed token(colors.clr_neutral_300_700)",
+                border: "1px dashed token(colors.border.default)",
               })
             : // 40x40 hit area for pointer/touch targets; negative margins keep the
               // icon's visual spacing in the header row unchanged.
@@ -109,8 +109,8 @@ export default function LanguageMenu(props: LanguageMenuProps) {
               boxShadow: "lg",
               borderRadius: "lg",
               border: "1px solid",
-              bgColor: "clr_neutral_100_800",
-              borderColor: "clr_neutral_300_700",
+              bgColor: "bg.raised",
+              borderColor: "border.default",
               outline: "none",
               transformOrigin: "var(--transform-origin)",
               transition: "opacity 0.15s ease-out, transform 0.15s ease-out",
@@ -128,11 +128,11 @@ export default function LanguageMenu(props: LanguageMenuProps) {
                   p: 2,
                   borderRadius: "md",
                   alignItems: "center",
-                  color: "clr_neutral_800_200",
+                  color: "text.secondary",
                   justifyContent: "space-between",
                   transition: "background-color 0.15s ease-in-out",
-                  _hover: { bg: "clr_neutral_300_700", cursor: "pointer" },
-                  "&[data-highlighted]": { bg: "clr_neutral_300_700" },
+                  _hover: { bg: "bg.hover", cursor: "pointer" },
+                  "&[data-highlighted]": { bg: "bg.hover" },
                   textDecoration: "none",
                   outline: "none",
                 })}

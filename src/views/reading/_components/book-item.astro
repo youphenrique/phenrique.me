@@ -20,7 +20,7 @@ const { title, rating, authors } = Astro.props;
     gridTemplateColumns: { base: "2fr 1fr", lg: "3fr 2fr auto" },
   })}
 >
-  <h1 class={css({ color: "clr_neutral_800_200", fontWeight: "medium", fontSize: "sm" })}>
+  <h1 class={css({ color: "text.secondary", fontWeight: "medium", fontSize: "sm" })}>
     {title}
   </h1>
   <span
@@ -28,7 +28,7 @@ const { title, rating, authors } = Astro.props;
       fontSize: "sm",
       lineHeight: "tight",
       fontWeight: "medium",
-      color: "clr_neutral_700_400",
+      color: "text.muted",
       textAlign: { base: "right", lg: "left" },
       justifySelf: { base: "end", lg: "start" },
     })}
@@ -42,7 +42,7 @@ const { title, rating, authors } = Astro.props;
           size={16}
           fill={index < rating}
           class={css({
-            color: index < rating ? "amber.500" : "clr_neutral_300_700",
+            color: index < rating ? "status.rating" : "border.strong",
           })}
         />
       ))

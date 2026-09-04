@@ -53,11 +53,11 @@ const pageTitle = `${title} | ${SITE.NAME}`;
       class={css({
         inset: 0,
         zIndex: -1,
-        color: "white",
+        color: "linkbio.textPrimary",
         position: "fixed",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-        backgroundColor: "rgb(0, 0, 0)",
+        backgroundColor: "linkbio.canvas",
         _before: {
           top: 0,
           content: "''",
@@ -113,8 +113,10 @@ const pageTitle = `${title} | ${SITE.NAME}`;
         margin: 0;
         padding: 0;
         font-family: "GeistSans", sans-serif;
-        background-color: rgb(0, 0, 0);
-        color: white;
+        /* /linkbio is deliberately always dark and does not follow the site
+           theme, so it draws from the scoped `linkbio.*` tokens. */
+        background-color: var(--colors-linkbio-canvas);
+        color: var(--colors-linkbio-text-primary);
         min-height: 100vh;
       }
     </style>

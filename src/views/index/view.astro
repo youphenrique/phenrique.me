@@ -20,7 +20,7 @@ const socialLinks = allSocialLinks.filter((link) => link.data.icon !== undefined
       class={css({
         zIndex: 0,
         pointerEvents: "none",
-        background: "radial-gradient(#ffffff08 0%, #0000 70%)",
+        background: "radial-gradient(token(colors.bg.bloom) 0%, transparent 70%)",
         width: { base: "full", md: "600px" },
         height: "400px",
         position: "absolute",
@@ -34,7 +34,7 @@ const socialLinks = allSocialLinks.filter((link) => link.data.icon !== undefined
       class={css({
         mt: 4,
         maxW: { base: "260px", md: "340px" },
-        color: "clr_neutral_900_50",
+        color: "text.primary",
       })}
     >
       <PauloHenrique label={Astro.props.title} />
@@ -53,14 +53,14 @@ const socialLinks = allSocialLinks.filter((link) => link.data.icon !== undefined
             set:html={item.data.icon}
             class={css({
               w: 4,
-              color: "clr_neutral_700_400",
+              color: "text.muted",
               display: "block",
               "& svg": { w: "full", h: "auto" },
               "& svg path": {
                 transition: "fill 0.15s ease-in-out",
               },
               "& svg:hover path": {
-                fill: "clr_neutral_900_50",
+                fill: "text.primary",
               },
             })}
           />

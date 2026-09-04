@@ -64,9 +64,9 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
         mx: "auto",
         overflow: "hidden",
         alignItems: "stretch",
-        bgColor: "clr_neutral_100_950_alpha_20",
+        bgColor: "bg.overlay",
         w: { base: "full", sm: "fit-content" },
-        // border: "1px solid token(colors.clr_neutral_300_700)",
+        // border: "1px solid token(colors.border.default)",
         transition: "border-radius 0.3s ease, box-shadow 0.3s ease",
         borderRadius: "2rem",
       })}
@@ -92,9 +92,9 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
               display: "block",
               borderRadius: "full",
               border: isHomePage
-                ? "2px solid token(colors.clr_coral_flame)"
-                : "2px solid token(colors.clr_white_neutral_900)",
-              boxShadow: "0 0 0 1px #77777714, 0 2px 2px -.5px #77777714",
+                ? "2px solid token(colors.border.accent)"
+                : "2px solid token(colors.bg.canvas)",
+              boxShadow: "elevation.avatar",
               flexShrink: 0,
             })}
           >
@@ -125,9 +125,9 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                     p: 1.5,
                     position: "relative",
                     fontWeight: "medium",
-                    color: isActive ? "clr_coral_flame" : "clr_neutral_800_200",
+                    color: isActive ? "text.accent" : "text.secondary",
                     transition: "color 0.15s ease-in-out",
-                    _hover: { color: "clr_coral_flame" },
+                    _hover: { color: "text.accent" },
                   })}
                 >
                   {dict.header[`${link.title}-label`]}
@@ -165,7 +165,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                 width: 5,
                 height: "1px",
                 position: "absolute",
-                bg: "clr_neutral_950_snow",
+                bg: "text.primary",
                 transition: "transform 0.2s ease",
                 transform: "translateY(-4px)",
               })}></span>
@@ -175,7 +175,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                 width: 5,
                 height: "1px",
                 position: "absolute",
-                bg: "clr_neutral_950_snow",
+                bg: "text.primary",
                 transition: "transform 0.2s ease",
                 transform: "translateY(4px)",
               })}></span>
@@ -201,7 +201,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
               w: "fit-content",
               alignItems: "center",
               borderRadius: "full",
-              border: "1px dashed token(colors.clr_neutral_300_700)",
+              border: "1px dashed token(colors.border.default)",
             })}
           >
             <button
@@ -215,9 +215,9 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "clr_neutral_800_200",
+                color: "text.secondary",
                 transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
-                _hover: { cursor: "pointer", color: "clr_neutral_900_50" },
+                _hover: { cursor: "pointer", color: "text.primary" },
               })}
             >
               <svg width="16" height="16" stroke-linejoin="round" viewBox="0 0 16 16">
@@ -239,9 +239,9 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "clr_neutral_800_200",
+                color: "text.secondary",
                 transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
-                _hover: { cursor: "pointer", color: "clr_neutral_900_50" },
+                _hover: { cursor: "pointer", color: "text.primary" },
               })}
             >
               <svg width="16" height="16" viewBox="0 0 16 16" stroke-linejoin="round">
@@ -263,9 +263,9 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "clr_neutral_800_200",
+                color: "text.secondary",
                 transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
-                _hover: { cursor: "pointer", color: "clr_neutral_900_50" },
+                _hover: { cursor: "pointer", color: "text.primary" },
               })}
             >
               <svg width="16" height="16" viewBox="0 0 16 16" stroke-linejoin="round">
@@ -316,9 +316,9 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                       fontSize: "sm",
                       position: "relative",
                       fontWeight: "medium",
-                      color: isActive ? "clr_coral_flame" : "clr_neutral_800_200",
+                      color: isActive ? "text.accent" : "text.secondary",
                       transition: "color 0.15s ease-in-out",
-                      _hover: { color: "clr_coral_flame" },
+                      _hover: { color: "text.accent" },
                       textDecoration: "none",
                     })}
                   >
@@ -346,7 +346,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                 w: "fit-content",
                 alignItems: "center",
                 borderRadius: "full",
-                border: "1px dashed token(colors.clr_neutral_300_700)",
+                border: "1px dashed token(colors.border.default)",
               })}
             >
               <button
@@ -361,9 +361,9 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  color: "clr_neutral_800_200",
+                  color: "text.secondary",
                   transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
-                  _hover: { cursor: "pointer", color: "clr_neutral_900_50" },
+                  _hover: { cursor: "pointer", color: "text.primary" },
                 })}
               >
                 <svg width="16" height="16" stroke-linejoin="round" viewBox="0 0 16 16">
@@ -386,9 +386,9 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  color: "clr_neutral_800_200",
+                  color: "text.secondary",
                   transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
-                  _hover: { cursor: "pointer", color: "clr_neutral_900_50" },
+                  _hover: { cursor: "pointer", color: "text.primary" },
                 })}
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" stroke-linejoin="round">
@@ -411,9 +411,9 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  color: "clr_neutral_800_200",
+                  color: "text.secondary",
                   transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
-                  _hover: { cursor: "pointer", color: "clr_neutral_900_50" },
+                  _hover: { cursor: "pointer", color: "text.primary" },
                 })}
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" stroke-linejoin="round">
@@ -438,16 +438,9 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
      head.astro) or the mobile menu is open. */
   html.scrolled #header-wrapper[data-hidden="false"] #header-pill,
   #header-wrapper[data-hidden="false"] #header-pill[data-open="true"] {
-    box-shadow: rgba(17, 12, 46, 0.15) 0 48px 100px 0;
-  }
-
-  /* Dark mode: the coloured ambient shadow disappears against a dark canvas,
-     so lift the pill with a deeper cast shadow plus a hairline rim of light. */
-  html.dark.scrolled #header-wrapper[data-hidden="false"] #header-pill,
-  html.dark #header-wrapper[data-hidden="false"] #header-pill[data-open="true"] {
-    box-shadow:
-      rgba(0, 0, 0, 0.55) 0 48px 100px 0,
-      rgba(255, 255, 255, 0.06) 0 0 0 1px;
+    /* `elevation.pill` already carries its own dark-mode variant, so this one
+       declaration covers both themes. */
+    box-shadow: var(--shadows-elevation-pill);
   }
 </style>
 
@@ -532,7 +525,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
         system: ["system-theme-button", "system-theme-button-mobile"],
         dark: ["dark-theme-button", "dark-theme-button-mobile"],
       };
-      const activeToken = "var(--colors-bg_neutral_100_700)";
+      const activeToken = "var(--colors-bg-raised-hover)";
       const inactiveToken = "transparent";
 
       Object.entries(themeMap).forEach(function ([key, ids]) {

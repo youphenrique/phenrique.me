@@ -26,7 +26,7 @@ const { bioDescription, bioQuote } = Astro.props;
         mx: "auto",
         boxShadow: "lg",
         borderRadius: "full",
-        outline: "1px solid rgba(243, 245, 247, 0.15)",
+        outline: "1px solid token(colors.linkbio.ring)",
       })}
     />
   </div>
@@ -36,7 +36,8 @@ const { bioDescription, bioQuote } = Astro.props;
       color: "transparent",
       fontWeight: 400,
       backgroundClip: "text",
-      backgroundImage: "linear-gradient(to bottom, #F5F5F5, #F5F5F5 40%, #999999)",
+      backgroundImage:
+        "linear-gradient(to bottom, token(colors.linkbio.headingFrom), token(colors.linkbio.headingFrom) 40%, token(colors.linkbio.headingTo))",
     })}
   >
     Paulo Henrique
@@ -45,7 +46,7 @@ const { bioDescription, bioQuote } = Astro.props;
     <h2
       class={css({
         fontSize: "sm",
-        color: "hsl(0 0% 100%/.85)",
+        color: "linkbio.textStrong",
         fontWeight: "semibold",
         maxWidth: { base: "sm", sm: "md" },
       })}
@@ -58,7 +59,7 @@ const { bioDescription, bioQuote } = Astro.props;
           class={"fraunces-font " + css({
             fontSize: "sm",
             display: "block",
-            color: "#fffcf4b0",
+            color: "linkbio.textSecondary",
             fontStyle: "italic",
             fontWeight: "medium",
             maxWidth: { base: "sm", sm: "md" },

@@ -24,10 +24,10 @@ const bookProgress = progress ?? 0;
   class={`book-card ${flex({
     borderRadius: "xl",
     width: "full",
-    bgColor: "clr_book_card_bg",
-    borderColor: "clr_neutral_300_700",
+    bgColor: "bg.raised",
+    borderColor: "border.subtle",
     transition: "background-color 0.2s ease",
-    _hover: { bgColor: "clr_book_card_bg_hover" },
+    _hover: { bgColor: "bg.raisedHover" },
   })}`}
 >
   <Image
@@ -69,7 +69,7 @@ const bookProgress = progress ?? 0;
               fontSize: { base: "md", md: "xl" },
               lineHeight: 1.25,
               fontWeight: "medium",
-              color: "clr_neutral_900_50",
+              color: "text.primary",
               lineClamp: 2,
               overflow: "hidden",
               boxOrient: "vertical",
@@ -83,7 +83,7 @@ const bookProgress = progress ?? 0;
             fontSize: "sm",
             lineHeight: "tight",
             fontWeight: "medium",
-            color: "clr_neutral_700_400",
+            color: "text.muted",
           })}
         >
           {authors.length === 0 ? "Unknown" : authors.join(", ")}
@@ -100,7 +100,7 @@ const bookProgress = progress ?? 0;
               class={css({
                 fontSize: "sm",
                 lineHeight: 1.6,
-                color: "clr_neutral_700_400",
+                color: "text.secondary",
                 lineClamp: 3,
                 boxOrient: "vertical",
                 overflow: "hidden",
@@ -130,7 +130,7 @@ const bookProgress = progress ?? 0;
               fontSize: "xs",
               fontWeight: "medium",
               lineHeight: "tight",
-              color: "clr_neutral_400_500",
+              color: "text.faint",
             })}
           >
             {lastUpdateLabel} · {lastUpdate}
@@ -144,7 +144,7 @@ const bookProgress = progress ?? 0;
             w: "full",
             borderRadius: "sm",
             position: "relative",
-            bg: "clr_neutral_300_700",
+            bg: "bg.track",
           })}
         >
           <div
@@ -156,12 +156,12 @@ const bookProgress = progress ?? 0;
               display: "block",
               borderRadius: "sm",
               position: "absolute",
-              bgColor: "clr_coral_flame",
+              bgColor: "accent.default",
             })}
           >
           </div>
         </div>
-        <span class={css({ fontSize: "sm", color: "clr_neutral_700_400" })}>{bookProgress}%</span>
+        <span class={css({ fontSize: "sm", color: "text.muted" })}>{bookProgress}%</span>
       </div>
     </div>
   </div>

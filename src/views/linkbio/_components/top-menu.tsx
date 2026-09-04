@@ -30,7 +30,7 @@ interface TopMenuProps {
 const labelClass = css({
   p: 2,
   fontSize: "xs",
-  color: "#fffcf4b0",
+  color: "linkbio.textSecondary",
   fontWeight: "medium",
   textTransform: "uppercase",
 });
@@ -38,12 +38,12 @@ const labelClass = css({
 const shareItemClass = hstack({
   p: 2,
   width: "full",
-  color: "#EEE",
+  color: "linkbio.textPrimary",
   borderRadius: "md",
   display: "flex",
   alignItems: "center",
   transition: "background-color 0.15s ease-in-out",
-  _hover: { bg: "neutral.700", cursor: "default" },
+  _hover: { bg: "linkbio.menuItemHover", cursor: "default" },
   textDecoration: "none",
   textAlign: "left",
   background: "none",
@@ -51,7 +51,7 @@ const shareItemClass = hstack({
   font: "inherit",
   gap: 2,
   "&[data-highlighted]": {
-    bg: "neutral.700",
+    bg: "linkbio.menuItemHover",
   },
 });
 
@@ -102,13 +102,13 @@ export default function TopMenu(props: TopMenuProps) {
             alignItems: "center",
             borderRadius: "full",
             justifyContent: "center",
-            backgroundColor: "zinc.800",
+            backgroundColor: "linkbio.control",
             transition: "background-color 0.15s ease-in-out",
             _hover: {
-              backgroundColor: "zinc.900",
+              backgroundColor: "linkbio.controlHover",
             },
             "&[data-popup-open]": {
-              backgroundColor: "zinc.900",
+              backgroundColor: "linkbio.controlHover",
             },
           })}
         >
@@ -117,7 +117,7 @@ export default function TopMenu(props: TopMenuProps) {
               width: 5,
               height: 5,
               display: "block",
-              color: "white",
+              color: "linkbio.textPrimary",
             })}
             html={props.icons.menu}
           />
@@ -138,8 +138,8 @@ export default function TopMenu(props: TopMenuProps) {
                 boxShadow: "2xl",
                 borderRadius: "lg",
                 border: "1px solid",
-                bg: "neutral.800",
-                borderColor: "rgb(37, 37, 37)",
+                bg: "linkbio.menuSurface",
+                borderColor: "linkbio.menuBorder",
                 outline: "none",
                 transformOrigin: "var(--transform-origin)",
                 transition: "opacity 0.15s ease-out, transform 0.15s ease-out",
@@ -158,15 +158,15 @@ export default function TopMenu(props: TopMenuProps) {
                     className={css({
                       p: 2,
                       width: "full",
-                      color: "#EEE",
+                      color: "linkbio.textPrimary",
                       borderRadius: "md",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
                       transition: "background-color 0.15s ease-in-out",
-                      _hover: { bg: "neutral.700", cursor: "default" },
+                      _hover: { bg: "linkbio.menuItemHover", cursor: "default" },
                       "&[data-highlighted]": {
-                        bg: "neutral.700",
+                        bg: "linkbio.menuItemHover",
                       },
                       textDecoration: "none",
                       textAlign: "left",
@@ -186,7 +186,7 @@ export default function TopMenu(props: TopMenuProps) {
                   height: "1px",
                   mx: 2,
                   my: 1,
-                  bg: "zinc.700",
+                  bg: "linkbio.separator",
                 })}
               />
 
