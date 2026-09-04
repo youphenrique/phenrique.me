@@ -14,33 +14,6 @@ interface MobileLanguageSheetProps {
   languages: LanguageOption[];
 }
 
-const triggerClass = css({
-  display: "flex",
-  w: 10,
-  h: 10,
-  alignItems: "center",
-  justifyContent: "center",
-  borderRadius: "full",
-  color: "clr_neutral_800_200",
-  transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
-  _hover: { color: "clr_neutral_900_50", bgColor: "bg_neutral_100_700", cursor: "pointer" },
-  _focusVisible: { outline: "2px solid token(colors.clr_coral_flame)", outlineOffset: "2px" },
-});
-
-const grabberClass = css({ w: 9, h: 1, mx: "auto", mt: 2, borderRadius: "full", bgColor: "clr_neutral_300_700" });
-
-const optionClass = hstack({
-  minH: 12,
-  px: 4,
-  borderRadius: "lg",
-  color: "clr_neutral_800_200",
-  justifyContent: "space-between",
-  textDecoration: "none",
-  transition: "background-color 0.15s ease-in-out",
-  _hover: { bgColor: "bg_neutral_100_700" },
-  _focusVisible: { outline: "2px solid token(colors.clr_coral_flame)", outlineOffset: "2px" },
-});
-
 function GlobeIcon() {
   return (
     <svg
@@ -85,11 +58,25 @@ function CheckIcon() {
 export default function MobileLanguageSheet({ currentLocale, languages, menuLabel }: MobileLanguageSheetProps) {
   return (
     <Sheet>
-      <SheetTrigger aria-label={menuLabel} className={triggerClass}>
+      <SheetTrigger
+        aria-label={menuLabel}
+        className={css({
+          display: "flex",
+          w: 10,
+          h: 10,
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: "full",
+          color: "clr_neutral_800_200",
+          transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
+          _hover: { color: "clr_neutral_900_50", bgColor: "bg_neutral_100_700", cursor: "pointer" },
+          _focusVisible: { outline: "2px solid token(colors.clr_coral_flame)", outlineOffset: "2px" },
+        })}
+      >
         <GlobeIcon />
       </SheetTrigger>
       <SheetContent side="bottom" aria-describedby={undefined}>
-        <div className={grabberClass} />
+        <div className={css({ w: 9, h: 1, mx: "auto", mt: 2, borderRadius: "full", bgColor: "clr_neutral_300_700" })} />
         <SheetHeader>
           <SheetTitle>{menuLabel}</SheetTitle>
         </SheetHeader>
@@ -102,7 +89,17 @@ export default function MobileLanguageSheet({ currentLocale, languages, menuLabe
                 key={language.id}
                 href={language.href}
                 aria-current={isCurrent ? "page" : undefined}
-                className={optionClass}
+                className={hstack({
+                  minH: 12,
+                  px: 4,
+                  borderRadius: "lg",
+                  color: "clr_neutral_800_200",
+                  justifyContent: "space-between",
+                  textDecoration: "none",
+                  transition: "background-color 0.15s ease-in-out",
+                  _hover: { bgColor: "bg_neutral_100_700" },
+                  _focusVisible: { outline: "2px solid token(colors.clr_coral_flame)", outlineOffset: "2px" },
+                })}
               >
                 <span className={flex({ gap: 3, alignItems: "center" })}>
                   <span className={css({ fontSize: "md", fontWeight: "medium" })}>{language.name}</span>

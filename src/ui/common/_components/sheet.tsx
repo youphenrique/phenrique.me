@@ -3,16 +3,6 @@ import { Dialog as SheetPrimitive } from "@base-ui/react/dialog";
 
 import { css, cx } from "../../../../styled-system/css";
 
-const overlayClass = css({
-  position: "fixed",
-  inset: 0,
-  zIndex: 50,
-  bg: "rgba(10, 10, 10, 0.24)",
-  backdropFilter: "blur(4px)",
-  transition: "opacity 0.2s ease-out",
-  "&[data-starting-style], &[data-ending-style]": { opacity: 0 },
-});
-
 const contentClass = css({
   position: "fixed",
   zIndex: 50,
@@ -59,28 +49,6 @@ const contentClass = css({
   "&[data-open][data-side]": { transform: "translate(0)" },
 });
 
-const closeButtonClass = css({
-  position: "absolute",
-  top: 3,
-  right: 4,
-  display: "flex",
-  w: 8,
-  h: 8,
-  alignItems: "center",
-  justifyContent: "center",
-  borderRadius: "full",
-  color: "clr_neutral_700_400",
-  bgColor: "bg_neutral_100_700",
-  transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
-  _hover: { color: "clr_neutral_900_50", cursor: "pointer" },
-  _focusVisible: { outline: "2px solid token(colors.clr_coral_flame)", outlineOffset: "2px" },
-});
-
-const headerClass = css({ p: 5, pb: 3, textAlign: "center" });
-const footerClass = css({ p: 5, pt: 3, mt: "auto" });
-const titleClass = css({ fontSize: "lg", fontWeight: "semibold", color: "clr_neutral_900_50" });
-const descriptionClass = css({ mt: 1, fontSize: "sm", color: "clr_neutral_700_400" });
-
 function Sheet(props: SheetPrimitive.Root.Props) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />;
 }
@@ -101,7 +69,20 @@ function SheetOverlay({ className, ...props }: SheetPrimitive.Backdrop.Props) {
   return (
     <SheetPrimitive.Backdrop
       data-slot="sheet-overlay"
-      className={(state) => cx(overlayClass, typeof className === "function" ? className(state) : className)}
+      className={(state) =>
+        cx(
+          css({
+            position: "fixed",
+            inset: 0,
+            zIndex: 50,
+            bg: "rgba(10, 10, 10, 0.24)",
+            backdropFilter: "blur(4px)",
+            transition: "opacity 0.2s ease-out",
+            "&[data-starting-style], &[data-ending-style]": { opacity: 0 },
+          }),
+          typeof className === "function" ? className(state) : className,
+        )
+      }
       {...props}
     />
   );
@@ -126,7 +107,25 @@ function SheetContent({ className, children, side = "right", showCloseButton = t
       >
         {children}
         {showCloseButton && (
-          <SheetClose aria-label="Close" className={closeButtonClass}>
+          <SheetClose
+            aria-label="Close"
+            className={css({
+              position: "absolute",
+              top: 3,
+              right: 4,
+              display: "flex",
+              w: 8,
+              h: 8,
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: "full",
+              color: "clr_neutral_700_400",
+              bgColor: "bg_neutral_100_700",
+              transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
+              _hover: { color: "clr_neutral_900_50", cursor: "pointer" },
+              _focusVisible: { outline: "2px solid token(colors.clr_coral_flame)", outlineOffset: "2px" },
+            })}
+          >
             <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
@@ -138,18 +137,25 @@ function SheetContent({ className, children, side = "right", showCloseButton = t
 }
 
 function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="sheet-header" className={cx(headerClass, className)} {...props} />;
+  return (
+    <div data-slot="sheet-header" className={cx(css({ p: 5, pb: 3, textAlign: "center" }), className)} {...props} />
+  );
 }
 
 function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="sheet-footer" className={cx(footerClass, className)} {...props} />;
+  return <div data-slot="sheet-footer" className={cx(css({ p: 5, pt: 3, mt: "auto" }), className)} {...props} />;
 }
 
 function SheetTitle({ className, ...props }: SheetPrimitive.Title.Props) {
   return (
     <SheetPrimitive.Title
       data-slot="sheet-title"
-      className={(state) => cx(titleClass, typeof className === "function" ? className(state) : className)}
+      className={(state) =>
+        cx(
+          css({ fontSize: "lg", fontWeight: "semibold", color: "clr_neutral_900_50" }),
+          typeof className === "function" ? className(state) : className,
+        )
+      }
       {...props}
     />
   );
@@ -159,7 +165,12 @@ function SheetDescription({ className, ...props }: SheetPrimitive.Description.Pr
   return (
     <SheetPrimitive.Description
       data-slot="sheet-description"
-      className={(state) => cx(descriptionClass, typeof className === "function" ? className(state) : className)}
+      className={(state) =>
+        cx(
+          css({ mt: 1, fontSize: "sm", color: "clr_neutral_700_400" }),
+          typeof className === "function" ? className(state) : className,
+        )
+      }
       {...props}
     />
   );
