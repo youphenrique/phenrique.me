@@ -113,6 +113,7 @@ export default function MobileLanguageSheet({ currentLocale, languages, menuLabe
                     right: 0,
                     bottom: 0,
                     left: "1rem",
+                    mr: "1rem",
                     h: "1px",
                     bgColor: "clr_sheet_separator",
                   },

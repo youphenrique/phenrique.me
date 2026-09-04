@@ -5,6 +5,7 @@ import type { MainDictionary } from "../../i18n/main/en.ts";
 import { languages } from "../../utils/constants.ts";
 import LanguageMenu from "./_components/language-menu";
 import MobileLanguageSheet from "./_components/mobile-language-sheet";
+import NavIcon from "./_components/nav-icon.astro";
 
 interface Props {
   lang: string;
@@ -311,6 +312,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                     href={getNavHref(link.path)}
                     class={hstack({
                       p: 1.5,
+                      gap: 2.5,
                       fontSize: "sm",
                       position: "relative",
                       fontWeight: "medium",
@@ -320,6 +322,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                       textDecoration: "none",
                     })}
                   >
+                    <NavIcon name={link.title} class={css({ flexShrink: 0 })} />
                     {dict.header[`${link.title}-label`]}
                   </a>
                 );

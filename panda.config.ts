@@ -108,7 +108,7 @@ export default defineConfig({
           // black cast plus a hairline rim of light, since the tint disappears
           // against a dark canvas.
           value: {
-            base: "rgba(17, 12, 46, 0.14) 0 10px 24px 0, rgba(17, 12, 46, 0.10) 0 2px 6px 0",
+            base: "rgba(255, 255, 255, 0.7) 1px 1px 1px inset, rgba(156, 165, 178, 0.35) -1px -1px 1px inset, rgba(156, 165, 178, 0.58) 12px 12px 36px, rgba(251, 252, 253, 0.81) -12px -12px 36px",
             _dark:
               "rgba(0, 0, 0, 0.55) 0 10px 24px 0, rgba(0, 0, 0, 0.35) 0 2px 6px 0, rgba(255, 255, 255, 0.06) 0 0 0 1px",
           },

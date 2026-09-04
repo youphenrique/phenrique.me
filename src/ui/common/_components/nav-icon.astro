@@ -1,0 +1,69 @@
+---
+// Lucide glyphs inlined by hand so the icon set stays dependency-free.
+// Paths are verbatim from lucide-icons (MIT), 24x24 grid.
+export type NavIconName = "about" | "work" | "writing" | "reading";
+
+interface Props {
+  name: NavIconName;
+  size?: number;
+  class?: string;
+}
+
+const { name, size = 16, class: iconClass } = Astro.props;
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+  class={iconClass}
+>
+  {/* user */}
+  {
+    name === "about" ? (
+      <>
+        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </>
+    ) : null
+  }
+
+  {/* briefcase */}
+  {
+    name === "work" ? (
+      <>
+        <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+        <rect width="20" height="14" x="2" y="6" rx="2" />
+      </>
+    ) : null
+  }
+
+  {/* pen-line */}
+  {
+    name === "writing" ? (
+      <>
+        <path d="M13 21h8" />
+        <path d="m15 5 4 4" />
+        <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+      </>
+    ) : null
+  }
+
+  {/* book-open */}
+  {
+    name === "reading" ? (
+      <>
+        <path d="M12 7v14" />
+        <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
+      </>
+    ) : null
+  }
+</svg>
