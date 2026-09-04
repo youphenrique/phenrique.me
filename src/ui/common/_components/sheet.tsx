@@ -3,9 +3,11 @@ import { Dialog as SheetPrimitive } from "@base-ui/react/dialog";
 
 import { css, cx } from "../../../../styled-system/css";
 
-// iOS uses a decelerating curve for sheet presentation: fast out of the gate,
-// long soft landing. Dismissal runs the same curve on a shorter duration.
-const SHEET_EASE = "cubic-bezier(0.32, 0.72, 0, 1)";
+// Decelerating curve for sheet presentation: quick to commit, long soft landing.
+// Softer than UIKit's own bezier, which front-loads so much of the distance that
+// the slide reads as instantaneous on screen. Dismissal runs the same curve on a
+// shorter duration.
+const SHEET_EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 
 const contentClass = css({
   position: "fixed",
@@ -15,11 +17,11 @@ const contentClass = css({
   color: "clr_neutral_800_200",
   bgColor: "clr_neutral_100_800",
   boxShadow: "0 -16px 48px rgba(10, 10, 10, 0.18)",
-  transition: `opacity 240ms ${SHEET_EASE}, transform 420ms ${SHEET_EASE}`,
+  transition: `opacity 320ms ${SHEET_EASE}, transform 620ms ${SHEET_EASE}`,
   outline: "none",
   // Edge-anchored sides slide fully off-screen instead of cross-fading, which is
   // what makes the motion read as native rather than as a popover.
-  "&[data-ending-style]": { transitionDuration: "280ms" },
+  "&[data-ending-style]": { transitionDuration: "420ms" },
   "&:not([data-side=bottom])[data-starting-style], &:not([data-side=bottom])[data-ending-style]": { opacity: 0 },
   "&[data-side=bottom]": {
     right: 0,
@@ -92,7 +94,7 @@ function SheetOverlay({ className, ...props }: SheetPrimitive.Backdrop.Props) {
             zIndex: 50,
             bg: "rgba(10, 10, 10, 0.32)",
             backdropFilter: "blur(2px)",
-            transition: `opacity 320ms ${SHEET_EASE}`,
+            transition: `opacity 460ms ${SHEET_EASE}`,
             "&[data-starting-style], &[data-ending-style]": { opacity: 0 },
             "@media (prefers-reduced-motion: reduce)": { transition: "opacity 150ms ease-out" },
           }),
@@ -159,9 +161,15 @@ function SheetContent({
               borderRadius: "full",
               color: "clr_neutral_700_400",
               bgColor: "clr_sheet_group_bg",
-              transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out, transform 0.1s ease-out",
+              boxShadow: "shadow_floating_control",
+              transition:
+                "color 0.15s ease-in-out, background-color 0.15s ease-in-out, box-shadow 0.2s ease-out, transform 0.1s ease-out",
               _hover: { color: "clr_neutral_900_50", cursor: "pointer" },
-              _active: { transform: "scale(0.92)", bgColor: "clr_sheet_group_bg_active" },
+              _active: {
+                transform: "scale(0.92)",
+                bgColor: "clr_sheet_group_bg_active",
+                boxShadow: "shadow_floating_control_pressed",
+              },
               _focusVisible: { outline: "2px solid token(colors.clr_coral_flame)", outlineOffset: "2px" },
             })}
             style={{

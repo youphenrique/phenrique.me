@@ -101,6 +101,26 @@ export default defineConfig({
           value: { base: "rgba(10, 10, 10, 0.18)", _dark: "rgba(255, 255, 255, 0.22)" },
         },
       },
+      shadows: {
+        shadow_floating_control: {
+          // Circular control lifted off a sheet surface. Mirrors the header pill:
+          // a cool-tinted ambient cast in light mode, and in dark mode a deeper
+          // black cast plus a hairline rim of light, since the tint disappears
+          // against a dark canvas.
+          value: {
+            base: "rgba(17, 12, 46, 0.14) 0 10px 24px 0, rgba(17, 12, 46, 0.10) 0 2px 6px 0",
+            _dark:
+              "rgba(0, 0, 0, 0.55) 0 10px 24px 0, rgba(0, 0, 0, 0.35) 0 2px 6px 0, rgba(255, 255, 255, 0.06) 0 0 0 1px",
+          },
+        },
+        shadow_floating_control_pressed: {
+          // Same control settled toward the surface while held down.
+          value: {
+            base: "rgba(17, 12, 46, 0.12) 0 2px 6px 0",
+            _dark: "rgba(0, 0, 0, 0.45) 0 2px 6px 0, rgba(255, 255, 255, 0.06) 0 0 0 1px",
+          },
+        },
+      },
     },
   },
 
