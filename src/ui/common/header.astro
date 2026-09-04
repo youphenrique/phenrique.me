@@ -46,6 +46,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
 
 <div
   id="header-wrapper"
+  data-hidden="false"
   class={flex({
     top: 4,
     zIndex: 2,
@@ -65,7 +66,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
         bgColor: "clr_neutral_100_950_alpha_20",
         w: { base: "full", sm: "fit-content" },
         // border: "1px solid token(colors.clr_neutral_300_700)",
-        transition: "border-radius 0.3s ease",
+        transition: "border-radius 0.3s ease, box-shadow 0.3s ease",
         borderRadius: "2rem",
       })}
       style="backdrop-filter: blur(16px);"
@@ -429,6 +430,22 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
   </header>
 </div>
 
+<style is:global>
+  /* Elevate the header pill only while it is on screen and the page is scrolled
+     away from the top. `.scrolled` is toggled on <html> in head.astro. */
+  html.scrolled #header-wrapper[data-hidden="false"] #header-pill {
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  }
+
+  /* Dark mode: the coloured ambient shadow disappears against a dark canvas,
+     so lift the pill with a deeper cast shadow plus a hairline rim of light. */
+  html.dark.scrolled #header-wrapper[data-hidden="false"] #header-pill {
+    box-shadow:
+      rgba(0, 0, 0, 0.55) 0px 48px 100px 0px,
+      rgba(255, 255, 255, 0.06) 0px 0px 0px 1px;
+  }
+</style>
+
 <script is:inline>
   function initHeader() {
     const headerWrapper = document.getElementById("header-wrapper");
@@ -454,9 +471,11 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
         const diff = Math.abs(currentScrollY - lastScrollY);
         if (currentScrollY > lastScrollY && diff > 50) {
           headerWrapper.style.transform = "translateY(-5rem)";
+          headerWrapper.dataset.hidden = "true";
           if (isMenuOpen) closeMenu();
         } else if (diff > 50 || currentScrollY < 10) {
           headerWrapper.style.transform = "translateY(0)";
+          headerWrapper.dataset.hidden = "false";
         }
         lastScrollY = currentScrollY;
       }, 50);
