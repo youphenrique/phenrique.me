@@ -4,6 +4,7 @@ import { flex, hstack, vstack } from "../../../styled-system/patterns";
 import type { MainDictionary } from "../../i18n/main/en.ts";
 import { languages } from "../../utils/constants.ts";
 import LanguageMenu from "./_components/language-menu";
+import MobileLanguageSheet from "./_components/mobile-language-sheet";
 
 interface Props {
   lang: string;
@@ -19,6 +20,12 @@ const navLinks = [
   { title: "writing", path: "/writing" },
   { title: "reading", path: "/reading" },
 ] as const;
+
+const languageOptions = languages.map((language) => ({
+  id: language.id,
+  name: language.name,
+  href: getLocaleSwitchUrl(language.id),
+}));
 
 function getLocaleSwitchUrl(targetLang: string) {
   let basePath = pathname;
@@ -126,15 +133,20 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
           }
         </nav>
 
-        <!-- Mobile menu button (hidden on sm+) -->
-        <div class={flex({ hideFrom: "sm", flex: 1, justifyContent: "flex-end" })}>
+        <!-- Mobile controls -->
+        <div class={hstack({ hideFrom: "sm", ml: "auto", gap: 2 })}>
+          <MobileLanguageSheet
+            client:load
+            currentLocale={lang}
+            menuLabel={dict.header["menu-label"]}
+            languages={languageOptions}
+          />
           <button
             id="menu-toggle"
             aria-label="Menu"
             aria-expanded="false"
             data-open="false"
             class={vstack({
-              ml: 6,
               width: 10,
               height: 10,
               borderRadius: "full",
@@ -175,11 +187,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
             client:load
             currentLocale={lang}
             menuLabel={dict.header["menu-label"]}
-            languages={languages.map((language) => ({
-              id: language.id,
-              name: language.name,
-              href: getLocaleSwitchUrl(language.id),
-            }))}
+            languages={languageOptions}
           />
 
           <!-- Theme toggle -->
@@ -318,30 +326,16 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
             }
           </nav>
 
-          <!-- Mobile bottom row: language switcher + theme toggle -->
+          <!-- Mobile theme toggle -->
           <div
             class={flex({
               alignItems: "center",
-              justifyContent: "space-between",
+              justifyContent: "flex-end",
               pt: 5,
               px: 5,
               pb: 4,
             })}
           >
-            <LanguageMenu
-              client:load
-              align="start"
-              withLabel
-              currentLocale={lang}
-              menuLabel={dict.header["menu-label"]}
-              languages={languages.map((language) => ({
-                id: language.id,
-                name: language.name,
-                href: getLocaleSwitchUrl(language.id),
-              }))}
-            />
-
-            <!-- Mobile theme toggle -->
             <div
               class={flex({
                 p: "3px",
