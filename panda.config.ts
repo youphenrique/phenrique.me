@@ -80,6 +80,26 @@ export default defineConfig({
           // text-forty
           value: { base: "{colors.neutral.400}", _dark: "{colors.neutral.500}" },
         },
+        clr_sheet_bg: {
+          // iOS-style grouped sheet background (sits behind the inset cards)
+          value: { base: "#EFEBE4", _dark: "#1C1C1E" },
+        },
+        clr_sheet_group_bg: {
+          // iOS-style inset grouped list card
+          value: { base: "#FDFBF8", _dark: "#2C2C2E" },
+        },
+        clr_sheet_group_bg_active: {
+          // pressed state for a row inside a grouped list card
+          value: { base: "#F0EDE6", _dark: "#3A3A3C" },
+        },
+        clr_sheet_separator: {
+          // hairline between grouped list rows
+          value: { base: "rgba(10, 10, 10, 0.09)", _dark: "rgba(255, 255, 255, 0.11)" },
+        },
+        clr_sheet_grabber: {
+          // drag indicator at the top of a bottom sheet
+          value: { base: "rgba(10, 10, 10, 0.18)", _dark: "rgba(255, 255, 255, 0.22)" },
+        },
       },
     },
   },

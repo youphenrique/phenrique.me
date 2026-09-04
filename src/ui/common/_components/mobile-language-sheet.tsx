@@ -1,6 +1,5 @@
 import { css } from "../../../../styled-system/css";
-import { flex, hstack, vstack } from "../../../../styled-system/patterns";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./sheet";
+import { Sheet, SheetContent, SheetGrabber, SheetHeader, SheetTitle, SheetTrigger } from "./sheet";
 
 interface LanguageOption {
   id: string;
@@ -41,12 +40,12 @@ function CheckIcon() {
   return (
     <svg
       aria-hidden="true"
-      width="18"
-      height="18"
+      width="20"
+      height="20"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
     >
@@ -75,49 +74,82 @@ export default function MobileLanguageSheet({ currentLocale, languages, menuLabe
       >
         <GlobeIcon />
       </SheetTrigger>
-      <SheetContent side="bottom" aria-describedby={undefined}>
-        <div className={css({ w: 9, h: 1, mx: "auto", mt: 2, borderRadius: "full", bgColor: "clr_neutral_300_700" })} />
-        <SheetHeader>
-          <SheetTitle>{menuLabel}</SheetTitle>
+
+      <SheetContent side="bottom" closeButtonSide="left" aria-describedby={undefined}>
+        <SheetGrabber />
+
+        {/* Horizontal padding clears the absolutely positioned close button so the
+            title stays optically centred, as it is on a native iOS sheet. */}
+        <SheetHeader className={css({ px: "3.5rem", pt: 3, pb: 4 })}>
+          <SheetTitle className={css({ fontSize: "17px", letterSpacing: "-0.01em" })}>{menuLabel}</SheetTitle>
         </SheetHeader>
-        <div className={vstack({ gap: 1, px: 4, pb: "max(1rem, env(safe-area-inset-bottom))" })}>
+
+        {/* iOS inset grouped list: one rounded card, hairline-separated rows. */}
+        <ul
+          className={css({
+            mx: 4,
+            mt: 6,
+            mb: "max(1.25rem, env(safe-area-inset-bottom))",
+            listStyle: "none",
+            borderRadius: "0.875rem",
+            bgColor: "clr_sheet_group_bg",
+            overflowY: "auto",
+            overscrollBehavior: "contain",
+            WebkitOverflowScrolling: "touch",
+          })}
+        >
           {languages.map((language) => {
             const isCurrent = language.id === currentLocale;
 
             return (
-              <a
+              <li
                 key={language.id}
-                href={language.href}
-                aria-current={isCurrent ? "page" : undefined}
-                className={hstack({
-                  minH: 12,
-                  px: 4,
-                  borderRadius: "lg",
-                  color: "clr_neutral_800_200",
-                  justifyContent: "space-between",
-                  textDecoration: "none",
-                  transition: "background-color 0.15s ease-in-out",
-                  _hover: { bgColor: "bg_neutral_100_700" },
-                  _focusVisible: { outline: "2px solid token(colors.clr_coral_flame)", outlineOffset: "2px" },
+                className={css({
+                  position: "relative",
+                  // Hairline inset from the text edge, iOS-style, and never on the last row.
+                  "&:not(:last-child)::after": {
+                    content: "''",
+                    position: "absolute",
+                    right: 0,
+                    bottom: 0,
+                    left: "1rem",
+                    h: "1px",
+                    bgColor: "clr_sheet_separator",
+                  },
                 })}
               >
-                <span className={flex({ gap: 3, alignItems: "center" })}>
-                  <span className={css({ fontSize: "md", fontWeight: "medium" })}>{language.name}</span>
+                <a
+                  href={language.href}
+                  aria-current={isCurrent ? "page" : undefined}
+                  className={css({
+                    position: "relative",
+                    display: "flex",
+                    minH: "52px",
+                    px: 4,
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: 3,
+                    fontSize: "17px",
+                    fontWeight: isCurrent ? "semibold" : "normal",
+                    letterSpacing: "-0.01em",
+                    color: "clr_neutral_900_50",
+                    textDecoration: "none",
+                    transition: "background-color 0.12s ease-out",
+                    _active: { bgColor: "clr_sheet_group_bg_active" },
+                    _focusVisible: { outline: "2px solid token(colors.clr_coral_flame)", outlineOffset: "-2px" },
+                  })}
+                >
+                  <span>{language.name}</span>
                   {isCurrent && (
-                    <span className={css({ fontSize: "xs", color: "clr_neutral_700_400" })}>
-                      {currentLocale.toUpperCase()}
+                    <span className={css({ display: "flex", color: "clr_coral_flame" })}>
+                      <CheckIcon />
                     </span>
                   )}
-                </span>
-                {isCurrent && (
-                  <span className={css({ color: "clr_coral_flame" })}>
-                    <CheckIcon />
-                  </span>
-                )}
-              </a>
+                </a>
+              </li>
             );
           })}
-        </div>
+        </ul>
       </SheetContent>
     </Sheet>
   );

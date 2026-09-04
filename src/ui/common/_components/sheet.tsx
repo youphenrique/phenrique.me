@@ -3,6 +3,10 @@ import { Dialog as SheetPrimitive } from "@base-ui/react/dialog";
 
 import { css, cx } from "../../../../styled-system/css";
 
+// iOS uses a decelerating curve for sheet presentation: fast out of the gate,
+// long soft landing. Dismissal runs the same curve on a shorter duration.
+const SHEET_EASE = "cubic-bezier(0.32, 0.72, 0, 1)";
+
 const contentClass = css({
   position: "fixed",
   zIndex: 50,
@@ -11,16 +15,22 @@ const contentClass = css({
   color: "clr_neutral_800_200",
   bgColor: "clr_neutral_100_800",
   boxShadow: "0 -16px 48px rgba(10, 10, 10, 0.18)",
-  transition: "opacity 0.25s ease-out, transform 0.25s ease-out",
+  transition: `opacity 240ms ${SHEET_EASE}, transform 420ms ${SHEET_EASE}`,
   outline: "none",
-  "&[data-starting-style], &[data-ending-style]": { opacity: 0 },
+  // Edge-anchored sides slide fully off-screen instead of cross-fading, which is
+  // what makes the motion read as native rather than as a popover.
+  "&[data-ending-style]": { transitionDuration: "280ms" },
+  "&:not([data-side=bottom])[data-starting-style], &:not([data-side=bottom])[data-ending-style]": { opacity: 0 },
   "&[data-side=bottom]": {
     right: 0,
     bottom: 0,
     left: 0,
-    borderTopLeftRadius: "2xl",
-    borderTopRightRadius: "2xl",
-    transform: "translateY(2.5rem)",
+    maxH: "88dvh",
+    borderTopLeftRadius: "1.75rem",
+    borderTopRightRadius: "1.75rem",
+    bgColor: "clr_sheet_bg",
+    boxShadow: "0 -0.5px 0 rgba(10, 10, 10, 0.08), 0 -20px 60px rgba(10, 10, 10, 0.24)",
+    transform: "translateY(100%)",
   },
   "&[data-side=left]": {
     top: 0,
@@ -28,7 +38,7 @@ const contentClass = css({
     left: 0,
     w: "3/4",
     maxW: "sm",
-    transform: "translateX(-2.5rem)",
+    transform: "translateX(-100%)",
   },
   "&[data-side=right]": {
     top: 0,
@@ -36,17 +46,22 @@ const contentClass = css({
     bottom: 0,
     w: "3/4",
     maxW: "sm",
-    transform: "translateX(2.5rem)",
+    transform: "translateX(100%)",
   },
   "&[data-side=top]": {
     top: 0,
     right: 0,
     left: 0,
-    borderBottomRightRadius: "2xl",
-    borderBottomLeftRadius: "2xl",
-    transform: "translateY(-2.5rem)",
+    borderBottomRightRadius: "1.75rem",
+    borderBottomLeftRadius: "1.75rem",
+    transform: "translateY(-100%)",
   },
   "&[data-open][data-side]": { transform: "translate(0)" },
+  "@media (prefers-reduced-motion: reduce)": {
+    transition: "opacity 150ms ease-out",
+    "&[data-side]": { transform: "translate(0)" },
+    "&[data-starting-style], &[data-ending-style]": { opacity: 0 },
+  },
 });
 
 function Sheet(props: SheetPrimitive.Root.Props) {
@@ -75,14 +90,30 @@ function SheetOverlay({ className, ...props }: SheetPrimitive.Backdrop.Props) {
             position: "fixed",
             inset: 0,
             zIndex: 50,
-            bg: "rgba(10, 10, 10, 0.24)",
-            backdropFilter: "blur(4px)",
-            transition: "opacity 0.2s ease-out",
+            bg: "rgba(10, 10, 10, 0.32)",
+            backdropFilter: "blur(2px)",
+            transition: `opacity 320ms ${SHEET_EASE}`,
             "&[data-starting-style], &[data-ending-style]": { opacity: 0 },
+            "@media (prefers-reduced-motion: reduce)": { transition: "opacity 150ms ease-out" },
           }),
           typeof className === "function" ? className(state) : className,
         )
       }
+      {...props}
+    />
+  );
+}
+
+/** Drag indicator rendered at the top edge of a bottom sheet. */
+function SheetGrabber({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="sheet-grabber"
+      aria-hidden="true"
+      className={cx(
+        css({ w: "36px", h: "5px", mx: "auto", mt: 2, borderRadius: "full", bgColor: "clr_sheet_grabber" }),
+        className,
+      )}
       {...props}
     />
   );
@@ -93,9 +124,18 @@ type SheetSide = "top" | "right" | "bottom" | "left";
 interface SheetContentProps extends SheetPrimitive.Popup.Props {
   side?: SheetSide;
   showCloseButton?: boolean;
+  /** Which header corner the close button occupies. iOS bottom sheets place it on the left. */
+  closeButtonSide?: "left" | "right";
 }
 
-function SheetContent({ className, children, side = "right", showCloseButton = true, ...props }: SheetContentProps) {
+function SheetContent({
+  className,
+  children,
+  side = "right",
+  showCloseButton = true,
+  closeButtonSide = "right",
+  ...props
+}: SheetContentProps) {
   return (
     <SheetPortal>
       <SheetOverlay />
@@ -111,23 +151,39 @@ function SheetContent({ className, children, side = "right", showCloseButton = t
             aria-label="Close"
             className={css({
               position: "absolute",
-              top: 3,
-              right: 4,
               display: "flex",
-              w: 8,
-              h: 8,
+              w: 10,
+              h: 10,
               alignItems: "center",
               justifyContent: "center",
               borderRadius: "full",
               color: "clr_neutral_700_400",
-              bgColor: "bg_neutral_100_700",
-              transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
+              bgColor: "clr_sheet_group_bg",
+              transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out, transform 0.1s ease-out",
               _hover: { color: "clr_neutral_900_50", cursor: "pointer" },
+              _active: { transform: "scale(0.92)", bgColor: "clr_sheet_group_bg_active" },
               _focusVisible: { outline: "2px solid token(colors.clr_coral_flame)", outlineOffset: "2px" },
             })}
+            style={{
+              // Optically centred against the sheet title; bottom sheets sit lower
+              // because a grabber precedes the header.
+              top: side === "bottom" ? "1.25rem" : "0.75rem",
+              ...(closeButtonSide === "left" ? { left: "1rem" } : { right: "1rem" }),
+            }}
           >
-            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
             </svg>
           </SheetClose>
         )}
@@ -182,6 +238,7 @@ export {
   SheetContent,
   SheetDescription,
   SheetFooter,
+  SheetGrabber,
   SheetHeader,
   SheetOverlay,
   SheetPortal,
