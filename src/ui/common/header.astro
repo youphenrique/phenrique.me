@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { css } from "../../../styled-system/css";
 import { flex, hstack, vstack } from "../../../styled-system/patterns";
 import type { MainDictionary } from "../../i18n/main/en.ts";
@@ -42,6 +43,7 @@ function getNavHref(linkPath: string) {
 }
 
 const homeHref = lang === "en" ? "/" : `/${lang}`;
+const homeLabel = lang === "pt" ? "Página inicial" : "Home";
 const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `/${lang}/`;
 ---
 
@@ -86,6 +88,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
         <div class={hstack({ gap: 6 })}>
           <a
             href={homeHref}
+            aria-label={homeLabel}
             class={css({
               h: 10,
               w: 10,
@@ -98,11 +101,13 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
               flexShrink: 0,
             })}
           >
-            <img
+            <Image
               src="/images/me.website.png"
               width={40}
               height={40}
-              alt="A black and white photo of a young man"
+              alt=""
+              loading="eager"
+              decoding="async"
               class={css({
                 borderRadius: "full",
                 w: "full",
@@ -121,6 +126,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
               return (
                 <a
                   href={getNavHref(link.path)}
+                  aria-current={isActive ? "page" : undefined}
                   class={css({
                     p: 1.5,
                     position: "relative",
@@ -149,6 +155,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
             id="menu-toggle"
             aria-label="Menu"
             aria-expanded="false"
+            aria-controls="mobile-menu"
             data-open="false"
             class={vstack({
               width: 10,
@@ -313,6 +320,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                 return (
                   <a
                     href={getNavHref(link.path)}
+                    aria-current={isActive ? "page" : undefined}
                     class={hstack({
                       p: 1.5,
                       gap: 2.5,
