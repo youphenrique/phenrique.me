@@ -3,14 +3,14 @@ import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 
 const homePages = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/home" }),
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/home" }),
   schema: z.object({
     title: z.string(),
   }),
 });
 
 const aboutPages = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/about" }),
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/about" }),
   schema: z.object({
     title: z.string(),
     bioImageResource: z.string(),
@@ -25,8 +25,8 @@ const metadatum = defineCollection({
   }),
 });
 
-const blog = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/blog" }),
+const writing = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/writing" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -36,7 +36,7 @@ const blog = defineCollection({
 });
 
 const work = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/work" }),
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/work" }),
   schema: z.object({
     company: z.string(),
     role: z.string(),
@@ -46,7 +46,7 @@ const work = defineCollection({
 });
 
 const projects = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/projects" }),
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/projects" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -113,7 +113,7 @@ const readingPages = defineCollection({
 });
 
 export const collections = {
-  blog,
+  writing,
   work,
   projects,
   linkbioPages,

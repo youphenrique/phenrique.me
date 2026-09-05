@@ -9,7 +9,7 @@ import { readingTime } from "../../utils/helpers.ts";
 import { css } from "../../../styled-system/css";
 
 export async function getStaticPaths() {
-  const posts = (await getCollection("blog"))
+  const posts = (await getCollection("writing"))
     .filter((post) => !post.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   return posts.map((post) => ({
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
   }));
 }
 
-type Props = CollectionEntry<"blog">;
+type Props = CollectionEntry<"writing">;
 
 const post = Astro.props;
 const { Content } = await render(post);
@@ -27,7 +27,7 @@ const { Content } = await render(post);
 <MainLayout title={post.data.title} description={post.data.description}>
   <Container>
     <div class="animate">
-      <BackToPrev href="/blog"> Back to blog </BackToPrev>
+      <BackToPrev href="/writing"> Back to blog </BackToPrev>
     </div>
     <div class={css({ "& > * + *": { mt: 1 }, my: 10 })}>
       <div class={`animate ${css({ display: "flex", alignItems: "center", gap: 1.5 })}`}>

@@ -71,7 +71,7 @@ Rules worth knowing before writing styles:
 - Content is managed via the Astro Content Layer in `src/content.config.ts`.
 - Supported loaders: `glob` for Markdown/MDX and YAML.
 - **Collections:**
-    - `blog`: Articles with `title`, `description`, `date`, `draft`.
+    - `writing`: Articles with `title`, `description`, `date`, `draft`.
     - `projects`: Portfolio items with `demoURL`, `repoURL`.
     - `work`: Professional experience.
     - `books`: Reading list tracking with status, genres, and ratings.
