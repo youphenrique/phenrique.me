@@ -25,7 +25,7 @@ const { Content } = await render(post);
 ---
 
 <MainLayout title={post.data.title} description={post.data.description}>
-  <Container>
+  <Container styles={css.raw({ py: { base: 24, sm: 32 } })}>
     <div class="animate">
       <BackToPrev href="/writing"> Back to blog </BackToPrev>
     </div>
@@ -49,7 +49,7 @@ const { Content } = await render(post);
         {post.data.title}
       </div>
     </div>
-    <article class="animate">
+    <article>
       <Content />
     </article>
   </Container>
