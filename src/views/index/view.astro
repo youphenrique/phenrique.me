@@ -12,9 +12,10 @@ interface Props {
 
 const allSocialLinks = await getCollection("socialLinks");
 const socialLinks = allSocialLinks.filter((link) => link.data.icon !== undefined);
+const isPortuguese = Astro.currentLocale === "pt";
 ---
 
-<MainLayout title="Home" description="Paulo Henrique's personal website" lang={Astro.currentLocale!}>
+<MainLayout title="Home" description="Paulo Henrique's personal website" lang={Astro.currentLocale ?? "en"}>
   <Container styles={css.raw({ py: { base: 32, sm: 44 } })}>
     <div
       class={css({
@@ -37,7 +38,8 @@ const socialLinks = allSocialLinks.filter((link) => link.data.icon !== undefined
         color: "text.primary",
       })}
     >
-      <PauloHenrique label={Astro.props.title} />
+      <span class="sr-only">{Astro.props.title}</span>
+      <PauloHenrique />
     </h1>
     <div class={"prose-ui antialiased " + css({ mt: 10, maxW: "xl" })}>
       <slot />
@@ -48,7 +50,11 @@ const socialLinks = allSocialLinks.filter((link) => link.data.icon !== undefined
           <a
             target="_blank"
             href={item.data.link}
-            title={item.data.name}
+            aria-label={
+              isPortuguese
+                ? `Visitar Paulo Henrique no ${item.data.name} (abre em uma nova aba)`
+                : `Visit Paulo Henrique on ${item.data.name} (opens in a new tab)`
+            }
             rel="noopener noreferrer"
             set:html={item.data.icon}
             class={css({
