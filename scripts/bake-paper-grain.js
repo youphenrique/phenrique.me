@@ -6,8 +6,14 @@
  * drag the token off its value — the mean is ~245, so the whole canvas would darken
  * by ~4% and warm up, quietly invalidating the contrast ratios the design system
  * guarantees. So we keep only the *deviation*: reduce to luminance, then re-centre
- * the mean on pure white. Multiplying by the result leaves the average canvas colour
- * untouched and adds grain around it.
+ * the mean on pure white.
+ *
+ * A multiply layer can only darken, so every sample above the mean clamps to 255 —
+ * about two thirds of the tile — and what ships is white with darker flecks. That
+ * leaves the painted canvas a hair under the token rather than exactly on it: less
+ * than one level at GAIN 1.0, which drifts each contrast ratio by at most 0.06 and
+ * crosses no threshold (`text.accent`, the tightest, holds at 4.69:1). Raising GAIN
+ * deepens the flecks, so re-check that margin if you push it much past 1.5.
  *
  * GAIN scales that deviation, and is the knob for how rough the paper reads.
  * Because the tile is multiplied, scaling the deviation is exactly equivalent to

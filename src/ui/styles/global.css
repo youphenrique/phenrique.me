@@ -76,9 +76,11 @@ body {
 /* Paper grain — light mode only.
    `/images/paper-grain.webp` is the source texture reduced to luminance and
    re-centred so its mean is pure white; only the deviation survives. Multiplied
-   into `bg.canvas` it modulates the surface without shifting the token's colour,
-   so every contrast ratio the design system guarantees still holds. Dark mode
-   keeps the flat ink canvas — the grain reads as dirt on a dark ground. */
+   into `bg.canvas` it modulates the surface while leaving the token essentially
+   where it is — the painted average lands under one level below it, drifting
+   every contrast ratio by at most 0.06 and crossing no threshold (`text.accent`,
+   the tightest, holds at 4.69:1). Dark mode keeps the flat ink canvas — the
+   grain reads as dirt on a dark ground. */
 :root.light .paper-grain {
     background-image: url("/images/paper-grain.webp");
     background-repeat: repeat;
