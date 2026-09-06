@@ -5,7 +5,7 @@ import "../ui/styles/global.css";
 import Head from "../ui/common/head.astro";
 import Header from "../ui/common/header.astro";
 import Footer from "../ui/common/footer.astro";
-import { css } from "../../styled-system/css";
+import { css, cx } from "../../styled-system/css";
 import { flex } from "../../styled-system/patterns";
 import enDict from "../i18n/main/en";
 import ptDict from "../i18n/main/pt";
@@ -45,11 +45,10 @@ const pageDescription = metadatum?.data.description ?? description;
       })();
     </script>
   </head>
-  <body>
+  <body class={cx("paper-grain", css({ bgColor: "bg.canvas" }))}>
     <div
       class={flex({
         minH: "100dvh",
-        bgColor: "bg.canvas",
         flexDirection: "column",
       })}
     >

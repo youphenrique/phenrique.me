@@ -66,13 +66,13 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
         mx: "auto",
         overflow: "hidden",
         alignItems: "stretch",
-        bgColor: "bg.overlay",
         w: { base: "full", sm: "fit-content" },
         // border: "1px solid token(colors.border.default)",
-        transition: "border-radius 0.3s ease, box-shadow 0.3s ease",
+        // Background and blur are applied from the global style block below so
+        // they can key off `html.scrolled`; the pill is bare at the top of the page.
+        transition: "border-radius 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease",
         borderRadius: "2rem",
       })}
-      style="backdrop-filter: blur(16px);"
     >
       <!-- Main header row -->
       <div
@@ -452,6 +452,18 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
     /* `elevation.pill` already carries its own dark-mode variant, so this one
        declaration covers both themes. */
     box-shadow: var(--shadows-elevation-pill);
+  }
+
+  /* The pill only materialises once the page scrolls: at the very top it is
+     fully transparent so the header sits directly on the paper canvas. The blur
+     is toggled with it rather than left on — a permanent backdrop-filter would
+     smooth the canvas grain into a visibly clean pill-shaped patch. Conditions
+     match the elevation rule above: scrolled away from the top, or the mobile
+     menu open (an open menu needs a solid panel at any scroll position). */
+  html.scrolled #header-pill,
+  #header-pill[data-open="true"] {
+    background-color: var(--colors-bg-overlay);
+    backdrop-filter: blur(16px);
   }
 
   /* Selected theme in the light/system/dark switch. `data-theme-active` is set
