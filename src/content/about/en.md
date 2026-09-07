@@ -35,7 +35,7 @@ To put it into perspective, I hold a postgraduate degree in Sacred Scripture fro
 
 When I'm not coding or writing, you’ll find me spending time with my family, friends, serving at my church community as a Bible teacher and musical leader, working out at the gym, reading a book, playing chess, or playing guitar or keyboard with my gig partners somewhere. That's where a lot of my most meaningful relationships live, and honestly, where I feel most like myself.
 
-## Tech behind this website
+## This website
 
 This website is built with [Astro](https://astro.build) and hosted on [Vercel](https://vercel.com). I do not use LLMs or AI tools to publish anything content-related on this website.
 
