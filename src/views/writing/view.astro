@@ -24,6 +24,7 @@ const dateFormatter = new Intl.DateTimeFormat(Astro.currentLocale, {
 });
 
 const posts = (await getCollection("writing"))
+  .filter((post) => post.data.locale === (Astro.currentLocale ?? "en"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
@@ -47,7 +48,7 @@ const posts = (await getCollection("writing"))
         posts.map((post) => (
           <li>
             <PostCard
-              href={`/writing/${post.id}`}
+              href={post.data.locale === "pt" ? `/pt/writing/${post.data.slug}` : `/writing/${post.data.slug}`}
               title={post.data.title}
               date={dateFormatter.format(post.data.date)}
               dateTime={post.data.date.toISOString()}

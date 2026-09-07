@@ -11,10 +11,11 @@ import { css } from "../../../styled-system/css";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("writing"))
+    .filter((post) => post.data.locale === "en")
     .filter((post) => !post.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   return posts.map((post) => ({
-    params: { slug: post.id },
+    params: { slug: post.data.slug },
     props: post,
   }));
 }
