@@ -3,8 +3,7 @@ title: "Building with craft, reasoning with depth, living by faith."
 bioImageResource: "/about-page.me.webp"
 ---
 
-My name is Paulo Henrique<sup>1</sup>. I am a software engineer from Fortaleza<sup>2</sup>, Brazil, and someone who
-enjoys researching, thinking, and solving problems at the intersection of the technical and social challenges.
+Hey, my name is Paulo Henrique<sup>1</sup> and I'm a software engineer from Fortaleza<sup>2</sup>, Brazil, working at the intersection of engineering and faith.
 
 ## My ethos
 
@@ -43,7 +42,7 @@ This website is built with [Astro](https://astro.build) and hosted on [Vercel](h
 # References
 
 1. Some people call me “Paulo”, “Henrique”, “Paulinho”, “Rique” (my sister) and, most frequently, “PH”.
-2. https://revistaaber.org.br/rberu/article/view/1069/432
+2. Timezone GMT-3. Right now is 12:13:14
 3. I tried the entrance exam for electrical engineering three times, but I didn't get into the university…
 4. https://www.facebook.com/maratona/posts/10154135897899118:0
 5. The “full stack” meme on Twitter
