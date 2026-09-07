@@ -1,80 +1,246 @@
-@import "@prose-ui/style/prose-ui.css";
-
-
 .fraunces-font {
-    font-family: "Fraunces", serif;
-    font-optical-sizing: auto;
-    font-variation-settings: "SOFT" 50, "WONK" 1;
+  font-family: "Fraunces", serif;
+  font-optical-sizing: auto;
+  font-variation-settings:
+    "SOFT" 50,
+    "WONK" 1;
 }
 
 .instrument-serif {
-    font-family: "Instrument Serif", serif;
-}
-
-/* prose-ui reads its own custom properties; bind them to the design system's
-   semantic tokens so long-form content inherits the palette instead of
-   carrying prose-ui's defaults. See docs/design-system.md. */
-:root {
-    --p-font-family: GeistSans;
-    --p-font-family-heading: GeistSans;
-    --p-font-family-mono: GeistMono;
-    --p-body-color-bg: transparent;
-    --p-heading-text-color: var(--colors-text-primary);
-    --p-body-text-color: var(--colors-text-secondary);
-    --p-link-text-color: var(--colors-text-accent);
-    --p-link-text-decoration-color: var(--colors-border-underline);
-    --p-content-gap-heading: 1.5rem;
-    --p-content-gap: 1rem;
+  font-family: "Instrument Serif", serif;
 }
 
 @font-face {
-    font-family: "GeistSans";
-    src: url("/fonts/geist-sans/Geist-Variable.woff2") format("woff2");
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
+  font-family: "GeistSans";
+  src: url("/fonts/geist-sans/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "GeistMono";
-    src: url("/fonts/geist-mono.woff2") format("woff2");
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
+  font-family: "GeistMono";
+  src: url("/fonts/geist-mono.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 body {
-    font-family: GeistSans, sans-serif;
+  font-family: GeistSans, sans-serif;
 }
 
 @layer reset, base, tokens, recipes, utilities;
 
 .sr-only {
-    border: 0;
-    padding: 0;
-    margin: 0;
-    position: absolute !important;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-    /* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-    clip: rect(1px 1px 1px 1px);
-    /* maybe deprecated but we need to support legacy browsers */
-    clip: rect(1px, 1px, 1px, 1px);
-    /* modern browsers, clip-path works inwards from each corner */
-    clip-path: inset(50%);
-    /* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
-    white-space: nowrap;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  /* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
+  clip: rect(1px 1px 1px 1px);
+  /* maybe deprecated but we need to support legacy browsers */
+  clip: rect(1px, 1px, 1px, 1px);
+  /* modern browsers, clip-path works inwards from each corner */
+  clip-path: inset(50%);
+  /* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
+  white-space: nowrap;
 }
 
-.prose-ui :is(p, blockquote p) {
-    line-height: 1.5;
-    color: var(--colors-text-secondary);
+/* ---------------------------------------------------------------------------
+   Long-form content
+   ---------------------------------------------------------------------------
+   Element styles for rendered Markdown, applied by putting `.prose` on the
+   container (see `src/ui/common/markdown.astro`). This replaced `@prose-ui/style`,
+   which was adopted when the site ran on Next.js and MDX: roughly half of that
+   stylesheet styled its own React components (`.callout`, `.steps`, `.cards`,
+   `.tabs`, `.code-group`), and Comark emits none of them — only ten of its 222
+   rules ever matched a page here.
 
-    & a:hover {
-        color: var(--colors-accent-hover);
-        text-decoration-color: var(--colors-accent-hover);
-    }
+   The metrics below are carried over from it deliberately, so the vertical
+   rhythm did not shift in the swap. What did change is colour: every value is
+   now a semantic token, where prose-ui fell back to neutral greys
+   (`oklch(0.97 0 0)` behind inline code, `oklch(0.5 0 0)` for table headers)
+   that read cool against this warm palette. See docs/design-system.md. */
+
+.prose {
+  font-size: 1rem;
+  line-height: 1.75;
+  letter-spacing: 0.0175em;
+  color: var(--colors-text-secondary);
+}
+
+.prose :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--colors-text-primary);
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+.prose h1 {
+  margin-top: 1.5rem;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  letter-spacing: -0.035em;
+}
+
+.prose h2 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  letter-spacing: -0.028em;
+}
+
+.prose h3 {
+  font-size: 1.09375rem;
+  line-height: 1.5rem;
+  letter-spacing: -0.03em;
+}
+
+.prose h4 {
+  font-size: 0.9375rem;
+  line-height: 1.5rem;
+  letter-spacing: -0.016em;
+}
+
+.prose h5 {
+  font-size: 0.90625rem;
+  line-height: 1.25rem;
+  letter-spacing: -0.016em;
+}
+
+.prose h6 {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  letter-spacing: -0.017em;
+  font-weight: 500;
+}
+
+/* A heading and the block it introduces are one cluster: close the gap that
+   the following block would otherwise open above itself. */
+.prose :is(h1, h2, h3, h4, h5, h6) + :is(p, ul, ol, blockquote, table, pre) {
+  margin-top: 0.5rem;
+}
+
+.prose p {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.prose :is(ul, ol) {
+  margin-bottom: 0.5rem;
+  padding-left: 2rem;
+  list-style-position: outside;
+}
+
+.prose ul {
+  margin-top: 0.5rem;
+  list-style-type: disc;
+}
+
+.prose ol {
+  margin-top: 1rem;
+  list-style-type: decimal;
+}
+
+.prose li {
+  margin-bottom: 0.25rem;
+  padding-left: 0.25rem;
+}
+
+.prose a {
+  color: var(--colors-text-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--colors-border-underline);
+  text-underline-offset: 2px;
+  transition:
+    color 0.15s ease-in-out,
+    text-decoration-color 0.15s ease-in-out;
+}
+
+.prose a:hover {
+  color: var(--colors-accent-hover);
+  text-decoration-color: var(--colors-accent-hover);
+}
+
+/* Inline code only — a fenced block is a `pre > code`, which keeps the bare
+   monospace treatment its Shiki colours are painted onto. */
+.prose :is(p, li, td, th, blockquote) code {
+  padding: 2px 4px;
+  border-radius: 4px;
+  background-color: var(--colors-bg-raised);
+  font-size: 0.875rem;
+}
+
+.prose code {
+  font-family: GeistMono, ui-monospace, monospace;
+}
+
+.prose pre {
+  /* Long lines scroll inside the block rather than widening the page. */
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.prose blockquote {
+  margin: 1rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--colors-border-default);
+  color: var(--colors-text-muted);
+}
+
+.prose table {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  border-collapse: collapse;
+}
+
+.prose :is(th, td) {
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--colors-border-hairline);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.prose th {
+  color: var(--colors-text-muted);
+  font-weight: 600;
+}
+
+/* Cell contents are laid out by the cell, not by their own block margins. */
+.prose :is(th, td) > * {
+  margin-bottom: 0;
+}
+
+.prose hr {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  border: 0;
+  border-top: 1px solid var(--colors-border-hairline);
+}
+
+.prose img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* Comark's Shiki plugin tokenises each block once and emits both themes: the
+   light colour inline as `color`, the dark one alongside it as a `--shiki-dark`
+   custom property. Applying the dark half is the page's job — without this rule
+   code blocks keep their light-theme palette on the ink canvas. */
+:root.dark .shiki,
+:root.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 
 /* Paper grain — light mode only.
@@ -86,14 +252,14 @@ body {
    the tightest, holds at 4.69:1). Dark mode keeps the flat ink canvas — the
    grain reads as dirt on a dark ground. */
 :root.light .paper-grain {
-    background-image: url("/images/paper-grain.webp");
-    background-repeat: repeat;
-    background-size: 405px 405px;
-    background-blend-mode: multiply;
+  background-image: url("/images/paper-grain.webp");
+  background-repeat: repeat;
+  background-size: 405px 405px;
+  background-blend-mode: multiply;
 }
 
 @media print {
-    .paper-grain {
-        background-image: none;
-    }
+  .paper-grain {
+    background-image: none;
+  }
 }

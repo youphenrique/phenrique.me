@@ -21,7 +21,6 @@
     "@astrojs/vercel": "^11.0.10",
     "@base-ui/react": "^1.7.0",
     "@comark/react": "^0.6.2",
-    "@prose-ui/style": "^2.0.8",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.5",
     "@vercel/analytics": "^2.0.1",

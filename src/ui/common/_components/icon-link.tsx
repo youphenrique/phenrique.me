@@ -48,7 +48,7 @@ function splitLeadingWord(children: ReactNode): { lead: string; rest: ReactNode[
  *
  * Links whose destination is in the curated registry get a leading mark; every
  * other link renders untouched, so this stays invisible for the common case.
- * Colour and underline are left to prose-ui — the glyph paints with
+ * Colour and underline are left to the `.prose` layer — the glyph paints with
  * `currentColor` and therefore tracks the link's own state, hover included.
  */
 export default function IconLink({ href, title, children }: Props) {

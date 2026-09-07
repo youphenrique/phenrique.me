@@ -1,12 +1,12 @@
 # Astro Nano - Project Context
 
-Astro Nano is a static, minimalist, and lightweight portfolio and blog theme built with Astro, MDX, and TypeScript. It is designed for high performance (100/100 Lighthouse score), responsiveness, and accessibility.
+Astro Nano is a static, minimalist, and lightweight portfolio and blog theme built with Astro, Comark, and TypeScript. It is designed for high performance (100/100 Lighthouse score), responsiveness, and accessibility.
 
 ## 🛠 Technology Stack
 
 - **Framework:** [Astro](https://astro.build/) (v7+)
 - **Styling:** [Panda CSS](https://panda-css.com/) (Modern CSS-in-JS/Build-time CSS)
-- **Content:** Astro Content Layer with Markdown and MDX support.
+- **Content:** Astro Content Layer. Markdown is parsed and rendered by [Comark](https://comark.dev/), not Astro's own `render()` — see `src/ui/common/markdown.astro`.
 - **Language:** TypeScript
 - **i18n:** Built-in support for English (default) and Portuguese.
 - **Deployment:** Optimized for Vercel (static output).
@@ -65,11 +65,11 @@ Rules worth knowing before writing styles:
 - **Panda extracts styles statically.** A computed token path such as `` css({ bg: `tint.${hue}.surface` }) `` generates no CSS at all. Use a `Record<Hue, string>` of literal `css()` calls and index into it. The same applies to token names inside JS strings: write CSS custom properties in kebab-case (`--colors-bg-raised-hover`), not the dotted token path.
 - **`linkbio.*` is scoped.** Only `src/views/linkbio/**` and `src/layouts/linkbio-layout.astro` may use it, and those files use nothing else — `/linkbio` is always dark and does not follow the site theme.
 - **Elevation** lives in `shadows.elevation.*`; from plain CSS use `var(--shadows-elevation-pill)`, which carries both themes.
-- Long-form content: `prose-ui`'s custom properties are bound to semantic tokens in `src/ui/styles/global.css`. Change them there, not per-article.
+- Long-form content: the `.prose` layer in `src/ui/styles/global.css` styles rendered Markdown, entirely in semantic tokens. Change it there, not per-article.
 
 ### Content
 - Content is managed via the Astro Content Layer in `src/content.config.ts`.
-- Supported loaders: `glob` for Markdown/MDX and YAML.
+- Supported loaders: `glob` for Markdown and YAML. MDX is not installed; components in content use Comark's `::component` syntax.
 - **Collections:**
     - `writing`: Articles with `title`, `description`, `date`, `draft`.
     - `projects`: Portfolio items with `demoURL`, `repoURL`.

@@ -331,45 +331,40 @@ var
 
 ## Long-form content
 
-`prose-ui` renders Markdown and MDX. Its own custom properties are bound to semantic tokens in `src/ui/styles/global.css`, so prose inherits the palette rather than shipping prose-ui's defaults:
+Rendered Markdown is styled by the `.prose` layer in `src/ui/styles/global.css`,
+applied by `src/ui/common/markdown.astro`. It is a plain element stylesheet —
+headings, paragraphs, lists, links, tables, inline code, rules and images —
+and every value in it is a semantic token:
 
 ```css
---p-heading-text-color:
+.prose :is(h1, h2, h3, h4, h5, h6) {
+    color: var(--colors-text-primary);
+}
 
-var
-(
---colors-text-primary
+.prose :is(p, li, td, th, blockquote) code {
+    background-color: var(--colors-bg-raised);
+}
 
-)
-;
---p-body-text-color:
-
-var
-(
---colors-text-secondary
-
-)
-;
---p-link-text-color:
-
-var
-(
---colors-text-accent
-
-)
-;
---p-link-text-decoration-color:
-
-var
-(
---colors-border-underline
-
-)
-;
+.prose :is(th, td) {
+    border-bottom: 1px solid var(--colors-border-hairline);
+}
 ```
 
-Prose links are coral, matching the rest of the site. They were previously emerald, which put a second, unrelated accent in the middle of every article.
+Prose links are coral, matching the rest of the site. They were previously
+emerald, which put a second, unrelated accent in the middle of every article.
 
+This layer replaced `@prose-ui/style`, adopted when the site ran on Next.js and
+MDX. Roughly half of that stylesheet styled its own React components
+(`.callout`, `.steps`, `.cards`, `.tabs`, `.code-group`); Comark emits none of
+them, and only ten of its 222 rules ever matched a page. Its metrics were
+carried over verbatim so the vertical rhythm did not shift, but its colours were
+not: unbound properties fell back to neutral greys — `oklch(0.97 0 0)` behind
+inline code, `oklch(0.5 0 0)` for table headers — which read cool against this
+warm palette and were invisible to the system.
+
+Code blocks are tokenised at build time by Comark's Shiki plugin, which emits
+both themes at once: the light colour inline, the dark one as a `--shiki-dark`
+custom property. `:root.dark .shiki` applies the dark half.
 ---
 
 ## Contrast

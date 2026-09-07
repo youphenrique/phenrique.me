@@ -47,7 +47,7 @@ const isPortuguese = Astro.currentLocale === "pt";
     >
       {Astro.props.title}
     </h1>
-    <Markdown body={Astro.props.body} class={"prose-ui antialiased " + css({ mt: 10, maxW: "xl" })} />
+    <Markdown body={Astro.props.body} class={"prose " + css({ mt: 10, maxW: "xl" })} />
     <div class={hstack({ gap: { base: 6, lg: 4 }, mt: 12 })}>
       {
         socialLinks.map((item) => (

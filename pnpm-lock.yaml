@@ -37,9 +37,6 @@ importers:
       '@comark/react':
         specifier: ^0.6.2
         version: 0.6.2(react@19.2.8)(shiki@4.4.3)
-      '@prose-ui/style':
-        specifier: ^2.0.8
-        version: 2.0.8
       '@types/react':
         specifier: ^19.2.18
         version: 19.2.18
@@ -1217,9 +1214,6 @@ packages:
   '@pkgr/core@0.3.6':
     resolution: {integrity: sha512-SEeaJLb3qBNF/OaXnaR1NmmBbFYk1zC0ZH/52fATcRPLFg/p791YrcyFFy44Bo9sLaGuSuLp5Q6axbb/O+v/RA==}
     engines: {node: ^14.18.0 || >=16.0.0}
-
-  '@prose-ui/style@2.0.8':
-    resolution: {integrity: sha512-00vUCTo1v47yF5ANaO4I+4dPLwlV97ePtvlpe9FfkfCvPcIHyIt3/0rSRPpPve5ma+2X7G7FD6i8CYvPYVV/5w==}
 
   '@rolldown/binding-android-arm-eabi@1.2.6':
     resolution: {integrity: sha512-b+jTcARdTiFLI6jB4a5XjTm0RWd6KcRfQj/I2356fxUZemiho9zQLxo0RtCuMDAyKcLo6cEltkgbQp6d1+sjjQ==}
@@ -5309,8 +5303,6 @@ snapshots:
   '@pandacss/types@1.12.0': {}
 
   '@pkgr/core@0.3.6': {}
-
-  '@prose-ui/style@2.0.8': {}
 
   '@rolldown/binding-android-arm-eabi@1.2.6':
     optional: true

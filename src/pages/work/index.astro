@@ -28,7 +28,7 @@ const work = (await getCollection("work")).sort(
               </div>
               <div class={css({ fontSize: "sm", opacity: 0.75 })}>{entry.data.role}</div>
               <article>
-                <Markdown body={entry.body} class="prose-ui antialiased" />
+                <Markdown body={entry.body} class="prose" />
               </article>
             </li>
           ))
