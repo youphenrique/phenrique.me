@@ -30,6 +30,8 @@ const writing = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    slug: z.string(),
+    locale: z.enum(["en", "pt"]),
     date: z.coerce.date(),
     draft: z.boolean().optional(),
   }),

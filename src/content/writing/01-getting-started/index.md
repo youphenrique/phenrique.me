@@ -1,73 +1,57 @@
 ---
-title: "Getting started"
-description: "Hit the ground running."
-date: "Mar 22 2024"
+title: "Interfaces are arguments"
+description: "Why frontend work is less about decoration than helping people form accurate mental models."
+slug: "interfaces-are-arguments"
+locale: "en"
+date: "2026-08-28"
 ---
 
-The basic configuration of Nano is pretty simple.
+I used to think frontend work began after the real engineering was finished. The API had to work; the data model had to survive contact with reality; the interface merely needed to make those things available.
 
-Edit `src/consts.ts`
+That account is comforting and wrong. An interface does not simply *show* a system. It proposes a way to understand it. Its labels, defaults, empty states, errors, and sequence of actions make an argument about what matters and what a person should do next.
 
-Customize the base site
+## The model a person carries
 
-```ts
-// src/consts.ts
+When I build a product, I try to ask a question before I ask which component to use: **what model of this system should someone leave with?**
 
-export const SITE: Site = {
-  NAME: "Astro Nano",
-  EMAIL: "markhorn.dev@gmail.com",
-  NUM_POSTS_ON_HOMEPAGE: 3,
-  NUM_WORKS_ON_HOMEPAGE: 2,
-  NUM_PROJECTS_ON_HOMEPAGE: 3,
-};
+That question has practical consequences. A good interface makes the important state visible, uses language that belongs to the person using it, and gives feedback soon enough to preserve confidence. A beautiful screen that obscures the next step is still a poor argument.
+
+> Craft in user interfaces is a form of care. It says: I considered the context in which you are arriving, and I did not make you carry unnecessary uncertainty.
+
+## Start with the state, not the screen
+
+On a recent feature, the tempting first move was to sketch a rich dashboard. The better move was to name the states the person would actually encounter:
+
+- loading, when the system has not yet earned trust;
+- empty, when there is nothing to act on;
+- ready, when the main task should be obvious;
+- interrupted, when recovery matters more than polish.
+
+The implementation became smaller once those states were explicit:
+
+```ts [save-profile.ts]
+type SaveResult = { ok: true } | { ok: false; reason: "offline" | "invalid" };
+
+export function messageFor(result: SaveResult) {
+  if (result.ok) return "Your changes are saved.";
+  if (result.reason === "offline") return "You’re offline. We’ll retry when you reconnect.";
+  return "Please review the highlighted fields.";
+}
 ```
 
-| Field        | Req | Description                                          |
-| :----------- | :-- | :--------------------------------------------------- |
-| NAME         | Yes | Displayed in header and footer. Used in SEO and RSS. |
-| EMAIL        | Yes | Displayed in contact section.                        |
-| NUM_POSTS    | Yes | Limit num of posts on home page.                     |
-| NUM_WORKS    | Yes | Limit num of works on home page.                     |
-| NUM_PROJECTS | Yes | Limit num of projects on home page.                  |
+Notice what the code refuses to do: it does not collapse every failure into “Something went wrong.” Specificity is not a luxury. It is how software helps a person make a competent next move.
 
-Customize your page metadata
+## A small review rubric
 
-```ts
-// src/consts.ts
+Before I call an interface finished, I look for evidence of these things:
 
-export const HOME: Metadata = {
-  TITLE: "Home",
-  DESCRIPTION: "Astro Nano is a minimal and lightweight blog and portfolio.",
-};
-```
+| Question | What I am looking for |
+| :-- | :-- |
+| Is the purpose clear? | A first-time visitor can say what this page is for. |
+| Is the state honest? | The UI does not imply success, freshness, or permission it does not have. |
+| Is the next action proportionate? | The most likely task is easier than the exceptional one. |
+| Is recovery possible? | Errors explain what happened and preserve useful work. |
 
-| Field       | Req | Description                                    |
-| :---------- | :-- | :--------------------------------------------- |
-| TITLE       | Yes | Displayed in browser tab. Used in SEO and RSS. |
-| DESCRIPTION | Yes | Used in SEO and RSS.                           |
+The details matter: the [Web Content Accessibility Guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/) are not a final compliance pass, but part of the discipline of making meaning available to more people.
 
-Customize your social media
-
-```ts
-// src/consts.ts
-
-export const SOCIALS: Socials = [
-  {
-    NAME: "twitter-x",
-    HREF: "https://twitter.com/markhorn_dev",
-  },
-  {
-    NAME: "github",
-    HREF: "https://github.com/markhorn-dev",
-  },
-  {
-    NAME: "linkedin",
-    HREF: "https://www.linkedin.com/in/markhorn-dev",
-  },
-];
-```
-
-| Field | Req | Description                             |
-| :---- | :-- | :-------------------------------------- |
-| NAME  | Yes | Displayed in contact section as a link. |
-| HREF  | Yes | External url to social media profile.   |
+Good frontend engineering joins systems thinking with editorial judgment. The screen is where the system makes a promise. Our job is to make that promise intelligible—and, as far as we can, true.

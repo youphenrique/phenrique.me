@@ -83,13 +83,19 @@ export function isInternalHref(href: string): boolean {
 /**
  * Resolves the mark for a destination, or `null` when the host is not curated.
  *
- * Root-relative and fragment links resolve to the site mark; `mailto:` to the
- * envelope; everything else is looked up by hostname.
+ * Root-relative links resolve to the site mark and `mailto:` to the envelope;
+ * everything else is looked up by hostname.
+ *
+ * A pure fragment gets nothing. It does not travel anywhere — it is a footnote
+ * reference, its back-link, or a jump within the page — and a destination mark
+ * on a link that never leaves the page is noise, twice over in a footnote list
+ * where every row would carry one.
  */
 export function iconForHref(href: string | undefined): LinkIcon | null {
   if (!href) return null;
+  if (href.startsWith("#")) return null;
   if (href.startsWith("mailto:")) return email;
-  if (href.startsWith("/") || href.startsWith("#")) return site;
+  if (href.startsWith("/")) return site;
 
   let hostname: string;
   try {

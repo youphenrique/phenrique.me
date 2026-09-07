@@ -1,0 +1,66 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import MainLayout from "../../layouts/main-layout.astro";
+import Container from "../../ui/common/container.astro";
+import FormattedDate from "../../ui/common/formatted-date.astro";
+import BackToPrev from "../../ui/common/back-to-prev.astro";
+import Markdown from "../../ui/common/markdown.astro";
+import { readingTimeMinutes } from "../../utils/helpers.ts";
+import { css } from "../../../styled-system/css";
+import type { WritingDictionary } from "../../i18n/writing/types.ts";
+
+interface Props {
+  post: CollectionEntry<"writing">;
+  /** Href of the article index this post belongs to. */
+  indexHref: string;
+  dict: WritingDictionary;
+}
+
+const { post, indexHref, dict } = Astro.props;
+const locale = post.data.locale;
+---
+
+<MainLayout title={post.data.title} description={post.data.description} lang={locale}>
+  {/*
+    Wider than the site default so the article's `wide` grid track — figures,
+    tables, code — has somewhere to go. The prose column inside stays at
+    `--prose-measure`, and the header below is pinned to the same measure with
+    `prose-column` so the title lines up with the text it introduces.
+  */}
+  <Container styles={css.raw({ py: { base: 24, sm: 32 }, maxWidth: { base: "full", sm: "2xl", lg: "4xl" } })}>
+    <div class={`animate ${css({ maxWidth: "var(--prose-measure)", marginInline: "auto" })}`}>
+      <BackToPrev href={indexHref}>{dict["back-to-index"]}</BackToPrev>
+    </div>
+    <div class={`prose-column ${css({ "& > * + *": { mt: 2 }, my: 10 })}`}>
+      <div class={`animate ${css({ display: "flex", alignItems: "center", gap: 1.5, color: "text.muted" })}`}>
+        <div class={css({ fontSize: "sm" })}>
+          <FormattedDate date={post.data.date} />
+        </div>
+        &bull;
+        <div class={css({ fontSize: "sm" })}>
+          {readingTimeMinutes(post.body ?? "")}&nbsp;{dict["reading-time"]}
+        </div>
+      </div>
+      {/*
+        `3xl` rather than `2xl`: the `.prose` scale tops out at 1.5rem for a body
+        `#`, and a title the article can outrank is not a title.
+      */}
+      <h1
+        class={`animate fraunces-font ${css({
+          fontSize: "3xl",
+          fontWeight: "semibold",
+          lineHeight: "1.2",
+          letterSpacing: "-0.015em",
+          textWrap: "balance",
+          color: "text.primary",
+        })}`}
+      >
+        {post.data.title}
+      </h1>
+    </div>
+    <article>
+      <Markdown body={post.body} class="prose prose-longform" locale={locale} />
+    </article>
+  </Container>
+</MainLayout>

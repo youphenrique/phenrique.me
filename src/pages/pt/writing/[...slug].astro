@@ -1,0 +1,16 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+
+import PostView from "../../../views/writing/post.astro";
+import { publishedPosts } from "../../../utils/content";
+import dict from "../../../i18n/writing/pt";
+
+export async function getStaticPaths() {
+  const posts = publishedPosts(await getCollection("writing"), "pt");
+  return posts.map((post) => ({ params: { slug: post.data.slug }, props: post }));
+}
+
+type Props = CollectionEntry<"writing">;
+---
+
+<PostView post={Astro.props} indexHref="/pt/writing" dict={dict} />

@@ -30,7 +30,12 @@ body {
   font-family: GeistSans, sans-serif;
 }
 
-@layer reset, base, tokens, recipes, utilities;
+/* `prose` sits below Panda's own layers on purpose: the long-form rules below
+   are element defaults for rendered Markdown, and a component that opts into a
+   different treatment does so with `css()`, whose output lands in `recipes` /
+   `utilities`. Left unlayered, these defaults would outrank every one of those
+   calls regardless of specificity. */
+@layer reset, base, tokens, prose, recipes, utilities;
 
 .sr-only {
   border: 0;
@@ -50,185 +55,438 @@ body {
   white-space: nowrap;
 }
 
-/* ---------------------------------------------------------------------------
-   Long-form content
-   ---------------------------------------------------------------------------
-   Element styles for rendered Markdown, applied by putting `.prose` on the
-   container (see `src/ui/common/markdown.astro`). This replaced `@prose-ui/style`,
-   which was adopted when the site ran on Next.js and MDX: roughly half of that
-   stylesheet styled its own React components (`.callout`, `.steps`, `.cards`,
-   `.tabs`, `.code-group`), and Comark emits none of them — only ten of its 222
-   rules ever matched a page here.
+@layer prose {
+  /* ---------------------------------------------------------------------------
+     Long-form content
+     ---------------------------------------------------------------------------
+     Element styles for rendered Markdown, applied by putting `.prose` on the
+     container (see `src/ui/common/markdown.astro`). This replaced `@prose-ui/style`,
+     which was adopted when the site ran on Next.js and MDX: roughly half of that
+     stylesheet styled its own React components (`.callout`, `.steps`, `.cards`,
+     `.tabs`, `.code-group`), and Comark emits none of them — only ten of its 222
+     rules ever matched a page here.
 
-   The metrics below are carried over from it deliberately, so the vertical
-   rhythm did not shift in the swap. What did change is colour: every value is
-   now a semantic token, where prose-ui fell back to neutral greys
-   (`oklch(0.97 0 0)` behind inline code, `oklch(0.5 0 0)` for table headers)
-   that read cool against this warm palette. See docs/design-system.md. */
+     Two layers live here. `.prose` is typography: what a paragraph, a heading or
+     a table cell looks like, anywhere rendered Markdown appears. `.prose-longform`
+     adds the reading column — the measure, and the grid that lets a figure or a
+     code block step outside it. Short prose (the home and about intros, a work
+     entry) takes the first and not the second.
 
-.prose {
-  font-size: 1rem;
-  line-height: 1.75;
-  letter-spacing: 0.0175em;
-  color: var(--colors-text-secondary);
-}
+     Rhythm is expressed as top margins only, never bottom. Margins do not collapse
+     between grid items, so the usual top-and-bottom pattern would silently double
+     every gap the moment `.prose-longform` turns the container into a grid. One
+     direction behaves identically in both.
 
-.prose :is(h1, h2, h3, h4, h5, h6) {
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  color: var(--colors-text-primary);
-  font-weight: 600;
-  text-wrap: balance;
-}
+     Colour is entirely semantic tokens; prose-ui fell back to neutral greys
+     (`oklch(0.97 0 0)` behind inline code, `oklch(0.5 0 0)` for table headers)
+     that read cool against this warm palette. See docs/design-system.md. */
 
-.prose h1 {
-  margin-top: 1.5rem;
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-  letter-spacing: -0.035em;
-}
+  :root {
+    /* ~71 characters at the body size — the comfortable range for continuous
+       reading is 60–75. The full container width stays available to figures,
+       tables and code through the `wide` grid track below. */
+    --prose-measure: 36rem;
+  }
 
-.prose h2 {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  letter-spacing: -0.028em;
-}
+  .prose {
+    font-size: 1rem;
+    line-height: 1.7;
+    letter-spacing: 0.0175em;
+    color: var(--colors-text-secondary);
+  }
 
-.prose h3 {
-  font-size: 1.09375rem;
-  line-height: 1.5rem;
-  letter-spacing: -0.03em;
-}
+  /* --- The reading column ---------------------------------------------------
+     A three-track grid: everything lands on `text` by default, and the handful of
+     blocks that earn more room opt into `wide` by carrying `data-prose-track`.
+     Placement is decided here rather than per component so that the set of blocks
+     allowed to leave the measure is readable in one place, and so a component
+     stays a description of what a callout *is* rather than where it sits. */
 
-.prose h4 {
-  font-size: 0.9375rem;
-  line-height: 1.5rem;
-  letter-spacing: -0.016em;
-}
+  .prose-longform {
+    display: grid;
+    grid-template-columns:
+      [wide-start] minmax(0, 1fr)
+      [text-start] min(100%, var(--prose-measure)) [text-end]
+      minmax(0, 1fr) [wide-end];
+  }
 
-.prose h5 {
-  font-size: 0.90625rem;
-  line-height: 1.25rem;
-  letter-spacing: -0.016em;
-}
+  .prose-longform > * {
+    grid-column: text;
+  }
 
-.prose h6 {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  letter-spacing: -0.017em;
-  font-weight: 500;
-}
+  .prose-longform > [data-prose-track="wide"] {
+    grid-column: wide;
+  }
 
-/* A heading and the block it introduces are one cluster: close the gap that
-   the following block would otherwise open above itself. */
-.prose :is(h1, h2, h3, h4, h5, h6) + :is(p, ul, ol, blockquote, table, pre) {
-  margin-top: 0.5rem;
-}
+  /* Aligns page furniture outside `.prose` — a post's date, title and back link —
+     to the same measure as the prose beneath it. */
+  .prose-column {
+    max-width: var(--prose-measure);
+    margin-inline: auto;
+  }
 
-.prose p {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  line-height: 1.5;
-}
+  /* --- Rhythm --------------------------------------------------------------- */
 
-.prose :is(ul, ol) {
-  margin-bottom: 0.5rem;
-  padding-left: 2rem;
-  list-style-position: outside;
-}
+  .prose :is(p, ul, ol, blockquote, figure, aside, hr, [data-prose-panel], [data-prose-block]) {
+    margin-top: 1.15em;
+    margin-bottom: 0;
+  }
 
-.prose ul {
-  margin-top: 0.5rem;
-  list-style-type: disc;
-}
+  .prose :is(h1, h2, h3, h4, h5, h6) {
+    margin-bottom: 0;
+    color: var(--colors-text-primary);
+    /* Fraunces, matching the page titles and the site's display voice. The
+       variation settings are the same pair `.fraunces-font` sets, repeated here
+       because rendered Markdown cannot carry a class on its own headings. */
+    font-family: "Fraunces", serif;
+    font-optical-sizing: auto;
+    font-variation-settings:
+      "SOFT" 50,
+      "WONK" 1;
+    font-weight: 600;
+    text-wrap: balance;
+  }
 
-.prose ol {
-  margin-top: 1rem;
-  list-style-type: decimal;
-}
+  .prose :is(h1, h2) {
+    margin-top: 2.25rem;
+  }
 
-.prose li {
-  margin-bottom: 0.25rem;
-  padding-left: 0.25rem;
-}
+  .prose h3 {
+    margin-top: 1.85rem;
+  }
 
-.prose a {
-  color: var(--colors-text-accent);
-  text-decoration: underline;
-  text-decoration-color: var(--colors-border-underline);
-  text-underline-offset: 2px;
-  transition:
-    color 0.15s ease-in-out,
-    text-decoration-color 0.15s ease-in-out;
-}
+  .prose :is(h4, h5, h6) {
+    margin-top: 1.6rem;
+  }
 
-.prose a:hover {
-  color: var(--colors-accent-hover);
-  text-decoration-color: var(--colors-accent-hover);
-}
+  /* A heading and the block it introduces are one cluster — but a heading
+     following another heading is a subdivision, not a cluster, and keeps the
+     space its own level asks for. */
+  .prose :is(h1, h2, h3, h4, h5, h6) + :not(h1, h2, h3, h4, h5, h6) {
+    margin-top: 0.6em;
+  }
 
-/* Inline code only — a fenced block is a `pre > code`, which keeps the bare
-   monospace treatment its Shiki colours are painted onto. */
-.prose :is(p, li, td, th, blockquote) code {
-  padding: 2px 4px;
-  border-radius: 4px;
-  background-color: var(--colors-bg-raised);
-  font-size: 0.875rem;
-}
+  /* Panels — code blocks, tables, figures — are objects the prose refers to
+     rather than sentences in it, so they sit in more air than a paragraph gets.
+     The space is claimed on both sides: the panel's own top margin, and the top
+     margin of whatever follows it.
 
-.prose code {
-  font-family: GeistMono, ui-monospace, monospace;
-}
+     Marked with `data-prose-panel`, deliberately separate from
+     `data-prose-track`. Keying rhythm on the placement attribute meant a block
+     silently lost its spacing the moment it stopped breaking out of the
+     measure. Placement and rhythm are independent decisions. */
+  .prose [data-prose-panel],
+  .prose [data-prose-panel] + * {
+    margin-top: 2em;
+  }
 
-.prose pre {
-  /* Long lines scroll inside the block rather than widening the page. */
-  overflow-x: auto;
-  font-size: 0.875rem;
-  line-height: 1.5;
-}
+  /* A panel introduced by a heading is still part of that cluster. */
+  .prose :is(h1, h2, h3, h4, h5, h6) + [data-prose-panel] {
+    margin-top: 1em;
+  }
 
-.prose blockquote {
-  margin: 1rem 0;
-  padding-left: 1rem;
-  border-left: 2px solid var(--colors-border-default);
-  color: var(--colors-text-muted);
-}
+  /* Nothing opens a container with a gap above it. */
+  .prose > :first-child,
+  .prose :is(li, blockquote, aside, figure, figcaption, td, th, [data-prose-block]) > :first-child {
+    margin-top: 0;
+  }
 
-.prose table {
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  border-collapse: collapse;
-}
+  /* --- Headings -------------------------------------------------------------
+     The scale is anchored below the page's own post title (`3xl`, 1.875rem), so a
+     body `#` cannot outrank the thing it sits under. */
 
-.prose :is(th, td) {
-  padding: 12px 8px;
-  border-bottom: 1px solid var(--colors-border-hairline);
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
+  .prose h1 {
+    font-size: 1.5rem;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+  }
 
-.prose th {
-  color: var(--colors-text-muted);
-  font-weight: 600;
-}
+  .prose h2 {
+    font-size: 1.3125rem;
+    line-height: 1.3;
+    letter-spacing: -0.012em;
+  }
 
-/* Cell contents are laid out by the cell, not by their own block margins. */
-.prose :is(th, td) > * {
-  margin-bottom: 0;
-}
+  .prose h3 {
+    font-size: 1.125rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
 
-.prose hr {
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  border: 0;
-  border-top: 1px solid var(--colors-border-hairline);
-}
+  .prose h4 {
+    font-size: 1rem;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+  }
 
-.prose img {
-  display: inline-block;
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
+  .prose h5 {
+    font-size: 0.9375rem;
+    line-height: 1.4;
+  }
+
+  .prose h6 {
+    font-size: 0.875rem;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--colors-text-muted);
+  }
+
+  /* --- Lists ---------------------------------------------------------------- */
+
+  .prose :is(ul, ol) {
+    padding-left: 1.5em;
+    list-style-position: outside;
+  }
+
+  .prose ul {
+    list-style-type: disc;
+  }
+
+  .prose ol {
+    list-style-type: decimal;
+  }
+
+  .prose li {
+    padding-left: 0.25em;
+  }
+
+  .prose li + li {
+    margin-top: 0.4em;
+  }
+
+  /* A nested list belongs to the item above it, not to the flow. */
+  .prose li > :is(ul, ol) {
+    margin-top: 0.4em;
+  }
+
+  .prose ul ul {
+    list-style-type: circle;
+  }
+
+  .prose ul ul ul {
+    list-style-type: square;
+  }
+
+  .prose li::marker {
+    color: var(--colors-text-faint);
+  }
+
+  /* Task lists. Comark's task-list plugin emits a real checkbox inside the item,
+     so the list marker has to go — left in place, every line carried a bullet and
+     a box. The row is a flex line to put the control on the first text baseline
+     rather than centred against a wrapped paragraph. */
+
+  .prose ul.contains-task-list {
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .prose li.task-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6em;
+    padding-left: 0;
+  }
+
+  .prose li.task-list-item::marker {
+    content: none;
+  }
+
+  .prose input.task-list-item-checkbox {
+    flex-shrink: 0;
+    width: 0.95em;
+    height: 0.95em;
+    /* Sits the box on the text's optical centre rather than its box centre. */
+    margin-top: 0.34em;
+    accent-color: var(--colors-accent-default);
+  }
+
+  /* --- Inline --------------------------------------------------------------- */
+
+  .prose a {
+    color: var(--colors-text-accent);
+    text-decoration: underline;
+    text-decoration-color: var(--colors-border-underline);
+    text-underline-offset: 2px;
+    transition:
+      color 0.15s ease-in-out,
+      text-decoration-color 0.15s ease-in-out;
+  }
+
+  .prose a:hover {
+    color: var(--colors-accent-hover);
+    text-decoration-color: var(--colors-accent-hover);
+  }
+
+  .prose strong {
+    font-weight: 600;
+    color: var(--colors-text-primary);
+  }
+
+  .prose del {
+    text-decoration-color: var(--colors-text-faint);
+  }
+
+  .prose mark {
+    padding: 0 0.15em;
+    border-radius: 2px;
+    background-color: var(--colors-tint-ochre-surface);
+    color: var(--colors-text-primary);
+  }
+
+  .prose kbd {
+    padding: 0.15em 0.4em;
+    border: 1px solid var(--colors-border-default);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    background-color: var(--colors-bg-raised);
+    color: var(--colors-text-primary);
+    font-family: GeistMono, ui-monospace, monospace;
+    font-size: 0.8125rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .prose abbr[title] {
+    text-decoration: underline dotted;
+    text-underline-offset: 2px;
+    cursor: help;
+  }
+
+  /* Inline code only — a fenced block is a `pre > code`, which keeps the bare
+     monospace treatment its Shiki colours are painted onto. */
+  .prose :is(p, li, td, th, blockquote, h1, h2, h3, h4, h5, h6, figcaption) code {
+    padding: 2px 4px;
+    border-radius: 4px;
+    background-color: var(--colors-bg-raised);
+    font-size: 0.875em;
+    /* A long identifier should break rather than push the column open. */
+    overflow-wrap: break-word;
+  }
+
+  .prose code {
+    font-family: GeistMono, ui-monospace, monospace;
+  }
+
+  .prose pre {
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  /* --- Blocks --------------------------------------------------------------- */
+
+  .prose blockquote {
+    padding-left: 1em;
+    border-left: 2px solid var(--colors-border-default);
+    color: var(--colors-text-muted);
+    font-style: italic;
+  }
+
+  .prose blockquote cite {
+    display: block;
+    margin-top: 0.6em;
+    font-size: 0.8125rem;
+    font-style: normal;
+    color: var(--colors-text-faint);
+  }
+
+  .prose :is(th, td) {
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--colors-border-hairline);
+    font-size: 0.875rem;
+    line-height: 1.45;
+    text-align: left;
+  }
+
+  .prose th {
+    color: var(--colors-text-muted);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .prose hr {
+    margin-top: 2.5em;
+    border: 0;
+    border-top: 1px solid var(--colors-border-hairline);
+  }
+
+  .prose img {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  .prose figcaption {
+    color: var(--colors-text-muted);
+  }
+
+  /* --- Footnotes ------------------------------------------------------------
+     Apparatus, not a section: the plugin emits an `h2`, but a numbered list of
+     sources should not compete with the argument's own headings, so it is set as
+     a small label instead. */
+
+  .prose sup.footnote-ref {
+    font-size: 0.7rem;
+    line-height: 0;
+  }
+
+  .prose sup.footnote-ref a {
+    padding: 0 0.1em;
+    color: var(--colors-text-accent);
+    text-decoration: none;
+  }
+
+  .prose sup.footnote-ref a:hover {
+    text-decoration: underline;
+  }
+
+  .prose section.footnotes {
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--colors-border-hairline);
+    font-size: 0.875rem;
+    color: var(--colors-text-muted);
+  }
+
+  .prose section.footnotes h2 {
+    margin-top: 0;
+    /* Apparatus, not display: this label stays in the interface face. */
+    font-family: inherit;
+    font-variation-settings: normal;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--colors-text-faint);
+  }
+
+  .prose ol.footnotes-list {
+    margin-top: 0.75em;
+    padding-left: 1.25em;
+  }
+
+  .prose ol.footnotes-list > li {
+    scroll-margin-top: 5rem;
+  }
+
+  /* Marks the note the reader was just sent to, so a jump into a long list lands
+     somewhere legible. */
+  .prose ol.footnotes-list > li:target {
+    background-color: var(--colors-bg-hover);
+    border-radius: 4px;
+  }
+
+  .prose a.footnote-backref {
+    margin-left: 0.35em;
+    color: var(--colors-text-faint);
+    text-decoration: none;
+  }
+
+  .prose a.footnote-backref:hover {
+    color: var(--colors-text-accent);
+  }
 }
 
 /* Comark's Shiki plugin tokenises each block once and emits both themes: the

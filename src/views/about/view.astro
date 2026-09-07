@@ -12,18 +12,33 @@ interface Props {
 }
 ---
 
-<MainLayout title="Home" description="Paulo Henrique's personal website" lang={Astro.currentLocale!}>
-  <Container styles={css.raw({ py: { base: 32, sm: 44, "2xl": 52 } })}>
+<MainLayout title="Home" description="Paulo Henrique's personal website" lang={Astro.currentLocale ?? "en"}>
+  {/*
+    Wider than the site default so the article's `wide` track has somewhere to
+    go; the prose column inside stays at `--prose-measure`, centred, and the
+    title is pinned to the same measure so the two share an axis. Previously the
+    body sat at `maxW: xl` with no `mx: auto`, which left it flush against the
+    left edge under a centred title.
+  */}
+  <Container styles={css.raw({ py: { base: 32, sm: 40 }, maxWidth: { base: "full", sm: "2xl", lg: "4xl" } })}>
+    {/*
+      Centred over the text column but not pinned to it: at `5xl` the reading
+      measure forces a three-line stack that breaks mid-phrase. Display type can
+      run wider than the prose it introduces.
+    */}
     <h1
       class={"fraunces-font " + css({
+        maxWidth: "42rem",
+        marginInline: "auto",
         fontSize: { base: "4xl", md: "5xl" },
         color: "text.primary",
         textAlign: "center",
+        textWrap: "balance",
         lineHeight: "1.1",
       })}
     >
       {Astro.props.title}
     </h1>
-    <Markdown body={Astro.props.body} class={"prose " + css({ mt: 10, maxW: "xl" })} />
+    <Markdown body={Astro.props.body} class={"prose prose-longform " + css({ mt: 10 })} />
   </Container>
 </MainLayout>

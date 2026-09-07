@@ -356,11 +356,118 @@ emerald, which put a second, unrelated accent in the middle of every article.
 This layer replaced `@prose-ui/style`, adopted when the site ran on Next.js and
 MDX. Roughly half of that stylesheet styled its own React components
 (`.callout`, `.steps`, `.cards`, `.tabs`, `.code-group`); Comark emits none of
-them, and only ten of its 222 rules ever matched a page. Its metrics were
-carried over verbatim so the vertical rhythm did not shift, but its colours were
-not: unbound properties fell back to neutral greys — `oklch(0.97 0 0)` behind
-inline code, `oklch(0.5 0 0)` for table headers — which read cool against this
-warm palette and were invisible to the system.
+them, and only ten of its 222 rules ever matched a page. Its colours were not
+carried over: unbound properties fell back to neutral greys — `oklch(0.97 0 0)`
+behind inline code, `oklch(0.5 0 0)` for table headers — which read cool against
+this warm palette and were invisible to the system.
+
+`.prose` lives in its own cascade layer, declared *before* Panda's:
+
+```css
+@layer reset, base, tokens, prose, recipes, utilities;
+```
+
+That ordering is what lets a component override a prose default with `css()`.
+Left unlayered, these element rules would beat every Panda class regardless of
+specificity — `.prose blockquote { font-style: italic }` would win over an
+explicit `fontStyle: "normal"` on the element itself.
+
+Headings in prose are set in **Fraunces**, matching the page titles and the
+site's display voice; body text stays in Geist. The variation settings
+(`SOFT 50`, `WONK 1`) are repeated in the prose layer because rendered Markdown
+cannot carry `.fraunces-font` on its own headings. Tracking is roughly half the
+negative value the Geist-tuned scale used — a serif with this much modulation
+closes up quickly. The footnote label is explicitly exempt: it is apparatus, not
+display, so it stays in the interface face.
+
+### The reading column
+
+`.prose` is typography; `.prose-longform` adds the column, and article pages
+apply both. It is a three-track grid — everything lands on `text`, and a block
+carrying `data-prose-track="wide"` spans the full article width instead:
+
+| Track | Width | Holds |
+| :-- | :-- | :-- |
+| `text` | `--prose-measure`, 36rem (~71 characters) | Everything, including code blocks |
+| `wide` | The container, ~53rem | Tables and `::figure` |
+
+Code blocks stay on the measure deliberately: a sample that lines up with the
+prose around it reads as part of the argument, and a long line scrolls inside
+its own box. Tables and figures take the extra width because it buys them
+something — columns that would otherwise wrap, and an image that would
+otherwise be smaller than the thing it illustrates.
+
+The measure is set at 36rem because continuous reading is comfortable between
+60 and 75 characters; the previous single-column layout ran to 89. Page
+furniture outside `.prose` — a post's date and title — aligns to the same
+measure with the `prose-column` class.
+
+Rhythm is expressed as **top margins only, never bottom**. Margins do not
+collapse between grid items, so the usual top-and-bottom pattern would silently
+double every gap the moment the container became a grid.
+
+Panels — code blocks, tables and figures — carry `data-prose-panel` and sit in
+more air than a paragraph does, claimed on both sides:
+
+| Between | Gap |
+| :-- | --: |
+| Paragraph and paragraph | 1.15em |
+| Paragraph and panel, either direction | 2em |
+| Heading and the panel it introduces | 1em |
+
+`data-prose-panel` is deliberately separate from `data-prose-track`. They were
+briefly the same attribute, and the moment code blocks stopped breaking out of
+the measure they silently lost all their spacing — placement and rhythm are
+independent decisions and need independent hooks.
+
+### Components in content
+
+Markdown may invoke components with Comark's `::name` syntax. Each is registered
+in `src/ui/common/_components/prose/index.tsx` and listed in `tags.ts`; the
+parser validates every document against that list, so `::calout` fails the build
+rather than shipping as an unstyled inline element — which is what an
+unregistered tag silently renders as.
+
+| Component | For | Notes |
+| :-- | :-- | :-- |
+| `::callout{type}` | A remark that interrupts the argument | `note` (sky), `warning` (ochre), `insight` (sage); `title` overrides the label |
+| `::aside` | Marginalia the argument could lose | Text column today; the shape a right-hand sidenote will take |
+| `::scripture{source href}` | A text the argument answers to | Display serif and a citation; use `>` blockquote for a voice *inside* the argument |
+| `::figure{src alt caption}` | An image outside the measure | `layout="wide"` by default |
+
+Two authoring constraints worth knowing. Attribute values are plain text, not
+Markdown — `source="Augustine, *Confessions* I.1"` renders the asterisks. And
+Comark bypasses Astro's asset pipeline, so a `::figure` `src` is not processed:
+point it under `public/` and give `width` and `height` so the box is reserved.
+
+A bare `![alt](src)` is parsed inside a paragraph and therefore cannot leave the
+text column. `::figure` is the only way to place an image in the `wide` track.
+
+### Footnotes
+
+`comark/plugins/footnotes` collects `[^ref]` markers into a labelled section at
+the end of the document. Three things about it are worth remembering.
+
+It copies a definition's source in as raw text, so `src/utils/comark.ts`
+re-parses each body to restore emphasis, code and links. It captures only a
+definition's *first* block, so an indented continuation paragraph is dropped —
+footnotes are deliberately one block long.
+
+And it has two silent failure modes, both of which now fail the build instead:
+
+| Written | What the plugin does | Fix |
+| :-- | :-- | :-- |
+| `[^a][^b]` | Drops the first marker *and* its definition | Separate them: `[^a]<sup>,&nbsp;</sup>[^b]` |
+| `[^x]` with no `[^x]:` | Strips the brackets, leaves stray `^x` text | Add the definition, or remove the reference |
+
+Both were found by writing them, not by reading the plugin. `assertFootnotesResolved`
+skips code, so a character class like `[^abc]` in a regex passes through.
+
+The two fixture posts under `src/content/writing/` — `98-markdown-kitchen-sink`
+and `99-component-gallery` — exercise every construct and every component on one
+page each. They are drafts, so they render under `npm run dev` and are excluded
+from the production build, the sitemap and the feed. Judge changes to this layer
+against them rather than against whichever constructs a real post happens to use.
 
 Code blocks are tokenised at build time by Comark's Shiki plugin, which emits
 both themes at once: the light colour inline, the dark one as a `--shiki-dark`

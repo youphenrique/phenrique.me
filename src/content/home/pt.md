@@ -8,4 +8,4 @@ Me importo profundamente com o ofício, a qualidade, a excelência e o raciocín
 
 Aqui busco explorar novas ideias, experimentar diferentes técnicas, ensinar a mim mesmo e refletir sobre insights em engenharia de software, ciência da computação, teologia, filosofia e outros temas.
 
-Obrigado por estar aqui. Se quiser saber mais sobre mim, confira a página [sobre](https://phenrique.me/about). Se tiver interesse em se conectar, sinta-se à vontade para entrar em contato em [pauloh1288@gmail.com](mailto:pauloh1288@gmail.com) ou pelas minhas redes sociais.
+Obrigado por estar aqui. Se quiser saber mais sobre mim, confira a página [sobre](https://phenrique.me/about). Se tiver interesse em se conectar, sinta-se à vontade para entrar em contato através do meu [e-mail](mailto:pauloh1288@gmail.com) ou pelas minhas redes sociais.
