@@ -60,7 +60,7 @@ body {
      Long-form content
      ---------------------------------------------------------------------------
      Element styles for rendered Markdown, applied by putting `.prose` on the
-     container (see `src/ui/common/markdown.astro`). This replaced `@prose-ui/style`,
+     container (see `src/ui/components/markdown.astro`). This replaced `@prose-ui/style`,
      which was adopted when the site ran on Next.js and MDX: roughly half of that
      stylesheet styled its own React components (`.callout`, `.steps`, `.cards`,
      `.tabs`, `.code-group`), and Comark emits none of them — only ten of its 222

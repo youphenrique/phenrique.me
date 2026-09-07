@@ -1,5 +1,5 @@
-import { css } from "../../../../styled-system/css";
-import { Sheet, SheetContent, SheetGrabber, SheetHeader, SheetTitle, SheetTrigger } from "./sheet";
+import { css } from "../../../styled-system/css";
+import { Sheet, SheetContent, SheetGrabber, SheetHeader, SheetTitle, SheetTrigger } from "./sheet.tsx";
 
 interface LanguageOption {
   id: string;

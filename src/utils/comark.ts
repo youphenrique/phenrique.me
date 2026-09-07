@@ -5,7 +5,7 @@ import footnotes from "comark/plugins/footnotes";
 import enProse from "../i18n/prose/en";
 import ptProse from "../i18n/prose/pt";
 import type { ProseDictionary } from "../i18n/prose/types";
-import { PROSE_COMPONENT_TAGS } from "../ui/common/_components/prose/tags";
+import { PROSE_COMPONENT_TAGS } from "../ui/components/prose/tags";
 
 /**
  * Shared Comark parse configuration.
@@ -171,7 +171,7 @@ function assertKnownComponents(nodes: Node[]): void {
       throw new Error(
         `[comark] Unknown component "::${tag}" in Markdown content. ` +
           `Registered components are: ${known}. ` +
-          `Register a renderer in src/ui/common/_components/prose/index.tsx, or fix the name.`,
+          `Register a renderer in src/ui/components/prose/index.tsx, or fix the name.`,
       );
     }
 

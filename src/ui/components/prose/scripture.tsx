@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { css, cx } from "../../../../../styled-system/css";
+import { css, cx } from "../../../../styled-system/css";
 
 /**
  * `::scripture{source="Matthew 6:21" href="…"}` — a quotation set apart.

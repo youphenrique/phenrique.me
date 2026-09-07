@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
-import { css } from "../../../../../styled-system/css";
-import type { ProseDictionary } from "../../../../i18n/prose/types";
+import { css } from "../../../../styled-system/css";
+import type { ProseDictionary } from "../../../i18n/prose/types.ts";
 
 /**
  * `::callout{type="note"}` — an aside that interrupts the argument.

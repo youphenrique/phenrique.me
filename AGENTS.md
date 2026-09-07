@@ -6,7 +6,7 @@ Astro Nano is a static, minimalist, and lightweight portfolio and blog theme bui
 
 - **Framework:** [Astro](https://astro.build/) (v7+)
 - **Styling:** [Panda CSS](https://panda-css.com/) (Modern CSS-in-JS/Build-time CSS)
-- **Content:** Astro Content Layer. Markdown is parsed and rendered by [Comark](https://comark.dev/), not Astro's own `render()` — see `src/ui/common/markdown.astro`.
+- **Content:** Astro Content Layer. Markdown is parsed and rendered by [Comark](https://comark.dev/), not Astro's own `render()` — see `src/ui/components/markdown.astro`.
 - **Language:** TypeScript
 - **i18n:** Built-in support for English (default) and Portuguese.
 - **Deployment:** Optimized for Vercel (static output).
@@ -67,7 +67,7 @@ Rules worth knowing before writing styles:
 - **Elevation** lives in `shadows.elevation.*`; from plain CSS use `var(--shadows-elevation-pill)`, which carries both themes.
 - Long-form content: the `.prose` layer in `src/ui/styles/global.css` styles rendered Markdown, entirely in semantic tokens. Change it there, not per-article. It sits in its own cascade layer declared **before** Panda's (`@layer reset, base, tokens, prose, recipes, utilities`) so a component can still override a prose default with `css()`.
 - **The reading column.** `.prose` is typography; `.prose-longform` adds the grid. Text sits on `--prose-measure` (36rem, ~71 characters); a block spans the full article width by carrying `data-prose-track="wide"` — placement lives in `global.css`, not in the components. Only tables and `::figure` break out; code blocks stay on the measure. Prose headings are Fraunces, body is Geist. Vertical rhythm is **top margins only, never bottom**: margins do not collapse between grid items. Panels (code, tables, figures) carry `data-prose-panel` for spacing — never reuse `data-prose-track` for rhythm, since a block that stops breaking out must not lose its gaps.
-- **Components in Markdown.** `::callout`, `::aside`, `::scripture` and `::figure` are registered in `src/ui/common/_components/prose/index.tsx` and listed in `tags.ts`. The parser validates documents against that list, so an unregistered `::name` fails the build instead of rendering as an unstyled inline element. Add a component to both files or not at all.
+- **Components in Markdown.** `::callout`, `::aside`, `::scripture` and `::figure` are registered in `src/ui/components/prose/index.tsx` and listed in `tags.ts`. The parser validates documents against that list, so an unregistered `::name` fails the build instead of rendering as an unstyled inline element. Add a component to both files or not at all.
 - **Fixtures.** `src/content/writing/98-markdown-kitchen-sink` and `99-component-gallery` are drafts that exercise every construct and component. They render in `npm run dev` and are excluded from the production build. Judge any change to the prose layer against them.
 
 ### Content

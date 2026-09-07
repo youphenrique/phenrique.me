@@ -48,7 +48,7 @@ Both live under `theme.extend` so they **merge** with Panda's preset. A bare
 `theme.tokens` would *replace* the preset and silently take `fontSizes`,
 `sizes`, `radii` and the default shadow scale with it.
 
-Dark mode is the `_dark` condition, which Panda compiles to `.dark &`. The class is set on `<html>` by the inline theme script in `src/ui/common/head.astro`.
+Dark mode is the `_dark` condition, which Panda compiles to `.dark &`. The class is set on `<html>` by the inline theme script in `src/ui/components/head.astro`.
 
 ---
 
@@ -332,7 +332,7 @@ var
 ## Long-form content
 
 Rendered Markdown is styled by the `.prose` layer in `src/ui/styles/global.css`,
-applied by `src/ui/common/markdown.astro`. It is a plain element stylesheet —
+applied by `src/ui/components/markdown.astro`. It is a plain element stylesheet —
 headings, paragraphs, lists, links, tables, inline code, rules and images —
 and every value in it is a semantic token:
 
@@ -423,7 +423,7 @@ independent decisions and need independent hooks.
 ### Components in content
 
 Markdown may invoke components with Comark's `::name` syntax. Each is registered
-in `src/ui/common/_components/prose/index.tsx` and listed in `tags.ts`; the
+in `src/ui/components/prose/index.tsx` and listed in `tags.ts`; the
 parser validates every document against that list, so `::calout` fails the build
 rather than shipping as an unstyled inline element — which is what an
 unregistered tag silently renders as.

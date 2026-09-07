@@ -10,17 +10,17 @@ import type { ComponentType } from "react";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ProseComponent = ComponentType<any>;
 
-import IconLink from "../icon-link";
-import CodeBlock from "./code-block";
-import Figure from "./figure";
-import Scripture from "./scripture";
-import { createAside } from "./aside";
-import { createCallout } from "./callout";
-import { createProseTable } from "./prose-table";
-import { PROSE_COMPONENT_TAGS } from "./tags";
-import enProse from "../../../../i18n/prose/en";
-import ptProse from "../../../../i18n/prose/pt";
-import type { ProseDictionary } from "../../../../i18n/prose/types";
+import IconLink from "../icon-link.tsx";
+import CodeBlock from "./code-block.tsx";
+import Figure from "./figure.tsx";
+import Scripture from "./scripture.tsx";
+import { createAside } from "./aside.tsx";
+import { createCallout } from "./callout.tsx";
+import { createProseTable } from "./prose-table.tsx";
+import { PROSE_COMPONENT_TAGS } from "./tags.ts";
+import enProse from "../../../i18n/prose/en.ts";
+import ptProse from "../../../i18n/prose/pt.ts";
+import type { ProseDictionary } from "../../../i18n/prose/types.ts";
 
 /**
  * The renderer map handed to `MarkdownDocument`.

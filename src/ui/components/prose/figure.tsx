@@ -1,4 +1,4 @@
-import { css } from "../../../../../styled-system/css";
+import { css } from "../../../../styled-system/css";
 
 /**
  * `::figure{src="/images/x.webp" alt="…" caption="…"}` — a captioned image.

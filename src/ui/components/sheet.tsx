@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Dialog as SheetPrimitive } from "@base-ui/react/dialog";
 
-import { css, cx } from "../../../../styled-system/css";
+import { css, cx } from "../../../styled-system/css";
 
 // Decelerating curve for sheet presentation: quick to commit, long soft landing.
 // Softer than UIKit's own bezier, which front-loads so much of the distance that

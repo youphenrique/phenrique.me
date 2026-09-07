@@ -1,7 +1,7 @@
 import { Menu as BaseMenu } from "@base-ui/react/menu";
 
-import { css, cx } from "../../../../styled-system/css";
-import { flex, hstack } from "../../../../styled-system/patterns";
+import { css, cx } from "../../../styled-system/css";
+import { flex, hstack } from "../../../styled-system/patterns";
 
 interface LanguageOption {
   id: string;

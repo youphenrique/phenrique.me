@@ -7,7 +7,7 @@ date: "2026-09-06"
 draft: true
 ---
 
-A fixture, like the kitchen sink, but for the components rather than the Markdown. Each section shows what to write and what it renders. Components are registered in `src/ui/common/_components/prose/index.tsx`; the parser validates every document against that registry, so a misspelt `::calout` fails the build rather than shipping as unstyled text.
+A fixture, like the kitchen sink, but for the components rather than the Markdown. Each section shows what to write and what it renders. Components are registered in `src/ui/components/prose/index.tsx`; the parser validates every document against that registry, so a misspelt `::calout` fails the build rather than shipping as unstyled text.
 
 ## Callout
 

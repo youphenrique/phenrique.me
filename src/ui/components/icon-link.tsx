@@ -1,7 +1,7 @@
 import { Children, type ReactNode } from "react";
 
-import { css } from "../../../../styled-system/css";
-import { iconForHref, isInternalHref } from "../../../utils/link-icons";
+import { css } from "../../../styled-system/css";
+import { iconForHref, isInternalHref } from "../../utils/link-icons.ts";
 
 interface Props {
   href?: string;

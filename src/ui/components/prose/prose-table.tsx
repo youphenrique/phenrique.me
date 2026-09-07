@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
-import { css } from "../../../../../styled-system/css";
-import type { ProseDictionary } from "../../../../i18n/prose/types";
+import { css } from "../../../../styled-system/css";
+import type { ProseDictionary } from "../../../i18n/prose/types.ts";
 
 /**
  * The `table` renderer for Comark documents.

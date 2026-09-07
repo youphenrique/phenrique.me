@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { css, cx } from "../../../../../styled-system/css";
+import { css, cx } from "../../../../styled-system/css";
 
 /**
  * The `pre` renderer for Comark documents.
