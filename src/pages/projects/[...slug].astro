@@ -3,7 +3,7 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import MainLayout from "../../layouts/main-layout.astro";
 import Container from "../../ui/common/container.astro";
 import FormattedDate from "../../ui/common/formatted-date.astro";
-import { readingTime } from "../../utils/helpers.ts";
+import { readingTimeMinutes } from "../../utils/helpers.ts";
 import BackToPrev from "../../ui/common/back-to-prev.astro";
 import Markdown from "../../ui/common/markdown.astro";
 import Link from "../../ui/common/link.astro";
@@ -24,29 +24,32 @@ const project = Astro.props;
 ---
 
 <MainLayout title={project.data.title} description={project.data.description}>
-  <Container>
-    <div class="animate">
+  <Container styles={css.raw({ maxWidth: { base: "full", sm: "2xl", lg: "4xl" } })}>
+    <div class={`animate ${css({ maxWidth: "var(--prose-measure)", marginInline: "auto" })}`}>
       <BackToPrev href="/projects"> Back to projects </BackToPrev>
     </div>
-    <div class={css({ "& > * + *": { mt: 1 }, my: 10 })}>
+    <div class={`prose-column ${css({ "& > * + *": { mt: 2 }, my: 10 })}`}>
       <div class={`animate ${css({ display: "flex", alignItems: "center", gap: 1.5 })}`}>
         <div class={css({ fontSize: "sm" })}>
           <FormattedDate date={project.data.date} />
         </div>
         &bull;
         <div class={css({ fontSize: "sm" })}>
-          {readingTime(project.body!)}
+          {readingTimeMinutes(project.body ?? "")}&nbsp;min read
         </div>
       </div>
-      <div
-        class={`animate ${css({
-          fontSize: "2xl",
+      <h1
+        class={`animate fraunces-font ${css({
+          fontSize: "3xl",
           fontWeight: "semibold",
-          color: { base: "black", _dark: "white" },
+          lineHeight: "1.2",
+          letterSpacing: "-0.015em",
+          textWrap: "balance",
+          color: "text.primary",
         })}`}
       >
         {project.data.title}
-      </div>
+      </h1>
       {
         (project.data.demoURL || project.data.repoURL) && (
           <nav class={`animate ${css({ display: "flex", gap: 1 })}`}>
@@ -66,7 +69,7 @@ const project = Astro.props;
       }
     </div>
     <article class="animate">
-      <Markdown body={project.body} class="prose" />
+      <Markdown body={project.body} class="prose prose-longform" />
     </article>
   </Container>
 </MainLayout>

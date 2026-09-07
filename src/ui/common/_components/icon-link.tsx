@@ -6,6 +6,12 @@ import { iconForHref, isInternalHref } from "../../../utils/link-icons";
 interface Props {
   href?: string;
   title?: string;
+  /**
+   * Forwarded because Comark puts classes on links it generates itself — the
+   * footnote back-reference is a `a.footnote-backref`, and dropping the class
+   * silently unstyles it.
+   */
+  className?: string;
   children?: ReactNode;
 }
 
@@ -51,7 +57,7 @@ function splitLeadingWord(children: ReactNode): { lead: string; rest: ReactNode[
  * Colour and underline are left to the `.prose` layer — the glyph paints with
  * `currentColor` and therefore tracks the link's own state, hover included.
  */
-export default function IconLink({ href, title, children }: Props) {
+export default function IconLink({ href, title, className, children }: Props) {
   const icon = iconForHref(href);
   const external = href !== undefined && !isInternalHref(href) && !href.startsWith("mailto:");
 
@@ -60,6 +66,7 @@ export default function IconLink({ href, title, children }: Props) {
   const anchorProps = {
     href,
     title,
+    className,
     ...(external ? { target: "_blank", rel: "noopener noreferrer" } : {}),
   };
 

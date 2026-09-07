@@ -2,7 +2,7 @@
 import { MarkdownDocument } from "@comark/react";
 
 import { parseContent } from "../../utils/comark";
-import IconLink from "./_components/icon-link";
+import { createProseComponents } from "./_components/prose";
 
 interface Props {
   /**
@@ -12,14 +12,22 @@ interface Props {
   body: string | undefined;
   /** Classes for the wrapper element — typically `prose`, the long-form layer. */
   class?: string;
+  /**
+   * Drives copy that the pipeline injects rather than the author writing it:
+   * the footnote heading, the table's accessible name, callout labels. Falls
+   * back to the page's own locale.
+   */
+  locale?: string;
 }
 
-const { body, class: className } = Astro.props;
+const { body, class: className, locale } = Astro.props;
+const resolvedLocale = locale ?? Astro.currentLocale ?? "en";
 
 // Parsed here rather than inside the island: `MarkdownDocument` is synchronous,
 // so there is no Suspense boundary and nothing to hydrate. Deliberately no
 // `client:*` directive — this compiles to static HTML.
-const document = body === undefined ? null : await parseContent(body);
+const document = body === undefined ? null : await parseContent(body, resolvedLocale);
+const components = createProseComponents(resolvedLocale);
 ---
 
-{document !== null && <MarkdownDocument value={document} components={{ a: IconLink }} className={className} />}
+{document !== null && <MarkdownDocument value={document} components={components} className={className} />}

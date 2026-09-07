@@ -1,17 +1,22 @@
 ---
 interface Props {
   date: Date;
+  /** Overrides the page's own locale — rarely needed. */
+  locale?: string;
 }
 
-const { date } = Astro.props;
+const { date, locale } = Astro.props;
+
+// Dates are authored as plain YAML days and parsed as UTC midnight, so
+// formatting in the build machine's zone renders the previous day anywhere west
+// of Greenwich — a post dated the 7th showed as the 6th. The article index
+// already formats in UTC; this is the same fix for the post itself.
+const formatter = new Intl.DateTimeFormat(locale ?? Astro.currentLocale ?? "en", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+});
 ---
 
-<time datetime={date.toISOString()}>
-  {
-    date.toLocaleDateString("en-us", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    })
-  }
-</time>
+<time datetime={date.toISOString()}>{formatter.format(date)}</time>

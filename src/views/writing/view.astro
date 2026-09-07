@@ -6,6 +6,7 @@ import Container from "../../ui/common/container.astro";
 import { vstack } from "../../../styled-system/patterns";
 import { css } from "../../../styled-system/css";
 import PostCard from "./_components/post-card.astro";
+import { publishedPosts } from "../../utils/content";
 import type { WritingDictionary } from "../../i18n/writing/types.ts";
 
 interface Props {
@@ -23,10 +24,7 @@ const dateFormatter = new Intl.DateTimeFormat(Astro.currentLocale, {
   timeZone: "UTC",
 });
 
-const posts = (await getCollection("writing"))
-  .filter((post) => post.data.locale === (Astro.currentLocale ?? "en"))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const posts = publishedPosts(await getCollection("writing"), (Astro.currentLocale ?? "en") as "en" | "pt");
 ---
 
 <MainLayout title={Astro.props.title} description={Astro.props.description} lang={Astro.currentLocale ?? "en"}>
