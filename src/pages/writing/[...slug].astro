@@ -1,10 +1,11 @@
 ---
-import { type CollectionEntry, getCollection, render } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 
 import MainLayout from "../../layouts/main-layout.astro";
 import Container from "../../ui/common/container.astro";
 import FormattedDate from "../../ui/common/formatted-date.astro";
 import BackToPrev from "../../ui/common/back-to-prev.astro";
+import Markdown from "../../ui/common/markdown.astro";
 import { readingTime } from "../../utils/helpers.ts";
 import { css } from "../../../styled-system/css";
 
@@ -21,7 +22,6 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"writing">;
 
 const post = Astro.props;
-const { Content } = await render(post);
 ---
 
 <MainLayout title={post.data.title} description={post.data.description}>
@@ -50,7 +50,7 @@ const { Content } = await render(post);
       </div>
     </div>
     <article>
-      <Content />
+      <Markdown body={post.body} class="prose-ui antialiased" />
     </article>
   </Container>
 </MainLayout>

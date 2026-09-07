@@ -4,9 +4,12 @@ import { css } from "../../../styled-system/css";
 import { hstack } from "../../../styled-system/patterns";
 import MainLayout from "../../layouts/main-layout.astro";
 import Container from "../../ui/common/container.astro";
+import Markdown from "../../ui/common/markdown.astro";
 
 interface Props {
   title: string;
+  /** Raw markdown body for the page's intro copy. */
+  body: string | undefined;
 }
 
 const allSocialLinks = await getCollection("socialLinks");
@@ -31,8 +34,7 @@ const isPortuguese = Astro.currentLocale === "pt";
     >
     </div>
     <h1
-      class={
-        "instrument-serif " +
+      class={"instrument-serif " +
         css({
           mt: 4,
           color: "text.primary",
@@ -41,14 +43,11 @@ const isPortuguese = Astro.currentLocale === "pt";
           fontStyle: "italic",
           letterSpacing: "-0.06em",
           lineHeight: "0.9",
-        })
-      }
+        })}
     >
       {Astro.props.title}
     </h1>
-    <div class={"prose-ui antialiased " + css({ mt: 10, maxW: "xl" })}>
-      <slot />
-    </div>
+    <Markdown body={Astro.props.body} class={"prose-ui antialiased " + css({ mt: 10, maxW: "xl" })} />
     <div class={hstack({ gap: { base: 6, lg: 4 }, mt: 12 })}>
       {
         socialLinks.map((item) => (

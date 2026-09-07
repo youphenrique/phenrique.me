@@ -142,11 +142,11 @@ const { title, description, image = "/nano.png" } = Astro.props;
 
     document.head.appendChild(css);
 
-    if (dark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    // Both classes are kept in sync. `light` gates the paper grain in
+    // global.css, so leaving it behind when switching to dark paints the
+    // texture over the ink canvas.
+    document.documentElement.classList.toggle("dark", dark);
+    document.documentElement.classList.toggle("light", !dark);
 
     // window.getComputedStyle(css).opacity;
     document.head.removeChild(css);

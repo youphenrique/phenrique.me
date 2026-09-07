@@ -1,10 +1,11 @@
 ---
-import { type CollectionEntry, getCollection, render } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 import MainLayout from "../../layouts/main-layout.astro";
 import Container from "../../ui/common/container.astro";
 import FormattedDate from "../../ui/common/formatted-date.astro";
 import { readingTime } from "../../utils/helpers.ts";
 import BackToPrev from "../../ui/common/back-to-prev.astro";
+import Markdown from "../../ui/common/markdown.astro";
 import Link from "../../ui/common/link.astro";
 import { css } from "../../../styled-system/css";
 
@@ -20,7 +21,6 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"projects">;
 
 const project = Astro.props;
-const { Content } = await render(project);
 ---
 
 <MainLayout title={project.data.title} description={project.data.description}>
@@ -66,7 +66,7 @@ const { Content } = await render(project);
       }
     </div>
     <article class="animate">
-      <Content />
+      <Markdown body={project.body} class="prose-ui antialiased" />
     </article>
   </Container>
 </MainLayout>

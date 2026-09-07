@@ -1,20 +1,14 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
 import MainLayout from "../../layouts/main-layout.astro";
 import Container from "../../ui/common/container.astro";
+import Markdown from "../../ui/common/markdown.astro";
 import { dateRange } from "../../utils/helpers.ts";
 import { WORK } from "../../consts";
 import { css } from "../../../styled-system/css";
 
-const collection = (await getCollection("work")).sort(
+const work = (await getCollection("work")).sort(
   (a, b) => new Date(b.data.dateStart).valueOf() - new Date(a.data.dateStart).valueOf(),
-);
-
-const work = await Promise.all(
-  collection.map(async (item) => {
-    const { Content } = await render(item);
-    return { ...item, Content };
-  }),
 );
 ---
 
@@ -34,7 +28,7 @@ const work = await Promise.all(
               </div>
               <div class={css({ fontSize: "sm", opacity: 0.75 })}>{entry.data.role}</div>
               <article>
-                <entry.Content />
+                <Markdown body={entry.body} class="prose-ui antialiased" />
               </article>
             </li>
           ))

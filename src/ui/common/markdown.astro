@@ -1,0 +1,25 @@
+---
+import { MarkdownDocument } from "@comark/react";
+
+import { parseContent } from "../../utils/comark";
+import IconLink from "./_components/icon-link";
+
+interface Props {
+  /**
+   * Raw markdown body, e.g. `entry.body` from a content collection. Optional
+   * because the loader types it as such — an entry with no body renders nothing.
+   */
+  body: string | undefined;
+  /** Classes for the wrapper element — typically the prose-ui container. */
+  class?: string;
+}
+
+const { body, class: className } = Astro.props;
+
+// Parsed here rather than inside the island: `MarkdownDocument` is synchronous,
+// so there is no Suspense boundary and nothing to hydrate. Deliberately no
+// `client:*` directive — this compiles to static HTML.
+const document = body === undefined ? null : await parseContent(body);
+---
+
+{document !== null && <MarkdownDocument value={document} components={{ a: IconLink }} className={className} />}

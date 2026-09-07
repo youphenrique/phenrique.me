@@ -2,10 +2,13 @@
 import { css } from "../../../styled-system/css";
 import MainLayout from "../../layouts/main-layout.astro";
 import Container from "../../ui/common/container.astro";
+import Markdown from "../../ui/common/markdown.astro";
 
 interface Props {
   title: string;
   bioImageResource: string;
+  /** Raw markdown body for the page's prose. */
+  body: string | undefined;
 }
 ---
 
@@ -21,8 +24,6 @@ interface Props {
     >
       {Astro.props.title}
     </h1>
-    <div class={"prose-ui antialiased " + css({ mt: 10, maxW: "xl" })}>
-      <slot />
-    </div>
+    <Markdown body={Astro.props.body} class={"prose-ui antialiased " + css({ mt: 10, maxW: "xl" })} />
   </Container>
 </MainLayout>
