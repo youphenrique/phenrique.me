@@ -7,6 +7,10 @@
     font-variation-settings: "SOFT" 50, "WONK" 1;
 }
 
+.instrument-serif {
+    font-family: "Instrument Serif", serif;
+}
+
 /* prose-ui reads its own custom properties; bind them to the design system's
    semantic tokens so long-form content inherits the palette instead of
    carrying prose-ui's defaults. See docs/design-system.md. */

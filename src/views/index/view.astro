@@ -4,7 +4,6 @@ import { css } from "../../../styled-system/css";
 import { hstack } from "../../../styled-system/patterns";
 import MainLayout from "../../layouts/main-layout.astro";
 import Container from "../../ui/common/container.astro";
-import PauloHenrique from "../../ui/common/paulo-henrique.astro";
 
 interface Props {
   title: string;
@@ -32,14 +31,20 @@ const isPortuguese = Astro.currentLocale === "pt";
     >
     </div>
     <h1
-      class={css({
-        mt: 4,
-        maxW: { base: "260px", md: "340px" },
-        color: "text.primary",
-      })}
+      class={
+        "instrument-serif " +
+        css({
+          mt: 4,
+          color: "text.primary",
+          fontSize: { base: "4xl", md: "5xl" },
+          fontWeight: "normal",
+          fontStyle: "italic",
+          letterSpacing: "-0.06em",
+          lineHeight: "0.9",
+        })
+      }
     >
-      <span class="sr-only">{Astro.props.title}</span>
-      <PauloHenrique />
+      {Astro.props.title}
     </h1>
     <div class={"prose-ui antialiased " + css({ mt: 10, maxW: "xl" })}>
       <slot />
