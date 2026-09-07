@@ -1,0 +1,61 @@
+---
+import { getCollection } from "astro:content";
+
+import MainLayout from "../../layouts/main-layout.astro";
+import Container from "../../ui/common/container.astro";
+import { vstack } from "../../../styled-system/patterns";
+import { css } from "../../../styled-system/css";
+import PostCard from "./_components/post-card.astro";
+import type { WritingDictionary } from "../../i18n/writing/types.ts";
+
+interface Props {
+  title: string;
+  description: string;
+  dict: WritingDictionary;
+}
+
+const dateFormatter = new Intl.DateTimeFormat(Astro.currentLocale, {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+  // Dates are authored as plain YAML days and parsed as UTC midnight; formatting
+  // in the build machine's zone would render the previous day west of Greenwich.
+  timeZone: "UTC",
+});
+
+const posts = (await getCollection("writing"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<MainLayout title={Astro.props.title} description={Astro.props.description} lang={Astro.currentLocale ?? "en"}>
+  <Container>
+    <div class={vstack({ mt: 32, alignItems: "stretch", gap: 8 })}>
+      <h1
+        class={"fraunces-font " +
+          css({
+            fontSize: "4xl",
+            fontWeight: "semibold",
+            color: "text.primary",
+          })}
+      >
+        {Astro.props.dict["page-title"]}
+      </h1>
+    </div>
+    <ul class={vstack({ mt: 8, mb: 20, alignItems: "stretch", gap: 3 })}>
+      {
+        posts.map((post) => (
+          <li>
+            <PostCard
+              href={`/writing/${post.id}`}
+              title={post.data.title}
+              date={dateFormatter.format(post.data.date)}
+              dateTime={post.data.date.toISOString()}
+              description={post.data.description}
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+</MainLayout>

@@ -1,0 +1,126 @@
+---
+import { css } from "../../../../styled-system/css";
+
+interface Props {
+  href: string;
+  title: string;
+  date: string;
+  dateTime: string;
+  description: string;
+}
+
+const { href, title, date, dateTime, description } = Astro.props;
+
+const transition = {
+  transitionDuration: "250ms",
+  transitionTimingFunction: "ease-in-out",
+  _motionReduce: { transitionDuration: "0ms" },
+} as const;
+
+// One line with an ellipsis at rest; two wrapped lines once the card is engaged.
+const unclamped = {
+  display: "-webkit-box",
+  WebkitBoxOrient: "vertical",
+  WebkitLineClamp: "2",
+  whiteSpace: "normal",
+} as const;
+
+const metaLine = css({
+  display: "block",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  _groupHover: unclamped,
+  _groupFocusVisible: unclamped,
+});
+---
+
+<a
+  href={href}
+  class={`group ${css({
+    display: "flex",
+    alignItems: "flex-start",
+    gap: 3.5,
+    py: 3,
+    px: 4,
+    borderRadius: "lg",
+    transitionProperty: "background-color, border-color",
+    ...transition,
+    _hover: { backgroundColor: "bg.hover", borderColor: "border.default" },
+    _focusVisible: {
+      backgroundColor: "bg.hover",
+      borderColor: "border.default",
+      outline: "2px solid token(colors.border.accent)",
+      outlineOffset: "2px",
+    },
+  })}`}
+>
+  <span
+    class={css({
+      display: "grid",
+      flexShrink: 0,
+      placeItems: "center",
+      w: 10,
+      h: 10,
+      borderRadius: "md",
+      border: "1px solid",
+      borderColor: "border.hairline",
+      backgroundColor: "bg.raised",
+      color: "text.faint",
+    })}
+  >
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M6 3h7l5 5v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"></path>
+      <path d="M13 3v5h5"></path>
+      <g
+        class={css({
+          opacity: 0,
+          transitionProperty: "opacity",
+          ...transition,
+          _groupHover: { opacity: 1 },
+          _groupFocusVisible: { opacity: 1 },
+        })}
+      >
+        <path d="M8.5 12.5h7"></path>
+        <path d="M8.5 15.5h7"></path>
+        <path d="M8.5 18.5h4"></path>
+      </g>
+    </svg>
+  </span>
+  <span class={css({ display: "flex", flexDirection: "column", minWidth: 0, flex: 1 })}>
+    <span class={css({ fontSize: "md", fontWeight: "medium", color: "text.primary", lineHeight: "1.5" })}>
+      {title}
+    </span>
+    <span
+      class={css({
+        display: "grid",
+        gridTemplateRows: "0fr",
+        fontSize: "sm",
+        lineHeight: "1.5",
+        color: "text.muted",
+        transitionProperty: "grid-template-rows",
+        ...transition,
+        _groupHover: { gridTemplateRows: "1fr" },
+        _groupFocusVisible: { gridTemplateRows: "1fr" },
+      })}
+    >
+      <span class={css({ display: "block", overflow: "hidden", minHeight: "1lh" })}>
+        <span class={metaLine}>
+          <time datetime={dateTime}>{date}</time>
+          <span aria-hidden="true">&nbsp;·&nbsp;</span>
+          {description}
+        </span>
+      </span>
+    </span>
+  </span>
+</a>
