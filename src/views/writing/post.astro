@@ -43,12 +43,14 @@ const locale = post.data.locale;
         </div>
       </div>
       {/*
-        `3xl` rather than `2xl`: the `.prose` scale tops out at 1.5rem for a body
-        `#`, and a title the article can outrank is not a title.
+        `4xl`, matching the about and home titles: the `.prose` scale tops out at
+        1.75rem for a body `#`, and a title the article can outrank is not a
+        title. At `3xl` it led its own `##` sections by six pixels, which is not
+        a hierarchy.
       */}
       <h1
         class={`animate fraunces-font ${css({
-          fontSize: "3xl",
+          fontSize: "4xl",
           fontWeight: "semibold",
           lineHeight: "1.2",
           letterSpacing: "-0.015em",

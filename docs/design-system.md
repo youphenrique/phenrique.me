@@ -380,6 +380,25 @@ negative value the Geist-tuned scale used — a serif with this much modulation
 closes up quickly. The footnote label is explicitly exempt: it is apparatus, not
 display, so it stays in the interface face.
 
+The scale is anchored below the page's own post title (`4xl`, 2.25rem), so a
+body `#` cannot outrank the thing it sits under:
+
+| Level | Size | Note |
+| :-- | --: | :-- |
+| Post title (outside `.prose`) | 2.25rem | `4xl`, matching the about and home titles |
+| `h1` | 1.75rem | |
+| `h2` | 1.5rem | The top level in practice — see below |
+| `h3` | 1.25rem | |
+| `h4` | 1rem | Body size; the face and weight carry it |
+| `h5` | 0.9375rem | |
+| `h6` | 0.875rem | Uppercase label, `text.muted` — apparatus, not a heading |
+
+`h2` is the rung that matters. An article's title comes from frontmatter, so no
+post in the collection opens a `#`; `##` is the top-level heading every article
+actually uses. The scale used to sit one step lower — anchored under a `3xl`
+title — which left `h2` at 1.3125rem, 1.31× the body size, carrying a section
+break on the strength of the serif face alone.
+
 ### The reading column
 
 `.prose` is typography; `.prose-longform` adds the column, and article pages

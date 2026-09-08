@@ -198,23 +198,29 @@ body {
   }
 
   /* --- Headings -------------------------------------------------------------
-     The scale is anchored below the page's own post title (`3xl`, 1.875rem), so a
-     body `#` cannot outrank the thing it sits under. */
+     The scale is anchored below the page's own post title (`4xl`, 2.25rem), so a
+     body `#` cannot outrank the thing it sits under.
+
+     `h2` is the rung that matters: an article's title comes from frontmatter, so
+     no post in the collection opens a `#` — `##` is the top-level heading in
+     practice. The scale used to sit one step lower, which left that heading at
+     1.3125rem, only 1.31× the body size, holding a 40rem column on the strength
+     of the serif face alone. */
 
   .prose h1 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     line-height: 1.25;
     letter-spacing: -0.015em;
   }
 
   .prose h2 {
-    font-size: 1.3125rem;
+    font-size: 1.5rem;
     line-height: 1.3;
     letter-spacing: -0.012em;
   }
 
   .prose h3 {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     line-height: 1.35;
     letter-spacing: -0.01em;
   }
