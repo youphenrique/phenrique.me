@@ -24,7 +24,7 @@ const project = Astro.props;
 ---
 
 <MainLayout title={project.data.title} description={project.data.description}>
-  <Container styles={css.raw({ maxWidth: { base: "full", sm: "2xl", lg: "4xl" } })}>
+  <Container styles={css.raw({ maxWidth: { base: "full", sm: "3xl", lg: "5xl" } })}>
     <div class={`animate ${css({ maxWidth: "var(--prose-measure)", marginInline: "auto" })}`}>
       <BackToPrev href="/projects"> Back to projects </BackToPrev>
     </div>

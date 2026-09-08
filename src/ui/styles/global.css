@@ -82,10 +82,16 @@ body {
      that read cool against this warm palette. See docs/design-system.md. */
 
   :root {
-    /* ~71 characters at the body size — the comfortable range for continuous
-       reading is 60–75. The full container width stays available to figures,
-       tables and code through the `wide` grid track below. */
-    --prose-measure: 36rem;
+    /* 640px, ~79 characters. A step short of Panda's `prose` size token, which
+       is 65ch and resolves in Geist to 43rem — ~85 characters, past the 60–75
+       range that continuous reading is comfortable in and close to the 89 the
+       single-column layout ran to. Fixed rem rather than a `ch` value on
+       purpose: `ch` is a font metric, and with `font-display: swap` the whole
+       reading column would jump several rem wider the moment Geist replaced the
+       fallback. The full container width stays available to figures, tables and
+       code through the `wide` grid track below, which is sized alongside the
+       measure so a breakout keeps its weight. */
+    --prose-measure: 40rem;
   }
 
   .prose {

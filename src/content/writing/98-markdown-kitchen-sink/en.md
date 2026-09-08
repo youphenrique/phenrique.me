@@ -166,6 +166,6 @@ Two markers on one sentence need punctuation between them[^measure]<sup>,&nbsp;<
 
 Inline code is exempt from that check, so a character class like `[^abc]` in a regex passes through untouched.
 
-[^measure]: The measure here is `--prose-measure`, set in `global.css` at 36rem — roughly 71 characters at the body size.
+[^measure]: The measure here is `--prose-measure`, set in `global.css` at 40rem — roughly 79 characters at the body size.
 [^second]: Note that the plugin captures only the *first* block of a definition; an indented continuation paragraph is silently dropped, so a footnote is deliberately one block long.
 [^third]: Markdown inside a note is parsed — see [the design system](/design.md) — which the footnote plugin does not do on its own.

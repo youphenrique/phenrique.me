@@ -20,15 +20,16 @@ interface Props {
     body sat at `maxW: xl` with no `mx: auto`, which left it flush against the
     left edge under a centred title.
   */}
-  <Container styles={css.raw({ py: { base: 32, sm: 40 }, maxWidth: { base: "full", sm: "2xl", lg: "4xl" } })}>
+  <Container styles={css.raw({ py: { base: 32, sm: 40 }, maxWidth: { base: "full", sm: "3xl", lg: "5xl" } })}>
     {/*
-      Centred over the text column but not pinned to it: at `5xl` the reading
-      measure forces a three-line stack that breaks mid-phrase. Display type can
-      run wider than the prose it introduces.
+      Centred over the text column but not pinned to it: on the reading measure
+      the title forces a three-line stack that breaks mid-phrase. Display type
+      can run wider than the prose it introduces, so this stays a fixed step
+      above `--prose-measure` rather than tracking it.
     */}
     <h1
       class={"fraunces-font " + css({
-        maxWidth: "42rem",
+        maxWidth: "47rem",
         marginInline: "auto",
         fontSize: { base: "4xl", md: "5xl" },
         color: "text.primary",

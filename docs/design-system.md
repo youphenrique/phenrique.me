@@ -388,8 +388,8 @@ carrying `data-prose-track="wide"` spans the full article width instead:
 
 | Track | Width | Holds |
 | :-- | :-- | :-- |
-| `text` | `--prose-measure`, 36rem (~71 characters) | Everything, including code blocks |
-| `wide` | The container, ~53rem | Tables and `::figure` |
+| `text` | `--prose-measure`, 40rem (~79 characters) | Everything, including code blocks |
+| `wide` | The container — 64rem at `lg`, 61rem inside the gutters | Tables and `::figure` |
 
 Code blocks stay on the measure deliberately: a sample that lines up with the
 prose around it reads as part of the argument, and a long line scrolls inside
@@ -397,10 +397,17 @@ its own box. Tables and figures take the extra width because it buys them
 something — columns that would otherwise wrap, and an image that would
 otherwise be smaller than the thing it illustrates.
 
-The measure is set at 36rem because continuous reading is comfortable between
-60 and 75 characters; the previous single-column layout ran to 89. Page
-furniture outside `.prose` — a post's date and title — aligns to the same
-measure with the `prose-column` class.
+The measure is 40rem, ~79 characters. Panda's `prose` size token (65ch)
+resolves in Geist to 43rem, which runs to ~85 — past the 60–75 that continuous
+reading is comfortable in, and close to the 89 the old single-column layout ran
+to; 40rem takes most of the extra width without going there. It is written as a
+fixed rem rather than a `ch` value because `ch` is a font metric, and
+`font-display: swap` would otherwise widen the whole column by several rem the
+moment Geist replaced the fallback face. The `wide` track is sized from the
+measure, not independently: the container went 4xl → 5xl at the same time, so a
+figure keeps a full 10rem of overhang per side and breaking out still reads as
+breaking out. Page furniture outside `.prose` — a post's date and title —
+aligns to the same measure with the `prose-column` class.
 
 Rhythm is expressed as **top margins only, never bottom**. Margins do not
 collapse between grid items, so the usual top-and-bottom pattern would silently
