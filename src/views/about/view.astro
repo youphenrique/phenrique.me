@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+
 import { css } from "../../../styled-system/css";
 import MainLayout from "../../layouts/main-layout.astro";
 import Container from "../../ui/components/container.astro";
@@ -40,6 +42,31 @@ interface Props {
     >
       {Astro.props.title}
     </h1>
+    {/*
+      Full container width, which is the same track a `::figure{layout="wide"}`
+      lands on inside the article below — so the page opens on the widest thing
+      it contains and steps inward to the prose, rather than the other way
+      round. The source is 4208×1894 (2.22:1), given here so the box is reserved
+      before the file arrives; Comark and `astro:assets` both leave a remote URL
+      unprocessed, so the intrinsic size has to be stated rather than inferred.
+    */}
+    <Image
+      src={import.meta.env.PUBLIC_VERCEL_BLOB_STORAGE_URL + Astro.props.bioImageResource}
+      alt="Paulo Henrique at a lookout, a forested valley and a glass railing behind him"
+      width="4208"
+      height="1894"
+      loading="eager"
+      decoding="async"
+      class={css({
+        mt: 10,
+        display: "block",
+        width: "full",
+        height: "auto",
+        borderRadius: "md",
+        border: "1px solid",
+        borderColor: "border.hairline",
+      })}
+    />
     <Markdown body={Astro.props.body} class={"prose prose-longform " + css({ mt: 10 })} />
   </Container>
 </MainLayout>
