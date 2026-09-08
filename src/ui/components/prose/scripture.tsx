@@ -23,8 +23,8 @@ const quoteStyles = css({
   // argument answers to, not a muted aside inside it.
   padding: 0,
   border: "none",
-  fontStyle: "normal",
-  fontSize: "1.1875rem",
+  fontStyle: "italic",
+  fontSize: "1.5rem",
   lineHeight: 1.6,
   letterSpacing: "-0.01em",
   color: "text.primary",
@@ -57,7 +57,7 @@ interface Props {
 export default function Scripture({ source, href, children }: Props) {
   return (
     <figure className={figureStyles}>
-      <blockquote className={cx("fraunces-font", quoteStyles)}>{children}</blockquote>
+      <blockquote className={cx("instrument-serif", quoteStyles)}>{children}</blockquote>
       {source !== undefined && (
         <figcaption className={captionStyles}>
           <cite>
