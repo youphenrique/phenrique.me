@@ -14,7 +14,7 @@ interface Props {
 }
 ---
 
-<MainLayout title="Home" description="Paulo Henrique's personal website" lang={Astro.currentLocale ?? "en"}>
+<MainLayout title={Astro.props.title} description="Paulo Henrique's personal website" lang={Astro.currentLocale ?? "en"}>
   {/*
     Wider than the site default so the article's `wide` track has somewhere to
     go; the prose column inside stays at `--prose-measure`, centred, and the
@@ -50,23 +50,52 @@ interface Props {
       before the file arrives; Comark and `astro:assets` both leave a remote URL
       unprocessed, so the intrinsic size has to be stated rather than inferred.
     */}
-    <Image
-      src={import.meta.env.PUBLIC_VERCEL_BLOB_STORAGE_URL + Astro.props.bioImageResource}
-      alt="Paulo Henrique at a lookout, a forested valley and a glass railing behind him"
-      width="4208"
-      height="1894"
-      loading="eager"
-      decoding="async"
+    <div
       class={css({
+        position: "relative",
         mt: 10,
-        display: "block",
-        width: "full",
-        height: "auto",
+        overflow: "hidden",
         borderRadius: "md",
         border: "1px solid",
         borderColor: "border.hairline",
+        _before: {
+          content: "\"\"",
+          position: "absolute",
+          inset: 0,
+          zIndex: 1,
+          pointerEvents: "none",
+          backgroundImage: "url(\"/images/paper-grain.webp\")",
+          backgroundRepeat: "repeat",
+          opacity: 0.055,
+          mixBlendMode: "soft-light",
+        },
+        _after: {
+          content: "\"\"",
+          position: "absolute",
+          inset: 0,
+          zIndex: 2,
+          pointerEvents: "none",
+          background: "linear-gradient(to bottom, transparent 58%, var(--colors-bg-canvas))",
+          opacity: 0.42,
+        },
       })}
-    />
-    <Markdown body={Astro.props.body} class={"prose prose-longform " + css({ mt: 10 })} />
+    >
+      <Image
+        src={import.meta.env.PUBLIC_VERCEL_BLOB_STORAGE_URL + Astro.props.bioImageResource}
+        alt="Paulo Henrique at a lookout, a forested valley and a glass railing behind him"
+        width="4208"
+        height="1894"
+        loading="eager"
+        decoding="async"
+        class={css({
+          display: "block",
+          width: "full",
+          height: { base: "18rem", sm: "auto" },
+          objectFit: "cover",
+          objectPosition: "42% center",
+        })}
+      />
+    </div>
+    <Markdown body={Astro.props.body} class={"prose prose-longform " + css({ mt: 16 })} />
   </Container>
 </MainLayout>
