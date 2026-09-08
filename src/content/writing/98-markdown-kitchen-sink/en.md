@@ -82,7 +82,7 @@ A task list:
 
 ## Quotations
 
-> A blockquote is a voice inside the argument. It stays at body size, set in italic, marked with a rule.
+> A blockquote is set in the display serif at 1.5rem, italic, behind the accent rule. `::quote` renders the same treatment and adds a citation.
 >
 > A second paragraph inside the same quote.
 

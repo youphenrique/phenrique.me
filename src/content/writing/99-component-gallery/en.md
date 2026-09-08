@@ -62,23 +62,23 @@ This renders in the text column today. It is the same authoring shape a right-ha
 `title` overrides the label here too.
 ::
 
-## Scripture
+## Quote
 
-A quotation the argument answers to, rather than one inside it — the display serif, a wider setting, and a citation that makes the quote checkable. Use `>` blockquote for everything else.
+A quotation with a source worth attributing. The treatment is the `.prose blockquote` default — this adds the citation, optionally linked, which is what makes the quote checkable. Use a bare `>` when there is nothing to attribute.
 
 Attribute values are plain text, not Markdown: `source="Augustine, *Confessions* I.1"` renders the asterisks literally.
 
 ```md
-::scripture{source="Matthew 6:21" href="https://…"}
+::quote{source="Matthew 6:21" href="https://…"}
 Where your treasure is, there your heart will be also.
 ::
 ```
 
-::scripture{source="Matthew 6:21" href="https://www.biblegateway.com/passage/?search=Matthew%206%3A21&version=ESV"}
+::quote{source="Matthew 6:21" href="https://www.biblegateway.com/passage/?search=Matthew%206%3A21&version=ESV"}
 Where your treasure is, there your heart will be also.
 ::
 
-::scripture{source="Augustine, Confessions I.1"}
+::quote{source="Augustine, Confessions I.1"}
 You have made us for yourself, and our heart is restless until it rests in you.
 ::
 

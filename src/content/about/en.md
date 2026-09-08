@@ -19,7 +19,7 @@ Nowadays, I work as a full-stack software engineer[^fullstack], with a particula
 
 I think Paul Irish captures my natural inclination toward UI craft:
 
-::scripture{source="Paul Irish, About" href="https://www.paulirish.com/about/"}
+::quote{source="Paul Irish, About" href="https://www.paulirish.com/about/"}
 Crafting a UI holds a lot of responsibility. For more niche topics, the UI may influence, or become (!), the mental model that people retain for these concepts and systems. At the same time, a UI can delight the user in a way that backend never can.
 ::
 

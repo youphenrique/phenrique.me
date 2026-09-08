@@ -6,4 +6,4 @@
  * the build graph. Every entry here must have a matching renderer in
  * `createProseComponents`; `assertKnownComponents` fails the build otherwise.
  */
-export const PROSE_COMPONENT_TAGS = new Set(["callout", "aside", "scripture", "figure"]);
+export const PROSE_COMPONENT_TAGS = new Set(["callout", "aside", "quote", "figure"]);

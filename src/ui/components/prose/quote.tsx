@@ -1,33 +1,34 @@
 import type { ReactNode } from "react";
 
-import { css, cx } from "../../../../styled-system/css";
+import { css } from "../../../../styled-system/css";
 
 /**
- * `::scripture{source="Matthew 6:21" href="…"}` — a quotation set apart.
+ * `::quote{source="Matthew 6:21" href="…"}` — a quotation with an attributable
+ * source.
  *
- * Distinct from `>` blockquote on purpose: a blockquote is a voice inside the
- * argument and stays at body size, while this is a text the argument answers
- * to. It gets the display serif, a wider setting, and a citation line carrying
- * the reference — which is what makes the quote checkable.
+ * Not a second quotation *style*: the treatment is the `.prose blockquote`
+ * default, and what this adds is the citation — `<figure>`/`<figcaption>` with
+ * an optionally linked reference, which is the markup that makes a quote
+ * checkable rather than merely set apart. Reach for `>` when there is nothing
+ * to attribute, and for this when there is.
  *
  * The attribute is `source` rather than `ref` because React reserves `ref`.
  */
+// `1.5rem`, not `1.25em`: the figure sits at the body size while the blockquote
+// inside it is 1.5rem, so an `em` here would indent a `::quote` four pixels
+// tighter than a bare `>` and the two would no longer line up.
 const figureStyles = css({
-  pl: "1.25em",
+  pl: "1.5rem",
   borderLeft: "2px solid",
   borderColor: "border.accent",
 });
 
+// Type, colour and the accent rule all come from `.prose blockquote`. The only
+// thing to undo is the rule itself, which the figure carries here so that the
+// citation sits inside it rather than beside it.
 const quoteStyles = css({
-  // Overrides the `.prose blockquote` default: this quote is the text the
-  // argument answers to, not a muted aside inside it.
   padding: 0,
   border: "none",
-  fontStyle: "italic",
-  fontSize: "1.5rem",
-  lineHeight: 1.6,
-  letterSpacing: "-0.01em",
-  color: "text.primary",
 });
 
 const captionStyles = css({
@@ -54,10 +55,10 @@ interface Props {
   children?: ReactNode;
 }
 
-export default function Scripture({ source, href, children }: Props) {
+export default function Quote({ source, href, children }: Props) {
   return (
     <figure className={figureStyles}>
-      <blockquote className={cx("instrument-serif", quoteStyles)}>{children}</blockquote>
+      <blockquote className={quoteStyles}>{children}</blockquote>
       {source !== undefined && (
         <figcaption className={captionStyles}>
           <cite>

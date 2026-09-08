@@ -388,18 +388,40 @@ body {
 
   /* --- Blocks --------------------------------------------------------------- */
 
+  /* The site has one quotation style, and this is it: Instrument Serif at
+     1.5rem behind the accent rule. `::quote` renders the same treatment and
+     adds a citation — the two are not different looks, and an author picks
+     between them on whether there is a source to attribute, not on emphasis.
+
+     `text.primary`, not `text.muted`: a quotation is content the author chose
+     to include, not chrome to play down.
+
+     `padding-left` and the rhythm margins are `em`, so the indent and the space
+     around the block scale with the larger type rather than staying at the body
+     measure's 16px. */
   .prose blockquote {
     padding-left: 1em;
-    border-left: 2px solid var(--colors-border-default);
-    color: var(--colors-text-muted);
+    border-left: 2px solid var(--colors-border-accent);
+    color: var(--colors-text-primary);
+    font-family: "Instrument Serif", serif;
+    font-size: 1.5rem;
     font-style: italic;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
   }
 
+  /* The attribution is apparatus, not part of the quoted voice, so it stays in
+     the interface face at the body's tracking — the same exemption the footnote
+     label takes. Left to inherit, it picked up Instrument Serif at 13px, which
+     is a display face doing a caption's job. */
   .prose blockquote cite {
     display: block;
     margin-top: 0.6em;
+    font-family: GeistSans, sans-serif;
     font-size: 0.8125rem;
     font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
     color: var(--colors-text-faint);
   }
 

@@ -380,6 +380,14 @@ negative value the Geist-tuned scale used — a serif with this much modulation
 closes up quickly. The footnote label is explicitly exempt: it is apparatus, not
 display, so it stays in the interface face.
 
+Quotations are set in **Instrument Serif** at 1.5rem, italic, behind the accent
+rule, in `text.primary` — a quotation is content the author chose to include,
+not chrome to play down. There is one quotation style and `::quote` renders the
+same one; the component adds a citation rather than a different look, so an
+author picks between `>` and `::quote` on whether there is a source to
+attribute. A quote's own attribution — an inline `cite` or the component's
+`figcaption` — is apparatus and stays in Geist.
+
 The scale is anchored below the page's own post title (`4xl`, 2.25rem), so a
 body `#` cannot outrank the thing it sits under:
 
@@ -458,7 +466,7 @@ unregistered tag silently renders as.
 | :-- | :-- | :-- |
 | `::callout{type}` | A remark that interrupts the argument | `note` (sky), `warning` (ochre), `insight` (sage); `title` overrides the label |
 | `::aside` | Marginalia the argument could lose | Text column today; the shape a right-hand sidenote will take |
-| `::scripture{source href}` | A text the argument answers to | Display serif and a citation; use `>` blockquote for a voice *inside* the argument |
+| `::quote{source href}` | A quotation with a source to attribute | Same treatment as `>`; adds a linkable citation in a `figcaption` |
 | `::figure{src alt caption}` | An image outside the measure | `layout="wide"` by default |
 
 Two authoring constraints worth knowing. Attribute values are plain text, not

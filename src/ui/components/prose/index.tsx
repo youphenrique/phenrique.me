@@ -13,7 +13,7 @@ type ProseComponent = ComponentType<any>;
 import IconLink from "../icon-link.tsx";
 import CodeBlock from "./code-block.tsx";
 import Figure from "./figure.tsx";
-import Scripture from "./scripture.tsx";
+import Quote from "./quote.tsx";
 import { createAside } from "./aside.tsx";
 import { createCallout } from "./callout.tsx";
 import { createProseTable } from "./prose-table.tsx";
@@ -52,7 +52,7 @@ export function createProseComponents(locale = "en"): Record<string, ProseCompon
     // `::component` invocations.
     callout: createCallout(dictionary),
     aside: createAside(dictionary),
-    scripture: Scripture,
+    quote: Quote,
     figure: Figure,
   };
 
