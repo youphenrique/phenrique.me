@@ -23,7 +23,16 @@ const glyphStyles = css({
   // Optical centring on the x-height. `middle` alone sits the glyph slightly
   // high against Geist's lowercase.
   verticalAlign: "-0.14em",
-  "& svg": { w: "full", h: "full", display: "block" },
+  "& svg, & img": { w: "full", h: "full", display: "block" },
+  "& img": { borderRadius: "full", objectFit: "cover" },
+  "& [data-theme-variant='light']": {
+    display: "block",
+    _dark: { display: "none" },
+  },
+  "& [data-theme-variant='dark']": {
+    display: "none",
+    _dark: { display: "block" },
+  },
 });
 
 // The glyph is an atomic inline, and browsers keep a break opportunity after

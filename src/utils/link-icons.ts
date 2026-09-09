@@ -17,7 +17,7 @@
  */
 
 export interface LinkIcon {
-  /** Inline SVG markup. Must paint with `currentColor` and carry a `viewBox`. */
+  /** Inline SVG markup or HTML image element for the mark. */
   svg: string;
   /** Human-readable destination name, used for the accessible label. */
   label: string;
@@ -45,12 +45,16 @@ const instagram: LinkIcon = {
 
 const email: LinkIcon = {
   label: "Email",
-  svg: `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 3h11A1.5 1.5 0 0 1 15 4.5v7a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 11.5v-7A1.5 1.5 0 0 1 2.5 3Zm0 1a.5.5 0 0 0-.5.5v.24l6 3.43 6-3.43V4.5a.5.5 0 0 0-.5-.5h-11ZM14 5.9 8.25 9.19a.5.5 0 0 1-.5 0L2 5.9v5.6a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5V5.9Z" fill="currentColor"/></svg>`,
+  svg: `<svg viewBox="0 -32 256 256" xmlns="http://www.w3.org/2000/svg"><path d="M58.182 192.05V93.14L27.507 65.077 0 49.504v125.091c0 9.658 7.825 17.455 17.455 17.455h40.727Z" fill="#4285F4"/><path d="M197.818 192.05h40.727c9.659 0 17.455-7.825 17.455-17.455V49.504l-31.156 17.838-27.026 25.798v98.91Z" fill="#34A853"/><polygon fill="#EA4335" points="58.182 93.14 54.008 54.493 58.182 17.504 128 69.868 197.818 17.504 202.487 52.496 197.818 93.14 128 145.504"/><path d="M197.818 17.504v75.636L256 49.504V26.231c0-21.585-24.64-33.89-41.891-20.945L197.818 17.504Z" fill="#FBBC04"/><path d="M0 49.504l26.759 20.069 31.423 23.567V17.504L41.891 5.286C24.61-7.66 0 4.646 0 26.231v23.273Z" fill="#C5221F"/></svg>`,
 };
+
+const blobBase = import.meta.env.PUBLIC_VERCEL_BLOB_STORAGE_URL ?? "";
+const lightAvatar = blobBase ? `${blobBase}/me-2.website.webp` : "/images/me-2.website.webp";
+const darkAvatar = blobBase ? `${blobBase}/me.website.webp` : "/images/me.website.webp";
 
 const site: LinkIcon = {
   label: "phenrique.me",
-  svg: `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1ZM2.05 8.5h2.42c.07 1.5.37 2.86.84 3.9A6.01 6.01 0 0 1 2.05 8.5Zm2.42-1H2.05a6.01 6.01 0 0 1 3.26-3.9c-.47 1.04-.77 2.4-.84 3.9Zm1 0c.08-1.53.42-2.86.87-3.74.24-.47.48-.76.68-.92.18-.14.3-.15.35-.15.05 0 .17.01.35.15.2.16.44.45.68.92.45.88.79 2.21.86 3.74h-3.8Zm0 1h3.8c-.07 1.53-.41 2.86-.86 3.74-.24.47-.48.76-.68.92-.18.14-.3.15-.35.15-.05 0-.17-.01-.35-.15a2.6 2.6 0 0 1-.68-.92c-.45-.88-.79-2.21-.87-3.74Zm5.06 4.4c.47-1.04.77-2.4.84-3.9h2.42a6.01 6.01 0 0 1-3.26 3.9Zm.84-4.9c-.07-1.5-.37-2.86-.84-3.9a6.01 6.01 0 0 1 3.26 3.9h-2.42Z" fill="currentColor"/></svg>`,
+  svg: `<img data-theme-variant="light" src="${lightAvatar}" alt="" width="16" height="16" loading="lazy" decoding="async" /><img data-theme-variant="dark" src="${darkAvatar}" alt="" width="16" height="16" loading="lazy" decoding="async" />`,
 };
 
 /**
@@ -64,6 +68,8 @@ const BY_HOSTNAME: Record<string, LinkIcon> = {
   "twitter.com": x,
   "linkedin.com": linkedin,
   "instagram.com": instagram,
+  "gmail.com": email,
+  "mail.google.com": email,
   "phenrique.me": site,
 };
 
