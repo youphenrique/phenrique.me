@@ -4,7 +4,7 @@ title: "Paulo Henrique"
 
 Hello! I am a thinker, an (online) writer, and a software engineer who loves to code and build thoughtful, polished apps, libraries, tools, and other software artifacts.
 
-I care deeply about the craft, quality, excellence, and reasoning involved in creating things that resonate with people's beliefs and values, aiming to point toward what is good, beautiful, and true.
+I care deeply about the craft, quality, excellence, and reasoning behind creating work that resonates with people's beliefs and values, aiming to leave an imprint of what is good, beautiful, and true.
 
 Here I try to explore new ideas, experiment with different techniques, teach myself, and muse on insights into software engineering, computer science, theology, philosophy, and other topics.
 

@@ -20,14 +20,12 @@ Nowadays, I work as a full-stack software engineer[^fullstack], with a particula
 I think Paul Irish captures my natural inclination toward UI craft:
 
 ::quote{source="Paul Irish, About" href="https://www.paulirish.com/about/"}
-Crafting a UI holds a lot of responsibility. For more niche topics, the UI may influence, or become (!), the mental model that people retain for these concepts and systems. At the same time, a UI can delight the user in a way that backend never can.
+Crafting a UI holds a lot of responsibility. For more niche topics, the UI may influence, or become (!), the mental model that people retain for these concepts and systems. At the same time, a UI can delight the user in a way that backend never can... ([one of my favorite examples](https://youtu.be/0Goz0PnhEg8?si=0pA3RZbSS2f6_MUf)).
 ::
 
-::aside
-That last clause is not only a flourish — [here is one of my favourite examples](https://youtu.be/0Goz0PnhEg8?si=0pA3RZbSS2f6_MUf).
-::
+Right now I am building high-quality web apps with `Kotlin` and `TypeScript`. I am trying to specialize in cross-platform and web solutions using `Jetpack Compose`, `React Native`, and `React`, and I’m particularly excited about `Kotlin Multiplatform`. 
 
-Although my expertise lies on the frontend side, I bring a solid foundation in backend systems, which lets me work effectively across the entire stack. In short, I build web applications, APIs, CLIs, and libraries with TypeScript, Kotlin/Java, and C++ — with or without AI.
+Although my expertise lies on the frontend side, I bring a solid foundation in backend systems, which lets me work effectively across the entire stack: automation, CI/CD, designing robust, scalable systems, etc. In short, I build web applications, APIs, libraries and other tools — with or without AI.
 
 ::callout{type="insight" title="What I am aiming at"}
 I actively try to lean into technologies and skill sets outside my main expertise, aiming to grow into a more versatile, well-rounded professional — a true T-shaped engineer[^tshaped-1]<sup>,&nbsp;</sup>[^tshaped-2], especially in the era of agentic engineering.
