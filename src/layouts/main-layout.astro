@@ -14,11 +14,9 @@ interface Props {
   title: string;
   description: string;
   lang?: string;
-  /** Use the alternate light-mode portrait in the site header. */
-  themeAwareAvatar?: boolean;
 }
 
-const { title, description, lang = "en", themeAwareAvatar = false } = Astro.props;
+const { title, description, lang = "en" } = Astro.props;
 
 const dictionaries = { en: enDict, pt: ptDict } as const;
 const dict = dictionaries[lang as keyof typeof dictionaries] ?? enDict;
@@ -54,7 +52,7 @@ const pageDescription = metadatum?.data.description ?? description;
         flexDirection: "column",
       })}
     >
-      <Header lang={lang} dict={dict} themeAwareAvatar={themeAwareAvatar} />
+      <Header lang={lang} dict={dict} />
       <div class={css({ flex: 1 })}>
         <slot />
       </div>
