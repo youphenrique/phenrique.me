@@ -11,14 +11,19 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = "/nano.png" } = Astro.props;
+
+const blobBase = import.meta.env.PUBLIC_VERCEL_BLOB_STORAGE_URL ?? "";
+const defaultFavicon = blobBase ? `${blobBase}/me.website.webp` : "/images/me.website.webp";
+const darkFavicon = defaultFavicon;
+const lightFavicon = blobBase ? `${blobBase}/me-2.website.webp` : "/images/me-2.website.webp";
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
-<link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)" />
-<link rel="icon" type="image/x-icon" href="/favicon-light.svg" />
+<link id="favicon-dark" rel="icon" type="image/webp" href={darkFavicon} data-src={darkFavicon} media="(prefers-color-scheme: dark)" />
+<link id="favicon-light" rel="icon" type="image/webp" href={lightFavicon} data-src={lightFavicon} media="(prefers-color-scheme: light)" />
+<link id="favicon-default" rel="icon" href={defaultFavicon} />
 <meta name="generator" content={Astro.generator} />
 
 <!-- Canonical URL -->
@@ -147,6 +152,17 @@ const { title, description, image = "/nano.png" } = Astro.props;
     // texture over the ink canvas.
     document.documentElement.classList.toggle("dark", dark);
     document.documentElement.classList.toggle("light", !dark);
+
+    // Update active favicon to match the selected theme
+    const faviconDark = document.getElementById("favicon-dark");
+    const faviconLight = document.getElementById("favicon-light");
+    const faviconDefault = document.getElementById("favicon-default");
+    const activeFavicon = dark ? faviconDark?.dataset.src : faviconLight?.dataset.src;
+    if (activeFavicon) {
+      if (faviconDefault) faviconDefault.href = activeFavicon;
+      if (faviconDark) faviconDark.href = activeFavicon;
+      if (faviconLight) faviconLight.href = activeFavicon;
+    }
 
     // window.getComputedStyle(css).opacity;
     document.head.removeChild(css);
