@@ -17,7 +17,12 @@ const socialLinks = allSocialLinks.filter((link) => link.data.icon !== undefined
 const isPortuguese = Astro.currentLocale === "pt";
 ---
 
-<MainLayout title="Home" description="Paulo Henrique's personal website" lang={Astro.currentLocale ?? "en"}>
+<MainLayout
+  title="Home"
+  description="Paulo Henrique's personal website"
+  lang={Astro.currentLocale ?? "en"}
+  themeAwareAvatar
+>
   <Container styles={css.raw({ py: { base: 32, sm: 44 } })}>
     <div
       class={css({

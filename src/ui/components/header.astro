@@ -11,9 +11,11 @@ import NavIcon from "./nav-icon.astro";
 interface Props {
   lang: string;
   dict: MainDictionary;
+  /** Swap the avatar with the Linkbio portrait when the site is light. */
+  themeAwareAvatar?: boolean;
 }
 
-const { lang, dict } = Astro.props;
+const { lang, dict, themeAwareAvatar = false } = Astro.props;
 const pathname = Astro.url.pathname;
 
 const navLinks = [
@@ -94,27 +96,64 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
               w: 10,
               display: "block",
               borderRadius: "full",
-              border: isHomePage
-                ? "2px solid token(colors.border.accent)"
-                : "2px solid token(colors.bg.canvas)",
+              border: isHomePage ? "2px solid token(colors.border.accent)" : "2px solid token(colors.bg.canvas)",
               boxShadow: "elevation.avatar",
               flexShrink: 0,
             })}
           >
-            <Image
-              src="/images/me.website.png"
-              width={40}
-              height={40}
-              alt=""
-              loading="eager"
-              decoding="async"
-              class={css({
-                borderRadius: "full",
-                w: "full",
-                h: "full",
-                objectFit: "cover",
-              })}
-            />
+            {
+              themeAwareAvatar ? (
+                <>
+                  <span class={css({ display: { base: "block", _dark: "none" }, width: "36px", height: "36px" })}>
+                    <Image
+                      src={import.meta.env.PUBLIC_VERCEL_BLOB_STORAGE_URL + "/me-2.website.webp"}
+                      width={40}
+                      height={40}
+                      alt=""
+                      loading="eager"
+                      decoding="async"
+                      class={css({
+                        borderRadius: "full",
+                        w: "full",
+                        h: "full",
+                        objectFit: "cover",
+                      })}
+                    />
+                  </span>
+                  <span class={css({ display: { base: "none", _dark: "block" } })}>
+                    <Image
+                      src={import.meta.env.PUBLIC_VERCEL_BLOB_STORAGE_URL + "/me.website.webp"}
+                      width={40}
+                      height={40}
+                      alt=""
+                      loading="eager"
+                      decoding="async"
+                      class={css({
+                        borderRadius: "full",
+                        w: "full",
+                        h: "full",
+                        objectFit: "cover",
+                      })}
+                    />
+                  </span>
+                </>
+              ) : (
+                <Image
+                  src="/images/me.website.png"
+                  width={40}
+                  height={40}
+                  alt=""
+                  loading="eager"
+                  decoding="async"
+                  class={css({
+                    borderRadius: "full",
+                    w: "full",
+                    h: "full",
+                    objectFit: "cover",
+                  })}
+                />
+              )
+            }
           </a>
         </div>
 
