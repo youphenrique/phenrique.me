@@ -49,6 +49,11 @@ const { links } = Astro.props;
           class={css({
             width: 8,
             display: "block",
+            ...(item.name === "Website" && {
+              "& img": {
+                borderRadius: "full",
+              }
+            })
           })}
         >
           <Image src={item.logoUrl} width="32" height="32" alt={`${item.name} logo`} loading="eager" />
