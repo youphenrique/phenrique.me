@@ -1,0 +1,125 @@
+---
+import { css } from "../../../../styled-system/css";
+import { flex, vstack } from "../../../../styled-system/patterns";
+
+interface Props {
+  title: string;
+  tagline: string;
+  href: string;
+  label: string;
+  /** Split name for the logo well; falls back to `title` when absent. */
+  wordmark?: { accent: string; rest: string };
+}
+
+// Same card shell as `book-preview-card.astro` — `bg.raised` on a hairline
+// `border.subtle`, `xl` radius, `bg.raisedHover` on hover — so a card means the
+// same thing on /work as it does on /reading.
+const { title, tagline, href, label, wordmark } = Astro.props;
+
+// Geist Mono is loaded by `@font-face` in global.css rather than registered as
+// a Panda token, so the stack is written out here the way `.prose code` does.
+const monoStack = "GeistMono, ui-monospace, monospace";
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={label}
+  class={`group ${vstack({
+    position: "relative",
+    alignItems: "stretch",
+    gap: 0,
+    height: "full",
+    borderRadius: "xl",
+    bgColor: "bg.raised",
+    border: "1px solid",
+    borderColor: "border.subtle",
+    textDecoration: "none",
+    overflow: "hidden",
+    transitionProperty: "background-color, border-color",
+    transitionDuration: "200ms",
+    transitionTimingFunction: "ease-in-out",
+    _motionReduce: { transitionDuration: "0ms" },
+    _hover: { bgColor: "bg.raisedHover", borderColor: "border.default" },
+    _focusVisible: {
+      outline: "2px solid token(colors.border.accent)",
+      outlineOffset: "2px",
+    },
+  })}`}
+>
+  {
+    /*
+    The logo well. Sized by a minimum height rather than an aspect ratio: two
+    cards side by side are stretched to a shared row height by the grid, and an
+    aspect-ratio well would leave the shorter card's mark off-centre.
+  */
+  }
+  <div
+    class={flex({
+      flex: 1,
+      alignItems: "center",
+      justifyContent: "center",
+      minHeight: { base: "7.5rem", md: "9rem" },
+      px: 5,
+      py: 8,
+    })}
+  >
+    <span
+      class={css({
+        fontFamily: monoStack,
+        fontSize: { base: "2xl", md: "3xl" },
+        fontWeight: "medium",
+        letterSpacing: "-0.03em",
+        color: "text.primary",
+      })}
+    >
+      {
+        wordmark ? (
+          <>
+            <span class={css({ color: "text.accent" })}>{wordmark.accent}</span>
+            {wordmark.rest}
+          </>
+        ) : (
+          title
+        )
+      }
+    </span>
+  </div>
+
+  <div class={vstack({ alignItems: "stretch", gap: 1, px: 5, pb: 5 })}>
+    <h3 class={css({ fontSize: "md", fontWeight: "medium", color: "text.primary", lineHeight: 1.4 })}>
+      {title}
+    </h3>
+    <p class={css({ fontSize: "sm", lineHeight: 1.5, color: "text.muted" })}>{tagline}</p>
+  </div>
+
+  {/* Decorative: the card's accessible name already says where the link goes. */}
+  <svg
+    width="15"
+    height="15"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+    class={css({
+      position: "absolute",
+      top: 4,
+      right: 4,
+      color: "text.faint",
+      opacity: 0,
+      transitionProperty: "opacity, color",
+      transitionDuration: "200ms",
+      transitionTimingFunction: "ease-in-out",
+      _motionReduce: { transitionDuration: "0ms" },
+      _groupHover: { opacity: 1, color: "text.muted" },
+      _groupFocusVisible: { opacity: 1, color: "text.muted" },
+    })}
+  >
+    <path d="M7 17 17 7"></path>
+    <path d="M7 7h10v10"></path>
+  </svg>
+</a>

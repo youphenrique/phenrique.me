@@ -1,0 +1,113 @@
+---
+import { css } from "../../../../styled-system/css";
+import { flex, vstack } from "../../../../styled-system/patterns";
+import Markdown from "../../../ui/components/markdown.astro";
+
+interface Props {
+  company: string;
+  companyURL?: string;
+  role: string;
+  location?: string;
+  arrangement: string;
+  dateRange: string;
+  /** Raw markdown body — the bullet list of what the role involved. */
+  body: string | undefined;
+}
+
+// Deliberately not a card. Six carded sections in a row flattens the page, and
+// the experience list is the one section a reader works through top to bottom —
+// it earns typography and air rather than another box. Entries are separated by
+// a hairline instead.
+const { company, companyURL, role, location, arrangement, dateRange, body } = Astro.props;
+---
+
+<li
+  class={vstack({
+    alignItems: "stretch",
+    gap: 3,
+    pt: { base: 7, md: 8 },
+    borderTop: "1px solid",
+    borderColor: "border.hairline",
+    _first: { pt: 0, borderTop: "none" },
+  })}
+>
+  <div class={vstack({ alignItems: "stretch", gap: 1 })}>
+    {
+      /*
+      Company, role and dates share a line at md+ and stack below it: at the
+      base width the three cannot sit on one row without the date wrapping
+      mid-range, which reads as a broken column rather than a wrapped one.
+    */
+    }
+    <div
+      class={flex({
+        flexDirection: { base: "column", md: "row" },
+        alignItems: { base: "flex-start", md: "baseline" },
+        justifyContent: "space-between",
+        gap: { base: 0.5, md: 4 },
+      })}
+    >
+      <h3 class={css({ fontSize: "md", lineHeight: 1.4, color: "text.primary" })}>
+        <span class={css({ fontWeight: "semibold" })}>
+          {
+            companyURL ? (
+              <a
+                href={companyURL}
+                target="_blank"
+                rel="noopener noreferrer"
+                class={css({
+                  textDecoration: "underline",
+                  textDecorationColor: "border.underline",
+                  textUnderlineOffset: "3px",
+                  transition: "text-decoration-color 0.15s ease-in-out",
+                  _hover: { textDecorationColor: "border.underlineHover" },
+                })}
+              >
+                {company}
+              </a>
+            ) : (
+              company
+            )
+          }
+        </span>
+        <span aria-hidden="true" class={css({ color: "text.faint", px: 1.5 })}>·</span>
+        <span class={css({ color: "text.secondary" })}>{role}</span>
+      </h3>
+      <span
+        class={css({
+          flexShrink: 0,
+          fontSize: "sm",
+          fontWeight: "medium",
+          lineHeight: 1.5,
+          color: "text.muted",
+          fontVariantNumeric: "tabular-nums",
+        })}
+      >
+        {dateRange}
+      </span>
+    </div>
+    {/* A fully remote role has no office to name, and "Remote · Remote" is not a line. */}
+    <p class={css({ fontSize: "xs", lineHeight: 1.5, color: "text.muted" })}>
+      {arrangement}
+      {
+        location ? (
+          <>
+            <span aria-hidden="true">&nbsp;·&nbsp;</span>
+            <span class="sr-only">, </span>
+            {location}
+          </>
+        ) : null
+      }
+    </p>
+  </div>
+
+  {
+    /*
+    `.prose` without `.prose-longform`: these are bullets inside a page column,
+    not an article, so they take the typography and not the reading grid. The
+    size override lands in Panda's `utilities` layer, which is declared after
+    `prose`, so it wins over the layer's own 1rem default.
+  */
+  }
+  <Markdown body={body} class={"prose " + css({ fontSize: "sm", "& li + li": { marginTop: "0.5em" } })} />
+</li>

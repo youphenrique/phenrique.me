@@ -37,13 +37,25 @@ const writing = defineCollection({
   }),
 });
 
+/**
+ * One professional role. The body is the markdown bullet list of what the role
+ * involved, rendered through the `.prose` layer.
+ *
+ * `dateEnd` is nullable rather than the string "Current": the label for an
+ * ongoing role is copy, and copy belongs in a dictionary the page can localise.
+ * `arrangement` is a key for the same reason — the YAML says `hybrid`, the
+ * dictionary decides whether that reads "Hybrid" or "Híbrido".
+ */
 const work = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/work" }),
   schema: z.object({
     company: z.string(),
+    companyURL: z.string().optional(),
     role: z.string(),
+    location: z.string().optional(),
+    arrangement: z.enum(["on-site", "hybrid", "remote"]),
     dateStart: z.coerce.date(),
-    dateEnd: z.union([z.coerce.date(), z.string()]),
+    dateEnd: z.coerce.date().nullable(),
   }),
 });
 
@@ -52,10 +64,23 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    /** Short line for the project card; `description` is the longer page/RSS one. */
+    tagline: z.string(),
     date: z.coerce.date(),
     draft: z.boolean().optional(),
     demoURL: z.string().optional(),
     repoURL: z.string().optional(),
+    /**
+     * Typographic mark for the card's logo well: the name split into a tinted
+     * head and a neutral tail (`br` + `utils`). Optional — a project without one
+     * falls back to its title set in the same face.
+     */
+    wordmark: z
+      .object({
+        accent: z.string(),
+        rest: z.string(),
+      })
+      .optional(),
   }),
 });
 
@@ -104,6 +129,54 @@ const books = defineCollection({
   }),
 });
 
+/**
+ * Everything on /work that is a list of fields rather than prose: the
+ * highlights grid, the stack table, education and languages. The markdown body
+ * is the page's opening summary, which is the one part that reads as writing.
+ *
+ * Kept as one file per locale rather than a collection per section — these are
+ * facets of a single page, and splitting them would mean four collections that
+ * are only ever read together.
+ */
+const workPages = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/work-page" }),
+  schema: z.object({
+    metadata: z.object({
+      title: z.string(),
+      description: z.string(),
+    }),
+    resumeURL: z.string(),
+    highlights: z.array(
+      z.object({
+        // Key into the glyph set in `work-icon.astro`, not an asset path.
+        icon: z.enum(["code", "layers", "activity", "refresh", "shield", "users"]),
+        title: z.string(),
+        description: z.string(),
+      }),
+    ),
+    stack: z.array(
+      z.object({
+        label: z.string(),
+        items: z.array(z.string()),
+      }),
+    ),
+    education: z.array(
+      z.object({
+        degree: z.string(),
+        institution: z.string(),
+        location: z.string(),
+        period: z.string(),
+      }),
+    ),
+    languages: z.array(
+      z.object({
+        name: z.string(),
+        level: z.string(),
+      }),
+    ),
+  }),
+});
+
 const readingPages = defineCollection({
   loader: glob({ pattern: "**/[^_]*.yaml", base: "./src/content/reading" }),
   schema: z.object({
@@ -122,6 +195,7 @@ export const collections = {
   socialLinks,
   books,
   readingPages,
+  workPages,
   homePages,
   aboutPages,
   metadatum,

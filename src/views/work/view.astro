@@ -1,0 +1,208 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+
+import { css } from "../../../styled-system/css";
+import { vstack } from "../../../styled-system/patterns";
+import MainLayout from "../../layouts/main-layout.astro";
+import ButtonLink from "../../ui/components/button-link.astro";
+import Container from "../../ui/components/container.astro";
+import Markdown from "../../ui/components/markdown.astro";
+import type { WorkDictionary } from "../../i18n/work/types.ts";
+import EducationCard from "./_components/education-card.astro";
+import ExperienceItem from "./_components/experience-item.astro";
+import HighlightCard from "./_components/highlight-card.astro";
+import ProjectCard from "./_components/project-card.astro";
+import SectionHeading from "./_components/section-heading.astro";
+import StackList from "./_components/stack-list.astro";
+
+interface Props {
+  dict: WorkDictionary;
+  page: CollectionEntry<"workPages">;
+}
+
+const { dict, page } = Astro.props;
+
+// Dates are authored as plain YAML days and parsed as UTC midnight; formatting
+// in the build machine's zone would render the previous month west of Greenwich.
+const monthFormatter = new Intl.DateTimeFormat(Astro.currentLocale, {
+  month: "short",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
+/** "Aug 2025 — Present". An open-ended role has no end date, only a label. */
+function formatRange(start: Date, end: Date | null): string {
+  return `${monthFormatter.format(start)} — ${end === null ? dict.present : monthFormatter.format(end)}`;
+}
+
+const experience = (await getCollection("work")).sort(
+  (a, b) => b.data.dateStart.valueOf() - a.data.dateStart.valueOf(),
+);
+
+const projects = (await getCollection("projects"))
+  .filter((project) => !project.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Every grid on the page runs on the same two-column rhythm, so the cards line
+// up across sections rather than each one picking its own breakpoint.
+const cardGrid = css.raw({
+  mt: 6,
+  gap: 4,
+  display: "grid",
+  gridTemplateColumns: { base: "repeat(1, minmax(0, 1fr))", md: "repeat(2, minmax(0, 1fr))" },
+});
+
+const sectionGap = css.raw({ mt: { base: 14, md: 16 } });
+---
+
+<MainLayout
+  title={page.data.metadata.title}
+  description={page.data.metadata.description}
+  lang={Astro.currentLocale ?? "en"}
+>
+  <Container>
+    {/* Same opening as /reading and /writing: the three pages share a shell. */}
+    <div class={vstack({ mt: 32, alignItems: "stretch", gap: 8 })}>
+      <h1
+        class={"fraunces-font " +
+          css({
+            fontSize: "4xl",
+            fontWeight: "semibold",
+            color: "text.primary",
+          })}
+      >
+        {dict["page-title"]}
+      </h1>
+    </div>
+
+    {
+      /*
+      The summary stands in for an "About" heading rather than sitting under
+      one — on a page called Work, a paragraph in the first position is already
+      understood to be the introduction.
+    */
+    }
+    <Markdown body={page.body} class={"prose " + css({ mt: 6, maxW: "var(--prose-measure)" })} />
+
+    <div class={css({ mt: 8 })}>
+      <ButtonLink href={page.data.resumeURL} variant="primary" icon="arrow" external>
+        {dict["resume-cta"]}
+      </ButtonLink>
+    </div>
+
+    {
+      /*
+      Highlights first: it is the summary's evidence, and a reader who stops
+      after one screen should have read it. Everything below is the record that
+      backs it up.
+    */
+    }
+    <section class={css(sectionGap)}>
+      <SectionHeading id="highlights">{dict.sections.highlights}</SectionHeading>
+      <ul class={css(cardGrid)}>
+        {
+          page.data.highlights.map((highlight) => (
+            <HighlightCard icon={highlight.icon} title={highlight.title} description={highlight.description} />
+          ))
+        }
+      </ul>
+    </section>
+
+    {
+      projects.length > 0 && (
+        <section class={css(sectionGap)}>
+          <SectionHeading id="projects">{dict.sections.projects}</SectionHeading>
+          <ul class={css(cardGrid)}>
+            {projects.map((project) => (
+              <li>
+                <ProjectCard
+                  title={project.data.title}
+                  tagline={project.data.tagline}
+                  href={project.data.repoURL ?? project.data.demoURL ?? "#"}
+                  label={dict["project-link"].replace("{project}", project.data.title)}
+                  wordmark={project.data.wordmark}
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <section class={css(sectionGap)}>
+      <SectionHeading id="experience">{dict.sections.experience}</SectionHeading>
+      <ul class={vstack({ mt: 8, alignItems: "stretch", gap: { base: 7, md: 8 } })}>
+        {
+          experience.map((entry) => (
+            <ExperienceItem
+              company={entry.data.company}
+              companyURL={entry.data.companyURL}
+              role={entry.data.role}
+              location={entry.data.location}
+              arrangement={dict.arrangement[entry.data.arrangement]}
+              dateRange={formatRange(entry.data.dateStart, entry.data.dateEnd)}
+              body={entry.body}
+            />
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class={css(sectionGap)}>
+      <SectionHeading id="stack">{dict.sections.stack}</SectionHeading>
+      <div class={css({ mt: 6 })}>
+        <StackList groups={page.data.stack} />
+      </div>
+    </section>
+
+    <section class={css(sectionGap)}>
+      <SectionHeading id="education">{dict.sections.education}</SectionHeading>
+      <ul class={css(cardGrid)}>
+        {
+          page.data.education.map((entry) => (
+            <EducationCard
+              degree={entry.degree}
+              institution={entry.institution}
+              location={entry.location}
+              period={entry.period}
+            />
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class={css(sectionGap, { mb: 20 })}>
+      <SectionHeading id="languages">{dict.sections.languages}</SectionHeading>
+      <ul
+        class={css({
+          mt: 6,
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 2,
+          fontSize: "sm",
+          lineHeight: 1.6,
+        })}
+      >
+        {
+          page.data.languages.map((language) => (
+            <li
+              class={css({
+                px: 3,
+                py: 1.5,
+                borderRadius: "full",
+                border: "1px solid",
+                borderColor: "border.subtle",
+                color: "text.secondary",
+              })}
+            >
+              <span class={css({ fontWeight: "medium", color: "text.primary" })}>{language.name}</span>
+              <span aria-hidden="true">&nbsp;·&nbsp;</span>
+              <span class="sr-only">, </span>
+              {language.level}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </Container>
+</MainLayout>

@@ -1,0 +1,30 @@
+---
+import { css } from "../../../../styled-system/css";
+
+interface Props {
+  /** Anchors the section for the heading's `id`, so a section is linkable. */
+  id: string;
+}
+
+// Same label treatment as "More reads" on /reading — small, medium, `text.muted` —
+// so the two pages read as siblings. The rule is a real border rather than that
+// page's absolutely-positioned `_after` bar: /work stacks six of these, and a rule
+// that participates in flow is what keeps the gap above the first card identical
+// in every one of them.
+const { id } = Astro.props;
+---
+
+<h2
+  id={id}
+  class={css({
+    pb: 3,
+    fontSize: "sm",
+    fontWeight: "medium",
+    color: "text.muted",
+    borderBottom: "1px solid",
+    borderColor: "border.hairline",
+    scrollMarginTop: "6rem",
+  })}
+>
+  <slot />
+</h2>

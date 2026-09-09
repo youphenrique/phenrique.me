@@ -1,0 +1,56 @@
+---
+import { css } from "../../../../styled-system/css";
+
+interface Props {
+  groups: { label: string; items: string[] }[];
+}
+
+// A description list, because that is what it is: a term and the things under it.
+// Two columns at md+ with the label right-aligned against its values — the Anthony
+// Fu treatment — and a stacked pair below, where a 7.5rem label column would leave
+// the values on a ~12rem measure.
+const { groups } = Astro.props;
+---
+
+<dl
+  class={css({
+    display: "grid",
+    gridTemplateColumns: { base: "1fr", md: "7.5rem 1fr" },
+    columnGap: 6,
+    rowGap: { base: 4, md: 3 },
+    alignItems: "baseline",
+  })}
+>
+  {
+    groups.map((group) => (
+      <>
+        <dt
+          class={css({
+            fontSize: "sm",
+            fontWeight: "medium",
+            lineHeight: 1.6,
+            color: "text.muted",
+            textAlign: { base: "left", md: "right" },
+          })}
+        >
+          {group.label}
+        </dt>
+        {/*
+          One text run rather than a row of chips: seven groups of chips is a
+          field of boxes, and none of these values is a link or a filter. The
+          separator is a real character in the flow so the line wraps like prose.
+        */}
+        <dd
+          class={css({
+            mt: { base: 1, md: 0 },
+            fontSize: "sm",
+            lineHeight: 1.7,
+            color: "text.secondary",
+          })}
+        >
+          {group.items.join(" · ")}
+        </dd>
+      </>
+    ))
+  }
+</dl>

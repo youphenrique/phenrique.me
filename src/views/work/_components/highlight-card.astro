@@ -1,0 +1,36 @@
+---
+import { css } from "../../../../styled-system/css";
+import { vstack } from "../../../../styled-system/patterns";
+import WorkIcon, { type WorkIconName } from "./work-icon.astro";
+
+interface Props {
+  icon: WorkIconName;
+  title: string;
+  description: string;
+}
+
+const { icon, title, description } = Astro.props;
+---
+
+{/* Static card: no hover state, because nothing here is clickable. */}
+<li
+  class={vstack({
+    alignItems: "stretch",
+    gap: 3,
+    height: "full",
+    px: 5,
+    py: 5,
+    borderRadius: "xl",
+    bgColor: "bg.raised",
+    border: "1px solid",
+    borderColor: "border.subtle",
+  })}
+>
+  <WorkIcon name={icon} class={css({ color: "text.faint" })} />
+  <div class={vstack({ alignItems: "stretch", gap: 1.5 })}>
+    <h3 class={css({ fontSize: "sm", fontWeight: "semibold", color: "text.primary", lineHeight: 1.4 })}>
+      {title}
+    </h3>
+    <p class={css({ fontSize: "sm", lineHeight: 1.6, color: "text.secondary" })}>{description}</p>
+  </div>
+</li>

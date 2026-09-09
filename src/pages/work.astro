@@ -1,0 +1,14 @@
+---
+import { getEntry } from "astro:content";
+
+import dict from "../i18n/work/en";
+import WorkView from "../views/work/view.astro";
+
+const workPageEntry = await getEntry("workPages", Astro.currentLocale!);
+
+if (workPageEntry === undefined) {
+  return Astro.redirect("/404");
+}
+---
+
+<WorkView dict={dict} page={workPageEntry} />

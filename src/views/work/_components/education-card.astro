@@ -1,0 +1,47 @@
+---
+import { css } from "../../../../styled-system/css";
+import { vstack } from "../../../../styled-system/patterns";
+import WorkIcon from "./work-icon.astro";
+
+interface Props {
+  degree: string;
+  institution: string;
+  location: string;
+  period: string;
+}
+
+const { degree, institution, location, period } = Astro.props;
+---
+
+<li
+  class={vstack({
+    alignItems: "stretch",
+    gap: 3,
+    height: "full",
+    px: 5,
+    py: 5,
+    borderRadius: "xl",
+    bgColor: "bg.raised",
+    border: "1px solid",
+    borderColor: "border.subtle",
+  })}
+>
+  <WorkIcon name="graduation" class={css({ color: "text.faint" })} />
+  <div class={vstack({ alignItems: "stretch", gap: 1 })}>
+    <h3 class={css({ fontSize: "sm", fontWeight: "semibold", color: "text.primary", lineHeight: 1.4 })}>
+      {degree}
+    </h3>
+    <p class={css({ fontSize: "sm", lineHeight: 1.5, color: "text.secondary" })}>{institution}</p>
+    {
+      /*
+      `text.muted`, not `text.faint`: this line is the only place the years
+      appear, so it is content rather than decoration. `text.faint` is specified
+      against the canvas and drops to 3.2:1 on `bg.raised`, which is below AA for
+      something a reader is meant to be able to read.
+    */
+    }
+    <p class={css({ fontSize: "xs", lineHeight: 1.5, color: "text.muted" })}>
+      {location}<span aria-hidden="true">&nbsp;·&nbsp;</span><span class="sr-only">, </span>{period}
+    </p>
+  </div>
+</li>
