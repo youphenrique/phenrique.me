@@ -16,23 +16,6 @@ const transition = {
   transitionTimingFunction: "ease-in-out",
   _motionReduce: { transitionDuration: "0ms" },
 } as const;
-
-// One line with an ellipsis at rest; two wrapped lines once the card is engaged.
-const unclamped = {
-  display: "-webkit-box",
-  WebkitBoxOrient: "vertical",
-  WebkitLineClamp: "2",
-  whiteSpace: "normal",
-} as const;
-
-const metaLine = css({
-  display: "block",
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-  whiteSpace: "nowrap",
-  _groupHover: unclamped,
-  _groupFocusVisible: unclamped,
-});
 ---
 
 <a
@@ -44,12 +27,11 @@ const metaLine = css({
     py: 3,
     px: 4,
     borderRadius: "lg",
-    transitionProperty: "background-color, border-color",
+    transitionProperty: "background-color",
     ...transition,
-    _hover: { backgroundColor: "bg.hover", borderColor: "border.default" },
+    _hover: { backgroundColor: "bg.hover" },
     _focusVisible: {
       backgroundColor: "bg.hover",
-      borderColor: "border.default",
       outline: "2px solid token(colors.border.accent)",
       outlineOffset: "2px",
     },
@@ -101,26 +83,36 @@ const metaLine = css({
     <span class={css({ fontSize: "md", fontWeight: "medium", color: "text.primary", lineHeight: "1.5" })}>
       {title}
     </span>
+    {
+      /*
+      Always rendered, at every card. The description is what tells a reader
+      whether to open the post, so it is not hover-only: a pointer is the one
+      input that can reveal it, and it leaves touch and scanning with a bare
+      title. Clamping it also fixes the card's height, which is what keeps
+      hovering down the list from pushing the next card out from under the
+      cursor.
+    */
+    }
     <span
       class={css({
-        display: "grid",
-        gridTemplateRows: "0fr",
+        // Two lines below `sm`, one above. A single line at 375px carries about
+        // four words of description, which is not enough to decide on a post;
+        // the wider card fits a useful clamp on one. Either way the height is
+        // fixed at render, so nothing moves under the cursor.
+        display: { base: "-webkit-box", sm: "block" },
+        boxOrient: "vertical",
+        lineClamp: "2",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        whiteSpace: { base: "normal", sm: "nowrap" },
         fontSize: "sm",
         lineHeight: "1.5",
         color: "text.muted",
-        transitionProperty: "grid-template-rows",
-        ...transition,
-        _groupHover: { gridTemplateRows: "1fr" },
-        _groupFocusVisible: { gridTemplateRows: "1fr" },
       })}
     >
-      <span class={css({ display: "block", overflow: "hidden", minHeight: "1lh" })}>
-        <span class={metaLine}>
-          <time datetime={dateTime}>{date}</time>
-          <span aria-hidden="true">&nbsp;·&nbsp;</span>
-          {description}
-        </span>
-      </span>
+      <time datetime={dateTime}>{date}</time>
+      <span aria-hidden="true">&nbsp;·&nbsp;</span>
+      {description}
     </span>
   </span>
 </a>
