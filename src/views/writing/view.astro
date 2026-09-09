@@ -6,6 +6,7 @@ import Container from "../../ui/components/container.astro";
 import { vstack } from "../../../styled-system/patterns";
 import { css } from "../../../styled-system/css";
 import PostCard from "./_components/post-card.astro";
+import EmptyState from "./_components/empty-state.astro";
 import { publishedPosts } from "../../utils/content";
 import type { WritingDictionary } from "../../i18n/writing/types.ts";
 
@@ -41,20 +42,29 @@ const posts = publishedPosts(await getCollection("writing"), (Astro.currentLocal
         {Astro.props.dict["page-title"]}
       </h1>
     </div>
-    <ul class={vstack({ mt: 8, mb: 20, alignItems: "stretch", gap: 3 })}>
-      {
-        posts.map((post) => (
-          <li>
-            <PostCard
-              href={post.data.locale === "pt" ? `/pt/writing/${post.data.slug}` : `/writing/${post.data.slug}`}
-              title={post.data.title}
-              date={dateFormatter.format(post.data.date)}
-              dateTime={post.data.date.toISOString()}
-              description={post.data.description}
-            />
-          </li>
-        ))
-      }
-    </ul>
+    {
+      posts.length === 0 ? (
+        <div class={css({ mt: 8, mb: 20 })}>
+          <EmptyState
+            title={Astro.props.dict["empty-state"].title}
+            description={Astro.props.dict["empty-state"].description}
+          />
+        </div>
+      ) : (
+        <ul class={vstack({ mt: 8, mb: 20, alignItems: "stretch", gap: 3 })}>
+          {posts.map((post) => (
+            <li>
+              <PostCard
+                href={post.data.locale === "pt" ? `/pt/writing/${post.data.slug}` : `/writing/${post.data.slug}`}
+                title={post.data.title}
+                date={dateFormatter.format(post.data.date)}
+                dateTime={post.data.date.toISOString()}
+                description={post.data.description}
+              />
+            </li>
+          ))}
+        </ul>
+      )
+    }
   </Container>
 </MainLayout>
