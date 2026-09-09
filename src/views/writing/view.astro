@@ -7,7 +7,7 @@ import { vstack } from "../../../styled-system/patterns";
 import { css } from "../../../styled-system/css";
 import PostCard from "./_components/post-card.astro";
 import EmptyState from "./_components/empty-state.astro";
-import { publishedPosts } from "../../utils/content";
+import { listedPosts } from "../../utils/content";
 import type { WritingDictionary } from "../../i18n/writing/types.ts";
 
 interface Props {
@@ -25,7 +25,7 @@ const dateFormatter = new Intl.DateTimeFormat(Astro.currentLocale, {
   timeZone: "UTC",
 });
 
-const posts = publishedPosts(await getCollection("writing"), (Astro.currentLocale ?? "en") as "en" | "pt");
+const posts = listedPosts(await getCollection("writing"), (Astro.currentLocale ?? "en") as "en" | "pt");
 ---
 
 <MainLayout title={Astro.props.title} description={Astro.props.description} lang={Astro.currentLocale ?? "en"}>

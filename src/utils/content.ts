@@ -11,13 +11,27 @@ import type { CollectionEntry } from "astro:content";
  */
 export const showDrafts = import.meta.env.DEV;
 
-/** Filters a writing collection down to the entries a given locale should show. */
-export function publishedPosts(
+function postsForLocale(
   posts: CollectionEntry<"writing">[],
   locale: "en" | "pt",
 ): CollectionEntry<"writing">[] {
   return posts
     .filter((post) => post.data.locale === locale)
-    .filter((post) => showDrafts || post.data.draft !== true)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+}
+
+/** Posts that belong on the public writing index. Drafts are never listed. */
+export function listedPosts(
+  posts: CollectionEntry<"writing">[],
+  locale: "en" | "pt",
+): CollectionEntry<"writing">[] {
+  return postsForLocale(posts, locale).filter((post) => post.data.draft !== true);
+}
+
+/** Posts with generated pages. Draft URLs remain directly previewable in dev. */
+export function routablePosts(
+  posts: CollectionEntry<"writing">[],
+  locale: "en" | "pt",
+): CollectionEntry<"writing">[] {
+  return postsForLocale(posts, locale).filter((post) => showDrafts || post.data.draft !== true);
 }
