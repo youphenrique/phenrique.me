@@ -159,6 +159,12 @@ export default defineConfig({
             scrim: { value: { base: "rgba(10, 10, 10, 0.32)", _dark: "rgba(0, 0, 0, 0.5)" } },
             // Radial bloom behind the home hero; invisible by design in light mode.
             bloom: { value: { base: "rgba(255, 255, 255, 0)", _dark: "rgba(255, 255, 255, 0.03)" } },
+            // Solid fill for a primary control: the canvas turned inside out, so
+            // the pill reads as the darkest thing on a light page and the
+            // lightest on a dark one. Pairs with `text.onInverted` and nothing
+            // else — 17.0:1 light, 15.3:1 dark.
+            inverted: { value: { base: "{colors.ink.850}", _dark: "{colors.sand.300}" } },
+            invertedHover: { value: { base: "{colors.ink.950}", _dark: "{colors.sand.500}" } },
           },
 
           /** Foreground. Every role here clears 4.5:1 on `bg.canvas`. */
@@ -169,6 +175,8 @@ export default defineConfig({
             faint: { value: { base: "{colors.ink.400}", _dark: "{colors.ink.400}" } }, // decorative only
             accent: { value: { base: "{colors.coral.600}", _dark: "{colors.coral.500}" } }, // 4.7:1 / 6.3:1
             onAccent: { value: { base: "{colors.sand.50}", _dark: "{colors.sand.50}" } },
+            // The only foreground allowed on `bg.inverted`.
+            onInverted: { value: { base: "{colors.sand.50}", _dark: "{colors.ink.950}" } },
           },
 
           /** Strokes. `subtle` and `underline` are translucent so they work on

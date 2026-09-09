@@ -1,0 +1,119 @@
+---
+import { css, cx, type Styles } from "../../../styled-system/css";
+
+type Variant = "primary" | "secondary";
+type Icon = "arrow" | "download" | "none";
+
+interface Props {
+  href: string;
+  /** `primary` is the solid inverted pill; `secondary` is the outlined one. */
+  variant?: Variant;
+  /** Trailing glyph. `arrow` marks a destination away from the page. */
+  icon?: Icon;
+  external?: boolean;
+  /** Accessible name, when the visible label is not enough on its own. */
+  label?: string;
+  styles?: Styles;
+}
+
+const { href, variant = "primary", icon = "none", external = false, label, styles } = Astro.props;
+
+// Shared geometry. The pill is sized from its own type rather than a fixed
+// height, so it stays proportionate if a caller sets a different font size.
+const base = css.raw({
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 1.5,
+  px: 4,
+  py: 2.5,
+  borderRadius: "full",
+  fontSize: "sm",
+  fontWeight: "medium",
+  lineHeight: 1,
+  textDecoration: "none",
+  whiteSpace: "nowrap",
+  cursor: "pointer",
+  border: "1px solid",
+  transitionProperty: "background-color, border-color, color",
+  transitionDuration: "200ms",
+  transitionTimingFunction: "ease-in-out",
+  _motionReduce: { transitionDuration: "0ms" },
+  _focusVisible: {
+    outline: "2px solid token(colors.border.accent)",
+    outlineOffset: "2px",
+  },
+});
+
+// `bg.inverted` is the one fill that reverses with the theme, so the pill reads
+// as the page's densest object in both. Its only legal foreground is
+// `text.onInverted`.
+const VARIANT: Record<Variant, string> = {
+  primary: css({
+    bg: "bg.inverted",
+    color: "text.onInverted",
+    borderColor: "bg.inverted",
+    _hover: { bg: "bg.invertedHover", borderColor: "bg.invertedHover" },
+  }),
+  secondary: css({
+    bg: "transparent",
+    color: "text.secondary",
+    borderColor: "border.default",
+    _hover: { bg: "bg.hover", color: "text.primary", borderColor: "border.strong" },
+  }),
+};
+
+// Nudged down a hair: both glyphs sit optically high against Geist's cap height
+// when centred on the flex line.
+const glyph = css({ flexShrink: 0, mt: "-1px" });
+---
+
+<a
+  href={href}
+  aria-label={label}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
+  class={cx(VARIANT[variant], css(base, styles))}
+>
+  <slot />
+  {
+    icon === "arrow" ? (
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.25"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        class={glyph}
+      >
+        <path d="M7 17 17 7" />
+        <path d="M7 7h10v10" />
+      </svg>
+    ) : null
+  }
+  {
+    icon === "download" ? (
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.25"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        class={glyph}
+      >
+        <path d="M12 3v12" />
+        <path d="m7 12 5 5 5-5" />
+        <path d="M5 21h14" />
+      </svg>
+    ) : null
+  }
+  {external ? <span class="sr-only"> (opens in a new tab)</span> : null}
+</a>
