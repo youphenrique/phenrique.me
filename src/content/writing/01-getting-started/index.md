@@ -4,6 +4,7 @@ description: "Why frontend work is less about decoration than helping people for
 slug: "interfaces-are-arguments"
 locale: "en"
 date: "2026-08-28"
+draft: true
 ---
 
 I used to think frontend work began after the real engineering was finished. The API had to work; the data model had to survive contact with reality; the interface merely needed to make those things available.
@@ -45,12 +46,12 @@ Notice what the code refuses to do: it does not collapse every failure into “S
 
 Before I call an interface finished, I look for evidence of these things:
 
-| Question | What I am looking for |
-| :-- | :-- |
-| Is the purpose clear? | A first-time visitor can say what this page is for. |
-| Is the state honest? | The UI does not imply success, freshness, or permission it does not have. |
-| Is the next action proportionate? | The most likely task is easier than the exceptional one. |
-| Is recovery possible? | Errors explain what happened and preserve useful work. |
+| Question                          | What I am looking for                                                     |
+|:----------------------------------|:--------------------------------------------------------------------------|
+| Is the purpose clear?             | A first-time visitor can say what this page is for.                       |
+| Is the state honest?              | The UI does not imply success, freshness, or permission it does not have. |
+| Is the next action proportionate? | The most likely task is easier than the exceptional one.                  |
+| Is recovery possible?             | Errors explain what happened and preserve useful work.                    |
 
 The details matter: the [Web Content Accessibility Guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/) are not a final compliance pass, but part of the discipline of making meaning available to more people.
 

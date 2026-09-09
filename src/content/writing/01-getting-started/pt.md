@@ -4,6 +4,7 @@ description: "Por que trabalho de frontend não é decoração, mas uma forma de
 slug: "interfaces-sao-argumentos"
 locale: "pt"
 date: "2026-08-28"
+draft: true
 ---
 
 Durante algum tempo, pensei que o trabalho de frontend começava depois que a engenharia de verdade terminava. A API precisava funcionar; o modelo de dados precisava sobreviver ao mundo real; a interface apenas tornava tudo isso disponível.
@@ -45,12 +46,12 @@ Repare no que o código se recusa a fazer: ele não reduz toda falha a “Algo d
 
 Antes de considerar uma interface pronta, procuro evidências destas coisas:
 
-| Pergunta | O que procuro |
-| :-- | :-- |
-| O propósito está claro? | Uma pessoa em sua primeira visita sabe dizer para que serve a página. |
-| O estado é honesto? | A interface não sugere sucesso, atualização ou permissão que não possui. |
-| A próxima ação é proporcional? | A tarefa mais provável é mais simples que a excepcional. |
-| A recuperação é possível? | Os erros explicam o que houve e preservam trabalho útil. |
+| Pergunta                       | O que procuro                                                            |
+|:-------------------------------|:-------------------------------------------------------------------------|
+| O propósito está claro?        | Uma pessoa em sua primeira visita sabe dizer para que serve a página.    |
+| O estado é honesto?            | A interface não sugere sucesso, atualização ou permissão que não possui. |
+| A próxima ação é proporcional? | A tarefa mais provável é mais simples que a excepcional.                 |
+| A recuperação é possível?      | Os erros explicam o que houve e preservam trabalho útil.                 |
 
 Os detalhes importam: as [Web Content Accessibility Guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/) não são uma verificação final de conformidade, mas parte da disciplina de tornar o significado disponível a mais pessoas.
 

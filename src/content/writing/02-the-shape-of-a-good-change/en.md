@@ -4,6 +4,7 @@ description: "A practical way to make software changes that are easier to reason
 slug: "the-shape-of-a-good-change"
 locale: "en"
 date: "2026-08-21"
+draft: true
 ---
 
 Most difficult changes are not difficult because the code is long. They are difficult because the consequences are unclear. A button may touch permissions, analytics, data migration, translation, accessibility, and someone’s daily routine all at once.
@@ -20,11 +21,11 @@ Then I map the work in three layers:
 2. **Boundaries** — which APIs, storage, or permissions are crossed.
 3. **Proof** — how we will know the promise still holds.
 
-| Layer | Useful question | Typical artifact |
-| :-- | :-- | :-- |
-| Behavior | What should someone notice? | Acceptance example |
-| Boundaries | What can fail or become stale? | Contract or migration |
-| Proof | What protects the important path? | Test, metric, or manual check |
+| Layer      | Useful question                   | Typical artifact              |
+|:-----------|:----------------------------------|:------------------------------|
+| Behavior   | What should someone notice?       | Acceptance example            |
+| Boundaries | What can fail or become stale?    | Contract or migration         |
+| Proof      | What protects the important path? | Test, metric, or manual check |
 
 ## Keep the seam visible
 

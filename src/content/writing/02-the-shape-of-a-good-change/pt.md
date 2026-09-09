@@ -4,6 +4,7 @@ description: "Uma forma prática de fazer mudanças em software que sejam mais f
 slug: "a-forma-de-uma-boa-mudanca"
 locale: "pt"
 date: "2026-08-21"
+draft: true
 ---
 
 As mudanças mais difíceis raramente são difíceis porque o código é longo. Elas são difíceis porque as consequências não estão claras. Um botão pode tocar permissões, analytics, migração de dados, tradução, acessibilidade e a rotina diária de alguém de uma só vez.
@@ -20,11 +21,11 @@ Depois organizo o trabalho em três camadas:
 2. **Fronteiras** — quais APIs, dados armazenados ou permissões são atravessados.
 3. **Evidência** — como saberemos que a promessa continua válida.
 
-| Camada | Pergunta útil | Artefato típico |
-| :-- | :-- | :-- |
-| Comportamento | O que alguém deve perceber? | Exemplo de aceitação |
-| Fronteiras | O que pode falhar ou ficar desatualizado? | Contrato ou migração |
-| Evidência | O que protege o caminho importante? | Teste, métrica ou verificação manual |
+| Camada        | Pergunta útil                             | Artefato típico                      |
+|:--------------|:------------------------------------------|:-------------------------------------|
+| Comportamento | O que alguém deve perceber?               | Exemplo de aceitação                 |
+| Fronteiras    | O que pode falhar ou ficar desatualizado? | Contrato ou migração                 |
+| Evidência     | O que protege o caminho importante?       | Teste, métrica ou verificação manual |
 
 ## Deixe a costura visível
 
