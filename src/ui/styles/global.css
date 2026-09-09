@@ -306,11 +306,13 @@ body {
   }
 
   .prose input.task-list-item-checkbox {
+    top: 0.35rem;
+    position: relative;
     flex-shrink: 0;
     width: 0.95em;
     height: 0.95em;
-    /* Sits the box on the text's optical centre rather than its box centre. */
-    margin-top: 0.34em;
+    /* Aligns the checkbox optically with the first line's baseline / text optical centre in Geist. */
+    margin: 0.68em 0 0;
     accent-color: var(--colors-accent-default);
   }
 
