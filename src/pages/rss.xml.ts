@@ -7,13 +7,12 @@ interface Context {
 }
 
 export async function GET(context: Context) {
-  const blog = (await getCollection("writing")).filter((post) => post.data.locale === "en" && !post.data.draft);
-
-  const projects = (await getCollection("projects")).filter((project) => !project.data.draft);
-
-  const items = [...blog, ...projects].sort(
-    (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
-  );
+  // Writing only. Projects are a collection without a route of their own — they
+  // are rendered inline on /work — so feeding them here would emit item links
+  // to pages that do not exist.
+  const items = (await getCollection("writing"))
+    .filter((post) => post.data.locale === "en" && !post.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
   return rss({
     title: HOME.TITLE,
