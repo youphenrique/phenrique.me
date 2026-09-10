@@ -20,4 +20,6 @@ export interface ProseDictionary {
   "callout-insight": string;
   /** Label introducing an `::aside` block. */
   "aside-label": string;
+  /** Table of contents: the rail's accessible name and label, and the mobile sheet's title. */
+  "toc-label": string;
 }

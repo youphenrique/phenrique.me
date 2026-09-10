@@ -476,6 +476,23 @@ point it under `public/` and give `width` and `height` so the box is reserved. A
 
 A bare `![alt](src)` is parsed inside a paragraph and therefore cannot leave the text column. `::figure` is the only way to place an image in the `wide` track.
 
+### Table of contents
+
+`<Markdown toc />` adds a table of contents built by `comark/plugins/toc` from the document's top-level `h2` and `h3` headings. Articles, `/about` and `/colophon` turn it on. A page with fewer than three headings gets none — at that length an outline is noise.
+
+It takes two shapes, split by a single media query, `(min-width: 80rem) and (hover: hover)`:
+
+| Where                        | Shape                                                                   | Component           |
+|:-----------------------------|:------------------------------------------------------------------------|:--------------------|
+| Wide screen, real pointer    | Hairline ticks at the viewport's right edge; hover or focus opens a card | `toc/toc-rail.astro` |
+| Everything else, touch of any width | A floating pill naming the current section, opening a bottom sheet | `toc/toc-sheet.tsx`  |
+
+The rail sits at the viewport edge, not in the article's gutter, because the gutter is the `wide` track that tables and figures break out into. Ticks are `border.strong`, an `h3` half the length of an `h2`; the current section's tick lengthens and turns `accent.default`, and the card repeats it as a 2px bar beside the title. The card stays focusable while closed (transparent, not `visibility: hidden`), so `:focus-within` opens it for keyboard users.
+
+The pill is the header's pill in miniature — `bg.overlay` behind a blur, `elevation.pill` — with a progress ring in `accent.default` over `bg.track`. It only appears once the reader is inside the article, and it is hydrated with `client:media` on the inverse query, so wide pointer screens never load it.
+
+Both read one tracker, `trackReadingPosition` in `src/utils/toc.ts`: the active section is the last heading above a reading line 120px down, which clears the `scroll-margin-top: 5rem` every prose heading carries. The two queries are duplicated as literals because Panda extracts styles statically — change one and change the other.
+
 ### Footnotes
 
 `comark/plugins/footnotes` collects `[^ref]` markers into a labelled section at the end of the document. Three things about it are worth remembering.

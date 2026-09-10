@@ -1,8 +1,11 @@
 ---
 import { MarkdownDocument } from "@comark/react";
 
-import { parseContent } from "../../utils/comark";
+import { dictionaryFor, parseContent } from "../../utils/comark";
+import { flattenToc, TOC_MIN_ENTRIES } from "../../utils/toc";
 import { createProseComponents } from "./prose";
+import TocRail from "./toc/toc-rail.astro";
+import TocSheet from "./toc/toc-sheet.tsx";
 
 interface Props {
   /**
@@ -18,9 +21,16 @@ interface Props {
    * back to the page's own locale.
    */
   locale?: string;
+  /**
+   * Adds a table of contents built from the document's `h2` and `h3` headings:
+   * a tick rail at the viewport edge on wide pointer screens, a reading pill
+   * everywhere else. Skipped when the document has fewer than
+   * `TOC_MIN_ENTRIES` headings.
+   */
+  toc?: boolean;
 }
 
-const { body, class: className, locale } = Astro.props;
+const { body, class: className, locale, toc = false } = Astro.props;
 const resolvedLocale = locale ?? Astro.currentLocale ?? "en";
 
 // Parsed here rather than inside the island: `MarkdownDocument` is synchronous,
@@ -28,6 +38,18 @@ const resolvedLocale = locale ?? Astro.currentLocale ?? "en";
 // `client:*` directive — this compiles to static HTML.
 const document = body === undefined ? null : await parseContent(body, resolvedLocale);
 const components = createProseComponents(resolvedLocale);
+
+const tocEntries = toc && document !== null ? flattenToc(document.meta.toc) : [];
+const tocLabel = dictionaryFor(resolvedLocale)["toc-label"];
 ---
 
 {document !== null && <MarkdownDocument value={document} components={components} className={className} />}
+{
+  tocEntries.length >= TOC_MIN_ENTRIES && (
+    <>
+      <TocRail entries={tocEntries} label={tocLabel} />
+      {/* The inverse of the rail's media query: hydrated only where the rail is not drawn. */}
+      <TocSheet client:media="not all and (min-width: 80rem) and (hover: hover)" entries={tocEntries} label={tocLabel} />
+    </>
+  )
+}

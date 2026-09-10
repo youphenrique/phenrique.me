@@ -8,6 +8,7 @@ const pt: ProseDictionary = {
   "callout-warning": "Atenção",
   "callout-insight": "Vale notar",
   "aside-label": "À parte",
+  "toc-label": "Nesta página",
 };
 
 export default pt;
