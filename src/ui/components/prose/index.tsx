@@ -14,6 +14,7 @@ import IconLink from "../icon-link.tsx";
 import CodeBlock from "./code-block.tsx";
 import Figure from "./figure.tsx";
 import Quote from "./quote.tsx";
+import Tweet from "./tweet.tsx";
 import { createAside } from "./aside.tsx";
 import { createCallout } from "./callout.tsx";
 import { createProseTable } from "./prose-table.tsx";
@@ -54,6 +55,7 @@ export function createProseComponents(locale = "en"): Record<string, ProseCompon
     aside: createAside(dictionary),
     quote: Quote,
     figure: Figure,
+    tweet: Tweet,
   };
 
   // Cheap guarantee that the registry and the parser's allowlist agree: a tag

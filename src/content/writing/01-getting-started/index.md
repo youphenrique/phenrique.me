@@ -4,7 +4,7 @@ description: "Why frontend work is less about decoration than helping people for
 slug: "interfaces-are-arguments"
 locale: "en"
 date: "2026-08-28"
-draft: true
+draft: false
 ---
 
 I used to think frontend work began after the real engineering was finished. The API had to work; the data model had to survive contact with reality; the interface merely needed to make those things available.
@@ -54,5 +54,15 @@ Before I call an interface finished, I look for evidence of these things:
 | Is recovery possible?             | Errors explain what happened and preserve useful work.                    |
 
 The details matter: the [Web Content Accessibility Guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/) are not a final compliance pass, but part of the discipline of making meaning available to more people.
+
+## A static social-post example
+
+::tweet{author="Mark Chen" handle="markchen90" href="https://x.com/markchen90/status/2097400166554993041" avatar="/images/tweets/mark-chen.jpg" date="Sep 8, 2026"}
+Two things to distinguish: Did any human or agent look at user data as part of the Navier Stokes effort? No. Do we use user feedback and de-identified data to improve ChatGPT and Codex in a holistic way? Yes. And so does every LLM company.
+
+:::tweet{author="levent" href="https://x.com/__alpoge__/status/2097383870773748190" avatar="/images/tweets/levent-alpoge.jpg"}
+“We cannot rule out that de-identified data derived from their usage of our products helped improve our models.” I mean props to them for straight coming clean.
+:::
+::
 
 Good frontend engineering joins systems thinking with editorial judgment. The screen is where the system makes a promise. Our job is to make that promise intelligible—and, as far as we can, true.
