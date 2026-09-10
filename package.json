@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "dev:network": "astro dev --host",
-    "build": "astro check && astro build",
+    "build": "astro check && node scripts/check-syntax-colors.ts && astro build",
+    "check:syntax": "node scripts/check-syntax-colors.ts",
     "preview": "astro preview",
     "preview:network": "astro preview --host",
     "astro": "astro",

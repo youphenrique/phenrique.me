@@ -524,16 +524,30 @@ body {
   }
 }
 
-/* Comark's Shiki plugin tokenises each block once and emits both themes: the
-   light colour inline as `color`, the dark one alongside it as a `--shiki-dark`
-   custom property. Applying the dark half is the page's job — without this rule
-   code blocks keep their light-theme palette on the ink canvas. */
-:root.dark .shiki,
-:root.dark .shiki span {
-  color: var(--shiki-dark) !important;
-  font-style: var(--shiki-dark-font-style) !important;
-  font-weight: var(--shiki-dark-font-weight) !important;
-  text-decoration: var(--shiki-dark-text-decoration) !important;
+/* Code blocks use Shiki's css-variables theme (src/utils/code-theme.ts): every
+   token is emitted as `color: var(--shiki-token-*)`, and the values are bound
+   here to `syntax.*` semantic tokens. Both themes therefore come from Panda and
+   switch with the page — there is no second, hard-coded palette to apply.
+   Shiki's `string-expression` and `link` are folded into `string` and
+   `function`: fewer colours, each one easier to tell apart.
+   `color` is set here, not left to `--shiki-foreground`: CodeBlock drops the
+   `<pre>`'s inline style, so untokenised text would inherit the prose colour. */
+.shiki {
+  color: var(--colors-syntax-text);
+  --shiki-foreground: var(--colors-syntax-text);
+  --shiki-background: transparent;
+  --shiki-token-comment: var(--colors-syntax-comment);
+  --shiki-token-punctuation: var(--colors-syntax-punctuation);
+  --shiki-token-keyword: var(--colors-syntax-keyword);
+  --shiki-token-string: var(--colors-syntax-string);
+  --shiki-token-string-expression: var(--colors-syntax-string);
+  --shiki-token-constant: var(--colors-syntax-constant);
+  --shiki-token-function: var(--colors-syntax-function);
+  --shiki-token-link: var(--colors-syntax-function);
+  --shiki-token-parameter: var(--colors-syntax-parameter);
+  --shiki-token-inserted: var(--colors-syntax-inserted);
+  --shiki-token-deleted: var(--colors-syntax-deleted);
+  --shiki-token-changed: var(--colors-syntax-changed);
 }
 
 /* Paper grain — light mode only.
