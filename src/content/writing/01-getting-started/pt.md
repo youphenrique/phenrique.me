@@ -42,6 +42,52 @@ export function messageFor(result: SaveResult) {
 
 Repare no que o código se recusa a fazer: ele não reduz toda falha a “Algo deu errado”. Especificidade não é luxo. É como o software ajuda alguém a dar um próximo passo competente.
 
+O mesmo argumento sobrevive à mudança para um cliente nativo, e uma linguagem mais rígida pode cobrar você por ele. Em Kotlin, uma sealed interface transforma a lista de estados em algo que o compilador exige: acrescente um desfecho, e todo `when` que transforma um resultado em palavras deixa de compilar até que alguém decida o que a pessoa deve ler.
+
+```kotlin [SaveMessage.kt]
+package app.profile
+
+import kotlinx.coroutines.delay
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
+
+/** Todo desfecho de um salvamento; a interface responde a cada um. */
+sealed interface SaveResult {
+    data object Saved : SaveResult
+    data class Offline(val retryIn: Duration) : SaveResult
+    data class Invalid(val fields: List<String>) : SaveResult
+}
+
+@JvmInline
+value class Message(val text: String)
+
+fun SaveResult.toMessage(): Message = when (this) {
+    SaveResult.Saved -> Message("Suas alterações foram salvas.")
+    is SaveResult.Offline ->
+        Message("Você está offline. Nova tentativa em $retryIn.")
+    is SaveResult.Invalid -> {
+        // “Algo deu errado” não é um próximo passo. Nomeie os campos.
+        val label = if (fields.size == 1) "o campo" else "os campos"
+        Message("Revise $label: ${fields.joinToString()}.")
+    }
+}
+
+suspend fun saveWithRetry(
+    attempts: Int = 3,
+    save: suspend () -> SaveResult,
+): SaveResult {
+    var last: SaveResult = SaveResult.Offline(retryIn = 5.seconds)
+    repeat(attempts) { attempt ->
+        last = save()
+        if (last !is SaveResult.Offline) return last
+        delay((attempt + 1) * 1_000L)
+    }
+    return last
+}
+```
+
+O laço de novas tentativas é a metade mais discreta do argumento. Estar offline ao salvar não é uma falha a relatar, mas um estado a esperar passar; por isso a interface só se manifesta quando esperar deixou de ser útil.
+
 ## Uma pequena régua de revisão
 
 Antes de considerar uma interface pronta, procuro evidências destas coisas:
