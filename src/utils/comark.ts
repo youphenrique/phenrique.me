@@ -6,6 +6,7 @@ import enProse from "../i18n/prose/en";
 import ptProse from "../i18n/prose/pt";
 import type { ProseDictionary } from "../i18n/prose/types";
 import { PROSE_COMPONENT_TAGS } from "../ui/components/prose/tags";
+import { codeHighlightOptions } from "./code-theme";
 
 /**
  * Shared Comark parse configuration.
@@ -40,7 +41,7 @@ function childrenOf(node: ElementNode): Node[] {
  * footnote plugin there would look for definitions inside a definition.
  */
 function parseInline(markdown: string) {
-  return parseMarkdown(markdown, { plugins: [shiki()] });
+  return parseMarkdown(markdown, { plugins: [shiki(codeHighlightOptions)] });
 }
 
 /**
@@ -191,7 +192,7 @@ export async function parseContent(body: string, locale = "en"): Promise<Markdow
   // Shiki tokenises code blocks at build time. The highlighter is a singleton
   // inside the plugin, so the cost is paid once per build rather than per page.
   const document = await parseMarkdown(body, {
-    plugins: [shiki(), footnotes({ label: dictionary["footnotes-label"], hr: false })],
+    plugins: [shiki(codeHighlightOptions), footnotes({ label: dictionary["footnotes-label"], hr: false })],
   });
 
   await parseFootnoteBodies(document);
