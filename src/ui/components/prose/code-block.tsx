@@ -22,6 +22,13 @@ const wrapperStyles = css({
   borderColor: "border.hairline",
   bg: "bg.raised",
   overflow: "hidden",
+  // A block with an overflowing line scrolls, and browsers make that scroller
+  // keyboard-focusable on their own. The ring goes on the panel, so it follows
+  // the rounded edge instead of being clipped by `overflow: hidden`.
+  "&:has(> pre:focus-visible)": {
+    outline: "2px solid token(colors.border.focus)",
+    outlineOffset: "2px",
+  },
 });
 
 const headerStyles = css({
@@ -60,6 +67,8 @@ const preStyles = css({
   py: "0.9em",
   // The block owns the surface; Shiki's own background would fight the token.
   bg: "transparent",
+  // The panel draws the ring (see `wrapperStyles`).
+  _focusVisible: { outline: "none" },
 });
 
 interface Props {

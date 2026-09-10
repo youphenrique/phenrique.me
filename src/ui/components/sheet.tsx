@@ -173,7 +173,7 @@ function SheetContent({
                 bgColor: "sheet.groupActive",
                 boxShadow: "elevation.controlPressed",
               },
-              _focusVisible: { outline: "2px solid token(colors.border.accent)", outlineOffset: "2px" },
+              _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "2px" },
             })}
             style={{
               // Optically centred against the sheet title; bottom sheets sit lower

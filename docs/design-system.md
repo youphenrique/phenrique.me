@@ -179,12 +179,15 @@ Ratios are measured against `bg.canvas` in the corresponding theme.
 | `border.subtle`         | `rgba(10,10,10,.12)` | `rgba(255,255,255,.12)` | card and button outlines         |
 | `border.default`        | `sand.400`           | `ink.800`               | dividers, menu edges, rules      |
 | `border.strong`         | `sand.500`           | `ink.700`               | emphasis, empty-state glyphs     |
-| `border.accent`         | `coral.500`          | `coral.500`             | focus rings, active indicators   |
+| `border.accent`         | `coral.500`          | `coral.500`             | active indicators, quote rules   |
+| `border.focus`          | `coral.600`          | `coral.500`             | keyboard focus rings             |
 | `border.underline`      | `rgba(10,10,10,.15)` | `rgba(255,255,255,.3)`  | link underlines at rest          |
 | `border.underlineHover` | `rgba(10,10,10,.3)`  | `rgba(255,255,255,.55)` | link underlines on hover         |
 | `border.hairline`       | `rgba(10,10,10,.09)` | `rgba(255,255,255,.11)` | row separators in a grouped list |
 
 The translucent ones are deliberate exceptions to "use a ramp step": a stroke that has to sit on an unknown surface cannot be a solid colour.
+
+**Focus rings use `border.focus`, never `border.accent`.** A focus indicator needs 3:1 against what surrounds it, and `coral.500` is only 2.9:1 on the light canvas; `coral.600` is 4.7:1. The standard ring is `outline: 2px solid token(colors.border.focus)` with a `2px` offset. Inset it (`-2px`) when the control sits flush inside a bordered group, such as a segmented switch or a grouped-list row, so the ring does not cut the group's edge.
 
 ### `accent.*` — the brand as an interactive role
 

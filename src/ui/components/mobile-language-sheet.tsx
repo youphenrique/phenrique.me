@@ -69,7 +69,7 @@ export default function MobileLanguageSheet({ currentLocale, languages, menuLabe
           color: "text.secondary",
           transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
           _hover: { color: "text.primary", bgColor: "bg.raisedHover", cursor: "pointer" },
-          _focusVisible: { outline: "2px solid token(colors.border.accent)", outlineOffset: "2px" },
+          _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "2px" },
         })}
       >
         <GlobeIcon />
@@ -137,7 +137,7 @@ export default function MobileLanguageSheet({ currentLocale, languages, menuLabe
                     textDecoration: "none",
                     transition: "background-color 0.12s ease-out",
                     _active: { bgColor: "sheet.groupActive" },
-                    _focusVisible: { outline: "2px solid token(colors.border.accent)", outlineOffset: "-2px" },
+                    _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "-2px" },
                   })}
                 >
                   <span>{language.name}</span>

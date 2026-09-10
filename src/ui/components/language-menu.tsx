@@ -79,6 +79,7 @@ export default function LanguageMenu(props: LanguageMenuProps) {
             transition: "color 0.15s ease-in-out",
             _hover: { color: "text.primary" },
             "&[data-popup-open]": { color: "text.primary" },
+            _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "2px" },
           }),
           withLabel
             ? hstack({

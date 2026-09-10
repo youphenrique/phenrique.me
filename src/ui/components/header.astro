@@ -102,6 +102,9 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
               // link shows where it goes using a marker the header already has.
               _hover: { borderColor: "border.accent", transform: "scale(1.04)" },
               _motionReduce: { transition: "none", _hover: { transform: "none" } },
+              // Offset clears the 2px border, so the ring never merges with the
+              // accent ring the avatar wears on the home page.
+              _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "2px" },
             })}
           >
             <span class={css({ display: { base: "block", _dark: "none" } })}>
@@ -156,6 +159,9 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                     transition: "color 0.15s ease-in-out",
                     // Hover must not borrow the accent: coral means "you are here".
                     _hover: { color: "text.primary" },
+                    borderRadius: "sm",
+                    // 4px offset keeps the ring clear of the current-page dot below.
+                    _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "4px" },
                     // Current page: accent text plus a dot, so the state does not
                     // rest on colour alone.
                     _currentPage: {
@@ -207,6 +213,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
               justifyContent: "center",
               position: "relative",
               cursor: "pointer",
+              _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "2px" },
             })}
           >
             <span
@@ -270,6 +277,8 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                 color: "text.secondary",
                 transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
                 _hover: { cursor: "pointer", color: "text.primary" },
+                // Inset so the ring stays inside the switch instead of cutting its border.
+                _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "-2px" },
               })}
             >
               <svg width="16" height="16" stroke-linejoin="round" viewBox="0 0 16 16">
@@ -295,6 +304,8 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                 color: "text.secondary",
                 transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
                 _hover: { cursor: "pointer", color: "text.primary" },
+                // Inset so the ring stays inside the switch instead of cutting its border.
+                _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "-2px" },
               })}
             >
               <svg width="16" height="16" viewBox="0 0 16 16" stroke-linejoin="round">
@@ -320,6 +331,8 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                 color: "text.secondary",
                 transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
                 _hover: { cursor: "pointer", color: "text.primary" },
+                // Inset so the ring stays inside the switch instead of cutting its border.
+                _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "-2px" },
               })}
             >
               <svg width="16" height="16" viewBox="0 0 16 16" stroke-linejoin="round">
@@ -372,6 +385,8 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                 color: isHomePage ? "text.accent" : "text.secondary",
                 transition: "color 0.15s ease-in-out",
                 _hover: { color: "text.primary" },
+                borderRadius: "sm",
+                _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "2px" },
                 textDecoration: "none",
               })}
             >
@@ -394,6 +409,8 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                       color: isActive ? "text.accent" : "text.secondary",
                       transition: "color 0.15s ease-in-out",
                       _hover: { color: "text.primary" },
+                      borderRadius: "sm",
+                      _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "2px" },
                       textDecoration: "none",
                     })}
                   >
@@ -439,6 +456,8 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                   color: "text.secondary",
                   transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
                   _hover: { cursor: "pointer", color: "text.primary" },
+                  // Inset so the ring stays inside the switch instead of cutting its border.
+                  _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "-2px" },
                 })}
               >
                 <svg width="16" height="16" stroke-linejoin="round" viewBox="0 0 16 16">
@@ -464,6 +483,8 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                   color: "text.secondary",
                   transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
                   _hover: { cursor: "pointer", color: "text.primary" },
+                  // Inset so the ring stays inside the switch instead of cutting its border.
+                  _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "-2px" },
                 })}
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" stroke-linejoin="round">
@@ -489,6 +510,8 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                   color: "text.secondary",
                   transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
                   _hover: { cursor: "pointer", color: "text.primary" },
+                  // Inset so the ring stays inside the switch instead of cutting its border.
+                  _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "-2px" },
                 })}
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" stroke-linejoin="round">

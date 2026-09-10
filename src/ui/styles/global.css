@@ -321,6 +321,17 @@ body {
     text-decoration-color: var(--colors-accent-hover);
   }
 
+  /* Every link in rendered Markdown, including footnote refs, backrefs and the
+     links inside `::quote` and `::tweet`, takes the site's focus ring rather than
+     the browser's. `border.focus`, not `border.accent`: a focus indicator needs
+     3:1, and coral.500 is 2.9:1 on the light canvas. A component that sets its
+     own `_focusVisible` still wins, since `prose` sits below Panda's utilities. */
+  .prose a:focus-visible {
+    outline: 2px solid var(--colors-border-focus);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
   .prose strong {
     font-weight: 600;
     color: var(--colors-text-primary);

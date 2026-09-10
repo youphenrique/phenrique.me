@@ -186,6 +186,9 @@ export default defineConfig({
             default: { value: { base: "{colors.sand.400}", _dark: "{colors.ink.800}" } },
             strong: { value: { base: "{colors.sand.500}", _dark: "{colors.ink.700}" } },
             accent: { value: { base: "{colors.coral.500}", _dark: "{colors.coral.500}" } },
+            // Keyboard focus ring. Deliberately not `accent`: coral.500 is 2.9:1 on
+            // the light canvas, and a focus indicator needs 3:1.
+            focus: { value: { base: "{colors.coral.600}", _dark: "{colors.coral.500}" } }, // 4.7:1 / 6.3:1
             underline: { value: { base: "rgba(10, 10, 10, 0.15)", _dark: "rgba(255, 255, 255, 0.3)" } },
             underlineHover: { value: { base: "rgba(10, 10, 10, 0.3)", _dark: "rgba(255, 255, 255, 0.55)" } },
             // Hairline between rows of a grouped list.

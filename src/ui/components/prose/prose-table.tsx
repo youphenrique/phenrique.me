@@ -17,7 +17,7 @@ import type { ProseDictionary } from "../../../i18n/prose/types.ts";
 const wrapperStyles = css({
   overflowX: "auto",
   _focusVisible: {
-    outline: "2px solid token(colors.border.accent)",
+    outline: "2px solid token(colors.border.focus)",
     outlineOffset: "2px",
     borderRadius: "sm",
   },
