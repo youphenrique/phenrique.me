@@ -53,6 +53,9 @@ const shareItemClass = hstack({
   "&[data-highlighted]": {
     bg: "linkbio.menuItemHover",
   },
+  // The highlight alone is 1.46:1 against the menu, too faint to mark focus.
+  // Inset so the ring stays inside the popup's padding.
+  _focusVisible: { outline: "2px solid token(colors.linkbio.focus)", outlineOffset: "-2px" },
 });
 
 const shareIconClass = css({ w: 6, h: 6 });
@@ -110,6 +113,7 @@ export default function TopMenu(props: TopMenuProps) {
             "&[data-popup-open]": {
               backgroundColor: "linkbio.controlHover",
             },
+            _focusVisible: { outline: "2px solid token(colors.linkbio.focus)", outlineOffset: "2px" },
           })}
         >
           <HtmlIcon
@@ -168,6 +172,7 @@ export default function TopMenu(props: TopMenuProps) {
                       "&[data-highlighted]": {
                         bg: "linkbio.menuItemHover",
                       },
+                      _focusVisible: { outline: "2px solid token(colors.linkbio.focus)", outlineOffset: "-2px" },
                       textDecoration: "none",
                       textAlign: "left",
                       background: "none",

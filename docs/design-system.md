@@ -294,7 +294,9 @@ class
 
 `/linkbio` is a standalone always-dark page that does **not** follow the site theme. Its tokens are single-valued: identical in light and dark.
 
-`canvas` · `surface` · `border` · `ring` · `textPrimary` · `textSecondary` · `control` · `controlHover` · `menuSurface` · `menuBorder` · `menuItemHover` · `separator` · `headingFrom` · `headingTo`
+`canvas` · `surface` · `border` · `ring` · `textPrimary` · `textSecondary` · `control` · `controlHover` · `menuSurface` · `menuBorder` · `menuItemHover` · `separator` · `headingFrom` · `headingTo` · `focus`
+
+`linkbio.focus` is the keyboard focus ring, bound to `coral.500` so focus looks the same here as on the rest of the site (where `border.focus` resolves to the same colour in dark mode). It clears 3:1 on every linkbio surface: 6.7:1 on the canvas, 4.8:1 on `control` and `menuSurface`, 3.3:1 on a highlighted `menuItemHover`. Use `outline: 2px solid token(colors.linkbio.focus)` with a `2px` offset, inset (`-2px`) for menu items.
 
 **Only** `src/views/linkbio/**` and `src/layouts/linkbio-layout.astro` may use these, and those files must use nothing else.
 

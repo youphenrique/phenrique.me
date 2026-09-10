@@ -267,6 +267,10 @@ export default defineConfig({
             menuSurface: { value: "#262626" },
             menuBorder: { value: "#252525" },
             menuItemHover: { value: "#404040" },
+            // Keyboard focus ring: the same coral as `border.focus` in dark mode, so
+            // focus reads the same across the site. 6.7:1 on the canvas, 4.8:1 on
+            // `control` and `menuSurface`, 3.3:1 on a highlighted `menuItemHover`.
+            focus: { value: "{colors.coral.500}" },
             separator: { value: "#3F3F46" },
             headingFrom: { value: "#F5F5F5" },
             headingTo: { value: "#999999" },
