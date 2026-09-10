@@ -43,7 +43,6 @@ function getNavHref(linkPath: string) {
 }
 
 const homeHref = lang === "en" ? "/" : `/${lang}`;
-const homeLabel = lang === "pt" ? "Página inicial" : "Home";
 const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `/${lang}/`;
 ---
 
@@ -88,7 +87,8 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
         <div class={hstack({ gap: 6 })}>
           <a
             href={homeHref}
-            aria-label={homeLabel}
+            aria-label={dict.header["home-label"]}
+            title={dict.header["home-label"]}
             class={css({
               h: 10,
               w: 10,
@@ -97,6 +97,11 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
               border: isHomePage ? "2px solid token(colors.border.accent)" : "2px solid token(colors.bg.canvas)",
               boxShadow: "elevation.avatar",
               flexShrink: 0,
+              transition: "border-color 0.2s ease, transform 0.2s ease",
+              // Hover previews the ring the avatar wears on the home page, so the
+              // link shows where it goes using a marker the header already has.
+              _hover: { borderColor: "border.accent", transform: "scale(1.04)" },
+              _motionReduce: { transition: "none", _hover: { transform: "none" } },
             })}
           >
             <span class={css({ display: { base: "block", _dark: "none" } })}>
@@ -353,6 +358,26 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
               gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
             })}
           >
+            <!-- Home spans both columns so the four sections below keep their 2×2 grid -->
+            <a
+              href={homeHref}
+              aria-current={isHomePage ? "page" : undefined}
+              class={hstack({
+                p: 1.5,
+                gap: 2.5,
+                fontSize: "sm",
+                gridColumn: "1 / -1",
+                position: "relative",
+                fontWeight: "medium",
+                color: isHomePage ? "text.accent" : "text.secondary",
+                transition: "color 0.15s ease-in-out",
+                _hover: { color: "text.primary" },
+                textDecoration: "none",
+              })}
+            >
+              <NavIcon name="home" class={css({ flexShrink: 0 })} />
+              {dict.header["home-label"]}
+            </a>
             {
               navLinks.map((link) => {
                 const isActive = pathname.includes(link.path);

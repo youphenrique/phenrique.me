@@ -2,6 +2,7 @@ import type { MainDictionary } from "./en";
 
 const dict: MainDictionary = {
   header: {
+    "home-label": "Início",
     "about-label": "Sobre",
     "reading-label": "Leitura",
     "work-label": "Trabalho",
