@@ -136,6 +136,10 @@ export default function LanguageMenu(props: LanguageMenuProps) {
                   "&[data-highlighted]": { bg: "bg.hover" },
                   textDecoration: "none",
                   outline: "none",
+                  // Arrow keys move real focus between items, and the highlight alone is
+                  // ~1.1:1 against the menu. The ring marks keyboard focus; a pointer
+                  // user still sees only the hover tint.
+                  _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "-2px" },
                 })}
               >
                 <span className={css({ fontSize: "sm", fontWeight: "medium" })}>{language.name}</span>
