@@ -21,6 +21,11 @@ export interface LinkIcon {
   svg: string;
   /** Human-readable destination name, used for the accessible label. */
   label: string;
+  /**
+   * The mark is wider than it is tall. It keeps the line height but takes its
+   * natural width, instead of being letterboxed into the square slot.
+   */
+  wide?: boolean;
 }
 
 const github: LinkIcon = {
@@ -41,6 +46,42 @@ const linkedin: LinkIcon = {
 const instagram: LinkIcon = {
   label: "Instagram",
   svg: `<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25"><path d="M17.017 25H6.982C3.142 25 0 21.815 0 17.921V7.08C0 3.185 3.142 0 6.982 0h10.035C20.857 0 24 3.185 24 7.079V17.92C24 21.815 20.857 25 17.017 25Zm0-1.87a5.064 5.064 0 0 0 3.626-1.532 5.207 5.207 0 0 0 1.511-3.677V7.08c0-1.383-.536-2.69-1.51-3.678a5.066 5.066 0 0 0-3.627-1.532H6.982a5.065 5.065 0 0 0-3.627 1.532A5.207 5.207 0 0 0 1.844 7.08V17.92c0 1.384.537 2.689 1.51 3.677a5.065 5.065 0 0 0 3.628 1.532h10.035Z" fill="currentColor"/><path d="M18.645 12.403c0 3.701-2.96 6.7-6.609 6.7s-6.61-3-6.61-6.7 2.96-6.701 6.61-6.701c3.65 0 6.609 3 6.609 6.701Zm-6.641-4.382c-2.39 0-4.328 1.964-4.328 4.388 0 2.423 1.937 4.388 4.328 4.388 2.39 0 4.327-1.965 4.327-4.388.002-2.424-1.936-4.388-4.327-4.388ZM20.316 5.598c0 .876-.7 1.586-1.565 1.586-.864 0-1.564-.71-1.564-1.586 0-.876.7-1.587 1.564-1.587.864 0 1.565.71 1.565 1.587Z" fill="currentColor"/></svg>`,
+};
+
+// Brand marks use their official colours instead of inheriting the prose link
+// colour. A brand that publishes light and dark versions (Vercel, Astro,
+// Comark) ships both, tagged with `data-theme-variant`, and the link shows the
+// one matching the site theme. Panda CSS carries its own yellow ground, so a
+// single version reads on either surface.
+const vercel: LinkIcon = {
+  label: "Vercel",
+  svg: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path data-theme-variant="light" d="m12 1.608 12 20.784H0Z" fill="#000000"/><path data-theme-variant="dark" d="m12 1.608 12 20.784H0Z" fill="#FFFFFF"/></svg>`,
+};
+
+// Astro's press kit (astro.build/press) ships the logomark in #17191E for light
+// surfaces and white for dark ones, and asks that its colours not be changed.
+const astroPath = `M8.358 20.162c-1.186-1.07-1.532-3.316-1.038-4.944.856 1.026 2.043 1.352 3.272 1.535 1.897.283 3.76.177 5.522-.678.202-.098.388-.229.608-.36.166.473.209.95.151 1.437-.14 1.185-.738 2.1-1.688 2.794-.38.277-.782.525-1.175.787-1.205.804-1.531 1.747-1.078 3.119l.044.148a3.158 3.158 0 0 1-1.407-1.188 3.31 3.31 0 0 1-.544-1.815c-.004-.32-.004-.642-.048-.958-.106-.769-.472-1.113-1.161-1.133-.707-.02-1.267.411-1.415 1.09-.012.053-.028.104-.045.165h.002zm-5.961-4.445s3.24-1.575 6.49-1.575l2.451-7.565c.092-.366.36-.614.662-.614.302 0 .57.248.662.614l2.45 7.565c3.85 0 6.491 1.575 6.491 1.575L16.088.727C15.93.285 15.663 0 15.303 0H8.697c-.36 0-.615.285-.784.727l-5.516 14.99z`;
+
+const astro: LinkIcon = {
+  label: "Astro",
+  svg: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path data-theme-variant="light" d="${astroPath}" fill="#17191E"/><path data-theme-variant="dark" d="${astroPath}" fill="#FFFFFF"/></svg>`,
+};
+
+const pandaCss: LinkIcon = {
+  label: "Panda CSS",
+  svg: `<svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><path d="M0 4.129C0 2.016 1.713.302 3.827.302h25.394c2.113 0 3.827 1.713 3.827 3.827v25.742c0 2.113-1.713 3.827-3.827 3.827H3.827C1.713 33.698 0 31.985 0 29.871V4.129Z" fill="#F6E458"/><path d="M21.178 7.767c-1.823-.524-3.683-.595-5.578-.425-1.06.11-2.081.32-3.064.69-2.126.798-3.722 2.181-4.673 4.263-.683 1.493-.93 3.08-.955 4.706-.027 1.72.188 3.72.531 5.162.31 1.524.724 3.966 1.314 5.408.056.137.126.183.276.183h7.392c.043 0 .086-.003.135-.006-.011-.027-.021-.052-.031-.075-.135-.289-.273-.576-.411-.864-.82-1.929-1.448-3.915-1.64-6.017-.085-.927-.073-1.85.184-2.88.294-1.034.925-1.763 1.972-2.068.96-.28 1.935-.278 2.89.031.853.276 1.409.859 1.646 1.731.181.67.181 1.347.044 2.023-.106.52-.319.995-.702 1.374-.688.681-1.547.838-2.469.786.002.026.003.05.004.073.039.158.077.317.115.475.09.382.18.764.296 1.138.228.734.493 1.468.793 2.149 2.14-.167 4.111-.698 6.203-1.954.03-.02.06-.038.088-.056.899-.56 1.626-1.286 2.128-2.223.812-1.517.97-3.14.73-4.764-.25-1.728-1.026-3.18-2.361-4.318-.927-.79-1.998-1.307-3.16-1.64Z" fill="#000000"/></svg>`,
+};
+
+// Comark's logo from `docs/public/logo-{light,dark}.svg` in comarkdown/comark:
+// an outlined frame around "M::". Not the favicon, whose white-filled frame
+// would read as a white chip on a dark surface.
+const comarkFrame = `M199 9v110H9V9h190Z`;
+const comarkLetters = `M128 51.25V32h19.937v19.25H128ZM128 96V76.75h19.937V96H128ZM158.063 51.25V32H178v19.25h-19.937Zm0 44.75V76.75H178V96h-19.937ZM30 98V30h20l20 25 20-25h20v68H90V59L70 84 50 59v39H30Z`;
+
+const comark: LinkIcon = {
+  label: "Comark",
+  wide: true,
+  svg: `<svg viewBox="0 0 208 128" fill="none" xmlns="http://www.w3.org/2000/svg"><g data-theme-variant="light"><path d="${comarkFrame}" stroke="#000000" stroke-width="8"/><path d="${comarkLetters}" fill="#000000"/></g><g data-theme-variant="dark"><path d="${comarkFrame}" stroke="#FFFFFF" stroke-width="8"/><path d="${comarkLetters}" fill="#FFFFFF"/></g></svg>`,
 };
 
 const email: LinkIcon = {
@@ -68,6 +109,10 @@ const BY_HOSTNAME: Record<string, LinkIcon> = {
   "twitter.com": x,
   "linkedin.com": linkedin,
   "instagram.com": instagram,
+  "vercel.com": vercel,
+  "astro.build": astro,
+  "panda-css.com": pandaCss,
+  "comark.dev": comark,
   "gmail.com": email,
   "mail.google.com": email,
   "phenrique.me": site,

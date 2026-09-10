@@ -29,6 +29,13 @@ const glyphStyles = css({
   },
 });
 
+// A wide mark keeps the line height and takes its natural width, so it is not
+// shrunk to fit the square slot.
+const wideGlyphStyles = css({
+  w: "auto",
+  "& svg": { w: "auto", h: "full" },
+});
+
 // The glyph is an atomic inline, and browsers keep a break opportunity after
 // one that a word joiner does not suppress — left alone it strands the mark at
 // the end of a line with the link text below it. Tying the glyph to the first
@@ -57,8 +64,9 @@ function splitLeadingWord(children: ReactNode): { lead: string; rest: ReactNode[
  *
  * Links whose destination is in the curated registry get a leading mark; every
  * other link renders untouched, so this stays invisible for the common case.
- * Colour and underline are left to the `.prose` layer — the glyph paints with
- * `currentColor` and therefore tracks the link's own state, hover included.
+ * Colour and underline are left to the `.prose` layer. Brand marks use their
+ * official colours, switching between light and dark versions where the brand
+ * publishes both; unbranded marks can still inherit `currentColor`.
  */
 export default function IconLink({ children, ...props }: Props) {
   const { href } = props;
@@ -83,7 +91,13 @@ export default function IconLink({ children, ...props }: Props) {
 
   // The mark is decorative: the link text already names the destination, so
   // announcing it again would only add noise.
-  const glyph = <span aria-hidden="true" className={glyphStyles} dangerouslySetInnerHTML={{ __html: icon.svg }} />;
+  const glyph = (
+    <span
+      aria-hidden="true"
+      className={icon.wide ? `${glyphStyles} ${wideGlyphStyles}` : glyphStyles}
+      dangerouslySetInnerHTML={{ __html: icon.svg }}
+    />
+  );
   const split = splitLeadingWord(children);
 
   return (

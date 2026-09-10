@@ -9,8 +9,8 @@ Um colofão é uma nota editorial — uma tradição da tipografia e da produç�
 
 Uma boa tipografia é a espinha dorsal de uma leitura confortável e atenta. Este espaço combina famílias tipográficas servidas diretamente pela infraestrutura de fontes do Astro, garantindo privacidade por padrão, zero rastreamento de terceiros e ausência de saltos visuais (*layout shifts*):
 
-- **Fraunces** (por Undercase Type): Utilizada em títulos de destaque e nomes de artigos. Uma serifa variável inspirada nos tipos do início do século XX, ajustada com eixos variáveis para um toque acolhedor e orgânico (`SOFT: 100`, `WONK: 1`).
-- **Geist** (por Vercel & Guillermo Rauch): A tipografia principal para todo o corpo de texto, navegação e prosa. Desenhada com foco em legibilidade, precisão e ritmo geométrico.
+- **Fraunces**: Utilizada em títulos de destaque e nomes de artigos. Uma serifa variável inspirada nos tipos do início do século XX, ajustada com eixos variáveis para um toque acolhedor e orgânico (`SOFT: 100`, `WONK: 1`).
+- **Geist**: A tipografia principal para todo o corpo de texto, navegação e prosa. Desenhada com foco em legibilidade, precisão e ritmo geométrico.
 - **Geist Mono**: Usada em blocos de código, hashes de commits, etiquetas de metadados e elementos técnicos.
 - **Instrument Serif**: Reservada para momentos editoriais sutis e clássicos.
 
