@@ -2,11 +2,11 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 
 import PostView from "../../views/writing/post.astro";
-import { routablePosts } from "../../utils/content";
+import { listedPosts } from "../../utils/content";
 import dict from "../../i18n/writing/en";
 
 export async function getStaticPaths() {
-  const posts = routablePosts(await getCollection("writing"), "en");
+  const posts = listedPosts(await getCollection("writing"), "en");
   return posts.map((post) => ({
     params: { slug: post.data.slug },
     props: post,

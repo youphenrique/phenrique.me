@@ -20,7 +20,7 @@ const imageStyles = css({
   display: "block",
   width: "full",
   height: "auto",
-  borderRadius: "md",
+  borderRadius: "xl",
   border: "1px solid",
   borderColor: "border.hairline",
 });

@@ -18,7 +18,7 @@ const CALLOUT_TYPES = new Set<CalloutType>(["note", "warning", "insight"]);
 const shared = {
   px: "1.25em",
   py: "1em",
-  borderRadius: "lg",
+  borderRadius: "xl",
   borderLeft: "3px solid",
 } as const;
 

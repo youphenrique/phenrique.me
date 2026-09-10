@@ -107,7 +107,7 @@ export default function LanguageMenu(props: LanguageMenuProps) {
               p: 1,
               minW: 48,
               boxShadow: "lg",
-              borderRadius: "lg",
+              borderRadius: "xl",
               border: "1px solid",
               bgColor: "bg.raised",
               borderColor: "border.default",
@@ -126,7 +126,7 @@ export default function LanguageMenu(props: LanguageMenuProps) {
                 href={language.href}
                 className={flex({
                   p: 2,
-                  borderRadius: "md",
+                  borderRadius: "xl",
                   alignItems: "center",
                   color: "text.secondary",
                   justifyContent: "space-between",
