@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 import { css } from "../../../styled-system/css";
 import { Sheet, SheetContent, SheetGrabber, SheetHeader, SheetTitle, SheetTrigger } from "./sheet.tsx";
 
@@ -55,6 +57,9 @@ function CheckIcon() {
 }
 
 export default function MobileLanguageSheet({ currentLocale, languages, menuLabel }: MobileLanguageSheetProps) {
+  // The sheet opens on the language already in use, not on whichever row is first.
+  const currentLanguageRef = useRef<HTMLAnchorElement>(null);
+
   return (
     <Sheet>
       <SheetTrigger
@@ -75,7 +80,7 @@ export default function MobileLanguageSheet({ currentLocale, languages, menuLabe
         <GlobeIcon />
       </SheetTrigger>
 
-      <SheetContent side="bottom" closeButtonSide="left" aria-describedby={undefined}>
+      <SheetContent side="bottom" closeButtonSide="left" aria-describedby={undefined} initialFocus={currentLanguageRef}>
         <SheetGrabber />
 
         {/* Horizontal padding clears the absolutely positioned close button so the
@@ -117,9 +122,14 @@ export default function MobileLanguageSheet({ currentLocale, languages, menuLabe
                     h: "1px",
                     bgColor: "border.hairline",
                   },
+                  // The list clips to its rounded corners, so the end rows carry the
+                  // same radius; otherwise the inset focus ring is cut off at the curve.
+                  "&:first-child > a": { borderTopLeftRadius: "0.875rem", borderTopRightRadius: "0.875rem" },
+                  "&:last-child > a": { borderBottomLeftRadius: "0.875rem", borderBottomRightRadius: "0.875rem" },
                 })}
               >
                 <a
+                  ref={isCurrent ? currentLanguageRef : undefined}
                   href={language.href}
                   aria-current={isCurrent ? "page" : undefined}
                   className={css({

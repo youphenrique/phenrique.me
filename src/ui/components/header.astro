@@ -347,10 +347,13 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
         </div>
       </div>
 
-      <!-- Mobile menu (hidden by default, shown when open) -->
+      <!-- Mobile menu (hidden by default, shown when open). `inert` while closed:
+           the collapse is a zero-height clip, which hides the links from sight but
+           not from Tab or a screen reader. The script lifts it on open. -->
       <div
         id="mobile-menu"
         data-open="false"
+        inert
         class={css({
           mb: "-8px",
           display: "grid",
@@ -605,6 +608,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
       headerPill.dataset.open = "true";
       mobileMenu.style.display = "grid";
       mobileMenu.style.gridTemplateRows = "1fr";
+      mobileMenu.inert = false;
       headerPill.style.borderRadius = "1.875rem";
       headerRow.style.paddingTop = "16px";
       headerRow.style.paddingInline = "18px";
@@ -617,6 +621,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
       isMenuOpen = false;
       headerPill.dataset.open = "false";
       mobileMenu.style.gridTemplateRows = "0fr";
+      mobileMenu.inert = true;
       headerPill.style.borderRadius = "2rem";
       headerRow.style.paddingTop = "7px";
       headerRow.style.paddingInline = "12px";
@@ -628,6 +633,15 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
     menuToggle.addEventListener("click", function () {
       if (isMenuOpen) closeMenu();
       else openMenu();
+    });
+
+    // Escape closes the open menu and hands focus back to the toggle. Bound to the
+    // pill, not the document: initHeader re-runs after every page swap, and the
+    // pill is replaced with the page while the document is not.
+    headerPill.addEventListener("keydown", function (event) {
+      if (event.key !== "Escape" || !isMenuOpen) return;
+      closeMenu();
+      menuToggle.focus();
     });
 
     // Close on resize to sm+

@@ -150,7 +150,9 @@ function SheetContent({
         className={(state) => cx(contentClass, typeof className === "function" ? className(state) : className)}
         {...props}
       >
-        {children}
+        {/* The close button comes first in the DOM. It is absolutely positioned
+            in a top corner, so source order changes nothing on screen, but it is
+            what keyboard users meet first, matching where it is drawn. */}
         {showCloseButton && (
           <SheetClose
             aria-label="Close"
@@ -198,6 +200,7 @@ function SheetContent({
             </svg>
           </SheetClose>
         )}
+        {children}
       </SheetPrimitive.Popup>
     </SheetPortal>
   );
