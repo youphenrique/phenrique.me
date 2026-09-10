@@ -99,7 +99,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
               flexShrink: 0,
             })}
           >
-            <span class={css({ display: { base: "block", _dark: "none" }, width: "36px", height: "36px" })}>
+            <span class={css({ display: { base: "block", _dark: "none" } })}>
               <Image
                 src={import.meta.env.PUBLIC_VERCEL_BLOB_STORAGE_URL + "/me-2.website.webp"}
                 width={40}
