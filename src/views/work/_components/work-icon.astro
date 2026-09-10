@@ -4,7 +4,7 @@
 //
 // The six `highlights` names are the enum `workPages` validates against, so a
 // content file cannot name a glyph that does not exist here.
-export type WorkIconName = "code" | "layers" | "activity" | "refresh" | "shield" | "users" | "graduation";
+export type WorkIconName = "code" | "layers" | "lightbulb" | "graduation" | "heart" | "users";
 
 interface Props {
   name: WorkIconName;
@@ -51,32 +51,33 @@ const { name, size = 18, class: iconClass } = Astro.props;
     ) : null
   }
 
-  {/* activity */}
+  {/* lightbulb */}
   {
-    name === "activity" ? (
-      <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
-    ) : null
-  }
-
-  {/* refresh-cw */}
-  {
-    name === "refresh" ? (
+    name === "lightbulb" ? (
       <>
-        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
-        <path d="M21 3v5h-5" />
-        <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
-        <path d="M8 16H3v5" />
+        <path d="M9 18h6" />
+        <path d="M10 22h4" />
+        <path d="M15.09 14c.18-.57.66-1 1.07-1.41A6 6 0 1 0 7.83 12.5c.48.47 1 1 1.18 1.5" />
+        <path d="M9 14h6v1a3 3 0 0 1-6 0z" />
       </>
     ) : null
   }
 
-  {/* shield-check */}
+  {/* graduation-cap */}
   {
-    name === "shield" ? (
+    name === "graduation" ? (
       <>
-        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
-        <path d="m9 12 2 2 4-4" />
+        <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+        <path d="M22 10v6" />
+        <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
       </>
+    ) : null
+  }
+
+  {/* heart */}
+  {
+    name === "heart" ? (
+      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z" />
     ) : null
   }
 
@@ -92,14 +93,4 @@ const { name, size = 18, class: iconClass } = Astro.props;
     ) : null
   }
 
-  {/* graduation-cap */}
-  {
-    name === "graduation" ? (
-      <>
-        <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
-        <path d="M22 10v6" />
-        <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
-      </>
-    ) : null
-  }
 </svg>
