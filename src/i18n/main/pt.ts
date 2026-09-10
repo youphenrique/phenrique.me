@@ -13,6 +13,8 @@ const dict: MainDictionary = {
   },
   footer: {
     "latest-commit": "último commit",
+    "citation-notice": "Citações com link para o original são bem-vindas.",
+    "colophon-label": "Colofão",
   },
 };
 

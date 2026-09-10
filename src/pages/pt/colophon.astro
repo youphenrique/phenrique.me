@@ -1,0 +1,17 @@
+---
+import { getEntry } from "astro:content";
+import ColophonView from "../../views/colophon/view.astro";
+
+const entry = await getEntry("colophonPages", "pt");
+
+if (entry === undefined) {
+  return Astro.redirect("/404");
+}
+---
+
+<ColophonView
+  title={entry.data.title}
+  description={entry.data.description}
+  body={entry.body}
+  locale="pt"
+/>

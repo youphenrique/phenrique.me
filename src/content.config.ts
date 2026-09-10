@@ -17,6 +17,14 @@ const aboutPages = defineCollection({
   }),
 });
 
+const colophonPages = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/colophon" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+  }),
+});
+
 const metadatum = defineCollection({
   loader: glob({ pattern: "**/[^_]*.yaml", base: "./src/content/metadatum" }),
   schema: z.object({
@@ -197,5 +205,6 @@ export const collections = {
   workPages,
   homePages,
   aboutPages,
+  colophonPages,
   metadatum,
 };

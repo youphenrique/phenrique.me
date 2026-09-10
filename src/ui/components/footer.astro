@@ -2,6 +2,7 @@
 import { css } from "../../../styled-system/css";
 import { container } from "../../../styled-system/patterns";
 import LatestCommit from "./latest-commit.astro";
+import { SITE } from "../../consts.ts";
 import type { MainDictionary } from "../../i18n/main/en.ts";
 
 interface Props {
@@ -10,6 +11,9 @@ interface Props {
 }
 
 const { lang, dict } = Astro.props;
+
+const currentYear = new Date().getFullYear();
+const colophonHref = lang === "pt" ? "/pt/colophon" : "/colophon";
 
 const innerContainerClass = css(
   container.raw({
@@ -20,13 +24,35 @@ const innerContainerClass = css(
   {
     py: 6,
     display: "flex",
-    alignItems: "center",
+    flexDirection: { base: "column", sm: "row" },
+    alignItems: { base: "flex-start", sm: "center" },
+    justifyContent: "space-between",
+    gap: 3,
   },
 );
 ---
 
 <footer>
   <div class={innerContainerClass}>
+    <div class={css({ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 1.5, fontSize: "xs", color: "text.muted" })}>
+      <span>&copy; {currentYear} {SITE.NAME}. {dict.footer["citation-notice"]}</span>
+      <span aria-hidden="true">&bull;</span>
+      <a
+        href={colophonHref}
+        class={css({
+          color: "text.muted",
+          textDecoration: "underline",
+          textUnderlineOffset: "3px",
+          textDecorationColor: "border.subtle",
+          transition: "color 0.15s ease-in-out, text-decoration-color 0.15s ease-in-out",
+          _hover: { color: "text.primary", textDecorationColor: "text.primary" },
+          borderRadius: "sm",
+          _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "2px" },
+        })}
+      >
+        {dict.footer["colophon-label"]}
+      </a>
+    </div>
     <LatestCommit lang={lang} dict={dict} />
   </div>
 </footer>

@@ -11,6 +11,8 @@ export interface MainDictionary {
   };
   footer: {
     "latest-commit": string;
+    "citation-notice": string;
+    "colophon-label": string;
   };
 }
 
@@ -27,6 +29,8 @@ const dict: MainDictionary = {
   },
   footer: {
     "latest-commit": "latest commit",
+    "citation-notice": "Excerpt citations with a link back are welcome.",
+    "colophon-label": "Colophon",
   },
 };
 

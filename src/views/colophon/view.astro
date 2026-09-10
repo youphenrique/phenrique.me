@@ -1,0 +1,45 @@
+---
+import { css } from "../../../styled-system/css";
+import MainLayout from "../../layouts/main-layout.astro";
+import Container from "../../ui/components/container.astro";
+import Markdown from "../../ui/components/markdown.astro";
+import BackToPrev from "../../ui/components/back-to-prev.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  body: string | undefined;
+  locale: string;
+}
+
+const { title, description, body, locale } = Astro.props;
+const homeHref = locale === "pt" ? "/pt" : "/";
+const backLabel = locale === "pt" ? "Voltar para o início" : "Back to home";
+---
+
+<MainLayout title={title} description={description} lang={locale}>
+  <Container styles={css.raw({ py: { base: 24, sm: 32 }, maxWidth: { base: "full", sm: "3xl", lg: "5xl" } })}>
+    <div class={`animate ${css({ maxWidth: "var(--prose-measure)", marginInline: "auto", mb: 8 })}`}>
+      <BackToPrev href={homeHref} label={backLabel} />
+    </div>
+
+    <header class={`animate ${css({ maxWidth: "var(--prose-measure)", marginInline: "auto", mb: 12 })}`}>
+      <h1
+        class={`fraunces-font ${css({
+          fontSize: "4xl",
+          fontWeight: "semibold",
+          lineHeight: "1.1",
+          letterSpacing: "-0.015em",
+          color: "text.primary",
+          textWrap: "balance",
+        })}`}
+      >
+        {title}
+      </h1>
+    </header>
+
+    <article>
+      <Markdown body={body} class="prose prose-longform" locale={locale} />
+    </article>
+  </Container>
+</MainLayout>
