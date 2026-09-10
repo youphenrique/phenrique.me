@@ -30,7 +30,7 @@ const locale = post.data.locale;
   */}
   <Container styles={css.raw({ py: { base: 24, sm: 32 }, maxWidth: { base: "full", sm: "3xl", lg: "5xl" } })}>
     <div class={`animate ${css({ maxWidth: "var(--prose-measure)", marginInline: "auto" })}`}>
-      <BackToPrev href={indexHref}>{dict["back-to-index"]}</BackToPrev>
+      <BackToPrev href={indexHref} label={dict["back-to-index"]} />
     </div>
     <div class={`prose-column ${css({ "& > * + *": { mt: 2 }, my: 10 })}`}>
       <div class={`animate ${css({ display: "flex", alignItems: "center", gap: 1.5, color: "text.muted" })}`}>

@@ -3,76 +3,51 @@ import { css } from "../../../styled-system/css";
 
 interface Props {
   href: string;
+  /** Accessible name and tooltip. The button shows only an icon, so this is the
+      only place its purpose is spelled out. */
+  label: string;
 }
 
-const { href } = Astro.props;
+const { href, label } = Astro.props;
 ---
 
 <a
   href={href}
-  class={`group ${css({
-    position: "relative",
-    width: "fit-content",
+  aria-label={label}
+  title={label}
+  class={css({
     display: "flex",
-    pl: 7,
-    pr: 3,
-    py: 1.5,
-    flexWrap: "nowrap",
-    borderRadius: "sm",
-    border: "1px solid",
-    borderColor: "border.subtle",
-    _hover: {
-      backgroundColor: "bg.hover",
+    alignItems: "center",
+    justifyContent: "center",
+    w: 9,
+    h: 9,
+    borderRadius: "full",
+    bg: "bg.raised",
+    color: "text.muted",
+    transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
+    _hover: { bg: "bg.raisedHover", color: "text.primary" },
+    _focusVisible: {
       color: "text.primary",
+      outline: "2px solid token(colors.border.focus)",
+      outlineOffset: "2px",
     },
-    transitionProperty: "color, background-color, border-color, text-decoration-color, fill, stroke",
-    transitionDuration: "300ms",
-    transitionTimingFunction: "ease-in-out",
-  })}`}
+  })}
 >
+  <!-- lucide `undo-2` -->
   <svg
     xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
     viewBox="0 0 24 24"
-    class={css({
-      position: "absolute",
-      top: "50%",
-      left: 2,
-      transform: "translateY(-50%)",
-      width: 4,
-      height: 4,
-      strokeWidth: "2",
-      fill: "none",
-      stroke: "currentColor",
-    })}
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+    focusable="false"
   >
-    <line
-      x1="5"
-      y1="12"
-      x2="19"
-      y2="12"
-      class={css({
-        transform: "translateX(8px) scaleX(0)",
-        _groupHover: {
-          transform: "translateX(0) scaleX(1)",
-        },
-        transitionProperty: "transform",
-        transitionDuration: "300ms",
-        transitionTimingFunction: "ease-in-out",
-      })}
-    ></line>
-    <polyline
-      points="12 5 5 12 12 19"
-      class={css({
-        transform: "translateX(4px)",
-        _groupHover: {
-          transform: "translateX(0)",
-        },
-        transitionProperty: "transform",
-        transitionDuration: "300ms",
-        transitionTimingFunction: "ease-in-out",
-      })}></polyline>
+    <path d="M9 14 4 9l5-5"></path>
+    <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"></path>
   </svg>
-  <div class={css({ fontSize: "sm" })}>
-    <slot />
-  </div>
 </a>
