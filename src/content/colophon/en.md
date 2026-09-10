@@ -9,8 +9,8 @@ A colophon is a statement of publication — a tradition in bookmaking and print
 
 Good typography is the backbone of comfortable, focused reading. This site pairs typefaces loaded via Astro's self-hosted font pipeline, ensuring zero third-party tracking, privacy by default, and no layout shifts:
 
-- **Fraunces** (by Undercase Type): Used for display headings and article titles. A variable serif inspired by early 20th-century typefaces, configured with custom variable axes for a warm, soft touch (`SOFT: 100`, `WONK: 1`).
-- **Geist** (by Vercel & Guillermo Rauch): The primary typeface for all body copy, navigation, and prose. Designed for legibility, precision, and geometric rhythm.
+- **Fraunces**: Used for display headings and article titles. A variable serif inspired by early 20th-century typefaces, configured with custom variable axes for a warm, soft touch (`SOFT: 100`, `WONK: 1`).
+- **Geist**: The primary typeface for all body copy, navigation, and prose. Designed for legibility, precision, and geometric rhythm.
 - **Geist Mono**: Used for code blocks, commit hashes, metadata badges, and technical labels.
 - **Instrument Serif**: Reserved for subtle editorial accents and hero moments.
 
