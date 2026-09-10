@@ -1,0 +1,17 @@
+---
+import { getEntry } from "astro:content";
+
+import AboutView from "../../views/about/view.astro";
+
+const homePageEntry = await getEntry("aboutPages", Astro.currentLocale ?? "pt");
+
+if (homePageEntry === undefined) {
+  return Astro.redirect("/404");
+}
+---
+
+<AboutView
+  title={homePageEntry.data.title}
+  bioImageResource={homePageEntry.data.bioImageResource}
+  body={homePageEntry.body}
+/>

@@ -3,48 +3,60 @@ title: "Construindo com maestria, pensando com profundidade, vivendo pela fé."
 bioImageResource: "/about-page.me.webp"
 ---
 
-My name is Paulo Henrique<sup>1</sup>. I am a software engineer from Fortaleza<sup>2</sup>, Brazil, and someone who enjoys researching, thinking, and solving problems at the intersection of the technical and social challenges.
+Olá, meu nome é Paulo Henrique[^name]. Sou um engenheiro de software com olhar apurado para design, de Fortaleza[^fortaleza], Brasil, atuando na interseção entre engenharia e fé.
 
-## My ethos
+## Meu ethos
 
-Although I initially intended to pursue a career in electrical engineering, "destiny"<sup>3</sup> ultimately led me to study computer science. In the early years, I wasn't sure if this was the professional career I wanted to pursue, but after being introduced to competitive programming, everything changed. Since then, I dedicated most of my study time solving algorithmic problems.
+Embora no início eu pretendesse seguir carreira em engenharia elétrica, o "destino"[^destiny] acabou me levando a estudar ciência da computação. Nos primeiros semestres, eu não tinha certeza se era essa a carreira que queria seguir, mas tudo mudou quando conheci a programação competitiva. A partir dali, passei a dedicar a maior parte do meu tempo de estudo a resolver problemas algorítmicos.
 
-The result of that competitive programming passion went on to shape my university experience, earning me a scholarship, internship opportunities, and the chance to compete in programming contests. By the way, between 2014 and 2016, I competed in the Maratona de Programação Brasileira, winning the regional championship in 2016<sup>4</sup> and reaching the national finals stage that same year. Ultimately, all these experiences solidified my desire to pursue a professional career in software engineer.
+Essa paixão pelas competições moldou minha experiência na universidade, rendendo bolsas de pesquisa, oportunidades de estágio e a chance de participar de torneios de programação. Entre 2014 e 2016 disputei a Maratona de Programação Brasileira, conquistando o campeonato regional em 2016[^maratona] e chegando à final nacional no mesmo ano. No fim das contas, todas essas experiências consolidaram meu desejo de seguir carreira na engenharia de software.
 
-In late 2019, I earned my B.Sc. in Computer Science from Universidade Estadual do Ceará. But since 2017, I've taken my first steps as a professional software developer when I joined a company as an intern due to my good results and performance in programming competitions. What started in competition arenas eventually became a career built around solving real problems — writing production code, working across the full stack, and paying close attention to the craft of quality software that users care about.
+No final de 2019, formei-me bacharel em Ciência da Computação pela Universidade Estadual do Ceará. Mas já em 2017 eu havia dado meus primeiros passos profissionais, ingressando como estagiário em uma empresa graças ao desempenho nas competições. O que começou nas arenas de competição acabou se tornando uma carreira construída em torno de resolver problemas reais — escrevendo código para produção, trabalhando em toda a stack e dedicando extrema atenção ao ofício de criar software de qualidade que faça a diferença para as pessoas.
 
-## What I do (professionally)
+## O que faço (profissionalmente)
 
-Nowadays, I work as a full-stack software engineer<sup>5</sup>, with a particular focus on the frontend. There's something deeply satisfying about crafting a beautiful, responsive, thoughtful user interface and seamless experiences <sup>6</sup> whether on mobile, web, or desktop applications. I think the following Paul Irish’s idea captures my natural inclination toward UI work:
+Hoje atuo como engenheiro de software full-stack[^fullstack], com foco especial no frontend. Há algo profundamente recompensador em criar interfaces elegantes, refinadas, bem pensadas e com experiências fluidas[^testimonial], seja em aplicações web, mobile ou desktop.
 
-> Crafting a UI holds a lot of responsibility. For more niche topics, the UI may influence, or become (!), the mental model that people retain for these concepts and systems. At the same time, a UI can delight the user in a way that backend never can… ([one of my favorite examples](https://youtu.be/0Goz0PnhEg8?si=0pA3RZbSS2f6_MUf)). <sup>7</sup>
+Acredito que Paul Irish sintetiza muito bem minha inclinação natural pelo ofício de criar UIs:
 
-Despite my expertise lies on the frontend side, I bring a solid foundation in backend systems, which enables me to work effectively across the entire stack. I actively try to lean into technologies and skill sets outside my main expertise, aiming to grow into a more versatile and well-rounded professional — a true T-shaped engineer <sup> 8, 9</sup>, especially in the era of agentic engineering.
+::quote{source="Paul Irish, About" href="https://www.paulirish.com/about/"}
+Criar uma interface traz uma grande responsabilidade. Em temas de nicho, a UI pode influenciar — ou até se tornar (!) — o modelo mental que as pessoas guardam sobre esses conceitos e sistemas. Ao mesmo tempo, uma UI é capaz de encantar o usuário de um jeito que o backend simplesmente não consegue... ([um dos meus exemplos favoritos](https://youtu.be/0Goz0PnhEg8?si=0pA3RZbSS2f6_MUf)).
+::
 
-## Faith & Community
+No momento, tenho desenvolvido aplicações web de alta qualidade com `Kotlin` e `TypeScript`. Busco me especializar em soluções multiplataforma e web utilizando `Jetpack Compose`, `React Native` e `React`, e tenho um entusiasmo especial por `Kotlin Multiplatform`.
 
-I'm a Protestant Christian<sup>10</sup>, and that's not a detail I tuck away from the rest of my life. My faith in God and his son Jesus shapes how I think about everything: my work, how I relate to people, and what I ultimately think technology is for. As Mortimer Adler observed, our conclusion about God impacts every area of our lives. It is the key to finding the ultimate meaning in life. It is literally the most important question for every human being to address. <sup>11</sup>
+Embora minha principal especialidade seja o frontend, tenho uma base sólida em sistemas de backend, o que me permite atuar com desenvoltura em toda a stack: automação, CI/CD, arquitetura de sistemas robustos e escaláveis, etc. Em resumo, desenvolvo aplicações web, APIs, bibliotecas e outras ferramentas — com ou sem IA.
 
-I hold a graduate degree in Sacred Scripture from FCTP, which reflects how seriously I take the life of the rational mind alongside the life of faith. My intention is not to become a theologian in the academic sense. However, I believe understanding the Bible well helps me to understand God, myself, the other people, and the universe/world we all live in.
+::callout{type="insight" title="Aonde quero chegar"}
+Procuro constantemente me aproximar de tecnologias e competências além da minha área central de especialidade, buscando me desenvolver como um profissional mais versátil e completo — um verdadeiro engenheiro em T (T-shaped)[^tshaped-1]<sup>,&nbsp;</sup>[^tshaped-2], especialmente nesta era de engenharia agêntica.
+::
 
-> If you want to know more about my beliefs and how they shape my identity, you can check out my article ["What I believe and why I believe in what I believe"](https://phenrique.me/writing/what-i-believe-and-why-i-believe-in-what-i-believe).
+## Fé e Comunidade
 
-When I'm not coding or writing, you’ll find me spending time with my family, friends, serving at my church community as a Bible teacher and musical leader, working out at the gym, reading a book, playing chess, or playing guitar or keyboard with my gig partners somewhere. That's where a lot of my most meaningful relationships live, and honestly, where I feel most like myself.
+Sou cristão protestante, e essa não é uma dimensão isolada do restante da minha vida. Minha fé em Deus e em seu filho Jesus orienta a maneira como penso sobre tudo: meu trabalho, como me relaciono com as pessoas e para que afinal serve a tecnologia. Como observou Mortimer Adler, a conclusão a que chegamos sobre Deus afeta todas as outras áreas da vida — é a chave para encontrar o sentido último das coisas e a pergunta mais importante que qualquer ser humano pode encarar.[^geisler]
 
-## Tech behind this website
+Para contextualizar, sou pós-graduado em Sagradas Escrituras pela FCTP. Isso reflete o quanto levo a sério a vida da mente racional lado a lado com a vida de fé. Minha intenção não é me tornar um teólogo no sentido acadêmico, mas acredito que compreender bem a Bíblia me ajuda a entender a mim mesmo, ao próximo, ao mundo em que vivemos e à maneira como tudo se relaciona dentro do Reino de Deus.
 
-This website is built with [Astro](https://astro.build) and hosted on [Vercel](https://vercel.com). I do not use LLMs or AI tools to publish anything content-related on this website.
+::callout{type="note" title="Para uma resposta mais detalhada"}
+Expliquei minhas convicções e como elas moldam minha identidade no texto ["No que creio e por que creio no que creio"](https://phenrique.me/writing/what-i-believe-and-why-i-believe-in-what-i-believe).
+::
 
-# References
+Quando não estou programando ou escrevendo, você me encontrará passando tempo com minha família e amigos, servindo na minha igreja local como professor bíblico e líder de música, treinando na academia, lendo um livro, jogando xadrez ou tocando violão ou teclado por aí com meus amigos de banda. É aí que vivem muitos dos meus relacionamentos mais significativos e, honestamente, onde me sinto mais eu mesmo.
 
-1. Some people call me “Paulo”, “Henrique”, “Paulinho”, “Rique” (my sister) and, most frequently, “PH”.
-2. https://revistaaber.org.br/rberu/article/view/1069/432
-3. I tried the entrance exam for electrical engineering three times, but I didn't get into the university…
-4. https://www.facebook.com/maratona/posts/10154135897899118:0
-5. The “full stack” meme on Twitter
-6. Maybe this website can be a compelling testimonial of how much a care about good design and quality software.
-7. Irish, Paul. *About* [online]. [s.d.]. [Accessed 26 April 2026]. Available at: https://www.paulirish.com/about/
-8. https://paulo.com.br/blog/vibecoding-hipsters-novo-dev/
-9. https://engineering.atspotify.com/2021/03/why-you-should-pair-with-non-engineers
-10. Protestant Christian
-11. Norman L. Geisler; Frank Turek. *I don't have enough faith to be an atheist*. p. 33
+## Sobre este site
+
+Construído com [Astro](https://astro.build) e hospedado na [Vercel](https://vercel.com). A tipografia é Fraunces para títulos e Geist para o restante; o sistema de cores está [documentado abertamente](/design.md).
+
+::callout{type="warning" title="Sobre IA e este site"}
+Não utilizo LLMs nem ferramentas de IA para gerar ou publicar qualquer conteúdo textual neste site.
+::
+
+[^name]: Algumas pessoas me chamam de "Paulo", "Henrique", "Paulinho", "Rique" (minha irmã) e, com mais frequência, "PH".
+[^fortaleza]: No litoral do Ceará, Nordeste do Brasil — fuso horário GMT−3.
+[^destiny]: Prestei vestibular para engenharia elétrica três vezes e não passei.
+[^maratona]: [Maratona de Programação, resultados da regional de 2016](https://www.facebook.com/maratona/posts/10154135897899118:0).
+[^fullstack]: Com todo o afeto — e toda a desconfiança — que o meme de "full stack" no Twitter conquistou.
+[^testimonial]: Talvez este site seja um bom testemunho de quanto valorizo bom design e software de qualidade.
+[^tshaped-1]: Paulo Silveira, ["Vibecoding, hipsters e o novo dev"](https://paulo.com.br/blog/vibecoding-hipsters-novo-dev/).
+[^tshaped-2]: Spotify Engineering, ["Why you should pair with non-engineers"](https://engineering.atspotify.com/2021/03/why-you-should-pair-with-non-engineers).
+[^geisler]: Norman L. Geisler e Frank Turek, *Não Tenho Fé Suficiente para Ser Ateu*, p. 33.
