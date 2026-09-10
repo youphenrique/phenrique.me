@@ -135,6 +135,30 @@ export default defineConfig({
             redBright: { value: "#F85149" },
           },
 
+          /**
+           * Syntax hues, behind `syntax.*` only. Purpose-built like `signal`: a
+           * deep step for the light theme, a bright step for the dark one. They
+           * are not the editorial tints on purpose — the tints share one lightness
+           * so badges read as a quiet set, which is exactly what makes code
+           * illegible. `scripts/check-syntax-colors.ts` holds every pair to 5:1 on
+           * `bg.raised` and a minimum distance from each other; run it after a tweak.
+           */
+          code: {
+            plum: { value: "#9A2F6B" },
+            plumBright: { value: "#E68BC0" },
+            green: { value: "#2E6B3A" },
+            greenBright: { value: "#A3CF8C" },
+            vermilion: { value: "#A8401B" },
+            vermilionBright: { value: "#F0A070" },
+            blue: { value: "#2C56A8" },
+            blueBright: { value: "#8DB2F2" },
+            amber: { value: "#855700" },
+            amberBright: { value: "#E3C173" },
+            // Comment neutral for the light theme. `ink.500` is 4.8:1 on `bg.raised`,
+            // under the 5:1 floor; `ink.600` is too close to punctuation to tell apart.
+            stone: { value: "#68615A" },
+          },
+
           /** Official gov.br digital brand colours (Manual da Marca v3). */
           govbr: {
             blue: { value: "#377EC1" },
@@ -216,6 +240,26 @@ export default defineConfig({
             success: { value: { base: "{colors.signal.green}", _dark: "{colors.signal.greenBright}" } },
             danger: { value: { base: "{colors.signal.red}", _dark: "{colors.signal.redBright}" } },
             rating: { value: { base: "{colors.ochre.500}", _dark: "{colors.ochre.400}" } },
+          },
+
+          /** Code highlighting. Shiki's css-variables theme writes every token as
+           *  `var(--shiki-token-*)`; global.css binds those to these roles, so code
+           *  switches theme with the rest of the page. Separated by lightness as
+           *  well as hue: identifiers are near-black, colour sits at ~5–6:1, and
+           *  comments recede without dropping under 4.5:1. */
+          syntax: {
+            text: { value: { base: "{colors.ink.850}", _dark: "{colors.sand.300}" } }, // 13.8:1 / 13.7:1
+            punctuation: { value: { base: "{colors.ink.700}", _dark: "{colors.sand.500}" } },
+            comment: { value: { base: "{colors.code.stone}", _dark: "{colors.ink.300}" } }, // 5.3:1 / 6.9:1
+            keyword: { value: { base: "{colors.code.plum}", _dark: "{colors.code.plumBright}" } },
+            string: { value: { base: "{colors.code.green}", _dark: "{colors.code.greenBright}" } },
+            constant: { value: { base: "{colors.code.vermilion}", _dark: "{colors.code.vermilionBright}" } },
+            function: { value: { base: "{colors.code.blue}", _dark: "{colors.code.blueBright}" } },
+            parameter: { value: { base: "{colors.code.amber}", _dark: "{colors.code.amberBright}" } },
+            // Diff lines. `signal.green`/`red` miss 4.5:1 on `bg.raised` in light mode.
+            inserted: { value: { base: "{colors.moss.600}", _dark: "{colors.signal.greenBright}" } },
+            deleted: { value: { base: "{colors.coral.700}", _dark: "{colors.signal.redBright}" } },
+            changed: { value: { base: "{colors.ochre.600}", _dark: "{colors.ochre.400}" } },
           },
 
           /** Fixed identity colours used by the brutils wordmark. */

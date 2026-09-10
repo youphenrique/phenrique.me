@@ -42,6 +42,52 @@ export function messageFor(result: SaveResult) {
 
 Notice what the code refuses to do: it does not collapse every failure into “Something went wrong.” Specificity is not a luxury. It is how software helps a person make a competent next move.
 
+The same argument survives the move to a native client, and a stricter language can hold you to it. In Kotlin, a sealed interface turns the list of states into something the compiler enforces: add an outcome, and every `when` that turns a result into words stops compiling until someone decides what the person should read.
+
+```kotlin [SaveMessage.kt]
+package app.profile
+
+import kotlinx.coroutines.delay
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
+
+/** Every outcome a save can have; the UI has to answer each one. */
+sealed interface SaveResult {
+    data object Saved : SaveResult
+    data class Offline(val retryIn: Duration) : SaveResult
+    data class Invalid(val fields: List<String>) : SaveResult
+}
+
+@JvmInline
+value class Message(val text: String)
+
+fun SaveResult.toMessage(): Message = when (this) {
+    SaveResult.Saved -> Message("Your changes are saved.")
+    is SaveResult.Offline ->
+        Message("You’re offline. Retrying in $retryIn.")
+    is SaveResult.Invalid -> {
+        // “Something went wrong” is not a next step. Name the fields.
+        val noun = if (fields.size == 1) "field" else "fields"
+        Message("Please review the $noun: ${fields.joinToString()}.")
+    }
+}
+
+suspend fun saveWithRetry(
+    attempts: Int = 3,
+    save: suspend () -> SaveResult,
+): SaveResult {
+    var last: SaveResult = SaveResult.Offline(retryIn = 5.seconds)
+    repeat(attempts) { attempt ->
+        last = save()
+        if (last !is SaveResult.Offline) return last
+        delay((attempt + 1) * 1_000L)
+    }
+    return last
+}
+```
+
+The retry loop is the quieter half of the argument. An offline save is not a failure to report but a state to wait out, so the interface only speaks once waiting has stopped being useful.
+
 ## A small review rubric
 
 Before I call an interface finished, I look for evidence of these things:

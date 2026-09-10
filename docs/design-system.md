@@ -133,6 +133,23 @@ Diff and status hues, kept from GitHub because they are purpose-built for the re
 | `signal.red`         | `#CF222E` |
 | `signal.redBright`   | `#F85149` |
 
+### Code
+
+Syntax hues, used only behind `syntax.*`. Purpose-built like `signal`: a deep step for the light theme, a bright step for the dark one.
+
+They are deliberately **not** the editorial tints. The tints share one lightness so a row of badges reads as a quiet set — and that sameness is exactly what makes highlighted code illegible. A first pass built on `sage.600`, `sky.600`, `periwinkle.600` and friends cleared contrast but put every token within 0.06 of the same OKLCH lightness, with booleans and numbers only ΔE 3 apart.
+
+| Token                  | Hex       | Token                        | Hex       |
+|------------------------|-----------|------------------------------|-----------|
+| `code.plum`            | `#9A2F6B` | `code.plumBright`            | `#E68BC0` |
+| `code.green`           | `#2E6B3A` | `code.greenBright`           | `#A3CF8C` |
+| `code.vermilion`       | `#A8401B` | `code.vermilionBright`       | `#F0A070` |
+| `code.blue`            | `#2C56A8` | `code.blueBright`            | `#8DB2F2` |
+| `code.amber`           | `#855700` | `code.amberBright`           | `#E3C173` |
+| `code.stone`           | `#68615A` |                              |           |
+
+`code.stone` is the light-theme comment neutral: `ink.500` misses the 5:1 floor on `bg.raised`, and `ink.600` sits too close to punctuation to tell apart.
+
 ---
 
 ## Layer 2 — semantic roles
@@ -209,6 +226,37 @@ The translucent ones are deliberate exceptions to "use a ramp step": a stroke th
 | `status.rating`  | `ochre.500`    | `ochre.400`          | filled stars    |
 
 Reserved for machine-reported state. Never decoration.
+
+### `syntax.*` — code highlighting
+
+Ratios are measured against `bg.raised`, the code panel, in the corresponding theme.
+
+| Token                | Light            | Dark                   | Contrast (light / dark) |
+|----------------------|------------------|------------------------|-------------------------|
+| `syntax.text`        | `ink.850`        | `sand.300`             | 13.8:1 / 13.7:1         |
+| `syntax.punctuation` | `ink.700`        | `sand.500`             | 9.7:1 / 9.4:1           |
+| `syntax.comment`     | `code.stone`     | `ink.300`              | 5.3:1 / 6.9:1           |
+| `syntax.keyword`     | `code.plum`      | `code.plumBright`      | 6.0:1 / 7.4:1           |
+| `syntax.string`      | `code.green`     | `code.greenBright`     | 5.5:1 / 9.9:1           |
+| `syntax.constant`    | `code.vermilion` | `code.vermilionBright` | 5.3:1 / 8.3:1           |
+| `syntax.function`    | `code.blue`      | `code.blueBright`      | 6.0:1 / 8.2:1           |
+| `syntax.parameter`   | `code.amber`     | `code.amberBright`     | 5.4:1 / 10.2:1          |
+| `syntax.inserted`    | `moss.600`       | `signal.greenBright`   | 6.1:1 / 6.9:1           |
+| `syntax.deleted`     | `coral.700`      | `signal.redBright`     | 6.2:1 / 5.2:1           |
+| `syntax.changed`     | `ochre.600`      | `ochre.400`            | 5.5:1 / 8.7:1           |
+
+**How it reaches the page.** Comark's Shiki plugin tokenises code at build time with Shiki's css-variables theme (`src/utils/code-theme.ts`), so the markup carries `color: var(--shiki-token-keyword)` rather than a hex value. `global.css` binds each `--shiki-token-*` to a `syntax.*` role on `.shiki`, and the roles switch with the page like every other semantic token. Shiki's `string-expression` and `link` are folded into `string` and `function`.
+
+**Two rules, enforced.** `npm run check:syntax` runs as part of `build` and fails it when, in either theme:
+
+- a role drops under **5:1** on `bg.raised` — stricter than AA's 4.5:1, for headroom at 14px; or
+- two roles that can share a line sit closer than **ΔE 8** in OKLab. Contrast alone would pass seven near-identical browns. The diff roles are exempt: they colour whole lines, never sit next to a keyword.
+
+**Separate by lightness, not only hue.** Text that clears 5:1 on cream has to sit near the middle of the lightness range, so hue alone cannot carry the distinction. Identifiers are near-black, colour sits at 5–6:1, and comments recede as a mid neutral. No italics: Geist Mono is loaded upright only, so the browser would fake an oblique.
+
+**Languages.** Comark's plugin preloads only vue, tsx, svelte, ts, js, bash, json, yaml and astro. Any other fence language throws inside the plugin and renders as plain, unhighlighted text with no build error, so register it in `languages` in `src/utils/code-theme.ts` first (Kotlin is registered there). Some grammars scope less than TypeScript's: Kotlin leaves parameters, colons and qualified names like `SaveResult.Saved` unscoped, so they render as `syntax.text`.
+
+**Adding a role.** Add it here and in `panda.config.ts`, bind its `--shiki-token-*` variable in `global.css`, then run the check. Never paste a Shiki theme's hex values into a component or a theme file; they are invisible to both themes and to the check.
 
 ### `sheet.*` — iOS-style bottom sheet
 
@@ -447,8 +495,8 @@ skips code, so a character class like `[^abc]` in a regex passes through.
 
 There are no fixture posts, so judge changes to this layer against the pages that use it. `/about` carries links, footnotes, `::callout` and `::quote`. `/writing/interfaces-are-arguments` carries `::tweet` embeds, tables and a code block. `/writing/the-shape-of-a-good-change` carries task lists; it is a draft, so it renders under `npm run dev` only. No page uses `::aside` or `::figure` yet, so a change to either needs a throwaway draft to be checked against.
 
-Code blocks are tokenised at build time by Comark's Shiki plugin, which emits both themes at once: the light colour inline, the dark one as a `--shiki-dark`
-custom property. `:root.dark .shiki` applies the dark half.
+Code blocks are coloured through `syntax.*` — see [that section](#syntax--code-highlighting) for how Shiki's output is bound to the tokens. Judge a palette change against the `save-profile.ts` block on `/writing/interfaces-are-arguments` in both themes, and run `npm run check:syntax`.
+
 ---
 
 ## Contrast
@@ -458,6 +506,8 @@ Every text role clears WCAG AA (4.5:1) on its intended surface, in both themes. 
 - **`text.faint`** — 3.5:1. Incidental text only, never load-bearing.
 - **`coral.500` as text on light** — 2.9:1. Which is exactly why `text.accent`
   resolves to `coral.600` in light mode. Do not hand-roll `coral.500` text.
+
+Syntax colours are held to a stricter 5:1 on `bg.raised`, plus a minimum separation from each other, by `npm run check:syntax`, which runs in `build`.
 
 When adding a token, verify the pair before committing it.
 
