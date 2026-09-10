@@ -135,7 +135,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
         </div>
 
         <!-- Desktop nav -->
-        <nav class={hstack({ gap: 4, fontSize: "sm", px: 5, hideBelow: "sm" })}>
+        <nav class={hstack({ gap: 2, fontSize: "sm", pl: 5, hideBelow: "sm" })}>
           {
             navLinks.map((link) => {
               const isActive = pathname.includes(link.path);
@@ -147,9 +147,27 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                     p: 1.5,
                     position: "relative",
                     fontWeight: "medium",
-                    color: isActive ? "text.accent" : "text.secondary",
+                    color: "text.secondary",
                     transition: "color 0.15s ease-in-out",
-                    _hover: { color: "text.accent" },
+                    // Hover must not borrow the accent: coral means "you are here".
+                    _hover: { color: "text.primary" },
+                    // Current page: accent text plus a dot, so the state does not
+                    // rest on colour alone.
+                    _currentPage: {
+                      color: "text.accent",
+                      _hover: { color: "text.accent" },
+                      _after: {
+                        content: '""',
+                        position: "absolute",
+                        left: "50%",
+                        bottom: "-2px",
+                        w: 1,
+                        h: 1,
+                        borderRadius: "full",
+                        bg: "accent.default",
+                        transform: "translateX(-50%)",
+                      },
+                    },
                   })}
                 >
                   {dict.header[`${link.title}-label`]}
@@ -158,6 +176,10 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
             })
           }
         </nav>
+
+        <!-- Destinations | preferences -->
+        <span aria-hidden="true" class={css({ w: "1px", h: 4, ml: 5, mr: 2.5, bg: "border.subtle", hideBelow: "sm" })}
+        ></span>
 
         <!-- Mobile controls -->
         <div class={hstack({ hideFrom: "sm", ml: "auto", gap: 2 })}>
@@ -205,8 +227,9 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
           </button>
         </div>
 
-        <!-- Right controls: separator + language menu + theme toggle -->
-        <div class={hstack({ gap: 6, hideBelow: "sm" })}>
+        <!-- Right controls: language menu + theme toggle. The gap matches the
+             divider's `mr`, so the translate glyph sits centred between the two. -->
+        <div class={hstack({ gap: 2.5, hideBelow: "sm" })}>
           <!-- Language switcher -->
           <LanguageMenu
             client:load
@@ -224,7 +247,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
               w: "fit-content",
               alignItems: "center",
               borderRadius: "full",
-              border: "1px dashed token(colors.border.default)",
+              border: "1px solid token(colors.border.subtle)",
             })}
           >
             <button
@@ -345,7 +368,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                       fontWeight: "medium",
                       color: isActive ? "text.accent" : "text.secondary",
                       transition: "color 0.15s ease-in-out",
-                      _hover: { color: "text.accent" },
+                      _hover: { color: "text.primary" },
                       textDecoration: "none",
                     })}
                   >
@@ -373,7 +396,7 @@ const isHomePage = pathname === "/" || pathname === `/${lang}` || pathname === `
                 w: "fit-content",
                 alignItems: "center",
                 borderRadius: "full",
-                border: "1px dashed token(colors.border.default)",
+                border: "1px solid token(colors.border.subtle)",
               })}
             >
               <button
