@@ -5,8 +5,13 @@ description: "An open-source TypeScript toolkit for Brazilian business rules —
 date: "2025-06-01"
 repoURL: "https://github.com/youphenrique/brutils"
 wordmark:
-  accent: "br"
-  rest: "utils"
+  segments:
+    - text: "b"
+      color: "green"
+    - text: "r"
+      color: "yellow"
+    - text: "utils"
+      color: "blue"
 ---
 
 An open-source TypeScript toolkit (MIT) for Brazilian business rules — retrieving, modelling, validating, formatting and generating data such as CPF and CNPJ. A personal project, under active development.

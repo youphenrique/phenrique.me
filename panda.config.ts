@@ -134,6 +134,13 @@ export default defineConfig({
             red: { value: "#CF222E" },
             redBright: { value: "#F85149" },
           },
+
+          /** Official gov.br digital brand colours (Manual da Marca v3). */
+          govbr: {
+            blue: { value: "#377EC1" },
+            green: { value: "#52AE32" },
+            yellow: { value: "#FBBA00" },
+          },
         },
       },
 
@@ -209,6 +216,15 @@ export default defineConfig({
             success: { value: { base: "{colors.signal.green}", _dark: "{colors.signal.greenBright}" } },
             danger: { value: { base: "{colors.signal.red}", _dark: "{colors.signal.redBright}" } },
             rating: { value: { base: "{colors.ochre.500}", _dark: "{colors.ochre.400}" } },
+          },
+
+          /** Fixed identity colours used by the brutils wordmark. */
+          brand: {
+            govbr: {
+              blue: { value: "{colors.govbr.blue}" },
+              green: { value: "{colors.govbr.green}" },
+              yellow: { value: "{colors.govbr.yellow}" },
+            },
           },
 
           /** iOS-style bottom sheet with inset grouped lists. The card is always
