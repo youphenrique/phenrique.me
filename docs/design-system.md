@@ -421,8 +421,8 @@ Markdown may invoke components with Comark's `::name` syntax. Each is registered
 | `::figure{src alt caption}` | An image outside the measure           | `layout="wide"` by default                                                     |
 | `::tweet{author href}`      | An X post, rendered as a static card   | `handle`, `avatar`, `date` optional; nest a `:::tweet` for a referenced post   |
 
-Two authoring constraints worth knowing. Attribute values are plain text, not Markdown — `source="Augustine, *Confessions* I.1"` renders the asterisks. And Comark bypasses Astro's asset pipeline, so a `::figure` `src` is not processed:
-point it under `public/` and give `width` and `height` so the box is reserved.
+Three authoring constraints worth knowing. Attribute values are plain text, not Markdown — `source="Augustine, *Confessions* I.1"` renders the asterisks. Comark bypasses Astro's asset pipeline, so a `::figure` `src` is not processed:
+point it under `public/` and give `width` and `height` so the box is reserved. And a `::tweet` `href` must be a post URL on `x.com` or `twitter.com`; any other host fails the build, as does a handle that cannot be read from `handle` or from the URL's first path segment.
 
 A bare `![alt](src)` is parsed inside a paragraph and therefore cannot leave the text column. `::figure` is the only way to place an image in the `wide` track.
 
