@@ -419,6 +419,7 @@ Markdown may invoke components with Comark's `::name` syntax. Each is registered
 | `::aside`                   | Marginalia the argument could lose     | Text column today; the shape a right-hand sidenote will take                   |
 | `::quote{source href}`      | A quotation with a source to attribute | Same treatment as `>`; adds a linkable citation in a `figcaption`              |
 | `::figure{src alt caption}` | An image outside the measure           | `layout="wide"` by default                                                     |
+| `::tweet{author href}`      | An X post, rendered as a static card   | `handle`, `avatar`, `date` optional; nest a `:::tweet` for a referenced post   |
 
 Two authoring constraints worth knowing. Attribute values are plain text, not Markdown — `source="Augustine, *Confessions* I.1"` renders the asterisks. And Comark bypasses Astro's asset pipeline, so a `::figure` `src` is not processed:
 point it under `public/` and give `width` and `height` so the box is reserved.
@@ -442,8 +443,7 @@ And it has two silent failure modes, both of which now fail the build instead:
 Both were found by writing them, not by reading the plugin. `assertFootnotesResolved`
 skips code, so a character class like `[^abc]` in a regex passes through.
 
-The two fixture posts under `src/content/writing/` — `98-markdown-kitchen-sink`
-and `99-component-gallery` — exercise every construct and every component on one page each. They are drafts, so they render under `npm run dev` and are excluded from the production build, the sitemap and the feed. Judge changes to this layer against them rather than against whichever constructs a real post happens to use.
+There are no fixture posts, so judge changes to this layer against the pages that use it. `/about` carries links, footnotes, `::callout` and `::quote`. `/writing/interfaces-are-arguments` carries `::tweet` embeds, tables and a code block. `/writing/the-shape-of-a-good-change` carries task lists; it is a draft, so it renders under `npm run dev` only. No page uses `::aside` or `::figure` yet, so a change to either needs a throwaway draft to be checked against.
 
 Code blocks are tokenised at build time by Comark's Shiki plugin, which emits both themes at once: the light colour inline, the dark one as a `--shiki-dark`
 custom property. `:root.dark .shiki` applies the dark half.
