@@ -1,5 +1,6 @@
 export interface MainDictionary {
   header: {
+    "skip-label": string;
     "home-label": string;
     "about-label": string;
     "reading-label": string;
@@ -15,6 +16,7 @@ export interface MainDictionary {
 
 const dict: MainDictionary = {
   header: {
+    "skip-label": "Skip to content",
     "home-label": "Home",
     "about-label": "About",
     "reading-label": "Reading",

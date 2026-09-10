@@ -51,6 +51,35 @@ const pageDescription = metadatum?.data.description ?? description;
     </script>
   </head>
   <body class={cx("paper-grain", css({ bgColor: "bg.canvas", color: "text.secondary" }))}>
+    <!-- First stop for keyboard users: skips the header's nine tab stops. Parked
+         above the viewport rather than hidden, so it stays in the accessibility
+         tree, and slides in over the header only while it has focus. -->
+    <a
+      href="#main"
+      class={css({
+        position: "fixed",
+        top: 4,
+        left: 4,
+        // Above the header wrapper (zIndex 2).
+        zIndex: 3,
+        px: 4,
+        py: 2.5,
+        borderRadius: "full",
+        bg: "bg.inverted",
+        color: "text.onInverted",
+        fontSize: "sm",
+        fontWeight: "medium",
+        textDecoration: "none",
+        boxShadow: "elevation.pill",
+        transform: "translateY(calc(-100% - token(spacing.8)))",
+        transition: "transform 0.2s ease",
+        _motionReduce: { transition: "none" },
+        _focus: { transform: "translateY(0)" },
+        _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "2px" },
+      })}
+    >
+      {dict.header["skip-label"]}
+    </a>
     <div
       class={flex({
         minH: "100dvh",
@@ -58,9 +87,12 @@ const pageDescription = metadatum?.data.description ?? description;
       })}
     >
       <Header lang={lang} dict={dict} />
-      <div class={css({ flex: 1 })}>
+      <!-- `tabindex="-1"` lets the skip link move focus here, so the next Tab
+           continues inside the content rather than back at the header. The
+           landing focus is programmatic, so it draws no ring. -->
+      <main id="main" tabindex="-1" class={css({ flex: 1, _focus: { outline: "none" } })}>
         <slot />
-      </div>
+      </main>
       <Footer lang={lang} dict={dict} />
     </div>
   </body>

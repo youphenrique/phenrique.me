@@ -65,6 +65,8 @@ const isPortuguese = Astro.currentLocale === "pt";
               w: 4,
               color: "text.muted",
               display: "block",
+              borderRadius: "sm",
+              _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "2px" },
               "& svg": { w: "full", h: "auto" },
               "& svg path": {
                 transition: "fill 0.15s ease-in-out",
