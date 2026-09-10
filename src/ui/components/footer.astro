@@ -15,44 +15,55 @@ const { lang, dict } = Astro.props;
 const currentYear = new Date().getFullYear();
 const colophonHref = lang === "pt" ? "/pt/colophon" : "/colophon";
 
+// Two units that never wrap inside themselves, so the row can only break
+// between them: side by side when they fit, stacked when they don't. No
+// breakpoint, which keeps it correct for any translation or commit label.
 const innerContainerClass = css(
   container.raw({
     w: "full",
     px: { base: 5, md: 6 },
-    maxWidth: { base: "xl", sm: "2xl", lg: "3xl" },
+    maxWidth: { base: "full", sm: "2xl", lg: "3xl" },
   }),
   {
     py: 6,
     display: "flex",
-    flexDirection: { base: "column", sm: "row" },
-    alignItems: { base: "flex-start", sm: "center" },
+    flexWrap: "wrap",
     justifyContent: "space-between",
-    gap: 3,
+    // Baseline, not center: Geist and Geist Mono sit differently in their line boxes.
+    alignItems: "baseline",
+    columnGap: 6,
+    rowGap: 1.5,
+    fontSize: "xs",
+    lineHeight: "normal",
+    color: "text.muted",
   },
 );
 ---
 
 <footer>
   <div class={innerContainerClass}>
-    <div class={css({ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 1.5, fontSize: "xs", color: "text.muted" })}>
-      <span>&copy; {currentYear} {SITE.NAME}. {dict.footer["citation-notice"]}</span>
-      <span aria-hidden="true">&bull;</span>
+    <p class={css({ whiteSpace: "nowrap" })}>
+      {`© ${currentYear} ${SITE.NAME}`}
+      <span aria-hidden="true" class={css({ mx: 1.5, color: "text.faint" })}>&middot;</span>
       <a
         href={colophonHref}
         class={css({
+          py: 1,
           color: "text.muted",
           textDecoration: "underline",
           textUnderlineOffset: "3px",
-          textDecorationColor: "border.subtle",
+          textDecorationColor: "border.underline",
           transition: "color 0.15s ease-in-out, text-decoration-color 0.15s ease-in-out",
-          _hover: { color: "text.primary", textDecorationColor: "text.primary" },
+          _hover: { color: "text.primary", textDecorationColor: "border.underlineHover" },
           borderRadius: "sm",
           _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "2px" },
         })}
       >
         {dict.footer["colophon-label"]}
       </a>
+    </p>
+    <div>
+      <LatestCommit lang={lang} dict={dict} />
     </div>
-    <LatestCommit lang={lang} dict={dict} />
   </div>
 </footer>
