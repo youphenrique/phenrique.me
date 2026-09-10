@@ -88,11 +88,11 @@ export default function LanguageMenu(props: LanguageMenuProps) {
                 fontSize: "sm",
                 fontWeight: "semibold",
                 textTransform: "uppercase",
-                border: "1px dashed token(colors.border.default)",
+                border: "1px solid token(colors.border.subtle)",
               })
-            : // 40x40 hit area for pointer/touch targets; negative margins keep the
-              // icon's visual spacing in the header row unchanged.
-              css({ w: 10, h: 10, mx: "-10px", p: 0, border: "none" }),
+            : // 40x40 hit area for pointer/touch targets. No negative margins: the
+              // header spaces its groups around the real box.
+              css({ w: 10, h: 10, p: 0, border: "none" }),
         )}
       >
         <GlobeIcon />
