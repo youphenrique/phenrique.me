@@ -149,7 +149,7 @@ const workPages = defineCollection({
     highlights: z.array(
       z.object({
         // Key into the glyph set in `work-icon.astro`, not an asset path.
-        icon: z.enum(["code", "layers", "activity", "refresh", "shield", "users"]),
+        icon: z.enum(["code", "layers", "lightbulb", "graduation", "heart", "users"]),
         title: z.string(),
         description: z.string(),
       }),
