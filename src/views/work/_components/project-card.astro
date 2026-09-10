@@ -7,8 +7,10 @@ interface Props {
   tagline: string;
   href: string;
   label: string;
-  /** Split name for the logo well; falls back to `title` when absent. */
-  wordmark?: { accent: string; rest: string };
+  /** Coloured name for the logo well; falls back to `title` when absent. */
+  wordmark?: {
+    segments: { text: string; color: "blue" | "green" | "yellow" }[];
+  };
 }
 
 // Same card shell as `book-preview-card.astro` — `bg.raised` on a hairline
@@ -19,6 +21,14 @@ const { title, tagline, href, label, wordmark } = Astro.props;
 // Geist Mono is registered with Astro's Fonts API rather than as a Panda token,
 // so the variable is referenced here the way `.prose code` does.
 const monoStack = "var(--font-geist-mono)";
+
+// Panda extracts literal token paths at build time, so each allowed brand
+// colour has a statically declared class rather than a computed token name.
+const wordmarkColorClasses = {
+  blue: css({ color: "brand.govbr.blue" }),
+  green: css({ color: "brand.govbr.green" }),
+  yellow: css({ color: "brand.govbr.yellow" }),
+};
 ---
 
 <a
@@ -76,10 +86,9 @@ const monoStack = "var(--font-geist-mono)";
     >
       {
         wordmark ? (
-          <>
-            <span class={css({ color: "text.accent" })}>{wordmark.accent}</span>
-            {wordmark.rest}
-          </>
+          wordmark.segments.map((segment) => (
+            <span class={wordmarkColorClasses[segment.color]}>{segment.text}</span>
+          ))
         ) : (
           title
         )

@@ -70,15 +70,15 @@ const projects = defineCollection({
     draft: z.boolean().optional(),
     demoURL: z.string().optional(),
     repoURL: z.string().optional(),
-    /**
-     * Typographic mark for the card's logo well: the name split into a tinted
-     * head and a neutral tail (`br` + `utils`). Optional — a project without one
-     * falls back to its title set in the same face.
-     */
+    /** Typographic mark for the card's logo well, split into coloured segments. */
     wordmark: z
       .object({
-        accent: z.string(),
-        rest: z.string(),
+        segments: z.array(
+          z.object({
+            text: z.string(),
+            color: z.enum(["blue", "green", "yellow"]),
+          }),
+        ),
       })
       .optional(),
   }),
