@@ -258,7 +258,6 @@ export default defineConfig({
             border: { value: "rgba(255, 255, 255, 0.15)" },
             ring: { value: "rgba(243, 245, 247, 0.15)" },
             textPrimary: { value: "#EEEEEE" },
-            textStrong: { value: "rgba(255, 255, 255, 0.85)" },
             textSecondary: { value: "rgba(255, 252, 244, 0.69)" },
             control: { value: "#27272A" },
             controlHover: { value: "#18181B" },

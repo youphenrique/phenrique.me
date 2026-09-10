@@ -6,10 +6,9 @@ import { vstack } from "../../../../styled-system/patterns";
 
 interface Props {
   bioDescription: string;
-  bioQuote?: string;
 }
 
-const { bioDescription, bioQuote } = Astro.props;
+const { bioDescription } = Astro.props;
 ---
 
 <div class={css({ mt: 2, textAlign: "center" })}>
@@ -32,7 +31,7 @@ const { bioDescription, bioQuote } = Astro.props;
   </div>
   <h1
     class={"fraunces-font " + css({
-      fontSize: "4xl",
+      fontSize: "2xl",
       color: "transparent",
       fontWeight: 400,
       backgroundClip: "text",
@@ -42,32 +41,16 @@ const { bioDescription, bioQuote } = Astro.props;
   >
     Paulo Henrique
   </h1>
-  <div lang={Astro.currentLocale} class={vstack({ mt: 3, gap: 0.5 })}>
+  <div lang={Astro.currentLocale} class={vstack({ mt: 1, gap: 0.5 })}>
     <h2
       class={css({
         fontSize: "sm",
-        color: "linkbio.textStrong",
+        color: "linkbio.textSecondary",
         fontWeight: "semibold",
         maxWidth: { base: "sm", sm: "md" },
       })}
     >
       {bioDescription}
     </h2>
-    {
-      bioQuote ? (
-        <h3
-          class={"instrument-serif " + css({
-            fontSize: "md",
-            display: "block",
-            color: "linkbio.textSecondary",
-            fontStyle: "italic",
-            fontWeight: "medium",
-            maxWidth: { base: "sm", sm: "md" },
-          })}
-        >
-          {bioQuote}
-        </h3>
-      ) : null
-    }
   </div>
 </div>

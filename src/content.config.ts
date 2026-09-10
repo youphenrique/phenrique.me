@@ -92,7 +92,6 @@ const linkbioPages = defineCollection({
     }),
     bio_section: z.object({
       description: z.string(),
-      quote: z.string().optional(),
     }),
   }),
 });
