@@ -1,4 +1,5 @@
 ---
+import { Font } from "astro:assets";
 import { getCollection } from "astro:content";
 
 import "../ui/styles/global.css";
@@ -31,9 +32,13 @@ const pageDescription = metadatum?.data.description ?? description;
 <html lang={lang}>
   <head>
     <Head title={pageTitle} description={pageDescription} />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <!-- Only Geist is preloaded: it is the one face every page paints first. The
+         home title is Instrument Serif and other titles are Fraunces, so
+         preloading either would download ~120 KB a page may never use. -->
+    <Font cssVariable="--font-geist" preload={[{ subset: "latin", style: "normal" }]} />
+    <Font cssVariable="--font-fraunces" />
+    <Font cssVariable="--font-geist-mono" />
+    <Font cssVariable="--font-instrument-serif" />
     <script is:inline>
       (function themeEffect() {
         const pref = localStorage.getItem("theme");

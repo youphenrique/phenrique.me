@@ -1,5 +1,9 @@
+/* Font families are registered in `astro.config.ts` and emitted by `<Font>` in
+   the layouts. Each `--font-*` variable holds the full stack, including the
+   metric-matched fallback, so it is used on its own — never as a bare name. */
+
 .fraunces-font {
-  font-family: "Fraunces", serif;
+  font-family: var(--font-fraunces);
   font-optical-sizing: auto;
   font-variation-settings:
     "SOFT" 50,
@@ -7,27 +11,11 @@
 }
 
 .instrument-serif {
-  font-family: "Instrument Serif", serif;
-}
-
-@font-face {
-  font-family: "GeistSans";
-  src: url("/fonts/geist-sans/Geist-Variable.woff2") format("woff2");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "GeistMono";
-  src: url("/fonts/geist-mono.woff2") format("woff2");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
+  font-family: var(--font-instrument-serif);
 }
 
 body {
-  font-family: GeistSans, sans-serif;
+  font-family: var(--font-geist);
 }
 
 /* `prose` sits below Panda's own layers on purpose: the long-form rules below
@@ -144,7 +132,7 @@ body {
     /* Fraunces, matching the page titles and the site's display voice. The
        variation settings are the same pair `.fraunces-font` sets, repeated here
        because rendered Markdown cannot carry a class on its own headings. */
-    font-family: "Fraunces", serif;
+    font-family: var(--font-fraunces);
     font-optical-sizing: auto;
     font-variation-settings:
       "SOFT" 50,
@@ -356,7 +344,7 @@ body {
     border-radius: 4px;
     background-color: var(--colors-bg-raised);
     color: var(--colors-text-primary);
-    font-family: GeistMono, ui-monospace, monospace;
+    font-family: var(--font-geist-mono);
     font-size: 0.8125rem;
     line-height: 1;
     white-space: nowrap;
@@ -380,7 +368,7 @@ body {
   }
 
   .prose code {
-    font-family: GeistMono, ui-monospace, monospace;
+    font-family: var(--font-geist-mono);
   }
 
   .prose pre {
@@ -405,7 +393,7 @@ body {
     padding-left: 1em;
     border-left: 2px solid var(--colors-border-accent);
     color: var(--colors-text-primary);
-    font-family: "Instrument Serif", serif;
+    font-family: var(--font-instrument-serif);
     font-size: 1.5rem;
     font-style: italic;
     line-height: 1.5;
@@ -419,7 +407,7 @@ body {
   .prose blockquote cite {
     display: block;
     margin-top: 0.6em;
-    font-family: GeistSans, sans-serif;
+    font-family: var(--font-geist);
     font-size: 0.8125rem;
     font-style: normal;
     line-height: 1.5;

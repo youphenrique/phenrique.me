@@ -20,7 +20,7 @@ const cardStyles = css({
   borderRadius: "xl",
   bg: "bg.raised",
   color: "text.secondary",
-  fontFamily: "GeistSans, sans-serif",
+  fontFamily: "var(--font-geist)",
   fontSize: "0.9375rem",
   lineHeight: 1.55,
 });
@@ -99,7 +99,7 @@ const bodyStyles = css({
     borderColor: "border.subtle",
     borderRadius: "xl",
     color: "text.secondary",
-    fontFamily: "GeistSans, sans-serif",
+    fontFamily: "var(--font-geist)",
     fontSize: "0.875rem",
     fontStyle: "normal",
     lineHeight: 1.55,

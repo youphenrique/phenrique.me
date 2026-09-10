@@ -16,9 +16,9 @@ interface Props {
 // same thing on /work as it does on /reading.
 const { title, tagline, href, label, wordmark } = Astro.props;
 
-// Geist Mono is loaded by `@font-face` in global.css rather than registered as
-// a Panda token, so the stack is written out here the way `.prose code` does.
-const monoStack = "GeistMono, ui-monospace, monospace";
+// Geist Mono is registered with Astro's Fonts API rather than as a Panda token,
+// so the variable is referenced here the way `.prose code` does.
+const monoStack = "var(--font-geist-mono)";
 ---
 
 <a

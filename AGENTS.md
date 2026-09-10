@@ -39,6 +39,12 @@ The project uses `npm` (or `pnpm`/`yarn`) for package management.
 - Run `npm run prepare` (`panda codegen`) after changing `panda.config.ts`. A running dev server does **not** pick up config changes — restart it.
 - In `panda.config.ts`, tokens go under `theme.extend.*`, never `theme.*` directly. A top-level `theme.tokens` **replaces** Panda's preset instead of merging, silently removing `fontSizes`, `sizes`, `radii` and the default shadow scale.
 
+### Fonts
+- Every family (Geist, Geist Mono, Fraunces, Instrument Serif) is registered in `astro.config.ts` with Astro's Fonts API and emitted by `<Font>` in both layouts. Files are downloaded from Google at build time and self-hosted — there is no runtime request to Google.
+- Reference a family only through its variable: `var(--font-geist)`, `var(--font-geist-mono)`, `var(--font-fraunces)`, `var(--font-instrument-serif)`. The real family names are hashed, so a literal `"Fraunces"` or `GeistMono` matches nothing and falls back silently.
+- Google only includes a variable axis in the file when it is requested. Fraunces requests `SOFT` and `WONK` through `options.experimental.variableAxis`; drop them from the config and the `font-variation-settings` in `global.css` stop doing anything.
+- Preload a face only if it paints above the fold on every page that uses the layout. The main layout preloads Geist alone; `/linkbio` also preloads Fraunces, which its header always shows.
+
 ### Color (Design System)
 
 Full documentation: **[`docs/design-system.md`](docs/design-system.md)**, published at **[/design.md](https://www.phenrique.me/design.md)**.

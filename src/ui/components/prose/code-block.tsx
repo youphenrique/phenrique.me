@@ -33,7 +33,7 @@ const headerStyles = css({
   py: "0.55em",
   borderBottom: "1px solid",
   borderColor: "border.hairline",
-  fontFamily: "GeistMono, ui-monospace, monospace",
+  fontFamily: "var(--font-geist-mono)",
   fontSize: "0.75rem",
   color: "text.muted",
 });

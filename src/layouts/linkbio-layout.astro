@@ -1,4 +1,6 @@
 ---
+import { Font } from "astro:assets";
+
 import "../ui/styles/global.css";
 import { SITE } from "../consts";
 import { css } from "../../styled-system/css";
@@ -27,9 +29,9 @@ const defaultFavicon = blobBase ? `${blobBase}/me.website.webp` : "/images/me.we
     <link rel="icon" type="image/webp" href={defaultFavicon} />
     <meta name="generator" content={Astro.generator} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
+    <Font cssVariable="--font-geist" preload={[{ subset: "latin", style: "normal" }]} />
+    <Font cssVariable="--font-fraunces" preload={[{ subset: "latin", style: "normal" }]} />
+    <Font cssVariable="--font-instrument-serif" />
 
     <link rel="canonical" href={canonicalURL} />
 
@@ -102,18 +104,9 @@ const defaultFavicon = blobBase ? `${blobBase}/me.website.webp` : "/images/me.we
     </main>
 
     <style is:global>
-      @font-face {
-        font-family: "GeistSans";
-        src: url("/fonts/geist-sans/Geist-Variable.woff2") format("woff2");
-        font-weight: 100 900;
-        font-style: normal;
-        font-display: swap;
-      }
-
       body {
         margin: 0;
         padding: 0;
-        font-family: "GeistSans", sans-serif;
         /* /linkbio is deliberately always dark and does not follow the site
            theme, so it draws from the scoped `linkbio.*` tokens. */
         background-color: var(--colors-linkbio-canvas);
