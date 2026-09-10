@@ -166,6 +166,12 @@ html {
     margin-top: 1.6rem;
   }
 
+  /* A jump to a heading — from the table of contents or a shared link — lands
+     clear of the fixed header, with the same allowance footnote targets take. */
+  .prose :is(h1, h2, h3, h4, h5, h6)[id] {
+    scroll-margin-top: 5rem;
+  }
+
   /* A heading and the block it introduces are one cluster — but a heading
      following another heading is a subdivision, not a cluster, and keeps the
      space its own level asks for. */

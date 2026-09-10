@@ -1,6 +1,7 @@
 import { parseMarkdown, type ElementNode, type MarkdownDocument, type Node } from "comark";
 import shiki from "comark/plugins/shiki";
 import footnotes from "comark/plugins/footnotes";
+import toc from "comark/plugins/toc";
 
 import enProse from "../i18n/prose/en";
 import ptProse from "../i18n/prose/pt";
@@ -20,7 +21,7 @@ import { codeHighlightOptions } from "./code-theme";
 const dictionaries: Record<string, ProseDictionary> = { en: enProse, pt: ptProse };
 
 /** Resolves a locale string (possibly a region tag like `pt-BR`) to a dictionary. */
-function dictionaryFor(locale: string): ProseDictionary {
+export function dictionaryFor(locale: string): ProseDictionary {
   return dictionaries[locale] ?? dictionaries[locale.split("-")[0]] ?? enProse;
 }
 
@@ -191,8 +192,17 @@ export async function parseContent(body: string, locale = "en"): Promise<Markdow
 
   // Shiki tokenises code blocks at build time. The highlighter is a singleton
   // inside the plugin, so the cost is paid once per build rather than per page.
+  //
+  // The toc plugin writes `meta.toc`. `depth: 2` is a count of levels from `h2`,
+  // so it collects `h2` and `h3`. `searchDepth: 0` keeps it to top-level nodes:
+  // the footnote section's `h2` label sits inside a `section`, and a heading
+  // inside a `::callout` belongs to the callout, not to the article's outline.
   const document = await parseMarkdown(body, {
-    plugins: [shiki(codeHighlightOptions), footnotes({ label: dictionary["footnotes-label"], hr: false })],
+    plugins: [
+      shiki(codeHighlightOptions),
+      footnotes({ label: dictionary["footnotes-label"], hr: false }),
+      toc({ depth: 2, searchDepth: 0 }),
+    ],
   });
 
   await parseFootnoteBodies(document);

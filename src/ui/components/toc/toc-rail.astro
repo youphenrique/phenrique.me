@@ -1,0 +1,210 @@
+---
+import { css, cx } from "../../../../styled-system/css";
+import type { TocEntry } from "../../../utils/toc";
+
+interface Props {
+  entries: TocEntry[];
+  /** Accessible name of the navigation, and the label above its links. */
+  label: string;
+}
+
+const { entries, label } = Astro.props;
+---
+
+{/*
+  Desktop table of contents: a column of hairline ticks pinned to the viewport's
+  right edge, one per heading, that opens into a titled card on hover or focus.
+
+  It lives at the viewport edge rather than in the article's gutter because the
+  gutter is not empty — it is the `wide` grid track that tables and figures
+  break out into. At `xl` the container leaves ~8rem either side, and the rail
+  takes ~2rem of it.
+
+  Only where a real pointer can hover. A touch screen of any width gets the
+  reading pill instead (`toc-sheet.tsx`), which is hydrated with the inverse of
+  this media query. Panda extracts styles statically, so the query is written
+  out in both places.
+*/}
+<nav
+  data-toc-rail
+  aria-label={label}
+  class={cx(
+    "group",
+    css({
+      display: "none",
+      "@media (min-width: 80rem) and (hover: hover)": { display: "flex" },
+      position: "fixed",
+      zIndex: 1,
+      top: "50%",
+      right: 5,
+      alignItems: "center",
+      transform: "translateY(-50%)",
+    }),
+  )}
+>
+  {/*
+    The card is always in the tree and always focusable: it is transparent and
+    ignores the pointer while closed, and `:focus-within` opens it, so a
+    keyboard user tabs straight into the links. `visibility: hidden` would take
+    them out of the tab order along with the pixels.
+
+    `pr` bridges the card and the ticks. Without it the pointer crosses a gap
+    on its way to a link, the hover drops, and the card closes under it.
+  */}
+  <div
+    class={css({
+      position: "absolute",
+      top: "50%",
+      right: "100%",
+      pr: 2,
+      opacity: 0,
+      pointerEvents: "none",
+      transform: "translate(0.375rem, -50%)",
+      transition: "opacity 0.18s ease, transform 0.26s cubic-bezier(0.22, 1, 0.36, 1)",
+      // Closing waits a beat, so grazing past the rail does not flicker the card.
+      transitionDelay: "0.12s",
+      _groupHover: { opacity: 1, pointerEvents: "auto", transform: "translate(0, -50%)", transitionDelay: "0s" },
+      _groupFocusWithin: { opacity: 1, pointerEvents: "auto", transform: "translate(0, -50%)", transitionDelay: "0s" },
+      _motionReduce: { transition: "opacity 0.12s ease" },
+    })}
+  >
+    <div
+      class={css({
+        w: "15rem",
+        py: 2.5,
+        px: 1.5,
+        bg: "bg.raised",
+        border: "1px solid token(colors.border.hairline)",
+        borderRadius: "xl",
+        boxShadow: "elevation.pill",
+      })}
+    >
+      {/* The nav is already named by `aria-label`; this is its visible twin. */}
+      <p
+        aria-hidden="true"
+        class={css({
+          px: 2.5,
+          pb: 1.5,
+          fontSize: "0.6875rem",
+          fontWeight: "semibold",
+          letterSpacing: "0.08em",
+          textTransform: "uppercase",
+          color: "text.muted",
+        })}
+      >
+        {label}
+      </p>
+      <ol>
+        {
+          entries.map((entry) => (
+            <li>
+              <a
+                href={`#${entry.id}`}
+                data-toc-link={entry.id}
+                data-depth={entry.depth}
+                class={css({
+                  position: "relative",
+                  display: "block",
+                  px: 2.5,
+                  py: 1.5,
+                  borderRadius: "md",
+                  fontSize: "0.8125rem",
+                  lineHeight: "1.35",
+                  textWrap: "pretty",
+                  color: "text.muted",
+                  textDecoration: "none",
+                  transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
+                  _hover: { color: "text.primary", bg: "bg.hover" },
+                  // Inset: rows sit flush against each other inside the card.
+                  _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "-2px" },
+                  "&[data-depth='3']": { pl: 5 },
+                  // The current section repeats the rail's coral tick beside its
+                  // title, so the state is marked by shape as well as weight.
+                  "&[aria-current]": {
+                    color: "text.primary",
+                    fontWeight: "medium",
+                    _before: {
+                      content: '""',
+                      position: "absolute",
+                      top: "50%",
+                      left: 0,
+                      w: "2px",
+                      h: 3,
+                      borderRadius: "full",
+                      bg: "accent.default",
+                      transform: "translateY(-50%)",
+                    },
+                  },
+                })}
+              >
+                {entry.text}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+
+  {/*
+    Decorative: the links above carry every name and state. The padding is hit
+    area, so the rail opens without having to land on a 2px line.
+  */}
+  <ol aria-hidden="true" class={css({ display: "flex", flexDirection: "column", py: 3, pl: 3 })}>
+    {
+      entries.map((entry) => (
+        <li
+          data-toc-tick={entry.id}
+          data-depth={entry.depth}
+          class={css({
+            display: "flex",
+            h: 2.5,
+            alignItems: "center",
+            justifyContent: "flex-end",
+            _before: {
+              content: '""',
+              w: 3,
+              h: "2px",
+              borderRadius: "full",
+              bg: "border.strong",
+              transition: "width 0.2s ease, background-color 0.2s ease",
+            },
+            "&[data-depth='3']::before": { w: 1.5 },
+            "&[data-active]::before": { w: 5, bg: "accent.default" },
+            _motionReduce: { _before: { transition: "none" } },
+          })}
+        />
+      ))
+    }
+  </ol>
+</nav>
+
+<script>
+  import { trackReadingPosition } from "../../../utils/toc";
+
+  // The module runs once and survives ClientRouter swaps, so it binds on every
+  // page load and releases the previous page's listeners first.
+  let release: (() => void) | undefined;
+
+  document.addEventListener("astro:page-load", () => {
+    release?.();
+    release = undefined;
+
+    const rail = document.querySelector<HTMLElement>("[data-toc-rail]");
+    if (rail === null) return;
+
+    const links = [...rail.querySelectorAll<HTMLAnchorElement>("a[data-toc-link]")];
+    const ticks = [...rail.querySelectorAll<HTMLElement>("[data-toc-tick]")];
+
+    release = trackReadingPosition(
+      links.map((link) => link.dataset.tocLink ?? ""),
+      ({ activeId }) => {
+        for (const link of links) {
+          if (link.dataset.tocLink === activeId) link.setAttribute("aria-current", "location");
+          else link.removeAttribute("aria-current");
+        }
+        for (const tick of ticks) tick.toggleAttribute("data-active", tick.dataset.tocTick === activeId);
+      },
+    );
+  });
+</script>
