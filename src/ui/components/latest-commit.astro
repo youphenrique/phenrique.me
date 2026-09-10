@@ -1,6 +1,5 @@
 ---
 import { css } from "../../../styled-system/css";
-import { hstack } from "../../../styled-system/patterns";
 import { getLatestCommit } from "../../utils/git.ts";
 import type { MainDictionary } from "../../i18n/main/en.ts";
 
@@ -24,20 +23,23 @@ const commit = getLatestCommit();
       data-latest-commit
       data-date={commit.date}
       data-lang={lang}
-      class={
-        hstack({ gap: 1.5 }) +
-        " " +
-        css({
-          fontSize: "xs",
-          fontWeight: "medium",
-          color: "text.muted",
-          fontFamily: "var(--font-geist-mono)",
-          transition: "color 0.15s ease-in-out",
-          _hover: { color: "text.primary" },
-          borderRadius: "sm",
-          _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "2px" },
-        })
-      }
+      class={css({
+        // Inline text on one line rather than a flex row: a flex row let the label
+        // wrap inside itself, and inline content shares the footer's text baseline.
+        display: "inline-block",
+        // Taller hit area; the negative margin keeps it out of the footer's rhythm.
+        py: 1,
+        my: -1,
+        whiteSpace: "nowrap",
+        fontSize: "xs",
+        fontVariantNumeric: "tabular-nums",
+        color: "text.muted",
+        fontFamily: "var(--font-geist-mono)",
+        transition: "color 0.15s ease-in-out",
+        _hover: { color: "text.primary" },
+        borderRadius: "sm",
+        _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "2px" },
+      })}
     >
       <svg
         width="12"
@@ -45,15 +47,15 @@ const commit = getLatestCommit();
         viewBox="0 0 16 16"
         fill="currentColor"
         aria-hidden="true"
-        class={css({ flexShrink: 0 })}
+        class={css({ display: "inline-block", verticalAlign: "-2px", mr: 1.5 })}
       >
         <path d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z" />
       </svg>
       <span>
-        {dict.footer["latest-commit"]} <time datetime={commit.date}>{commit.date.slice(0, 10)}</time>:
+        {dict.footer["latest-commit"]} <time datetime={commit.date}>{commit.date.slice(0, 10)}</time>
       </span>
-      <span class={css({ color: "status.success" })}>+{commit.additions}</span>
-      <span class={css({ color: "status.danger" })}>-{commit.deletions}</span>
+      <span class={css({ ml: 2, color: "status.success" })}>+{commit.additions}</span>
+      <span class={css({ ml: 1, color: "status.danger" })}>&minus;{commit.deletions}</span>
     </a>
   )
 }
