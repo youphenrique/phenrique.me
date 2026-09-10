@@ -18,6 +18,19 @@ body {
   font-family: var(--font-geist);
 }
 
+/* Fragment navigation is most noticeable on the long trip between a footnote
+   reference and its note. Keep the browser-native motion so hashes, history and
+   keyboard navigation retain their normal semantics. */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 /* `prose` sits below Panda's own layers on purpose: the long-form rules below
    are element defaults for rendered Markdown, and a component that opts into a
    different treatment does so with `css()`, whose output lands in `recipes` /
@@ -471,6 +484,7 @@ body {
     padding: 0 0.1em;
     color: var(--colors-text-accent);
     text-decoration: none;
+    scroll-margin-top: 5rem;
   }
 
   .prose sup.footnote-ref a:hover {

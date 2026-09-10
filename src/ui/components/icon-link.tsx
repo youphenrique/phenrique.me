@@ -1,19 +1,13 @@
-import { Children, type ReactNode } from "react";
+import { Children, type AnchorHTMLAttributes, type ReactNode } from "react";
 
 import { css } from "../../../styled-system/css";
 import { iconForHref, isInternalHref } from "../../utils/link-icons.ts";
 
-interface Props {
-  href?: string;
-  title?: string;
-  /**
-   * Forwarded because Comark puts classes on links it generates itself — the
-   * footnote back-reference is a `a.footnote-backref`, and dropping the class
-   * silently unstyles it.
-   */
-  className?: string;
-  children?: ReactNode;
-}
+/**
+ * Keep the complete anchor contract: Comark-generated links carry structural
+ * attributes such as the footnote reference's `id`, not just `href` and class.
+ */
+type Props = AnchorHTMLAttributes<HTMLAnchorElement>;
 
 const glyphStyles = css({
   display: "inline-block",
@@ -66,16 +60,15 @@ function splitLeadingWord(children: ReactNode): { lead: string; rest: ReactNode[
  * Colour and underline are left to the `.prose` layer — the glyph paints with
  * `currentColor` and therefore tracks the link's own state, hover included.
  */
-export default function IconLink({ href, title, className, children }: Props) {
+export default function IconLink({ children, ...props }: Props) {
+  const { href } = props;
   const icon = iconForHref(href);
   const external = href !== undefined && !isInternalHref(href) && !href.startsWith("mailto:");
 
   // The anchor stays `inline` so long link text still wraps normally inside a
   // paragraph; only the glyph and its first word form a box.
   const anchorProps = {
-    href,
-    title,
-    className,
+    ...props,
     ...(external ? { target: "_blank", rel: "noopener noreferrer" } : {}),
   };
 
