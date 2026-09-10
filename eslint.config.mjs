@@ -7,7 +7,7 @@ import tseslint from "typescript-eslint";
 export default defineConfig(
   // 1. Global ignores (replaces .eslintignore or not having it)
   {
-    ignores: ["node_modules/**", "dist/**", ".astro/**", "styled-system/**", ".agents/**"],
+    ignores: ["node_modules/**", "dist/**", ".vercel/**", ".astro/**", "styled-system/**", ".agents/**"],
   },
 
   // 2. Base recommended rules (replaces "eslint:recommended")
@@ -35,7 +35,9 @@ export default defineConfig(
     },
     rules: {
       semi: ["error", "always"],
-      quotes: ["error", "double", { allowTemplateLiterals: true }],
+      // `avoidEscape` keeps this rule from fighting Prettier, which picks whichever
+      // quote needs fewer escapes — a CSS `url("…")` value stays single-quoted.
+      quotes: ["error", "double", { allowTemplateLiterals: true, avoidEscape: true }],
       "@typescript-eslint/triple-slash-reference": "off",
     },
   },

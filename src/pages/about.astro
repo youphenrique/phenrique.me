@@ -3,7 +3,7 @@ import { getEntry } from "astro:content";
 
 import AboutView from "../views/about/view.astro";
 
-const homePageEntry = await getEntry("aboutPages", Astro.currentLocale!);
+const homePageEntry = await getEntry("aboutPages", Astro.currentLocale ?? "en");
 
 if (homePageEntry === undefined) {
   return Astro.redirect("/404");
