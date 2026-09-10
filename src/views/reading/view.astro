@@ -49,7 +49,7 @@ const finishedBooks = Astro.props.allBooks
   .map((book) => ({ ...book.data, id: book.id }));
 ---
 
-<MainLayout title={Astro.props.title} description={Astro.props.description}>
+<MainLayout title={Astro.props.title} description={Astro.props.description} lang={Astro.currentLocale ?? "en"}>
   <Container>
     <div class={vstack({ mt: 32, alignItems: "stretch", gap: 8 })}>
       <h1
