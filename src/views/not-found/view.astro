@@ -1,0 +1,35 @@
+---
+import MainLayout from "../../layouts/main-layout.astro";
+import Container from "../../ui/components/container.astro";
+import Content from "./_components/content.astro";
+import en from "../../i18n/not-found/en";
+import pt from "../../i18n/not-found/pt";
+---
+
+<MainLayout title={en["page-title"]} description={en["page-description"]} lang="en">
+  {
+    /*
+    Vercel serves the single root `404.html` for every unmatched path, whatever
+    its locale prefix, so this page cannot be built per language — it has to
+    choose at request time. The script runs while the document is still being
+    parsed, before either copy exists in the DOM, so the switch below applies on
+    the first paint rather than as a visible swap. The page keeps its 404 status
+    this way, which a redirect to a `/pt/404/` route would trade away.
+
+    The header and footer stay English: they are rendered by the layout and
+    there is one of each. Only the copy and its two destinations change.
+  */
+  }
+  <script is:inline define:vars={{ ptTitle: pt["page-title"] }}>
+    (function notFoundLocale() {
+      if (!/^\/pt(\/|$)/.test(window.location.pathname)) return;
+      document.documentElement.setAttribute("data-nf-lang", "pt");
+      document.documentElement.lang = "pt";
+      document.title = ptTitle;
+    })();
+  </script>
+  <Container>
+    <Content dict={en} homeHref="/" writingHref="/writing" lang="en" />
+    <Content dict={pt} homeHref="/pt" writingHref="/pt/writing" lang="pt" />
+  </Container>
+</MainLayout>

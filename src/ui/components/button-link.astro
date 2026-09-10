@@ -6,7 +6,7 @@ type Icon = "arrow" | "download" | "none";
 
 interface Props {
   href: string;
-  /** `primary` is the solid inverted pill; `secondary` is the outlined one. */
+  /** `primary` is the solid inverted button; `secondary` is the outlined one. */
   variant?: Variant;
   /** Trailing glyph. `arrow` marks a destination away from the page. */
   icon?: Icon;
@@ -18,8 +18,10 @@ interface Props {
 
 const { href, variant = "primary", icon = "none", external = false, label, styles } = Astro.props;
 
-// Shared geometry. The pill is sized from its own type rather than a fixed
+// Shared geometry. The button is sized from its own type rather than a fixed
 // height, so it stays proportionate if a caller sets a different font size.
+// `radii.xl` — a rounded rectangle, not a capsule: at this height a full radius
+// swallows the horizontal padding and the label stops reading as centred.
 const base = css.raw({
   display: "inline-flex",
   alignItems: "center",
@@ -27,7 +29,7 @@ const base = css.raw({
   gap: 1.5,
   px: 4,
   py: 2.5,
-  borderRadius: "full",
+  borderRadius: "xl",
   fontSize: "sm",
   fontWeight: "medium",
   lineHeight: 1,
@@ -45,7 +47,7 @@ const base = css.raw({
   },
 });
 
-// `bg.inverted` is the one fill that reverses with the theme, so the pill reads
+// `bg.inverted` is the one fill that reverses with the theme, so the button reads
 // as the page's densest object in both. Its only legal foreground is
 // `text.onInverted`.
 const VARIANT: Record<Variant, string> = {

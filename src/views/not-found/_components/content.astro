@@ -1,0 +1,85 @@
+---
+import ButtonLink from "../../../ui/components/button-link.astro";
+import { css } from "../../../../styled-system/css";
+import { flex, vstack } from "../../../../styled-system/patterns";
+import type { NotFoundDictionary } from "../../../i18n/not-found/types";
+
+interface Props {
+  dict: NotFoundDictionary;
+  /** Locale-aware destinations, so the Portuguese copy keeps its prefix. */
+  homeHref: string;
+  writingHref: string;
+  /** Matched against `data-nf-lang` on `<html>`; see the note in `view.astro`. */
+  lang: "en" | "pt";
+}
+
+const { dict, homeHref, writingHref, lang } = Astro.props;
+
+// The two copies are both in the document; the one that does not match the
+// failed URL's prefix is removed from the box tree, so it never paints and is
+// never announced. English is the default so a reader without JavaScript gets
+// a page rather than a blank one.
+const SWITCH: Record<"en" | "pt", string> = {
+  en: css({ "[data-nf-lang='pt'] &": { display: "none" } }),
+  pt: css({ display: "none", "[data-nf-lang='pt'] &": { display: "flex" } }),
+};
+---
+
+<div
+  lang={lang}
+  class={`${SWITCH[lang]} ${vstack({
+    alignItems: "center",
+    textAlign: "center",
+    py: { base: 24, sm: 32 },
+    gap: 0,
+  })}`}
+>
+  {
+    /*
+    The numeral is the page's only ornament: `text.faint` keeps it below the
+    heading in the reading order even though it is the largest thing here,
+    which is the point — it labels the failure without shouting it.
+  */
+  }
+  <p
+    aria-hidden="true"
+    class={`fraunces-font ${css({
+      fontSize: { base: "6xl", sm: "8xl" },
+      fontWeight: "semibold",
+      lineHeight: 1,
+      letterSpacing: "-0.03em",
+      color: "text.faint",
+    })}`}
+  >
+    {dict.code}
+  </p>
+  <h1
+    class={`fraunces-font ${css({
+      mt: 6,
+      fontSize: { base: "3xl", sm: "4xl" },
+      fontWeight: "semibold",
+      lineHeight: 1.15,
+      letterSpacing: "-0.015em",
+      textWrap: "balance",
+      color: "text.primary",
+    })}`}
+  >
+    {dict.title}
+  </h1>
+  <p
+    class={css({
+      mt: 4,
+      maxW: "32rem",
+      fontSize: "sm",
+      lineHeight: 1.7,
+      textWrap: "pretty",
+      color: "text.muted",
+    })}
+  >
+    {dict.description}
+  </p>
+  <div class={flex({ mt: 8, gap: 3, flexWrap: "wrap", justifyContent: "center" })}>
+    <ButtonLink href={homeHref}>{dict["home-label"]}</ButtonLink>
+    <ButtonLink href={writingHref} variant="secondary">{dict["writing-label"]}</ButtonLink>
+  </div>
+</div>
