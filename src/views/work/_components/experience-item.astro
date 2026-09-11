@@ -21,16 +21,7 @@ interface Props {
 const { company, companyURL, role, location, arrangement, dateRange, body } = Astro.props;
 ---
 
-<li
-  class={vstack({
-    alignItems: "stretch",
-    gap: 3,
-    pt: { base: 7, md: 8 },
-    borderTop: "1px solid",
-    borderColor: "border.hairline",
-    _first: { pt: 0, borderTop: "none" },
-  })}
->
+<li class={vstack({ alignItems: "stretch", gap: 3 })}>
   <div class={vstack({ alignItems: "stretch", gap: 1 })}>
     {
       /*

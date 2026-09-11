@@ -109,7 +109,7 @@ const sectionGap = css.raw({ mt: { base: 14, md: 16 } });
     </section>
 
     {
-      projects.length > 0 && (
+      projects.length > 0 ? (
         <section class={css(sectionGap)}>
           <SectionHeading id="projects">{dict.sections.projects}</SectionHeading>
           <ul class={css(cardGrid)}>
@@ -126,7 +126,7 @@ const sectionGap = css.raw({ mt: { base: 14, md: 16 } });
             ))}
           </ul>
         </section>
-      )
+      ) : null
     }
 
     <section class={css(sectionGap)}>
