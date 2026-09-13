@@ -5,6 +5,7 @@ import { css } from "../../../styled-system/css";
 import MainLayout from "../../layouts/main-layout.astro";
 import Container from "../../ui/components/container.astro";
 import Markdown from "../../ui/components/markdown.astro";
+import BackToTop from "../../ui/components/back-to-top.astro";
 
 interface Props {
   title: string;
@@ -97,5 +98,6 @@ interface Props {
       />
     </div>
     <Markdown body={Astro.props.body} class={"prose prose-longform " + css({ mt: 16 })} toc />
+    <BackToTop />
   </Container>
 </MainLayout>

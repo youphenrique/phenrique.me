@@ -6,6 +6,7 @@ import Container from "../../ui/components/container.astro";
 import FormattedDate from "../../ui/components/formatted-date.astro";
 import BackToPrev from "../../ui/components/back-to-prev.astro";
 import Markdown from "../../ui/components/markdown.astro";
+import BackToTop from "../../ui/components/back-to-top.astro";
 import { readingTimeMinutes } from "../../utils/helpers.ts";
 import { css } from "../../../styled-system/css";
 import type { WritingDictionary } from "../../i18n/writing/types.ts";
@@ -64,5 +65,6 @@ const locale = post.data.locale;
     <article>
       <Markdown body={post.body} class="prose prose-longform" locale={locale} toc />
     </article>
+    <BackToTop locale={locale} />
   </Container>
 </MainLayout>

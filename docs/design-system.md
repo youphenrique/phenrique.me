@@ -491,6 +491,8 @@ The rail sits at the viewport edge, not in the article's gutter, because the gut
 
 The pill is the header's pill in miniature — `bg.overlay` behind a blur, `elevation.pill` — with a progress ring in `accent.default` over `bg.track`. It only appears once the reader is inside the article, and it is hydrated with `client:media` on the inverse query, so wide pointer screens never load it.
 
+The first row of both the card and the sheet is `Back to top` — a plain `#main` fragment link, the same one `back-to-top.astro` renders under the prose at the end of every long-form page. Nothing scripts the scroll: the browser animates it through `scroll-behavior`, drops to an instant jump under reduced motion, and carries the sequential focus point with it.
+
 Both read one tracker, `trackReadingPosition` in `src/utils/toc.ts`: the active section is the last heading above a reading line 120px down, which clears the `scroll-margin-top: 5rem` every prose heading carries. The two queries are duplicated as literals because Panda extracts styles statically — change one and change the other.
 
 ### Footnotes

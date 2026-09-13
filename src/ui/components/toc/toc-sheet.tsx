@@ -9,11 +9,18 @@ interface TocSheetProps {
   entries: TocEntry[];
   /** Sheet title, and the pill's text before the first heading is reached. */
   label: string;
+  /** Label for the first row, which returns to the top of the page. */
+  topLabel: string;
 }
 
 // Same decelerating curve as the sheet itself, so the pill and the panel it
 // opens move as one piece.
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
+
+// The `main` landmark, already on the page for the skip link. It rides the same
+// path a heading row takes, so returning to the top is one more fragment link
+// rather than a second mechanism.
+const TOP_ID = "main";
 
 const RING_RADIUS = 7;
 const RING_LENGTH = 2 * Math.PI * RING_RADIUS;
@@ -45,7 +52,7 @@ function ChevronIcon() {
  * pill echoes the header's — same blurred `bg.overlay`, same `elevation.pill` —
  * and stays out of the way until the reader is inside the article.
  */
-export default function TocSheet({ entries, label }: TocSheetProps) {
+export default function TocSheet({ entries, label, topLabel }: TocSheetProps) {
   const [open, setOpen] = useState(false);
   const [position, setPosition] = useState<ReadingPosition>({ activeId: null, progress: 0, inArticle: false });
   // The sheet opens on the section being read, not on whichever row is first.
@@ -63,6 +70,8 @@ export default function TocSheet({ entries, label }: TocSheetProps) {
   );
 
   const active = entries.find((entry) => entry.id === position.activeId);
+  // Depth 0 is the way out of the article; every other row is a heading.
+  const rows = [{ id: TOP_ID, text: topLabel, depth: 0 }, ...entries];
   const shown = position.inArticle || open;
 
   return (
@@ -174,12 +183,12 @@ export default function TocSheet({ entries, label }: TocSheetProps) {
             overscrollBehavior: "contain",
           })}
         >
-          {entries.map((entry) => {
-            const isActive = entry.id === position.activeId;
+          {rows.map((row) => {
+            const isActive = row.depth !== 0 && row.id === position.activeId;
 
             return (
               <li
-                key={entry.id}
+                key={row.id}
                 className={css({
                   position: "relative",
                   "&:not(:last-child)::after": {
@@ -198,14 +207,14 @@ export default function TocSheet({ entries, label }: TocSheetProps) {
               >
                 <a
                   ref={isActive ? activeLinkRef : undefined}
-                  href={`#${entry.id}`}
-                  data-depth={entry.depth}
+                  href={`#${row.id}`}
+                  data-depth={row.depth}
                   aria-current={isActive ? "location" : undefined}
                   onClick={(event) => {
                     // A modified click still opens the fragment in a new tab.
                     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
                     event.preventDefault();
-                    pendingId.current = entry.id;
+                    pendingId.current = row.id;
                     setOpen(false);
                   }}
                   className={css({
@@ -226,10 +235,31 @@ export default function TocSheet({ entries, label }: TocSheetProps) {
                     _active: { bgColor: "sheet.groupActive" },
                     _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "-2px" },
                     "&[data-depth='3']": { pl: 8, fontSize: "15px", color: "text.secondary" },
+                    // Apparatus, not a section of the page.
+                    "&[data-depth='0']": { color: "text.muted" },
                     "&[aria-current]": { fontWeight: "semibold", color: "text.primary" },
                   })}
                 >
-                  <span>{entry.text}</span>
+                  <span className={css({ display: "flex", alignItems: "center", gap: 2.5 })}>
+                    {row.depth === 0 && (
+                      <svg
+                        aria-hidden="true"
+                        width="15"
+                        height="15"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className={css({ flexShrink: 0 })}
+                      >
+                        <path d="m5 12 7-7 7 7" />
+                        <path d="M12 19V5" />
+                      </svg>
+                    )}
+                    {row.text}
+                  </span>
                   {isActive && (
                     <span
                       aria-hidden="true"

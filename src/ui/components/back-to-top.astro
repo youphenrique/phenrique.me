@@ -1,70 +1,79 @@
 ---
 import { css } from "../../../styled-system/css";
+import { dictionaryFor } from "../../utils/comark";
+
+interface Props {
+  /** Drives the label; falls back to the page's own locale. */
+  locale?: string;
+}
+
+const label = dictionaryFor(Astro.props.locale ?? Astro.currentLocale ?? "en")["top-label"];
 ---
 
-<button
-  id="back-to-top"
-  class={`group ${css({
-    position: "relative",
-    width: "fit-content",
+{
+  /*
+  The way back once the article ends.
+
+  A plain fragment link to the `main` landmark rather than a scripted scroll:
+  the browser animates it with the page's own `scroll-behavior`, drops to an
+  instant jump under reduced motion, and moves the sequential focus point with
+  it — so a keyboard reader carries on from the top of the page instead of from
+  the footer. `#main` is already there for the skip link.
+
+  Pinned to the reading measure with `prose-column`, so it lines up with the
+  text it follows rather than with the wider container a figure can reach.
+*/
+}
+<div
+  class={`prose-column ${css({
+    mt: 16,
+    pt: 5,
+    borderTop: "1px solid token(colors.border.hairline)",
     display: "flex",
-    pl: 8,
-    pr: 3,
-    py: 1.5,
-    flexWrap: "nowrap",
-    borderRadius: "sm",
-    border: "1px solid",
-    borderColor: "border.subtle",
-    _hover: {
-      backgroundColor: "bg.hover",
-      color: "text.primary",
-    },
-    transitionProperty: "color, background-color, border-color, text-decoration-color, fill, stroke",
-    transitionDuration: "300ms",
-    transitionTimingFunction: "ease-in-out",
+    justifyContent: "flex-end",
   })}`}
 >
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    class={css({
-      position: "absolute",
-      top: "50%",
-      left: 2,
-      transform: "translateY(-50%) rotate(90deg)",
-      width: 4,
-      height: 4,
-      strokeWidth: "2",
-      fill: "none",
-      stroke: "currentColor",
-    })}
+  <a
+    href="#main"
+    class={`group ${css({
+      display: "inline-flex",
+      alignItems: "center",
+      gap: 2,
+      // Negative margin pulls the padded hit area back to the text edge.
+      px: 1.5,
+      mr: -1.5,
+      py: 1,
+      borderRadius: "sm",
+      fontSize: "sm",
+      color: "text.muted",
+      textDecoration: "none",
+      transition: "color 0.15s ease-in-out",
+      _hover: { color: "text.primary" },
+      _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "2px" },
+    })}`}
   >
-    <line
-      x1="5"
-      y1="12"
-      x2="19"
-      y2="12"
+    <!-- lucide `arrow-up`. The nudge on hover states the direction before the words do. -->
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      focusable="false"
       class={css({
-        transform: "translateX(8px) scaleX(0)",
-        _groupHover: {
-          transform: "translateX(0) scaleX(1)",
-        },
-        transitionProperty: "transform",
-        transitionDuration: "300ms",
-        transitionTimingFunction: "ease-in-out",
+        transition: "transform 0.2s ease-in-out",
+        _groupHover: { transform: "translateY(-2px)" },
+        _motionReduce: { transition: "none", _groupHover: { transform: "none" } },
       })}
-    ></line>
-    <polyline
-      points="12 5 5 12 12 19"
-      class={css({
-        transform: "translateX(4px)",
-        _groupHover: {
-          transform: "translateX(0)",
-        },
-        transitionProperty: "transform",
-        transitionDuration: "300ms",
-        transitionTimingFunction: "ease-in-out",
-      })}></polyline>
-  </svg>
-  <div class={css({ fontSize: "sm" })}>Back to top</div>
-</button>
+    >
+      <path d="m5 12 7-7 7 7"></path>
+      <path d="M12 19V5"></path>
+    </svg>
+    {label}
+  </a>
+</div>

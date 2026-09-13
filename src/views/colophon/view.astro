@@ -4,6 +4,7 @@ import MainLayout from "../../layouts/main-layout.astro";
 import Container from "../../ui/components/container.astro";
 import Markdown from "../../ui/components/markdown.astro";
 import BackToPrev from "../../ui/components/back-to-prev.astro";
+import BackToTop from "../../ui/components/back-to-top.astro";
 
 interface Props {
   title: string;
@@ -41,5 +42,6 @@ const backLabel = locale === "pt" ? "Voltar para o início" : "Back to home";
     <article>
       <Markdown body={body} class="prose prose-longform" locale={locale} toc />
     </article>
+    <BackToTop locale={locale} />
   </Container>
 </MainLayout>

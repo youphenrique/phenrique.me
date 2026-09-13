@@ -20,6 +20,8 @@ export interface ProseDictionary {
   "callout-insight": string;
   /** Label introducing an `::aside` block. */
   "aside-label": string;
+  /** The way back after an article ends: the link under the prose, and the first row of the table of contents. */
+  "top-label": string;
   /** Table of contents: the rail's accessible name and label, and the mobile sheet's title. */
   "toc-label": string;
 }

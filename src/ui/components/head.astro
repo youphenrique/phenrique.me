@@ -69,9 +69,6 @@ const lightFavicon = blobBase ? `${blobBase}/me-2.website.webp` : "/images/me-2.
     onScroll();
     animate();
 
-    const backToTop = document.getElementById("back-to-top");
-    backToTop?.addEventListener("click", (event) => scrollToTop(event));
-
     const lightThemeButton = document.getElementById("light-theme-button");
     lightThemeButton?.addEventListener("click", () => {
       localStorage.setItem("theme", "light");
@@ -116,14 +113,6 @@ const lightFavicon = blobBase ? `${blobBase}/me-2.website.webp` : "/images/me-2.
     } else {
       document.documentElement.classList.remove("scrolled");
     }
-  }
-
-  function scrollToTop(event) {
-    event.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
   }
 
   function toggleTheme(dark) {
