@@ -40,7 +40,7 @@ const { entries, label, topLabel } = Astro.props;
       position: "fixed",
       zIndex: 1,
       top: "50%",
-      right: 5,
+      right: 0,
       alignItems: "center",
       transform: "translateY(-50%)",
     }),
@@ -191,13 +191,20 @@ const { entries, label, topLabel } = Astro.props;
 
   {
     /*
-    Decorative: the links above carry every name and state. The padding is hit
-    area, so the rail opens without having to land on a 2px line.
+    Decorative: the links above carry every name and state.
+
+    All of this padding is hit area. The ticks are 12px of hairline in a column
+    that used to sit 20px clear of the screen edge, which made opening the rail
+    a matter of stopping the pointer inside a 24px band — the padding now
+    carries the column out to the edge instead, where the pointer cannot
+    overshoot it, and widens the band to 64px by 200-odd px tall. `pr` is
+    what keeps the ticks
+    drawn where they were.
   */
   }
   <div
     aria-hidden="true"
-    class={css({ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 1.5, py: 3, pl: 3 })}
+    class={css({ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 1.5, py: 10, pl: 8, pr: 5 })}
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
