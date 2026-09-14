@@ -7,13 +7,13 @@
  * recognisable marks reads as a signal.
  *
  * Every mark is inlined (no network request, no layout shift, no third-party
- * favicon service) and paints with `currentColor`, so it inherits whichever
- * semantic text token the surrounding link resolves to.
+ * favicon service). Brand marks use their official artwork and colours; the
+ * rest paint with `currentColor` and inherit the surrounding link's colour.
  *
- * The brand paths are the same ones used by the profile icons in
- * `src/content/social-links/*.yaml`; they are repeated here rather than read
- * from that collection because the two serve different jobs — that collection
- * describes *your profiles*, this one describes *any destination*.
+ * These are not the profile icons in `src/content/social-links/*.yaml`, which
+ * the home page renders in its own monochrome style. The two serve different
+ * jobs — that collection describes *your profiles*, this one describes *any
+ * destination* — so a change here does not reach the home page.
  */
 
 export interface LinkIcon {
@@ -28,24 +28,41 @@ export interface LinkIcon {
   wide?: boolean;
 }
 
+// GitHub's Invertocat (github.com/logos) comes in black or white only.
+const githubPath = `M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12`;
+
 const github: LinkIcon = {
   label: "GitHub",
-  svg: `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8a7.993 7.993 0 0 0 5.19 7.49c.185.07.386.15.575.089a.373.373 0 0 0 .255-.369c0-.775-.73-1.301-1.491-1.453-.819-.164-1.099-.668-1.209-.977-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.624 1.048 1.57.933 2.11.747.14-.047.239-.23.276-.372.095-.36-.144-.861-.505-.952C4.17 11.004 2.92 10.088 2.92 7.58c0-.399.065-.766.185-1.1.254-.712.483-1.175.474-1.93-.008-.593.599-1.304 1.156-1.103.08.029.165.063.256.103a4.29 4.29 0 0 0 2.188.356 7.657 7.657 0 0 1 1.667-.001c.754.081 1.52-.06 2.214-.365.09-.039.175-.072.254-.1.553-.199 1.153.512 1.147 1.1-.006.76.225 1.23.479 1.947.117.331.18.695.18 1.093 0 2.147-.914 3.125-2.073 3.587-.574.23-1.037 1.225-1.037 1.843 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z" fill="currentColor"/></svg>`,
+  svg: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path data-theme-variant="light" d="${githubPath}" fill="#000000"/><path data-theme-variant="dark" d="${githubPath}" fill="#FFFFFF"/></svg>`,
 };
+
+// X's brand toolkit (about.x.com) ships the logo in black or white only.
+const xPath = `M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z`;
 
 const x: LinkIcon = {
   label: "X",
-  svg: `<svg fill="none" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 1.5625H6.90625L11.1072 7.42435L16.1875 1.5625H18.4375L12.1257 8.84539L19 18.4375H13.0938L8.89276 12.5757L3.8125 18.4375H1.5625L7.87435 11.1546L1 1.5625ZM13.9605 16.75L4.28548 3.25H6.03952L15.7146 16.75H13.9605Z" fill="currentColor"/></svg>`,
+  svg: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path data-theme-variant="light" d="${xPath}" fill="#000000"/><path data-theme-variant="dark" d="${xPath}" fill="#FFFFFF"/></svg>`,
 };
 
+// LinkedIn's 14px "in" bug (brand.linkedin.com/in-logo), drawn for small
+// sizes, in #0A66C2. The official path knocks the letters out of the blue
+// square, so a white underlay keeps them white on a dark surface too.
 const linkedin: LinkIcon = {
   label: "LinkedIn",
-  svg: `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 1H5C2.92925 1 1 2.92925 1 5V15C1 17.0707 2.92925 19 5 19H15C17.0715 19 19 17.0707 19 15V5C19 2.92925 17.0715 1 15 1ZM7 15.25H4.75V7H7V15.25ZM5.875 6.049C5.1505 6.049 4.5625 5.4565 4.5625 4.726C4.5625 3.9955 5.1505 3.403 5.875 3.403C6.5995 3.403 7.1875 3.9955 7.1875 4.726C7.1875 5.4565 6.60025 6.049 5.875 6.049ZM16 15.25H13.75V11.047C13.75 8.521 10.75 8.71225 10.75 11.047V15.25H8.5V7H10.75V8.32375C11.797 6.38425 16 6.241 16 10.1808V15.25Z" fill="currentColor"/></svg>`,
+  svg: `<svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="12" height="12" fill="#FFFFFF"/><path d="m13 0h-12c-0.5 0-1 0.5-1 1v12c0 0.6 0.5 1 1 1h12c0.6 0 1-0.4 1-1v-12c0-0.6-0.5-1-1-1zm-8.8 11.9h-2.1v-6.6h2.1v6.6zm-1.1-7.6c-0.7 0-1.2-0.5-1.2-1.2s0.5-1.2 1.2-1.2 1.2 0.5 1.2 1.2-0.5 1.2-1.2 1.2zm8.8 7.6h-2v-3.2c0-0.8 0-1.8-1.1-1.8s-1.2 0.8-1.2 1.7v3.3h-2.1v-6.6h2v0.9c0.3-0.5 1-1.1 2-1.1 2.1 0 2.5 1.4 2.5 3.2v3.6z" fill="#0A66C2"/></svg>`,
 };
+
+// The glyph outline is `Instagram_Glyph_Black.svg` from Meta's
+// IG_brand_asset_pack_2023. The pack's gradient glyph is a bitmap clipped to
+// that outline, with no colour stops to copy, so the gradient is rebuilt in
+// vector from samples of it: a warm radial rising from the bottom edge
+// (#FFD600 → #FF7A00 → #FF0069 → #D300C5) under a purple (#7638FA) bloom from
+// the top-left corner. It is the same on either theme.
+const instagramPath = `M295.42,6c-53.2,2.51-89.53,11-121.29,23.48-32.87,12.81-60.73,30-88.45,57.82S40.89,143,28.17,175.92c-12.31,31.83-20.65,68.19-23,121.42S2.3,367.68,2.56,503.46,3.42,656.26,6,709.6c2.54,53.19,11,89.51,23.48,121.28,12.83,32.87,30,60.72,57.83,88.45S143,964.09,176,976.83c31.8,12.29,68.17,20.67,121.39,23s70.35,2.87,206.09,2.61,152.83-.86,206.16-3.39S799.1,988,830.88,975.58c32.87-12.86,60.74-30,88.45-57.84S964.1,862,976.81,829.06c12.32-31.8,20.69-68.17,23-121.35,2.33-53.37,2.88-70.41,2.62-206.17s-.87-152.78-3.4-206.1-11-89.53-23.47-121.32c-12.85-32.87-30-60.7-57.82-88.45S862,40.87,829.07,28.19c-31.82-12.31-68.17-20.7-121.39-23S637.33,2.3,501.54,2.56,348.75,3.4,295.42,6m5.84,903.88c-48.75-2.12-75.22-10.22-92.86-17-23.36-9-40-19.88-57.58-37.29s-28.38-34.11-37.5-57.42c-6.85-17.64-15.1-44.08-17.38-92.83-2.48-52.69-3-68.51-3.29-202s.22-149.29,2.53-202c2.08-48.71,10.23-75.21,17-92.84,9-23.39,19.84-40,37.29-57.57s34.1-28.39,57.43-37.51c17.62-6.88,44.06-15.06,92.79-17.38,52.73-2.5,68.53-3,202-3.29s149.31.21,202.06,2.53c48.71,2.12,75.22,10.19,92.83,17,23.37,9,40,19.81,57.57,37.29s28.4,34.07,37.52,57.45c6.89,17.57,15.07,44,17.37,92.76,2.51,52.73,3.08,68.54,3.32,202s-.23,149.31-2.54,202c-2.13,48.75-10.21,75.23-17,92.89-9,23.35-19.85,40-37.31,57.56s-34.09,28.38-57.43,37.5c-17.6,6.87-44.07,15.07-92.76,17.39-52.73,2.48-68.53,3-202.05,3.29s-149.27-.25-202-2.53m407.6-674.61a60,60,0,1,0,59.88-60.1,60,60,0,0,0-59.88,60.1M245.77,503c.28,141.8,115.44,256.49,257.21,256.22S759.52,643.8,759.25,502,643.79,245.48,502,245.76,245.5,361.22,245.77,503m90.06-.18a166.67,166.67,0,1,1,167,166.34,166.65,166.65,0,0,1-167-166.34`;
 
 const instagram: LinkIcon = {
   label: "Instagram",
-  svg: `<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25"><path d="M17.017 25H6.982C3.142 25 0 21.815 0 17.921V7.08C0 3.185 3.142 0 6.982 0h10.035C20.857 0 24 3.185 24 7.079V17.92C24 21.815 20.857 25 17.017 25Zm0-1.87a5.064 5.064 0 0 0 3.626-1.532 5.207 5.207 0 0 0 1.511-3.677V7.08c0-1.383-.536-2.69-1.51-3.678a5.066 5.066 0 0 0-3.627-1.532H6.982a5.065 5.065 0 0 0-3.627 1.532A5.207 5.207 0 0 0 1.844 7.08V17.92c0 1.384.537 2.689 1.51 3.677a5.065 5.065 0 0 0 3.628 1.532h10.035Z" fill="currentColor"/><path d="M18.645 12.403c0 3.701-2.96 6.7-6.609 6.7s-6.61-3-6.61-6.7 2.96-6.701 6.61-6.701c3.65 0 6.609 3 6.609 6.701Zm-6.641-4.382c-2.39 0-4.328 1.964-4.328 4.388 0 2.423 1.937 4.388 4.328 4.388 2.39 0 4.327-1.965 4.327-4.388.002-2.424-1.936-4.388-4.327-4.388ZM20.316 5.598c0 .876-.7 1.586-1.565 1.586-.864 0-1.564-.71-1.564-1.586 0-.876.7-1.587 1.564-1.587.864 0 1.565.71 1.565 1.587Z" fill="currentColor"/></svg>`,
+  svg: `<svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="link-icon-instagram-warm" cx="0.3" cy="1.07" r="1.05"><stop offset="0.08" stop-color="#FFD600"/><stop offset="0.4" stop-color="#FF7A00"/><stop offset="0.7" stop-color="#FF0069"/><stop offset="1" stop-color="#D300C5"/></radialGradient><radialGradient id="link-icon-instagram-cool" cx="0" cy="0" r="0.9"><stop offset="0" stop-color="#7638FA"/><stop offset="1" stop-color="#7638FA" stop-opacity="0"/></radialGradient></defs><g transform="translate(-2.5 -2.5)"><path d="${instagramPath}" fill="url(#link-icon-instagram-warm)"/><path d="${instagramPath}" fill="url(#link-icon-instagram-cool)"/></g></svg>`,
 };
 
 // Brand marks use their official colours instead of inheriting the prose link
