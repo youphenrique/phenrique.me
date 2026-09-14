@@ -7,7 +7,7 @@ resumeURL: "https://resume.phenrique.me/cv.pdf"
 
 highlights:
   - icon: "code"
-    title: "Frontend architecture"
+    title: "Frontend expertise"
     description: "Design systems, component architecture and accessible interfaces in React, Next.js and Vue — built to be extended rather than rewritten."
   - icon: "layers"
     title: "Full-stack range"
@@ -16,7 +16,7 @@ highlights:
     title: "Problem solving"
     description: "Creative thinker who breaks down complex problems, navigates ambiguity, and turns constraints into innovative, pragmatic solutions."
   - icon: "graduation"
-    title: "Continuous learner"
+    title: "Continuous, fast learner"
     description: "Self-taught engineer driven by curiosity, always learning from others and exploring new disciplines, tools, and ways of thinking."
   - icon: "heart"
     title: "Cultural fit"

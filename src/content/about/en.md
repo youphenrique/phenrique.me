@@ -49,9 +49,9 @@ When I'm not coding, you'll find me writing something (mainly in this website), 
 
 The most reliable way to reach me is [email](mailto:pauloh1288@gmail.com). I read everything and reply to most things inside a few days. There is no contact form on this site on purpose, because a form means a database, and a personal site has no business holding one.
 
-Also, I’m on [GitHub](https://github.com/youphenrique) as youphenrique, which is the right place for a bug or a pull request on anything I maintain. I’m also on [X](https://x.com/youphenrique) and [LinkedIn](https://www.linkedin.com/in/phenrique7/). Every one of those is the same person, and they are all listed in this site’s structured data.
+I’m on [GitHub](https://github.com/youphenrique), which is the right place for a bug report or a pull request on anything I maintain. I’m also on [X](https://x.com/youphenrique) and [LinkedIn](https://www.linkedin.com/in/phenrique7/). If you’d like to follow along for more informal and non-technical moments, feel free to find me on [Instagram](https://www.instagram.com/youphenrique).
 
-::callout{type="note" title="Worth writing about"}
+::callout{type="warning" title="Worth writing about"}
 Please skip bulk outreach, link exchanges, guest post offers, and SEO services. I do not take paid placements or sponsored links anywhere on this site.
 ::
 
