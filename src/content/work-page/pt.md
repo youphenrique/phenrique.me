@@ -66,3 +66,5 @@ languages:
 Sou um engenheiro de software com mais de nove anos de experiência, atuando principalmente na ponta de frontend da stack — arquitetura, design systems e as interfaces com as quais as pessoas realmente interagem —, com bagagem sólida em backend e infraestrutura para levar um produto da concepção até a produção.
 
 Boa parte desse tempo foi dedicada a dois tipos de trabalho: produtos de alto tráfego, onde os desafios mais interessantes estão em performance, confiabilidade e em não quebrar o que já funciona; e modernização de legados, onde o foco é abrir caminhos de migração e manter o negócio rodando enquanto o terreno se move por baixo. Hoje, lidero o design, a arquitetura e a entrega de um ERP próprio na Nordeste Painéis.
+
+O que costumo buscar em novos desafios: trabalho em frontend ou full-stack, especialmente projetos em tempo real ou com foco crítico em performance; startups e equipes em estágio inicial que precisam de um primeiro engenheiro frontend; ferramentas de desenvolvimento e pacotes de código; um bug neste site ou em projetos que mantenho; ou uma ideia sobre a qual você queira uma segunda opinião.

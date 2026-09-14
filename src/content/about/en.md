@@ -45,9 +45,16 @@ I set out my beliefs, and how they shape my identity, in ["What I believe and wh
 
 When I'm not coding, you'll find me writing something (mainly in this website), spending time with family and friends, serving at my church community as a Bible teacher and musical leader, working out at the gym, reading a book, playing chess, or playing guitar or keyboard with my gig partners somewhere.
 
-::callout{type="info" title="This website"}
-This website is built with [Astro](https://astro.build) and hosted on [Vercel](https://vercel.com). If you want to know more about how it was built, check out the [Colophon](https://phenrique.me/colophon) page.
+## Contact
+
+The most reliable way to reach me is [email](mailto:pauloh1288@gmail.com). I read everything and reply to most things inside a few days. There is no contact form on this site on purpose, because a form means a database, and a personal site has no business holding one.
+
+Also, I’m on [GitHub](https://github.com/youphenrique) as youphenrique, which is the right place for a bug or a pull request on anything I maintain. I’m also on [X](https://x.com/youphenrique) and [LinkedIn](https://www.linkedin.com/in/phenrique7/). Every one of those is the same person, and they are all listed in this site’s structured data.
+
+::callout{type="note" title="Worth writing about"}
+Please skip bulk outreach, link exchanges, guest post offers, and SEO services. I do not take paid placements or sponsored links anywhere on this site.
 ::
+
 
 [^name]: People call me "Paulo", "Henrique", "Paulinho", "Rique" and, most frequently, "PH".
 [^fortaleza]: On the coast of [Ceará, in Brazil's northeast](https://maps.app.goo.gl/YbP1zDmW3U7A9MuBA) — timezone GMT−3.

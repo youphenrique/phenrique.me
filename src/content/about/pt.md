@@ -41,14 +41,28 @@ Para contextualizar, sou pós-graduado em Sagradas Escrituras pela FCTP. Isso re
 Expliquei minhas convicções e como elas moldam minha identidade no texto ["No que creio e por que creio no que creio"](https://phenrique.me/writing/what-i-believe-and-why-i-believe-in-what-i-believe).
 ::
 
-Quando não estou programando ou escrevendo, você me encontrará passando tempo com minha família e amigos, servindo na minha igreja local como professor bíblico e líder de música, treinando na academia, lendo um livro, jogando xadrez ou tocando violão ou teclado por aí com meus amigos de banda. É aí que vivem muitos dos meus relacionamentos mais significativos e, honestamente, onde me sinto mais eu mesmo.
+## Quando não estou programando
 
-## Sobre este site
+Quando não estou programando, você me encontrará escrevendo alguma coisa (principalmente neste site), passando tempo com minha família e amigos, servindo na minha comunidade de fé como professor bíblico e líder musical, treinando na academia, lendo um livro, jogando xadrez ou tocando violão ou teclado por aí com meus amigos de banda.
 
-Construído com [Astro](https://astro.build) e hospedado na [Vercel](https://vercel.com). A tipografia é Fraunces para títulos e Geist para o restante; o sistema de cores está [documentado abertamente](/design.md).
+::callout{type="info" title="Este site"}
+Este site é construído com [Astro](https://astro.build) e hospedado na [Vercel](https://vercel.com). Se quiser saber mais sobre como ele foi feito, confira a página [Colophon](https://phenrique.me/colophon).
+::
 
-::callout{type="warning" title="Sobre IA e este site"}
-Não utilizo LLMs nem ferramentas de IA para gerar ou publicar qualquer conteúdo textual neste site.
+## Contato
+
+Como falar comigo e o que esperar quando entrar em contato.
+
+### E-mail
+
+A forma mais confiável de falar comigo é por e-mail, em [pauloh1288@gmail.com](mailto:pauloh1288@gmail.com). Leio tudo e costumo responder à maioria das mensagens em poucos dias. Não há formulário de contato neste site por uma razão intencional: formulário exige banco de dados, e um site pessoal não tem por que manter um.
+
+### Em outros lugares
+
+Estou no [GitHub](https://github.com/youphenrique) como youphenrique — o lugar ideal para reportar bugs ou enviar pull requests em projetos que mantenho. Também estou no [X](https://x.com/youphenrique) e no [LinkedIn](https://www.linkedin.com/in/phenrique7/). Cada um desses perfis é a mesma pessoa, e todos estão listados nos dados estruturados deste site.
+
+::callout{type="note" title="Vale a pena escrever"}
+Por favor, evite mensagens genéricas em massa, troca de links, ofertas de guest posts e serviços de SEO. Não aceito parcerias pagas nem links patrocinados em nenhum lugar deste site.
 ::
 
 [^name]: Algumas pessoas me chamam de "Paulo", "Henrique", "Paulinho", "Rique" (minha irmã) e, com mais frequência, "PH".

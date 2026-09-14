@@ -66,3 +66,5 @@ languages:
 I'm a software engineer with more than nine years of experience, working mostly at the frontend end of the stack — architecture, design systems, and the interfaces people actually touch — with enough backend and infrastructure behind me to carry a product from an idea to something running in production.
 
 Most of that time has gone into two kinds of work: high-traffic products, where the interesting problems are performance, reliability and not breaking what already works; and legacy modernisation, where they are migration paths and keeping a business running while the ground moves under it. Today I lead the design, architecture and delivery of a custom ERP at Nordeste Painéis.
+
+What I'm typically open to: frontend or full-stack work, especially anything real-time or performance-critical; startups and early teams that need a first frontend engineer; dev tooling and packages; a bug on this site or in one of mine; or an idea you want a second opinion on.
