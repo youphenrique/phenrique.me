@@ -2,9 +2,16 @@
 // Lucide glyphs inlined by hand, matching `nav-icon.astro` — the icon set stays
 // dependency-free. Paths are verbatim from lucide-icons (MIT), 24x24 grid.
 //
-// The six `highlights` names are the enum `workPages` validates against, so a
+// The seven `highlights` names are the enum `workPages` validates against, so a
 // content file cannot name a glyph that does not exist here.
-export type WorkIconName = "code" | "layers" | "lightbulb" | "graduation" | "heart" | "users";
+export type WorkIconName =
+  | "code"
+  | "layers"
+  | "lightbulb"
+  | "graduation"
+  | "heart"
+  | "users"
+  | "package";
 
 interface Props {
   name: WorkIconName;
@@ -78,6 +85,18 @@ const { name, size = 18, class: iconClass } = Astro.props;
   {
     name === "heart" ? (
       <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z" />
+    ) : null
+  }
+
+  {/* package */}
+  {
+    name === "package" ? (
+      <>
+        <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
+        <path d="M12 22V12" />
+        <polyline points="3.29 7 12 12 20.71 7" />
+        <path d="m7.5 4.27 9 5.15" />
+      </>
     ) : null
   }
 

@@ -1,7 +1,7 @@
 ---
 metadata:
   title: "Work"
-  description: "Nine years of building software: roles, projects, stack and education."
+  description: "Nine years building software products end to end — discovery, architecture, interface, production."
 
 resumeURL: "https://resume.phenrique.me/cv.pdf"
 
@@ -9,23 +9,25 @@ highlights:
   - icon: "code"
     title: "Frontend expertise"
     description: "Design systems, component architecture and accessible interfaces in React, Next.js and Vue — built to be extended rather than rewritten."
-  - icon: "layers"
-    title: "Full-stack range"
-    description: "Comfortable from Postgres and Spring Boot through to the pixel, so a feature does not stop at the boundary of one team's repository."
   - icon: "lightbulb"
-    title: "Problem solving"
-    description: "Creative thinker who breaks down complex problems, navigates ambiguity, and turns constraints into innovative, pragmatic solutions."
-  - icon: "graduation"
-    title: "Continuous, fast learner"
-    description: "Self-taught engineer driven by curiosity, always learning from others and exploring new disciplines, tools, and ways of thinking."
-  - icon: "heart"
-    title: "Cultural fit"
-    description: "Positive, respectful, and welcoming of differences. A strong fit for organizations that value diversity and authenticity."
+    title: "Product discovery"
+    description: "I find the requirements before I write the spec. On the Nordeste Painéis ERP I ran discovery with the shop floor and defined what \"good\" meant for that factory — with no product manager in between."
+  - icon: "layers"
+    title: "End-to-end ownership"
+    description: "From Postgres and Spring Boot through to the pixel and the deploy pipeline. I own outcomes rather than tickets, so a feature does not stop at the boundary of one team's repository."
+  - icon: "package"
+    title: "Open source & tooling"
+    description: "brutils, an MIT-licensed TypeScript toolkit for Brazilian business rules, plus the design system behind this site. Libraries are where taste has to survive contact with other people's code."
   - icon: "users"
     title: "Mentorship"
     description: "Code review, pairing and five years coaching students for the Maratona de Programação — including a state title."
+  - icon: "graduation"
+    title: "Continuous learning"
+    description: "Self-taught across four production stacks in nine years, and a postgraduate degree earned entirely outside software — curiosity that holds up over years, not weekends."
 
 stack:
+  - label: "Product & discovery"
+    items: ["Requirements discovery", "Stakeholder interviews", "Domain modelling", "Product specs", "Scope negotiation", "Analytics & telemetry"]
   - label: "Languages"
     items: ["TypeScript", "JavaScript", "Kotlin", "PHP"]
   - label: "Frontend"
@@ -63,8 +65,10 @@ languages:
     level: "Beginner"
 ---
 
-I'm a software engineer with more than nine years of experience, working mostly at the frontend end of the stack — architecture, design systems, and the interfaces people actually touch — with enough backend and infrastructure behind me to carry a product from an idea to something running in production.
+I'm a software engineer with more than nine years of experience. I take products from a conversation with the people who need them to something running in production — the discovery, the domain model, the architecture, the interface, the pipeline. My depth is at the frontend: design systems, component architecture, and the interfaces people actually touch. My range covers enough backend and infrastructure that the work never stops at a repository boundary.
 
-Most of that time has gone into two kinds of work: high-traffic products, where the interesting problems are performance, reliability and not breaking what already works; and legacy modernisation, where they are migration paths and keeping a business running while the ground moves under it. Today I lead the design, architecture and delivery of a custom ERP at Nordeste Painéis.
+Most of that time has gone into three kinds of work. High-traffic products, where the interesting problems are performance, reliability and not breaking what already works. Legacy modernisation, where they are migration paths and keeping a business running while the ground moves under it. And greenfield software built directly with the people who will use it, which is the work I find most valuable and the hardest to get right.
 
-What I'm typically open to: frontend or full-stack work, especially anything real-time or performance-critical; startups and early teams that need a first frontend engineer; dev tooling and packages; a bug on this site or in one of mine; or an idea you want a second opinion on.
+That last kind is what I do now. At Nordeste Painéis I lead the design, architecture and delivery of a custom ERP for the assembly and sale of electrical panels — an operation that previously ran on spreadsheets, WhatsApp threads and the people who remembered how it all fit together. I owned both ends of it: working out with the shop floor what the system had to do, and shipping it to production myself.
+
+What I'm typically open to: product or frontend engineering where I'd talk to customers directly; the role now being posted as forward deployed, solutions, implementation or applied AI engineer; first product engineer at an early team; anything real-time or performance-critical; dev tooling and packages; a bug on this site or in one of mine; or an idea you want a second opinion on.
