@@ -5,7 +5,7 @@ bioImageResource: "/about-page.me.webp"
 
 Olá, meu nome é Paulo Henrique[^name]. Sou um engenheiro de software com olhar apurado para design, de Fortaleza[^fortaleza], Brasil, atuando na interseção entre engenharia e fé.
 
-## Meu ethos
+## Um breve histórico (acadêmico)
 
 Embora no início eu pretendesse seguir carreira em engenharia elétrica, o "destino"[^destiny] acabou me levando a estudar ciência da computação. Nos primeiros semestres, eu não tinha certeza se era essa a carreira que queria seguir, mas tudo mudou quando conheci a programação competitiva. A partir dali, passei a dedicar a maior parte do meu tempo de estudo a resolver problemas algorítmicos.
 
@@ -13,9 +13,13 @@ Essa paixão pelas competições moldou minha experiência na universidade, rend
 
 No final de 2019, formei-me bacharel em Ciência da Computação pela Universidade Estadual do Ceará. Mas já em 2017 eu havia dado meus primeiros passos profissionais, ingressando como estagiário em uma empresa graças ao desempenho nas competições. O que começou nas arenas de competição acabou se tornando uma carreira construída em torno de resolver problemas reais — escrevendo código para produção, trabalhando em toda a stack e dedicando extrema atenção ao ofício de criar software de qualidade que faça a diferença para as pessoas.
 
-## O que faço (profissionalmente)
+A programação competitiva me ensinou a resolver um problema que outra pessoa já havia enunciado com precisão. Quase tudo de interessante que vem desde então é o trabalho inverso: o problema chega como uma reclamação vaga de alguém que não consegue descrever o que quer, e o trabalho é transformar isso em algo exato o suficiente para ser construído.
 
-Hoje atuo como engenheiro de software full-stack[^fullstack], com foco especial no frontend. Há algo profundamente recompensador em criar interfaces elegantes, refinadas, bem pensadas e com experiências fluidas[^testimonial], seja em aplicações web, mobile ou desktop.
+## O que faço
+
+Hoje atuo como engenheiro de produto de software[^productengineer] — full-stack em abrangência[^fullstack], com profundidade no frontend. O rótulo importa para mim porque a parte deste trabalho pela qual sou efetivamente pago não é a digitação. É descobrir o que deveria existir, decidir o que significa "bom" para aquele negócio específico e aquelas pessoas específicas, e então construir bem o suficiente para que elas gostem de usar.
+
+E essa última parte não é enfeite. Há algo profundamente recompensador em criar interfaces elegantes, refinadas, bem pensadas e com experiências fluidas[^testimonial], seja em aplicações web, mobile ou desktop — e quando todo mundo consegue construir aquilo que tecnicamente funciona, aquilo que as pessoas realmente gostam de usar é o que resta para competir.
 
 Acredito que Paul Irish sintetiza muito bem minha inclinação natural pelo ofício de criar UIs:
 
@@ -25,13 +29,15 @@ Criar uma interface traz uma grande responsabilidade. Em temas de nicho, a UI po
 
 No momento, tenho desenvolvido aplicações web de alta qualidade com `Kotlin` e `TypeScript`. Busco me especializar em soluções multiplataforma e web utilizando `Jetpack Compose`, `React Native` e `React`, e tenho um entusiasmo especial por `Kotlin Multiplatform`.
 
-Embora minha principal especialidade seja o frontend, tenho uma base sólida em sistemas de backend, o que me permite atuar com desenvoltura em toda a stack: automação, CI/CD, arquitetura de sistemas robustos e escaláveis, etc. Em resumo, desenvolvo aplicações web, APIs, bibliotecas e outras ferramentas — com ou sem IA.
+Embora minha principal especialidade seja o frontend, tenho uma base sólida em sistemas de backend, o que me permite atuar com desenvoltura em toda a stack: automação, CI/CD, arquitetura de sistemas robustos e escaláveis, etc. Em resumo, desenvolvo aplicações web, APIs, bibliotecas e outras ferramentas — com ou sem IA. Recorro bastante a agentes para as partes que antes consumiam a semana inteira, justamente para que mais da semana sobre para descoberta e julgamento; a página de [IA](https://phenrique.me/ai) detalha como.
 
-::callout{type="insight" title="Aonde quero chegar"}
-Procuro constantemente me aproximar de tecnologias e competências além da minha área central de especialidade, buscando me desenvolver como um profissional mais versátil e completo — um verdadeiro engenheiro em T (T-shaped)[^tshaped-1]<sup>,&nbsp;</sup>[^tshaped-2], especialmente nesta era de engenharia agêntica.
+Neste momento, isso se traduz em um ERP que estou construindo para a Nordeste Painéis, uma fábrica que monta e vende painéis elétricos. Antes dele, a operação rodava em planilhas, conversas de WhatsApp e na memória das pessoas que sabiam como tudo se encaixava. Não havia product manager nem especificação escrita, então o primeiro trabalho foi caminhar pelo chão de fábrica e entender o que o sistema precisava fazer de fato — como são os pedidos, em que ponto da montagem está cada painel, do que um vendedor precisa no momento exato em que está orçando. Depois eu projetei, construí e coloquei em produção. A parte interessante desse projeto nunca foi a escolha do framework. Foi chegar a uma definição de "bom" que serve para esta fábrica e não serviria para quase nenhuma outra.
+
+::callout{type="insight" title="Para onde acho que isso caminha"}
+O custo de produzir código desabou, e o custo de revisar, corrigir e operar esse código está seguindo o mesmo caminho. O que não desaba é a parte que só existia na cabeça de uma pessoa: o que aquele negócio realmente precisa e o que significa "bom" para ele e para mais ninguém. Esse trabalho é específico de cada cliente e não se transfere — e é exatamente por isso que ele continua valioso.[^productengineer] Então aponto minha abrangência para lá — tecnologias e competências além da minha área central[^tshaped-1]<sup>,&nbsp;</sup>[^tshaped-2] —, porque nesta era de engenharia agêntica, quem consegue sentar com as pessoas que precisam do software e voltar com uma definição correta de "bom" é quem segue fazendo um trabalho durável.
 ::
 
-## Fé e Comunidade
+## Somos todos crentes
 
 Sou cristão protestante, e essa não é uma dimensão isolada do restante da minha vida. Minha fé em Deus e em seu filho Jesus orienta a maneira como penso sobre tudo: meu trabalho, como me relaciono com as pessoas e para que afinal serve a tecnologia. Como observou Mortimer Adler, a conclusão a que chegamos sobre Deus afeta todas as outras áreas da vida — é a chave para encontrar o sentido último das coisas e a pergunta mais importante que qualquer ser humano pode encarar.[^geisler]
 
@@ -60,9 +66,10 @@ Por favor, evite mensagens genéricas em massa, troca de links, ofertas de guest
 ::
 
 [^name]: Algumas pessoas me chamam de "Paulo", "Henrique", "Paulinho", "Rique" (minha irmã) e, com mais frequência, "PH".
-[^fortaleza]: No litoral do Ceará, Nordeste do Brasil — fuso horário GMT−3.
+[^fortaleza]: No litoral do [Ceará, no Nordeste do Brasil](https://maps.app.goo.gl/YbP1zDmW3U7A9MuBA) — fuso horário GMT−3.
 [^destiny]: Prestei vestibular para engenharia elétrica três vezes e não passei.
 [^maratona]: [Maratona de Programação, resultados da regional de 2016](https://www.facebook.com/maratona/posts/10154135897899118:0).
+[^productengineer]: Laurie Voss, ["We are all Product Engineers now"](https://seldo.com/posts/we-are-all-product-engineers-now/), que defende o argumento melhor do que eu conseguiria: à medida que o custo de escrever código desaba, o que resta é descobrir o que as pessoas realmente querem, definir isso com precisão e tornar o uso agradável.
 [^fullstack]: Com todo o afeto — e toda a desconfiança — que o meme de "full stack" no Twitter conquistou.
 [^testimonial]: Talvez este site seja um bom testemunho de quanto valorizo bom design e software de qualidade.
 [^tshaped-1]: Paulo Silveira, ["Vibecoding, hipsters e o novo dev"](https://paulo.com.br/blog/vibecoding-hipsters-novo-dev/).
