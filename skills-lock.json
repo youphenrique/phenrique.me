@@ -7,6 +7,18 @@
       "sourceType": "well-known",
       "computedHash": "3dbb37fd278fb3ab7d9c8c5c82caed3d2dc6cc9c658068d784d838d7537fd1d6",
       "wellKnownDigest": "sha256:8e5d39f593a29c99cb0b974077eeeb108662e2787dedaca50415b89d90cba86d"
+    },
+    "emil-design-eng": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/emil-design-eng/SKILL.md",
+      "computedHash": "51f2537e04d15911b41d78e2de24c36a0e26d41beae15e82a954fe5496a5eda9"
+    },
+    "modern-web-guidance": {
+      "source": "GoogleChrome/modern-web-guidance",
+      "sourceType": "github",
+      "skillPath": "skills/modern-web-guidance/SKILL.md",
+      "computedHash": "da9b9c833351f0575ca7482f3c8decc8e24b02b76dea71f138738283c701b4c5"
     }
   }
 }
