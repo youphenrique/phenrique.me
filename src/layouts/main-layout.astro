@@ -1,6 +1,5 @@
 ---
 import { Font } from "astro:assets";
-import { getCollection } from "astro:content";
 
 import "../ui/styles/global.css";
 import Head from "../ui/components/head.astro";
@@ -10,13 +9,7 @@ import { css, cx } from "../../styled-system/css";
 import { flex } from "../../styled-system/patterns";
 import enDict from "../i18n/main/en";
 import ptDict from "../i18n/main/pt";
-import {
-  DEFAULT_LOCALE,
-  LOCALES,
-  pathAlternates,
-  type Alternates,
-  type Locale,
-} from "../utils/i18n-routes.ts";
+import { DEFAULT_LOCALE, LOCALES, pathAlternates, type Alternates, type Locale } from "../utils/i18n-routes.ts";
 
 interface Props {
   title: string;
@@ -44,19 +37,14 @@ const pageAlternates = alternates ?? pathAlternates(Astro.url.pathname);
 
 const dictionaries = { en: enDict, pt: ptDict } as const;
 const dict = dictionaries[lang as keyof typeof dictionaries] ?? enDict;
-
-const metadatumEntries = await getCollection("metadatum");
-const metadatum = metadatumEntries.find((m) => m.id === `metadata.${lang}`);
-const pageTitle = metadatum?.data.title ?? title;
-const pageDescription = metadatum?.data.description ?? description;
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
     <Head
-      title={pageTitle}
-      description={pageDescription}
+      title={title}
+      description={description}
       image={image}
       locale={locale}
       alternates={pageAlternates}
