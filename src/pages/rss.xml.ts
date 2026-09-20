@@ -1,6 +1,6 @@
 import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
-import { HOME } from "../consts";
+import { FEED } from "../consts";
 
 interface Context {
   site: string;
@@ -15,8 +15,8 @@ export async function GET(context: Context) {
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
   return rss({
-    title: HOME.TITLE,
-    description: HOME.DESCRIPTION,
+    title: FEED.TITLE,
+    description: FEED.DESCRIPTION,
     site: context.site,
     items: items.map((item) => ({
       title: item.data.title,

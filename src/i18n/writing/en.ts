@@ -2,6 +2,7 @@ import type { WritingDictionary } from "./types";
 
 const en: WritingDictionary = {
   "page-title": "Writing",
+  "page-description": "A collection of articles on topics I am passionate about.",
   "back-to-index": "Back to blog",
   "reading-time": "min read",
   "empty-state": {

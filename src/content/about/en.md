@@ -1,6 +1,8 @@
 ---
 title: "Building with craft, reasoning with depth, living by faith."
 bioImageResource: "/about-page.me.webp"
+metadata:
+  description: "About Paulo Henrique: his work, his craft, and his faith."
 ---
 
 Hey, my name is Paulo Henrique[^name], and I'm a software engineer with a keen eye for design, from Fortaleza[^fortaleza], Brazil, working at the intersection of engineering and faith.

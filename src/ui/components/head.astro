@@ -40,6 +40,18 @@ const {
 
 const OG_LOCALES: Record<Locale, string> = { en: "en_US", pt: "pt_BR" };
 
+/**
+ * A bare "Work" is an ambiguous browser tab and a weak search result, so the
+ * site name is appended — but only where it fits. Google truncates a title
+ * around 60 characters, and the suffix costs 17, so a title already at this
+ * length would be pushed through the cut by the very thing meant to help it.
+ * `/about`'s tagline is 59 characters and opts out on its own this way, with no
+ * per-page special case.
+ */
+const SUFFIX_AT_MOST = 45;
+
+const pageTitle = title.length >= SUFFIX_AT_MOST || title.includes(SITE.NAME) ? title : `${title} | ${SITE.NAME}`;
+
 // Alternates are matched to the canonical's trailing-slash shape so the two
 // never describe the same page two ways.
 const alternateLinks = Object.entries(alternates ?? {}).map(([lang, path]) => ({
@@ -75,8 +87,8 @@ const lightFavicon = blobBase ? `${blobBase}/me-2.website.webp` : "/images/me-2.
 {xDefault && <link rel="alternate" hreflang="x-default" href={xDefault} />}
 
 <!-- Primary Meta Tags -->
-<title>{title}</title>
-<meta name="title" content={title} />
+<title>{pageTitle}</title>
+<meta name="title" content={pageTitle} />
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
@@ -89,7 +101,7 @@ const lightFavicon = blobBase ? `${blobBase}/me-2.website.webp` : "/images/me-2.
     .filter((link) => link.lang !== locale)
     .map((link) => <meta property="og:locale:alternate" content={OG_LOCALES[link.lang as Locale]} />)
 }
-<meta property="og:title" content={title} />
+<meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
 {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
@@ -97,7 +109,7 @@ const lightFavicon = blobBase ? `${blobBase}/me-2.website.webp` : "/images/me-2.
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
+<meta property="twitter:title" content={pageTitle} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 

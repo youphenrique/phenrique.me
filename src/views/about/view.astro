@@ -12,6 +12,8 @@ import { SITE } from "../../consts.ts";
 interface Props {
   title: string;
   bioImageResource: string;
+  /** Head metadata. Was hardcoded in English, so `/pt/about` shipped it too. */
+  metadata: { description: string };
   /** Raw markdown body for the page's prose. */
   body: string | undefined;
 }
@@ -34,7 +36,7 @@ const jsonLd = {
 
 <MainLayout
   title={Astro.props.title}
-  description="Paulo Henrique's personal website"
+  description={Astro.props.metadata.description}
   lang={Astro.currentLocale ?? "en"}
   jsonLd={jsonLd}
 >
