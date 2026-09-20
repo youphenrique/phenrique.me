@@ -6,6 +6,16 @@ const homePages = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/home" }),
   schema: z.object({
     title: z.string(),
+    /**
+     * Head metadata, kept apart from `title` because the two want different
+     * words here: the heading is the name on its own, while the `<title>` has
+     * to say what the person does for the result to be worth clicking. Every
+     * other page's heading doubles as its title, so only this one splits them.
+     */
+    metadata: z.object({
+      title: z.string(),
+      description: z.string(),
+    }),
   }),
 });
 
@@ -14,6 +24,15 @@ const aboutPages = defineCollection({
   schema: z.object({
     title: z.string(),
     bioImageResource: z.string(),
+    /**
+     * Description only: the page's `title` is a tagline that already reads as
+     * a `<title>`, and at 59 characters it opts out of the site-name suffix on
+     * its own. The description was hardcoded in English in the view, so `/pt`
+     * shipped it untranslated.
+     */
+    metadata: z.object({
+      description: z.string(),
+    }),
   }),
 });
 

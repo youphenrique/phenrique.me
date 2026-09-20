@@ -1,6 +1,8 @@
 ---
 title: "Construindo com maestria, pensando com profundidade, vivendo pela fé."
 bioImageResource: "/about-page.me.webp"
+metadata:
+  description: "Sobre Paulo Henrique: seu trabalho, seu ofício e sua fé."
 ---
 
 Olá, meu nome é Paulo Henrique[^name]. Sou um engenheiro de software com olhar apurado para design, de Fortaleza[^fortaleza], Brasil, atuando na interseção entre engenharia e fé.

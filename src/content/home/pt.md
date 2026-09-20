@@ -1,5 +1,8 @@
 ---
 title: "Paulo Henrique"
+metadata:
+  title: "Paulo Henrique — Engenheiro de Software"
+  description: "Site pessoal de Paulo Henrique, engenheiro de software e escritor."
 ---
 
 Olá! Sou um pensador, escritor (online) e engenheiro de software que ama programar e construir aplicativos, bibliotecas, ferramentas e outros artefatos de software bem projetados e refinados.

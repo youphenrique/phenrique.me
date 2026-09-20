@@ -1,5 +1,7 @@
 export interface WritingDictionary {
   "page-title": string;
+  /** Meta description for the article index. */
+  "page-description": string;
   /** Label on the link back to the article index, shown above a post. */
   "back-to-index": string;
   /** Suffix after the number of minutes a post takes to read. */

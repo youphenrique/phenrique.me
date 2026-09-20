@@ -8,13 +8,13 @@ export const SITE: Site = {
   NUM_PROJECTS_ON_HOMEPAGE: 3,
 };
 
-export const HOME: Metadata = {
-  TITLE: "Home",
-  DESCRIPTION: "Astro Nano is a minimal and lightweight blog and portfolio.",
+/**
+ * Channel metadata for the RSS feed, which is the only thing reading this. It
+ * carried the theme's own boilerplate ("Astro Nano is a minimal and lightweight
+ * blog and portfolio") into every subscriber's reader. Page metadata lives in
+ * the content collections; nothing here feeds a `<title>`.
+ */
+export const FEED: Metadata = {
+  TITLE: "Paulo Henrique",
+  DESCRIPTION: "Articles on software engineering, craft, and the ideas behind them.",
 };
-
-export const BLOG: Metadata = {
-  TITLE: "Blog",
-  DESCRIPTION: "A collection of articles on topics I am passionate about.",
-};
-

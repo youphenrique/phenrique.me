@@ -1,5 +1,8 @@
 ---
 title: "Paulo Henrique"
+metadata:
+  title: "Paulo Henrique — Software Engineer"
+  description: "Personal website of Paulo Henrique, a software engineer and writer."
 ---
 
 Hello! I am a thinker, an (online) writer, and a software engineer who loves to code and build thoughtful, polished apps, libraries, tools, and other software artifacts.

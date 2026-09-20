@@ -7,7 +7,15 @@ import Container from "../../ui/components/container.astro";
 import Markdown from "../../ui/components/markdown.astro";
 
 interface Props {
+  /** The page heading: the name on its own. */
   title: string;
+  /**
+   * Head metadata. Separate from `title` because the heading is just the name
+   * while the `<title>` has to say what the name does. Both were hardcoded in
+   * the layout call below, so the Portuguese home page shipped an English
+   * title and description.
+   */
+  metadata: { title: string; description: string };
   /** Raw markdown body for the page's intro copy. */
   body: string | undefined;
 }
@@ -17,7 +25,11 @@ const socialLinks = allSocialLinks.filter((link) => link.data.icon !== undefined
 const isPortuguese = Astro.currentLocale === "pt";
 ---
 
-<MainLayout title="Home" description="Paulo Henrique's personal website" lang={Astro.currentLocale ?? "en"}>
+<MainLayout
+  title={Astro.props.metadata.title}
+  description={Astro.props.metadata.description}
+  lang={Astro.currentLocale ?? "en"}
+>
   <Container styles={css.raw({ py: { base: 32, sm: 44 } })}>
     <div
       class={css({
