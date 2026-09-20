@@ -7,6 +7,9 @@ import react from "@astrojs/react";
 export default defineConfig({
   site: "https://www.phenrique.me",
   integrations: [sitemap(), react()],
+  image: {
+    domains: ["eqaazorpfawkpfpn.public.blob.vercel-storage.com"],
+  },
   i18n: {
     locales: ["en", "pt"],
     defaultLocale: "en",
