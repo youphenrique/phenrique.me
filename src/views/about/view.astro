@@ -1,11 +1,13 @@
 ---
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 
 import { css } from "../../../styled-system/css";
 import MainLayout from "../../layouts/main-layout.astro";
 import Container from "../../ui/components/container.astro";
 import Markdown from "../../ui/components/markdown.astro";
 import BackToTop from "../../ui/components/back-to-top.astro";
+import { SITE } from "../../consts.ts";
 
 interface Props {
   title: string;
@@ -13,9 +15,29 @@ interface Props {
   /** Raw markdown body for the page's prose. */
   body: string | undefined;
 }
+
+// `sameAs` is read from the social-links collection rather than restated here,
+// so the profiles a crawler is given stay the profiles the page actually links.
+const socialLinks = await getCollection("socialLinks");
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: SITE.NAME,
+  email: `mailto:${SITE.EMAIL}`,
+  url: new URL("/", Astro.site).href,
+  sameAs: socialLinks
+    .map((link) => link.data.link)
+    .filter((href) => !href.startsWith(Astro.site?.origin ?? "")),
+};
 ---
 
-<MainLayout title={Astro.props.title} description="Paulo Henrique's personal website" lang={Astro.currentLocale ?? "en"}>
+<MainLayout
+  title={Astro.props.title}
+  description="Paulo Henrique's personal website"
+  lang={Astro.currentLocale ?? "en"}
+  jsonLd={jsonLd}
+>
   {/*
     Wider than the site default so the article's `wide` track has somewhere to
     go; the prose column inside stays at `--prose-measure`, centred, and the

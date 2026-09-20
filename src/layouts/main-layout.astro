@@ -10,14 +10,37 @@ import { css, cx } from "../../styled-system/css";
 import { flex } from "../../styled-system/patterns";
 import enDict from "../i18n/main/en";
 import ptDict from "../i18n/main/pt";
+import {
+  DEFAULT_LOCALE,
+  LOCALES,
+  pathAlternates,
+  type Alternates,
+  type Locale,
+} from "../utils/i18n-routes.ts";
 
 interface Props {
   title: string;
   description: string;
   lang?: string;
+  image?: string;
+  /**
+   * Overrides the address-derived alternates, for pages whose slug is itself
+   * translated. Only the articles need it; every other page is the same path
+   * under a locale prefix.
+   */
+  alternates?: Alternates;
+  ogType?: "website" | "article";
+  publishedTime?: Date;
+  jsonLd?: Record<string, unknown>;
 }
 
-const { title, description, lang = "en" } = Astro.props;
+const { title, description, lang = "en", image, alternates, ogType, publishedTime, jsonLd } = Astro.props;
+
+const locale = (LOCALES as readonly string[]).includes(lang) ? (lang as Locale) : DEFAULT_LOCALE;
+
+// One value feeds both the `hreflang` links and the header's language menu, so
+// the pair a crawler is told about is the pair a reader can actually walk.
+const pageAlternates = alternates ?? pathAlternates(Astro.url.pathname);
 
 const dictionaries = { en: enDict, pt: ptDict } as const;
 const dict = dictionaries[lang as keyof typeof dictionaries] ?? enDict;
@@ -31,7 +54,16 @@ const pageDescription = metadatum?.data.description ?? description;
 <!doctype html>
 <html lang={lang}>
   <head>
-    <Head title={pageTitle} description={pageDescription} />
+    <Head
+      title={pageTitle}
+      description={pageDescription}
+      image={image}
+      locale={locale}
+      alternates={pageAlternates}
+      ogType={ogType}
+      publishedTime={publishedTime}
+      jsonLd={jsonLd}
+    />
     <!-- Only Geist is preloaded: it is the one face every page paints first. The
          home title is Instrument Serif and other titles are Fraunces, so
          preloading either would download ~120 KB a page may never use. -->
@@ -86,7 +118,7 @@ const pageDescription = metadatum?.data.description ?? description;
         flexDirection: "column",
       })}
     >
-      <Header lang={lang} dict={dict} />
+      <Header lang={lang} dict={dict} alternates={pageAlternates} />
       <!-- `tabindex="-1"` lets the skip link move focus here, so the next Tab
            continues inside the content rather than back at the header. The
            landing focus is programmatic, so it draws no ring. -->

@@ -6,7 +6,19 @@ import react from "@astrojs/react";
 
 export default defineConfig({
   site: "https://www.phenrique.me",
-  integrations: [sitemap(), react()],
+  integrations: [
+    // Pairs URLs by the path left after stripping the locale prefix, so it
+    // covers the static pages (`/about` <-> `/pt/about`) but not the articles,
+    // whose slugs are translated too. Those carry their own `hreflang` links
+    // from `head.astro`.
+    sitemap({
+      i18n: {
+        defaultLocale: "en",
+        locales: { en: "en", pt: "pt" },
+      },
+    }),
+    react(),
+  ],
   image: {
     domains: ["eqaazorpfawkpfpn.public.blob.vercel-storage.com"],
   },

@@ -4,6 +4,7 @@ import { css } from "../../../styled-system/css";
 import { flex, hstack, vstack } from "../../../styled-system/patterns";
 import type { MainDictionary } from "../../i18n/main/en.ts";
 import { languages } from "../../utils/constants.ts";
+import { localeSwitchHref, type Alternates, type Locale } from "../../utils/i18n-routes.ts";
 import LanguageMenu from "./language-menu";
 import MobileLanguageSheet from "./mobile-language-sheet";
 import NavIcon from "./nav-icon.astro";
@@ -11,9 +12,11 @@ import NavIcon from "./nav-icon.astro";
 interface Props {
   lang: string;
   dict: MainDictionary;
+  /** This page's address in each locale, from the layout. */
+  alternates?: Alternates;
 }
 
-const { lang, dict } = Astro.props;
+const { lang, dict, alternates } = Astro.props;
 const pathname = Astro.url.pathname;
 
 const navLinks = [
@@ -23,19 +26,16 @@ const navLinks = [
   { title: "reading", path: "/reading" },
 ] as const;
 
+// Swapping the locale prefix in place is wrong on an article: post slugs are
+// translated too, so `/writing/interfaces-are-arguments` became a link to
+// `/pt/writing/interfaces-are-arguments`, which does not exist. The layout
+// hands down the real pair; `localeSwitchHref` falls back to the section index
+// when a page has no counterpart, so the menu never points at a 404.
 const languageOptions = languages.map((language) => ({
   id: language.id,
   name: language.name,
-  href: getLocaleSwitchUrl(language.id),
+  href: localeSwitchHref(pathname, language.id as Locale, alternates),
 }));
-
-function getLocaleSwitchUrl(targetLang: string) {
-  let basePath = pathname;
-  basePath = basePath.replace(/^\/(de|pt|en)(\/|$)/, "/");
-  if (!basePath || basePath === "/") basePath = "/";
-  if (targetLang === "en") return basePath;
-  return `/${targetLang}${basePath === "/" ? "" : basePath}`;
-}
 
 function getNavHref(linkPath: string) {
   if (lang === "en") return linkPath;
