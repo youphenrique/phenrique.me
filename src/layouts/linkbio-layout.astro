@@ -104,6 +104,15 @@ const defaultFavicon = blobBase ? `${blobBase}/me.website.webp` : "/images/me.we
     </main>
 
     <style is:global>
+      /* This layout never loads `head.astro`, so `<html>` carries neither the
+         `.light` nor the `.dark` class the site theme switches on — the
+         `color-scheme` rules in global.css cannot reach it. The page is always
+         dark, so pin it here or the browser paints light scrollbars and form
+         controls over the ink canvas. */
+      :root {
+        color-scheme: dark;
+      }
+
       body {
         margin: 0;
         padding: 0;
