@@ -25,14 +25,6 @@ const colophonPages = defineCollection({
   }),
 });
 
-const metadatum = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.yaml", base: "./src/content/metadatum" }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-  }),
-});
-
 const writing = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/writing" }),
   schema: z.object({
@@ -218,5 +210,4 @@ export const collections = {
   homePages,
   aboutPages,
   colophonPages,
-  metadatum,
 };
