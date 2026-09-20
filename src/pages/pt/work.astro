@@ -4,11 +4,11 @@ import { getEntry } from "astro:content";
 import dict from "../../i18n/work/pt";
 import WorkView from "../../views/work/view.astro";
 
-const workPageEntry = await getEntry("workPages", Astro.currentLocale ?? "pt");
+const workEntry = await getEntry("work", Astro.currentLocale ?? "pt");
 
-if (workPageEntry === undefined) {
+if (workEntry === undefined) {
   return Astro.redirect("/404");
 }
 ---
 
-<WorkView dict={dict} page={workPageEntry} />
+<WorkView dict={dict} page={workEntry} />

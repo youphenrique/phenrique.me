@@ -84,7 +84,8 @@ Rules worth knowing before writing styles:
 - **Collections:**
     - `writing`: Articles with `title`, `description`, `date`, `draft`.
     - `projects`: Portfolio items with `demoURL`, `repoURL`.
-    - `work`: Professional experience.
+    - `work`: Work page data (highlights, stack, education, languages).
+    - `workExperience`: Professional experience roles.
     - `books`: Reading list tracking with status, genres, and ratings.
 
 ### Internationalization (i18n)

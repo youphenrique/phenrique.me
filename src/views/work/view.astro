@@ -17,7 +17,7 @@ import StackList from "./_components/stack-list.astro";
 
 interface Props {
   dict: WorkDictionary;
-  page: CollectionEntry<"workPages">;
+  page: CollectionEntry<"work">;
 }
 
 const { dict, page } = Astro.props;
@@ -35,7 +35,7 @@ function formatRange(start: Date, end: Date | null): string {
   return `${monthFormatter.format(start)} — ${end === null ? dict.present : monthFormatter.format(end)}`;
 }
 
-const experience = (await getCollection("work")).sort(
+const experience = (await getCollection("workExperience")).sort(
   (a, b) => b.data.dateStart.valueOf() - a.data.dateStart.valueOf(),
 );
 

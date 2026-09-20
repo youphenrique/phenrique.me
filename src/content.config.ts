@@ -54,8 +54,8 @@ const writing = defineCollection({
  * `arrangement` is a key for the same reason — the YAML says `hybrid`, the
  * dictionary decides whether that reads "Hybrid" or "Híbrido".
  */
-const work = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/work" }),
+const workExperience = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/work-experience" }),
   schema: z.object({
     company: z.string(),
     companyURL: z.string().optional(),
@@ -145,8 +145,8 @@ const books = defineCollection({
  * facets of a single page, and splitting them would mean four collections that
  * are only ever read together.
  */
-const workPages = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/work-page" }),
+const work = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/work" }),
   schema: z.object({
     metadata: z.object({
       title: z.string(),
@@ -196,13 +196,13 @@ const readingPages = defineCollection({
 
 export const collections = {
   writing,
-  work,
+  workExperience,
   projects,
   linkbioPages,
   socialLinks,
   books,
   readingPages,
-  workPages,
+  work,
   homePages,
   aboutPages,
   colophonPages,
