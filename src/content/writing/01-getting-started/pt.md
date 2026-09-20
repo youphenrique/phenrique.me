@@ -2,6 +2,7 @@
 title: "Interfaces são argumentos"
 description: "Por que trabalho de frontend não é decoração, mas uma forma de ajudar pessoas a formar modelos mentais precisos."
 slug: "interfaces-sao-argumentos"
+translationKey: "interfaces-are-arguments"
 locale: "pt"
 date: "2026-08-28"
 draft: true

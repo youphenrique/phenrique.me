@@ -1,5 +1,5 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 
 import MainLayout from "../../layouts/main-layout.astro";
 import Container from "../../ui/components/container.astro";
@@ -8,6 +8,8 @@ import BackToPrev from "../../ui/components/back-to-prev.astro";
 import Markdown from "../../ui/components/markdown.astro";
 import BackToTop from "../../ui/components/back-to-top.astro";
 import { readingTimeMinutes } from "../../utils/helpers.ts";
+import { postAlternates } from "../../utils/content.ts";
+import { SITE } from "../../consts.ts";
 import { css } from "../../../styled-system/css";
 import type { WritingDictionary } from "../../i18n/writing/types.ts";
 
@@ -20,9 +22,38 @@ interface Props {
 
 const { post, indexHref, dict } = Astro.props;
 const locale = post.data.locale;
+
+const alternates = postAlternates(await getCollection("writing"), post);
+
+// `BlogPosting` rather than the broader `Article`: every entry in this
+// collection is a dated post on a personal site, which is what the narrower
+// type describes. `inLanguage` matters here — the same article exists twice.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date.toISOString(),
+  inLanguage: locale,
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
+  author: {
+    "@type": "Person",
+    name: SITE.NAME,
+    url: new URL("/about/", Astro.site).href,
+  },
+};
 ---
 
-<MainLayout title={post.data.title} description={post.data.description} lang={locale}>
+<MainLayout
+  title={post.data.title}
+  description={post.data.description}
+  lang={locale}
+  image={post.data.image}
+  alternates={alternates}
+  ogType="article"
+  publishedTime={post.data.date}
+  jsonLd={jsonLd}
+>
   {/*
     Wider than the site default so the article's `wide` grid track — figures,
     tables, code — has somewhere to go. The prose column inside stays at

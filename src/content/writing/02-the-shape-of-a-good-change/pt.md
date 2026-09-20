@@ -2,6 +2,7 @@
 title: "A forma de uma boa mudança"
 description: "Uma forma prática de fazer mudanças em software que sejam mais fáceis de entender, revisar e reverter."
 slug: "a-forma-de-uma-boa-mudanca"
+translationKey: "the-shape-of-a-good-change"
 locale: "pt"
 date: "2026-08-21"
 draft: true

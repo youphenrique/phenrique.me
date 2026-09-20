@@ -2,6 +2,7 @@
 title: "Interfaces are arguments"
 description: "Why frontend work is less about decoration than helping people form accurate mental models."
 slug: "interfaces-are-arguments"
+translationKey: "interfaces-are-arguments"
 locale: "en"
 date: "2026-08-28"
 draft: false

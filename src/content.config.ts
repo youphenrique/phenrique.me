@@ -42,6 +42,18 @@ const writing = defineCollection({
     locale: z.enum(["en", "pt"]),
     date: z.coerce.date(),
     draft: z.boolean().optional(),
+    /**
+     * Shared by the two files of one article, one per locale. Slugs are
+     * translated too, so this is the only thing tying a pair together — see
+     * `postAlternates` in `src/utils/content.ts`. A post with no translation
+     * leaves it unset.
+     */
+    translationKey: z.string().optional(),
+    /**
+     * Social card for this post, as a site-absolute path. Falls back to the
+     * site-wide card in `head.astro` when unset.
+     */
+    image: z.string().optional(),
   }),
 });
 

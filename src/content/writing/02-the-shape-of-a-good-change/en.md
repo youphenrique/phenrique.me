@@ -2,6 +2,7 @@
 title: "The shape of a good change"
 description: "A practical way to make software changes that are easier to reason about, review, and reverse."
 slug: "the-shape-of-a-good-change"
+translationKey: "the-shape-of-a-good-change"
 locale: "en"
 date: "2026-08-21"
 draft: true
