@@ -22,6 +22,7 @@ import { PROSE_COMPONENT_TAGS } from "./tags.ts";
 import enProse from "../../../i18n/prose/en.ts";
 import ptProse from "../../../i18n/prose/pt.ts";
 import type { ProseDictionary } from "../../../i18n/prose/types.ts";
+import YOE from "./yoe.tsx";
 
 /**
  * The renderer map handed to `MarkdownDocument`.
@@ -56,6 +57,7 @@ export function createProseComponents(locale = "en"): Record<string, ProseCompon
     quote: Quote,
     figure: Figure,
     tweet: Tweet,
+    yoe: YOE,
   };
 
   // Cheap guarantee that the registry and the parser's allowlist agree: a tag
