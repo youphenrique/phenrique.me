@@ -39,6 +39,7 @@ export default defineConfig({
            * because each theme draws from one half only.
            */
           sand: {
+            0: { value: "#FFFFFF" }, // code panel (light) — top of the surface ramp
             50: { value: "#FAF6F2" }, // app canvas (light)
             100: { value: "#F5F1E8" },
             200: { value: "#F0EEE6" }, // raised surface (light)
@@ -178,6 +179,15 @@ export default defineConfig({
             canvas: { value: { base: "{colors.sand.50}", _dark: "{colors.ink.950}" } },
             raised: { value: { base: "{colors.sand.200}", _dark: "{colors.ink.900}" } },
             raisedHover: { value: { base: "{colors.sand.300}", _dark: "{colors.ink.850}" } },
+            // Code panel only (see `code-block.tsx`). Deliberately NOT `raised`:
+            // a fenced block reads as a quoted artefact, and the references this
+            // follows paint it crisp white rather than the warm surface cards,
+            // sheets and the TOC rail share. Light mode inverts the usual stack
+            // — the panel is *brighter* than the cream canvas, and that is what
+            // separates it. Dark mode keeps `ink.900`: a lifted panel already
+            // reads there, and going lighter would eat into the 5:1 floor the
+            // syntax palette is held to.
+            code: { value: { base: "{colors.sand.0}", _dark: "{colors.ink.900}" } },
             sunken: { value: { base: "{colors.sand.100}", _dark: "{colors.ink.900}" } },
             // Translucent wash for hover on an unknown surface. Deliberately not a
             // ramp step: it has to tint whatever it lands on.

@@ -20,7 +20,7 @@ const wrapperStyles = css({
   borderRadius: "lg",
   border: "1px solid",
   borderColor: "border.hairline",
-  bg: "bg.raised",
+  bg: "bg.code",
   overflow: "hidden",
   // A block with an overflowing line scrolls, and browsers make that scroller
   // keyboard-focusable on their own. The ring goes on the panel, so it follows
@@ -67,6 +67,12 @@ const preStyles = css({
   py: "0.9em",
   // The block owns the surface; Shiki's own background would fight the token.
   bg: "transparent",
+  // The scroller is the only UA-painted chrome inside the panel, and nothing
+  // declares `color-scheme`, so the browser paints it light in both themes — a
+  // white bar across the bottom of every dark code block. Driving it from the
+  // border ramp keeps it theme-aware and on the token system.
+  scrollbarWidth: "thin",
+  scrollbarColor: "token(colors.border.strong) transparent",
   // The panel draws the ring (see `wrapperStyles`).
   _focusVisible: { outline: "none" },
 });

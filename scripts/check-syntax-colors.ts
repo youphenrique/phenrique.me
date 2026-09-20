@@ -4,7 +4,7 @@
  * Two rules, in both themes:
  *
  *  1. Contrast — every role clears MIN_CONTRAST against the code panel
- *     (`bg.raised`). 5:1 rather than AA's 4.5:1 leaves headroom for the paper
+ *     (`bg.code`). 5:1 rather than AA's 4.5:1 leaves headroom for the paper
  *     grain and for rendering differences at 14px.
  *  2. Distinctness — every pair of roles that can share a line sits at least
  *     MIN_DISTANCE apart in OKLab (ΔE × 100). Contrast alone passes a palette of
@@ -18,7 +18,7 @@ type Mode = "base" | "_dark";
 
 const MIN_CONTRAST = 5;
 const MIN_DISTANCE = 8;
-const SURFACE = "bg.raised";
+const SURFACE = "bg.code";
 const MODES: Record<Mode, string> = { base: "light", _dark: "dark" };
 
 // Diff roles only ever colour whole lines against each other, never next to

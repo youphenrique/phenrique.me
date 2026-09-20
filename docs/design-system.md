@@ -60,6 +60,7 @@ Dark mode is the `_dark` condition, which Panda compiles to `.dark &`. The class
 
 | Token      | Hex       | Typical role                                      |
 |------------|-----------|---------------------------------------------------|
+| `sand.0`   | `#FFFFFF` | code panel (light)                                |
 | `sand.50`  | `#FAF6F2` | app canvas (light) · **fixed**                    |
 | `sand.100` | `#F5F1E8` | sunken surface (light)                            |
 | `sand.200` | `#F0EEE6` | raised surface (light)                            |
@@ -148,7 +149,7 @@ They are deliberately **not** the editorial tints. The tints share one lightness
 | `code.amber`           | `#855700` | `code.amberBright`           | `#E3C173` |
 | `code.stone`           | `#68615A` |                              |           |
 
-`code.stone` is the light-theme comment neutral: `ink.500` misses the 5:1 floor on `bg.raised`, and `ink.600` sits too close to punctuation to tell apart.
+`code.stone` is the light-theme comment neutral: `ink.500` missed the 5:1 floor back when the panel was `bg.raised`, and `ink.600` sits too close to punctuation to tell apart.
 
 ---
 
@@ -163,12 +164,18 @@ This is the API. Everything below is what a component writes.
 | `bg.canvas`      | `sand.50`              | `ink.950`               | the page itself                   |
 | `bg.raised`      | `sand.200`             | `ink.900`               | cards, menus, badges              |
 | `bg.raisedHover` | `sand.300`             | `ink.850`               | hover on a raised surface         |
+| `bg.code`        | `sand.0` (`#FFFFFF`)   | `ink.900`               | the fenced code panel, and only that |
 | `bg.sunken`      | `sand.100`             | `ink.900`               | wells and recessed areas          |
 | `bg.hover`       | `rgba(10,10,10,.05)`   | `rgba(255,255,255,.06)` | hover on an *unknown* surface     |
 | `bg.track`       | `sand.400`             | `ink.800`               | the groove behind a progress fill |
 | `bg.overlay`     | `rgba(250,246,242,.5)` | `rgba(13,11,10,.55)`    | the blurred header pill           |
 | `bg.scrim`       | `rgba(10,10,10,.32)`   | `rgba(0,0,0,.5)`        | modal backdrop                    |
 | `bg.bloom`       | transparent            | `rgba(255,255,255,.03)` | radial bloom behind the home hero |
+
+`bg.code` is deliberately split off from `bg.raised`. A fenced block reads as a quoted artefact rather than another card, and it is the one surface
+where light mode inverts the stack: the panel is *brighter* than the cream canvas, which is what separates it, with `border.hairline` doing the rest.
+Dark mode keeps `ink.900` — a lifted panel already reads there, and going lighter would eat into the 5:1 floor `syntax.*` is held to. Only
+`code-block.tsx` may use it; cards, sheets, the TOC rail, tweet embeds and inline `code` stay on `bg.raised`.
 
 `bg.hover` is translucent on purpose: it tints whatever it lands on, so one token covers hover on canvas, on a card, and inside a menu. Use `bg.raisedHover`
 only when you know the surface underneath.
@@ -229,27 +236,27 @@ Reserved for machine-reported state. Never decoration.
 
 ### `syntax.*` — code highlighting
 
-Ratios are measured against `bg.raised`, the code panel, in the corresponding theme.
+Ratios are measured against `bg.code`, the code panel, in the corresponding theme.
 
 | Token                | Light            | Dark                   | Contrast (light / dark) |
 |----------------------|------------------|------------------------|-------------------------|
-| `syntax.text`        | `ink.850`        | `sand.300`             | 13.8:1 / 13.7:1         |
-| `syntax.punctuation` | `ink.700`        | `sand.500`             | 9.7:1 / 9.4:1           |
-| `syntax.comment`     | `code.stone`     | `ink.300`              | 5.3:1 / 6.9:1           |
-| `syntax.keyword`     | `code.plum`      | `code.plumBright`      | 6.0:1 / 7.4:1           |
-| `syntax.string`      | `code.green`     | `code.greenBright`     | 5.5:1 / 9.9:1           |
-| `syntax.constant`    | `code.vermilion` | `code.vermilionBright` | 5.3:1 / 8.3:1           |
-| `syntax.function`    | `code.blue`      | `code.blueBright`      | 6.0:1 / 8.2:1           |
-| `syntax.parameter`   | `code.amber`     | `code.amberBright`     | 5.4:1 / 10.2:1          |
-| `syntax.inserted`    | `moss.600`       | `signal.greenBright`   | 6.1:1 / 6.9:1           |
-| `syntax.deleted`     | `coral.700`      | `signal.redBright`     | 6.2:1 / 5.2:1           |
-| `syntax.changed`     | `ochre.600`      | `ochre.400`            | 5.5:1 / 8.7:1           |
+| `syntax.text`        | `ink.850`        | `sand.300`             | 16.0:1 / 13.7:1         |
+| `syntax.punctuation` | `ink.700`        | `sand.500`             | 11.3:1 / 9.4:1           |
+| `syntax.comment`     | `code.stone`     | `ink.300`              | 6.1:1 / 6.9:1           |
+| `syntax.keyword`     | `code.plum`      | `code.plumBright`      | 7.0:1 / 7.4:1           |
+| `syntax.string`      | `code.green`     | `code.greenBright`     | 6.4:1 / 9.9:1           |
+| `syntax.constant`    | `code.vermilion` | `code.vermilionBright` | 6.2:1 / 8.3:1           |
+| `syntax.function`    | `code.blue`      | `code.blueBright`      | 7.0:1 / 8.2:1           |
+| `syntax.parameter`   | `code.amber`     | `code.amberBright`     | 6.3:1 / 10.2:1          |
+| `syntax.inserted`    | `moss.600`       | `signal.greenBright`   | 7.0:1 / 6.9:1           |
+| `syntax.deleted`     | `coral.700`      | `signal.redBright`     | 7.2:1 / 5.2:1           |
+| `syntax.changed`     | `ochre.600`      | `ochre.400`            | 6.4:1 / 8.7:1           |
 
 **How it reaches the page.** Comark's Shiki plugin tokenises code at build time with Shiki's css-variables theme (`src/utils/code-theme.ts`), so the markup carries `color: var(--shiki-token-keyword)` rather than a hex value. `global.css` binds each `--shiki-token-*` to a `syntax.*` role on `.shiki`, and the roles switch with the page like every other semantic token. Shiki's `string-expression` and `link` are folded into `string` and `function`.
 
 **Two rules, enforced.** `npm run check:syntax` runs as part of `build` and fails it when, in either theme:
 
-- a role drops under **5:1** on `bg.raised` — stricter than AA's 4.5:1, for headroom at 14px; or
+- a role drops under **5:1** on `bg.code` — stricter than AA's 4.5:1, for headroom at 14px; or
 - two roles that can share a line sit closer than **ΔE 8** in OKLab. Contrast alone would pass seven near-identical browns. The diff roles are exempt: they colour whole lines, never sit next to a keyword.
 
 **Separate by lightness, not only hue.** Text that clears 5:1 on cream has to sit near the middle of the lightness range, so hue alone cannot carry the distinction. Identifiers are near-black, colour sits at 5–6:1, and comments recede as a mid neutral. No italics: Geist Mono is loaded upright only, so the browser would fake an oblique.
@@ -526,7 +533,7 @@ Every text role clears WCAG AA (4.5:1) on its intended surface, in both themes. 
 - **`coral.500` as text on light** — 2.9:1. Which is exactly why `text.accent`
   resolves to `coral.600` in light mode. Do not hand-roll `coral.500` text.
 
-Syntax colours are held to a stricter 5:1 on `bg.raised`, plus a minimum separation from each other, by `npm run check:syntax`, which runs in `build`.
+Syntax colours are held to a stricter 5:1 on `bg.code`, plus a minimum separation from each other, by `npm run check:syntax`, which runs in `build`.
 
 When adding a token, verify the pair before committing it.
 
