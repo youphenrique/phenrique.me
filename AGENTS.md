@@ -88,6 +88,17 @@ Rules worth knowing before writing styles:
     - `workExperience`: Professional experience roles.
     - `books`: Reading list tracking with status, genres, and ratings.
 
+### Agent-readable pages (`.md` endpoints)
+
+The document pages — `/about`, `/work`, `/reading`, `/colophon` and every article, in both locales — each have a plain-Markdown twin at their own address plus `.md`: `/work` and `/work.md`. `/llms.txt` indexes them. The listing pages (`/` and `/writing`) have none; the index already enumerates what they would link to.
+
+- **`markdownPath` in `src/utils/markdown/routes.ts` is the registry.** It is the single answer to "does this page have a twin", read by both `head.astro` (which emits `<link rel="alternate" type="text/markdown">`) and the build. A new `.md` endpoint that is not listed there ships a Markdown version nothing links to and no crawler finds. Articles are matched by their `/writing/` prefix; every other path is listed explicitly, for the same reason as `TRANSLATED_PATHS`.
+- **Add the page to `/llms.txt` too** (`src/pages/llms.txt.ts`). It is generated from the collections, so articles appear on their own, but a new static page needs a line in `pagesFor`.
+- **Prose pages serialise themselves; data pages need a composer.** Where the body is Markdown (`about`, `colophon`, `writing`), the endpoint is frontmatter plus `entry.body`. Where the page is structured fields rendered as cards and grids (`work`, `reading`), a composer in `src/utils/markdown/` builds the document from the same entry and the same i18n dictionary the view reads — mirroring the page's section order and using its dictionary labels, so the two cannot drift. Never convert the rendered HTML; the structure is the part worth keeping.
+- **`flattenDirectives` rewrites Comark's `::component` syntax** into standard Markdown — callouts, quotes and tweets become blockquotes carrying the words the page displays, resolving a callout's label exactly as `createCallout` does. It works on the source, line by line, and skips code fences. A new `::component` with no case in `render` falls through to its own body: register one there when the box carries meaning of its own.
+- **Drafts follow the page.** Build paths from `routablePosts` and list from `listedPosts`, so a draft never has a `.md` twin its page does not also have.
+- **Dates and locales.** Use the view's own `Intl` formatter settings, including `timeZone: "UTC"` — these are plain YAML days parsed as UTC midnight, and formatting in the build machine's zone renders the previous day west of Greenwich.
+
 ### Internationalization (i18n)
 - Configured in `astro.config.ts` with `en` (default) and `pt`.
 - Translation files are located in `src/i18n/`.

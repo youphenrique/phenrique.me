@@ -2,6 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 import { SITE } from "../../consts.ts";
 import { DEFAULT_LOCALE, matchTrailingSlash, type Alternates, type Locale } from "../../utils/i18n-routes.ts";
+import { markdownPath } from "../../utils/markdown/routes.ts";
 
 interface Props {
   title: string;
@@ -65,6 +66,13 @@ const hreflangLinks = alternateLinks.length > 1 ? alternateLinks : [];
 // reader whose language matches neither.
 const xDefault = hreflangLinks.find((link) => link.lang === DEFAULT_LOCALE)?.href;
 
+/**
+ * The plain-Markdown twin of this page, when it has one. Announced the way the
+ * feed is: an agent that can use the Markdown finds it from the HTML, without
+ * having to guess that appending `.md` is a convention here.
+ */
+const markdownHref = markdownPath(Astro.url.pathname);
+
 const blobBase = import.meta.env.PUBLIC_VERCEL_BLOB_STORAGE_URL ?? "";
 const defaultFavicon = blobBase ? `${blobBase}/me.website.webp` : "/images/me.website.webp";
 const darkFavicon = defaultFavicon;
@@ -123,6 +131,9 @@ const lightFavicon = blobBase ? `${blobBase}/me-2.website.webp` : "/images/me-2.
 
 <!-- RSS Link -->
 <link rel="alternate" type="application/rss+xml" title={SITE.NAME} href={new URL("rss.xml", Astro.site)} />
+
+<!-- Markdown version of this page, for agents -->
+{markdownHref && <link rel="alternate" type="text/markdown" href={new URL(markdownHref, Astro.site)} />}
 
 <script>
   import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
