@@ -28,3 +28,6 @@ styled-system-studio
 .vercel/
 .idea
 src/content/.obsidian
+
+# agent worktrees — whole checkouts, generated output and all
+.claude/worktrees/
