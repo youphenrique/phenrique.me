@@ -6,8 +6,23 @@ import tseslint from "typescript-eslint";
 
 export default defineConfig(
   // 1. Global ignores (replaces .eslintignore or not having it)
+  //
+  // The generated-output patterns are deliberately depth-independent. Anchored
+  // at the root they match only the top-level copy, so a nested checkout — an
+  // agent worktree under `.claude/worktrees/<name>/` carries its own
+  // `styled-system/` and `.astro/` — slips past them, and ESLint lints Panda's
+  // emitted `.mjs` and Astro's emitted `.d.ts` as if someone had written them.
   {
-    ignores: ["node_modules/**", "dist/**", ".vercel/**", ".astro/**", "styled-system/**", ".agents/**"],
+    ignores: [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/.vercel/**",
+      "**/.astro/**",
+      "**/styled-system/**",
+      "**/.agents/**",
+      // Agent worktrees are whole checkouts, not just generated output.
+      ".claude/**",
+    ],
   },
 
   // 2. Base recommended rules (replaces "eslint:recommended")
