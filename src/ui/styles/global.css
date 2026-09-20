@@ -18,6 +18,29 @@ body {
   font-family: var(--font-geist);
 }
 
+/* Tells the browser which palette to paint its *own* chrome from: scrollbars,
+   form controls, spellcheck underlines, date pickers, the autofill background.
+   Semantic tokens cover everything we draw; none of them reach any of that.
+   Without this the UA assumes a light page and, in dark mode, paints a white
+   scrollbar down the side of an ink canvas.
+
+   The bare `:root` value is the pre-class state — the inline theme script in
+   `head.astro` sets `.light`/`.dark` before first paint, but `light dark` keeps
+   a no-JS render following the system preference, which is what the script
+   would have chosen anyway. The class rules then pin it, so an explicit theme
+   choice still wins over the system one. */
+:root {
+  color-scheme: light dark;
+}
+
+:root.light {
+  color-scheme: light;
+}
+
+:root.dark {
+  color-scheme: dark;
+}
+
 /* Fragment navigation is most noticeable on the long trip between a footnote
    reference and its note. Keep the browser-native motion so hashes, history and
    keyboard navigation retain their normal semantics. */
