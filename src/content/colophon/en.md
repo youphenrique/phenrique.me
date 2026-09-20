@@ -1,6 +1,6 @@
 ---
 title: "Colophon"
-description: "How this website is made: typography, design system, engineering stack, and my approach to craft and artificial intelligence."
+description: "How this website is made: typography, design system, and the engineering stack behind it."
 ---
 
 A colophon is a statement of publication — a tradition in bookmaking and printing that describes how a work was designed, typeset, and produced. This page details the aesthetic decisions, engineering stack, and ethical boundaries that shape this website.
@@ -34,27 +34,11 @@ This website is statically pre-rendered, prioritizing minimal client-side JavaSc
 - **Hosting**: Deployed globally on [Vercel](https://vercel.com).
 - **Analytics**: Privacy-friendly analytics with zero tracking cookies or invasive finger-printing.
 
-## Artificial Intelligence & Craft
+## Artificial Intelligence
 
-We live in an era where AI can produce endless content with minimal effort. This makes intentionality, human thought, and genuine care more valuable, not less. Here is how artificial intelligence intersects with this space:
+Where AI is used on this site, where it is not, and how these pages are made readable by agents, is set out on its own page: [AI](/ai).
 
-::callout{type="note" title="Human-authored writing"}
-Every essay, reflection, book review, and opinion published on this website is 100% written and articulated by Paulo Henrique. No generative AI writes or ghostwrites the prose you read here.
-::
-
-### How I use AI
-
-1. **Engineering Co-pilot**: I use AI tools (such as Claude and agentic coding environments) for exploring code structures, drafting boilerplate, generating CSS tokens, and speeding up refactors.
-2. **Intellectual Sparring**: When researching technical topics or architectural decisions, I use LLMs to challenge assumptions, debate trade-offs, and suggest alternatives.
-3. **Clarity & Proofreading**: Occasionally, I use language models to spot typos or refine phrasing across English and Portuguese.
-
-### AI Training & The Open Web
-
-::callout{type="insight" title="The Open Web Commons"}
-This website does not block AI scrapers or crawlers via `robots.txt`. If models are trained on the public web to advance human knowledge, this space is open. Thoughtful, authentic human writing belongs in the common heritage of human knowledge.
-::
-
-All I ask is what honest scholarship has always required: when humans quote or reference ideas from this site, give credit where credit is due and link back to the original essay.
+The short version: the prose is entirely human-authored, and every document here is also published as plain Markdown for machines that would rather not parse a stylesheet.
 
 ## License & Excerpts
 

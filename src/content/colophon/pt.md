@@ -1,6 +1,6 @@
 ---
 title: "Colofão"
-description: "Como este site é feito: tipografia, sistema de design, engenharia e a minha postura sobre artesanato e inteligência artificial."
+description: "Como este site é feito: tipografia, sistema de design e a engenharia por trás dele."
 ---
 
 Um colofão é uma nota editorial — uma tradição da tipografia e da produção de livros que descreve como uma obra foi concebida, composta e fabricada. Esta página detalha as decisões estéticas, a infraestrutura técnica e os limites éticos que dão forma a este site.
@@ -34,27 +34,11 @@ Este site é pré-renderizado estaticamente, priorizando velocidade instantânea
 - **Hospedagem**: Distribuído globalmente na [Vercel](https://vercel.com).
 - **Métricas**: Estatísticas com foco em privacidade, sem cookies de rastreamento ou identificação invasiva.
 
-## Inteligência Artificial & Artesanato
+## Inteligência Artificial
 
-Vivemos em uma época onde a IA pode gerar quantidades infinitas de texto quase sem esforço. Isso torna a intencionalidade, o pensamento crítico e o toque humano genuíno mais valiosos, não menos. É assim que a inteligência artificial se relaciona com este site:
+Onde a IA é usada neste site, onde não é, e como estas páginas foram feitas para serem lidas por agentes, está em uma página própria: [IA](/pt/ai).
 
-::callout{type="note" title="Autoria estritamente humana"}
-Cada ensaio, reflexão, resenha e opinião publicada neste site é 100% pensada e escrita por Paulo Henrique. Nenhuma ferramenta de IA generativa redige ou atua como ghostwriter das ideias aqui presentes.
-::
-
-### Como utilizo IA
-
-1. **Copiloto de Engenharia**: Utilizo ferramentas de IA (como Claude e fluxos de programação agêntica) para explorar estruturas de código, gerar código boilerplate, prototipar estilos no Panda CSS e acelerar refatorações repetitivas.
-2. **Interlocutor Intelectual**: Em estudos técnicos ou decisões arquiteturais, uso LLMs para desafiar premissas, debater prós e contras e sugerir alternativas.
-3. **Clareza & Revisão**: Ocasionalmente, consulto modelos para apontar deslizes gramaticais ou refinar a fluidez entre português e inglês.
-
-### Treinamento de Modelos & A Web Aberta
-
-::callout{type="insight" title="O bem comum da web aberta"}
-Este site não bloqueia scrapers ou robôs de IA em seu `robots.txt`. Se modelos são treinados na web pública para expandir o conhecimento da humanidade, este espaço está aberto. Escritos humanos sinceros e bem pensados devem fazer parte do patrimônio comum de dados.
-::
-
-Tudo o que peço é o que a honestidade intelectual sempre exigiu: ao citar ideias ou trechos deste site, dê o devido crédito ao autor e inclua um link para a publicação original.
+Em resumo: a prosa é inteiramente de autoria humana, e cada documento daqui também é publicado em Markdown puro, para máquinas que preferem não interpretar uma folha de estilos.
 
 ## Direitos & Citações
 

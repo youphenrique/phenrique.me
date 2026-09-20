@@ -11,4 +11,4 @@ Me importo profundamente com o ofício, a qualidade e a excelência por trás da
 
 Aqui procuro refletir sobre ideias e percepções relacionadas à engenharia de software, ciência da computação, teologia, filosofia e outros temas.
 
-Obrigado por estar aqui. Se quiser saber mais sobre mim, confira a página [Sobre](https://phenrique.me/about). Se tiver interesse em se conectar, sinta-se à vontade para entrar em contato por [e-mail](mailto:pauloh1288@gmail.com) ou pelas minhas redes sociais.
+Obrigado por estar aqui. Se quiser saber mais sobre mim, confira a página [Sobre](/pt/about). Se tiver interesse em se conectar, sinta-se à vontade para entrar em contato por [e-mail](mailto:pauloh1288@gmail.com) ou pelas minhas redes sociais.

@@ -6,6 +6,11 @@ import Markdown from "../../ui/components/markdown.astro";
 import BackToPrev from "../../ui/components/back-to-prev.astro";
 import BackToTop from "../../ui/components/back-to-top.astro";
 
+/**
+ * A standalone long-form page: a heading, a way back, and a body of prose on
+ * the reading measure. Shared by `/colophon` and `/ai`, which differ only in
+ * their content entry — nothing here is specific to either.
+ */
 interface Props {
   title: string;
   description: string;

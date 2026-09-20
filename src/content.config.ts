@@ -36,12 +36,25 @@ const aboutPages = defineCollection({
   }),
 });
 
+/** Shape of a standalone long-form page: a heading and a body of prose. */
+const longformPage = z.object({
+  title: z.string(),
+  description: z.string(),
+});
+
 const colophonPages = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/colophon" }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-  }),
+  schema: longformPage,
+});
+
+/**
+ * `/ai`. Split out of the colophon, which had grown a section on AI large
+ * enough to bury the typography and the stack around it — and which the about
+ * page already linked to as if it were its own page.
+ */
+const aiPages = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/ai" }),
+  schema: longformPage,
 });
 
 const writing = defineCollection({
@@ -229,4 +242,5 @@ export const collections = {
   homePages,
   aboutPages,
   colophonPages,
+  aiPages,
 };
