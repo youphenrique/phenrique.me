@@ -65,7 +65,7 @@ languages:
     level: "Beginner"
 ---
 
-I'm a software engineer with more than nine years of experience. I take products from a conversation with the people who need them to something running in production — the discovery, the domain model, the architecture, the interface, the pipeline. My depth is at the frontend: design systems, component architecture, and the interfaces people actually touch. My range covers enough backend and infrastructure that the work never stops at a repository boundary.
+I'm a product-minded software engineer and developer-tools builder with :yoe years of experience. I take products from a conversation with the people who need them to something running in production — the discovery, the domain model, the architecture, the interface, the pipeline. My depth is at the frontend: design systems, component architecture, and the interfaces people actually touch. My range covers enough backend and infrastructure that the work never stops at a repository boundary.
 
 Most of that time has gone into three kinds of work. High-traffic products, where the interesting problems are performance, reliability and not breaking what already works. Legacy modernisation, where they are migration paths and keeping a business running while the ground moves under it. And greenfield software built directly with the people who will use it, which is the work I find most valuable and the hardest to get right.
 
