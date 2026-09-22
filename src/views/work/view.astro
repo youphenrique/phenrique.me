@@ -30,9 +30,9 @@ const monthFormatter = new Intl.DateTimeFormat(Astro.currentLocale, {
   timeZone: "UTC",
 });
 
-/** "Aug 2025 — Present". An open-ended role has no end date, only a label. */
+/** "Aug 2025 – Present". An open-ended role has no end date, only a label. */
 function formatRange(start: Date, end: Date | null): string {
-  return `${monthFormatter.format(start)} — ${end === null ? dict.present : monthFormatter.format(end)}`;
+  return `${monthFormatter.format(start)} – ${end === null ? dict.present : monthFormatter.format(end)}`;
 }
 
 const experience = (await getCollection("workExperience")).sort(
