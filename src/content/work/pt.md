@@ -1,29 +1,29 @@
 ---
 metadata:
   title: "Trabalho"
-  description: "Engenharia de software orientada a produto — descoberta, arquitetura, interfaces refinadas e sistemas em produção."
+  description: "Engenharia de produto da primeira conversa com os usuários ao software rodando em produção: experiência, projetos, stack e formação."
 
 resumeURL: "https://resume.phenrique.me/cv.pdf"
 
 highlights:
   - icon: "code"
     title: "Arquitetura frontend"
-    description: "Design systems, arquitetura de componentes e interfaces acessíveis em React, Next.js e Vue — pensadas para serem estendidas, e não reescritas."
+    description: "Design systems, arquitetura de componentes e interfaces acessíveis em React, Next.js e Vue. Construo tudo para que a próxima funcionalidade possa estender o que já existe, em vez de começar do zero."
   - icon: "lightbulb"
     title: "Descoberta de produto"
-    description: "Descubro os requisitos antes de escrever a especificação, transformando complexidade operacional e fluxos em planilhas em modelos de domínio claros e software intuitivo."
+    description: "Antes de escrever uma especificação, vou até quem faz o trabalho. Os requisitos de verdade costumam estar escondidos nas planilhas, e cabe a mim transformá-los em um modelo de domínio que o software consiga seguir."
   - icon: "layers"
     title: "Responsabilidade de ponta a ponta"
-    description: "Do Postgres e Spring Boot até interfaces refinadas e o pipeline de deploy. Assumo resultados além da fronteira do repositório de um único time."
+    description: "Trabalho do banco de dados ao pipeline de deploy: Postgres, Spring Boot, a interface, CI/CD. Se uma funcionalidade exige mudanças em três lugares, eu faço as três."
   - icon: "package"
     title: "Ferramentas e DX"
-    description: "De bibliotecas tipadas e design systems a servidores MCP — construindo ferramentas para devs com APIs ergonômicas e contratos claros."
+    description: "Bibliotecas e design systems sobre os quais outros devs constroem. Mantenho as APIs pequenas e com tipagem estrita, e coloco as regras no build em vez de na revisão de código, para que os erros sejam pegos antes de alguém precisar apontá-los."
   - icon: "users"
     title: "Mentoria"
-    description: "Revisão de código, pair programming e cinco anos treinando estudantes para a Maratona de Programação — incluindo um título estadual."
+    description: "Revisão de código e pair programming com devs júnior e pleno na T10. Antes disso, treinei estudantes para a Maratona de Programação na UECE, incluindo o ano em que a UECE ganhou o título estadual."
   - icon: "graduation"
     title: "Aprendizado contínuo"
-    description: "Autodidata em quatro stacks de produção, e uma pós-graduação concluída inteiramente fora da área de software — curiosidade que se sustenta por anos, não por fins de semana."
+    description: "Aprendi sozinho as quatro stacks que já coloquei em produção, e concluí uma pós-graduação numa área que não tem nada a ver com software."
 
 stack:
   - label: "Produto e descoberta"
@@ -43,18 +43,18 @@ stack:
     items: ["Vitest", "Playwright", "Cypress", "Jest", "JUnit", "React Testing Library", "Observabilidade", "Acessibilidade"]
   - label: "Arquitetura"
     items: ["Domain-Driven Design", "Arquitetura Hexagonal", "Monólitos Modulares", "Design Systems"]
-  - label: "IA e Sistemas Agênticos"
-    items: ["Model Context Protocol (MCP)", "APIs de LLM & Tool Calling", "Fluxos Agênticos", "Evals & Engenharia de Prompt", "Claude", "Antigravity", "GitHub Copilot"]
+  - label: "Ferramentas de IA"
+    items: ["Claude", "Antigravity", "GitHub Copilot"]
 
 education:
   - degree: "Pós-graduação em Sagradas Escrituras"
     institution: "Faculdade Cidade Teológica Pentecostal"
     location: "Fortaleza, CE"
-    period: "2023 — 2025"
+    period: "2023 – 2025"
   - degree: "Bacharelado em Ciência da Computação"
     institution: "Universidade Estadual do Ceará"
     location: "Fortaleza, CE"
-    period: "2012 — 2019"
+    period: "2012 – 2019"
 
 languages:
   - name: "Português"
@@ -65,17 +65,13 @@ languages:
     level: "Iniciante"
 ---
 
-Sou um engenheiro de software orientado a produto e criador de ferramentas para desenvolvedores com :yoe anos de experiência. Transformo fluxos operacionais complexos em produtos de software confiáveis — aplicações web, desktop e mobile, bibliotecas e ferramentas para desenvolvedores.
+Sou um engenheiro de software orientado a produto, com :yoe anos de experiência. Pego fluxos operacionais bagunçados e os transformo em produtos web em que as pessoas podem confiar, desde as primeiras conversas sobre o que é preciso até a produção e tudo o que vem depois do lançamento.
 
-Minha profundidade está em design systems, arquitetura de componentes e nas interfaces que as pessoas realmente usam. Também projeto e opero sistemas de backend e infraestrutura, levando um produto da descoberta e modelagem de domínio à produção e à iteração contínua.
-
-::callout{type="note" title="Atualmente"}
-Lidero o design, a arquitetura, o desenvolvimento e a entrega de um ERP próprio para a montagem e venda de painéis elétricos na Nordeste Painéis. Sou responsável pelo produto de ponta a ponta: trabalhando diretamente com o chão de fábrica para definir o que o sistema precisa fazer e colocando-o em produção eu mesmo.
-::
+Meu lado mais forte é o frontend: design systems, arquitetura de componentes e as interfaces que as pessoas usam todos os dias. Também construo e opero o backend e a infraestrutura por trás delas, então consigo levar uma funcionalidade até o fim sem precisar passá-la adiante.
 
 ::callout{type="insight" title="O que busco hoje"}
-Tenho preferência por times pequenos e startups em estágio inicial, onde engenheiros têm alta autonomia, lidam bem com ambiguidade e conversam diretamente com os usuários. Busco especialmente:
+Rendo mais em times pequenos e startups em estágio inicial, onde engenheiros têm bastante autonomia e conversam direto com os usuários. Os papéis que procuro:
 
-- **Engenharia de Produto:** Papéis como **Founding Engineer**, **Senior Product Engineer** ou **AI Product Engineer** — assumindo problemas de negócio ambíguos desde a descoberta e modelagem de domínio até a produção, aplicando LLMs, tool calling e MCPs onde eles geram valor real.
-- **Engenharia de Frontend:** Frontend de alto impacto focado em design systems, fluxos complexos, performance em tempo real e interfaces acessíveis — com capacidade de contribuir em todo o stack quando o produto precisa.
+- **Engenharia de Produto:** Founding Engineer, Senior Product Engineer ou AI Product Engineer, levando problemas de negócio pouco definidos da descoberta e modelagem de domínio até a produção.
+- **Engenharia de Frontend:** Vagas de frontend centradas em design systems, fluxos complexos, performance em tempo real e acessibilidade, com espaço para atuar em toda a stack quando o produto pedir.
 ::
