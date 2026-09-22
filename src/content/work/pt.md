@@ -1,7 +1,7 @@
 ---
 metadata:
   title: "Trabalho"
-  description: "Mais de nove anos construindo produtos de software de ponta a ponta — descoberta, arquitetura, interface, produção."
+  description: "Engenharia de software orientada a produto — descoberta, arquitetura, interfaces refinadas e sistemas em produção."
 
 resumeURL: "https://resume.phenrique.me/cv.pdf"
 
@@ -11,10 +11,10 @@ highlights:
     description: "Design systems, arquitetura de componentes e interfaces acessíveis em React, Next.js e Vue — pensadas para serem estendidas, e não reescritas."
   - icon: "lightbulb"
     title: "Descoberta de produto"
-    description: "Descubro os requisitos antes de escrever a especificação. No ERP da Nordeste Painéis, conduzi a descoberta junto ao chão de fábrica e definimos o que era \"bom\" para aquela fábrica — sem nenhum product manager no meio."
+    description: "Descubro os requisitos antes de escrever a especificação, transformando complexidade operacional e fluxos em planilhas em modelos de domínio claros e software intuitivo."
   - icon: "layers"
     title: "Responsabilidade de ponta a ponta"
-    description: "Do Postgres e Spring Boot até o último pixel e o pipeline de deploy. Assumo resultados, não tickets, de modo que uma funcionalidade não fique limitada à fronteira do repositório de um único time."
+    description: "Do Postgres e Spring Boot até interfaces refinadas e o pipeline de deploy. Assumo resultados além da fronteira do repositório de um único time."
   - icon: "package"
     title: "Ferramentas e DX"
     description: "De bibliotecas tipadas e design systems a servidores MCP — construindo ferramentas para devs com APIs ergonômicas e contratos claros."
@@ -23,7 +23,7 @@ highlights:
     description: "Revisão de código, pair programming e cinco anos treinando estudantes para a Maratona de Programação — incluindo um título estadual."
   - icon: "graduation"
     title: "Aprendizado contínuo"
-    description: "Autodidata em quatro stacks de produção ao longo de nove anos, e uma pós-graduação concluída inteiramente fora da área de software — curiosidade que se sustenta por anos, não por fins de semana."
+    description: "Autodidata em quatro stacks de produção, e uma pós-graduação concluída inteiramente fora da área de software — curiosidade que se sustenta por anos, não por fins de semana."
 
 stack:
   - label: "Produto e descoberta"
@@ -65,18 +65,17 @@ languages:
     level: "Iniciante"
 ---
 
-Sou um engenheiro de software orientado a produto e criador de ferramentas para desenvolvedores com :yoe anos de experiência. Em outras palavras, transformo ideias em produtos de software, sejam aplicações web, desktop ou mobile, bibliotecas ou outras ferramentas.
+Sou um engenheiro de software orientado a produto e criador de ferramentas para desenvolvedores com :yoe anos de experiência. Transformo fluxos operacionais complexos em produtos de software confiáveis — aplicações web, desktop e mobile, bibliotecas e ferramentas para desenvolvedores.
 
-Como um product engineer com forte inclinação para o frontend, minha profundidade está em design systems, arquitetura de componentes e nas interfaces com as quais as pessoas realmente interagem. Ao mesmo tempo, trago sólida bagagem em backend e infraestrutura para levar um produto da concepção à produção e mantê-lo com estabilidade e qualidade ao longo dos anos.
+Minha profundidade está em design systems, arquitetura de componentes e nas interfaces que as pessoas realmente usam. Também projeto e opero sistemas de backend e infraestrutura, levando um produto da descoberta e modelagem de domínio à produção e à iteração contínua.
 
 ::callout{type="note" title="Atualmente"}
 Lidero o design, a arquitetura, o desenvolvimento e a entrega de um ERP próprio para a montagem e venda de painéis elétricos na Nordeste Painéis. Sou responsável pelo produto de ponta a ponta: trabalhando diretamente com o chão de fábrica para definir o que o sistema precisa fazer e colocando-o em produção eu mesmo.
 ::
 
 ::callout{type="insight" title="O que busco hoje"}
-Tenho preferência por times pequenos e startups em estágio inicial, onde engenheiros têm alta autonomia, lidam bem com ambiguidade e conversam diretamente com os usuários. Hoje, me interessam especialmente:
+Tenho preferência por times pequenos e startups em estágio inicial, onde engenheiros têm alta autonomia, lidam bem com ambiguidade e conversam diretamente com os usuários. Busco especialmente:
 
-- **Engenharia de Produto & IA:** Papéis como **Founding Engineer**, **AI Product Engineer** ou **Senior Product Engineer** — assumindo problemas de negócio ambíguos desde a descoberta e modelagem de domínio até a produção, aproveitando LLMs, arquiteturas agênticas e MCPs.
-- **Frontend de Alto Impacto:** Engenharia de **Frontend** de alto impacto focada em design systems, fluxos complexos, performance em tempo real e interfaces acessíveis.
-- **Ferramentas para Devs & Developer Advocacy:** Experiência do desenvolvedor, bibliotecas open-source ou papéis de **Developer Advocate** onde bom gosto, escrita técnica e criação de ferramentas para outros desenvolvedores se encontram.
+- **Engenharia de Produto:** Papéis como **Founding Engineer**, **Senior Product Engineer** ou **AI Product Engineer** — assumindo problemas de negócio ambíguos desde a descoberta e modelagem de domínio até a produção, aplicando LLMs, tool calling e MCPs onde eles geram valor real.
+- **Engenharia de Frontend:** Frontend de alto impacto focado em design systems, fluxos complexos, performance em tempo real e interfaces acessíveis — com capacidade de contribuir em todo o stack quando o produto precisa.
 ::

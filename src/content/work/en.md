@@ -1,7 +1,7 @@
 ---
 metadata:
   title: "Work"
-  description: "Nine years building software products end to end — discovery, architecture, interface, production."
+  description: "Product-minded software engineering — discovery, architecture, polished interfaces, and production systems."
 
 resumeURL: "https://resume.phenrique.me/cv.pdf"
 
@@ -11,10 +11,10 @@ highlights:
     description: "Design systems, component architecture and accessible interfaces in React, Next.js and Vue — built to be extended rather than rewritten."
   - icon: "lightbulb"
     title: "Product discovery"
-    description: "I find requirements before writing specs: turning operational complexity and spreadsheet workflows into clear domain models and intuitive software."
+    description: "I uncover requirements before writing specs, turning operational complexity and spreadsheet workflows into clear domain models and intuitive software."
   - icon: "layers"
     title: "End-to-end ownership"
-    description: "From Postgres and Spring Boot through to the pixel and the deploy pipeline. I own outcomes that do not stop at the boundary of one team's repository."
+    description: "From Postgres and Spring Boot through polished interfaces and the deployment pipeline. I own outcomes beyond the boundary of one team's repository."
   - icon: "package"
     title: "Tooling & developer experience"
     description: "Typed libraries, design systems, and MCP servers for agentic workflows — building developer tools with ergonomic APIs and clear contracts."
@@ -23,7 +23,7 @@ highlights:
     description: "Code review, pairing and five years coaching students for the Maratona de Programação — including a state title."
   - icon: "graduation"
     title: "Continuous learning"
-    description: "Self-taught across four production stacks over nine years, with a postgraduate degree earned outside tech — curiosity that holds up over years, not weekends."
+    description: "Self-taught across four production stacks, with a postgraduate degree earned outside tech — curiosity that holds up over years, not weekends."
 
 stack:
   - label: "Product & discovery"
@@ -65,18 +65,17 @@ languages:
     level: "Beginner"
 ---
 
-I'm a product-minded software engineer and developer-tools builder with :yoe years of experience. In other words, I turn ideas into software products, whether web/desktop/mobile applications, libraries, or other tools.
+I'm a product-minded software engineer and developer-tools builder with :yoe years of experience. I turn complex operational workflows into reliable software products — web, desktop, and mobile applications, libraries, and developer tools.
 
-As a frontend-leaning product engineer, my depth is in design systems, component architecture, and the interfaces people actually touch. Yet I have enough backend and infrastructure experience to ship a product from idea to production and maintain it with stability and quality over the years.
+My depth is in design systems, component architecture, and the interfaces people actually use. I also design and operate backend and infrastructure systems, carrying a product from discovery and domain modelling to production and ongoing iteration.
 
 ::callout{type="note" title="These days"}
 I lead the design, architecture, development, and delivery of a custom ERP for the assembly and sale of electrical panels at Nordeste Painéis. I own the product end-to-end: working with the shop floor to define what the system needs to do and shipping it to production myself.
 ::
 
 ::callout{type="insight" title="What I'm open to"}
-I thrive in small, fast-moving teams and early-stage startups where engineers operate with high autonomy and talk directly to users. Today, I am particularly interested in:
+I thrive in small, fast-moving teams and early-stage startups where engineers operate with high autonomy and talk directly to users. I am particularly interested in:
 
-- **Product & AI Engineering:** Roles such as **Founding Engineer**, **AI Product Engineer**, or **Senior Product Engineer** — taking ambiguous business problems from discovery and domain modelling to production, leveraging LLMs, agentic architectures, and MCPs.
-- **Deep Frontend Craft:** High-impact **Frontend Engineering** focused on design systems, complex workflows, real-time performance, and accessible interfaces.
-- **Developer Tooling & Advocacy:** Developer experience, open-source libraries, or **Developer Advocate** roles where taste, technical writing, and building tools for other developers meet.
+- **Product Engineering:** Founding Engineer, Senior Product Engineer, or AI Product Engineer roles where I can take ambiguous business problems from discovery and domain modelling to production, applying LLMs, tool calling, and MCPs where they create real leverage.
+- **Frontend Engineering:** High-impact frontend roles focused on design systems, complex workflows, real-time performance, and accessible interfaces — with the ability to contribute across the stack when the product needs it.
 ::
