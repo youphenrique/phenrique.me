@@ -16,8 +16,8 @@ highlights:
     title: "Responsabilidade de ponta a ponta"
     description: "Do Postgres e Spring Boot até o último pixel e o pipeline de deploy. Assumo resultados, não tickets, de modo que uma funcionalidade não fique limitada à fronteira do repositório de um único time."
   - icon: "package"
-    title: "Open source e ferramentas"
-    description: "brutils, um toolkit TypeScript sob licença MIT para regras de negócio brasileiras, além do design system por trás deste site. Bibliotecas são onde o bom gosto precisa sobreviver ao contato com o código de outras pessoas."
+    title: "Ferramentas e DX"
+    description: "De bibliotecas tipadas e design systems a servidores MCP — construindo ferramentas para devs com APIs ergonômicas e contratos claros."
   - icon: "users"
     title: "Mentoria"
     description: "Revisão de código, pair programming e cinco anos treinando estudantes para a Maratona de Programação — incluindo um título estadual."
@@ -43,8 +43,8 @@ stack:
     items: ["Vitest", "Playwright", "Cypress", "Jest", "JUnit", "React Testing Library", "Observabilidade", "Acessibilidade"]
   - label: "Arquitetura"
     items: ["Domain-Driven Design", "Arquitetura Hexagonal", "Monólitos Modulares", "Design Systems"]
-  - label: "Ferramentas de IA"
-    items: ["Claude", "Junie", "GitHub Copilot", "Codex", "Antigravity"]
+  - label: "IA e Sistemas Agênticos"
+    items: ["Model Context Protocol (MCP)", "APIs de LLM & Tool Calling", "Fluxos Agênticos", "Evals & Engenharia de Prompt", "Claude", "Antigravity", "GitHub Copilot"]
 
 education:
   - degree: "Pós-graduação em Sagradas Escrituras"
@@ -65,10 +65,18 @@ languages:
     level: "Iniciante"
 ---
 
-Sou um engenheiro de software com mais de nove anos de experiência. Levo produtos de uma conversa com as pessoas que precisam deles até algo rodando em produção — a descoberta, o modelo de domínio, a arquitetura, a interface, o pipeline. Minha profundidade está no frontend: design systems, arquitetura de componentes e as interfaces com as quais as pessoas realmente interagem. Minha abrangência cobre backend e infraestrutura o suficiente para que o trabalho nunca pare na fronteira de um repositório.
+Sou um engenheiro de software orientado a produto e criador de ferramentas para desenvolvedores com :yoe anos de experiência. Em outras palavras, transformo ideias em produtos de software, sejam aplicações web, desktop ou mobile, bibliotecas ou outras ferramentas.
 
-Boa parte desse tempo foi dedicada a três tipos de trabalho. Produtos de alto tráfego, onde os desafios mais interessantes estão em performance, confiabilidade e em não quebrar o que já funciona. Modernização de legados, onde o foco é abrir caminhos de migração e manter o negócio rodando enquanto o terreno se move por baixo. E software novo, construído diretamente com as pessoas que vão usá-lo — o trabalho que considero mais valioso e o mais difícil de acertar.
+Como um product engineer com forte inclinação para o frontend, minha profundidade está em design systems, arquitetura de componentes e nas interfaces com as quais as pessoas realmente interagem. Ao mesmo tempo, trago sólida bagagem em backend e infraestrutura para levar um produto da concepção à produção e mantê-lo com estabilidade e qualidade ao longo dos anos.
 
-É esse último tipo que faço hoje. Na Nordeste Painéis, lidero o design, a arquitetura e a entrega de um ERP próprio para a montagem e venda de painéis elétricos — uma operação que antes rodava em planilhas, conversas de WhatsApp e na memória das pessoas que sabiam como tudo se encaixava. Assumi as duas pontas: entender junto ao chão de fábrica o que o sistema precisava fazer, e colocá-lo em produção eu mesmo.
+::callout{type="note" title="Atualmente"}
+Lidero o design, a arquitetura, o desenvolvimento e a entrega de um ERP próprio para a montagem e venda de painéis elétricos na Nordeste Painéis. Sou responsável pelo produto de ponta a ponta: trabalhando diretamente com o chão de fábrica para definir o que o sistema precisa fazer e colocando-o em produção eu mesmo.
+::
 
-O que costumo buscar em novos desafios: engenharia de produto ou frontend em que eu converse diretamente com clientes; o papel que hoje aparece nas vagas como forward deployed, solutions, implementation ou applied AI engineer; primeiro engenheiro de produto em um time em estágio inicial; projetos em tempo real ou com foco crítico em performance; ferramentas de desenvolvimento e pacotes de código; um bug neste site ou em projetos que mantenho; ou uma ideia sobre a qual você queira uma segunda opinião.
+::callout{type="insight" title="O que busco hoje"}
+Tenho preferência por times pequenos e startups em estágio inicial, onde engenheiros têm alta autonomia, lidam bem com ambiguidade e conversam diretamente com os usuários. Hoje, me interessam especialmente:
+
+- **Engenharia de Produto & IA:** Papéis como **Founding Engineer**, **AI Product Engineer** ou **Senior Product Engineer** — assumindo problemas de negócio ambíguos desde a descoberta e modelagem de domínio até a produção, aproveitando LLMs, arquiteturas agênticas e MCPs.
+- **Frontend de Alto Impacto:** Engenharia de **Frontend** de alto impacto focada em design systems, fluxos complexos, performance em tempo real e interfaces acessíveis.
+- **Ferramentas para Devs & Developer Advocacy:** Experiência do desenvolvedor, bibliotecas open-source ou papéis de **Developer Advocate** onde bom gosto, escrita técnica e criação de ferramentas para outros desenvolvedores se encontram.
+::
