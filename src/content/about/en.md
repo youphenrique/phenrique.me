@@ -49,13 +49,9 @@ To give you an idea, I hold a postgraduate degree in Sacred Scripture from FCTP.
 I set out my beliefs, and how they shape my identity, in ["What I believe and why I believe in what I believe"](/writing/what-i-believe-and-why-i-believe-in-what-i-believe).
 ::
 
-## When I'm not coding
+## Away from computers
 
 When I'm not coding, you'll find me writing something (mainly in this website), spending time with family and friends, serving at my church community as a Bible teacher and musical leader, working out at the gym, reading a book, playing chess, or playing guitar or keyboard with my gig partners somewhere.
-
-::callout{type="info" title="This site"}
-This site is built with [Astro](https://astro.build) and hosted on [Vercel](https://vercel.com). If you want to know more about how it was made, have a look at the [Colophon](/colophon).
-::
 
 ## Contact
 
@@ -65,6 +61,10 @@ I’m on [GitHub](https://github.com/youphenrique), which is the right place for
 
 ::callout{type="warning" title="Worth writing about"}
 Please skip bulk outreach, link exchanges, guest post offers, and SEO services. I do not take paid placements or sponsored links anywhere on this site.
+::
+
+::callout{type="info" title="This site"}
+This site is built with [Astro](https://astro.build) and hosted on [Vercel](https://vercel.com). If you want to know more about how it was made, have a look at the [Colophon](/colophon).
 ::
 
 
