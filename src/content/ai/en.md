@@ -25,18 +25,7 @@ I lean on agents heavily for the parts of the work that used to eat the week, pr
 
 Increasingly the reader here is not a person with a browser. It is an agent fetching a page on someone's behalf, and what it receives is styled markup wrapped around the few paragraphs it actually wanted.
 
-That seemed like a poor way to treat a reader, so every document page on this site has a plain-Markdown twin at its own address with `.md` appended:
-
-| Address | What it is |
-|:--------|:-----------|
-| [/about.md](/about.md) | This site's author, in prose |
-| [/work.md](/work.md) | Roles, stack, education — as structured lists, not cards |
-| [/reading.md](/reading.md) | What I am reading and what I have finished |
-| [/ai.md](/ai.md) | This page |
-| [/colophon.md](/colophon.md) | How the site is made |
-| `/writing/<slug>.md` | Any article, with its footnotes intact |
-
-Each has a Portuguese counterpart under `/pt`. [/llms.txt](/llms.txt) indexes them all, and the design system is published verbatim at [/design.md](/design.md).
+That seemed like a poor way to treat a reader, so every document page on this site has a plain-Markdown twin at its own address with `.md` appended. Each has a Portuguese counterpart under `/pt`. [/llms.txt](/llms.txt) indexes them all, and the design system is published verbatim at [/design.md](/design.md).
 
 Three details matter more than the URLs:
 
