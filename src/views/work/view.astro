@@ -30,14 +30,18 @@ const monthFormatter = new Intl.DateTimeFormat(Astro.currentLocale, {
   timeZone: "UTC",
 });
 
-/** "Aug 2025 — Present". An open-ended role has no end date, only a label. */
+/** "Aug 2025 – Present". An open-ended role has no end date, only a label. */
 function formatRange(start: Date, end: Date | null): string {
-  return `${monthFormatter.format(start)} — ${end === null ? dict.present : monthFormatter.format(end)}`;
+  return `${monthFormatter.format(start)} – ${end === null ? dict.present : monthFormatter.format(end)}`;
 }
 
-const experience = (await getCollection("workExperience")).sort(
-  (a, b) => b.data.dateStart.valueOf() - a.data.dateStart.valueOf(),
-);
+const currentLocale = Astro.currentLocale ?? "en";
+const experience = (
+  await getCollection(
+    "workExperience",
+    (entry) => entry.id.startsWith(`${currentLocale}/`) || !entry.id.includes("/"),
+  )
+).sort((a, b) => b.data.dateStart.valueOf() - a.data.dateStart.valueOf());
 
 const projects = (await getCollection("projects"))
   .filter((project) => !project.data.draft)
@@ -108,6 +112,25 @@ const sectionGap = css.raw({ mt: { base: 14, md: 16 } });
       </ul>
     </section>
 
+    <section class={css(sectionGap)}>
+      <SectionHeading id="experience">{dict.sections.experience}</SectionHeading>
+      <ul class={vstack({ mt: 8, alignItems: "stretch", gap: { base: 7, md: 8 } })}>
+        {
+          experience.map((entry) => (
+            <ExperienceItem
+              company={entry.data.company}
+              companyURL={entry.data.companyURL}
+              role={entry.data.role}
+              location={entry.data.location}
+              arrangement={dict.arrangement[entry.data.arrangement]}
+              dateRange={formatRange(entry.data.dateStart, entry.data.dateEnd)}
+              body={entry.body}
+            />
+          ))
+        }
+      </ul>
+    </section>
+
     {
       projects.length > 0 ? (
         <section class={css(sectionGap)}>
@@ -128,25 +151,6 @@ const sectionGap = css.raw({ mt: { base: 14, md: 16 } });
         </section>
       ) : null
     }
-
-    <section class={css(sectionGap)}>
-      <SectionHeading id="experience">{dict.sections.experience}</SectionHeading>
-      <ul class={vstack({ mt: 8, alignItems: "stretch", gap: { base: 7, md: 8 } })}>
-        {
-          experience.map((entry) => (
-            <ExperienceItem
-              company={entry.data.company}
-              companyURL={entry.data.companyURL}
-              role={entry.data.role}
-              location={entry.data.location}
-              arrangement={dict.arrangement[entry.data.arrangement]}
-              dateRange={formatRange(entry.data.dateStart, entry.data.dateEnd)}
-              body={entry.body}
-            />
-          ))
-        }
-      </ul>
-    </section>
 
     <section class={css(sectionGap)}>
       <SectionHeading id="stack">{dict.sections.stack}</SectionHeading>

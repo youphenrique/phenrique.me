@@ -12,6 +12,7 @@ export interface MainDictionary {
   footer: {
     "latest-commit": string;
     "colophon-label": string;
+    "ai-label": string;
   };
 }
 
@@ -29,6 +30,7 @@ const dict: MainDictionary = {
   footer: {
     "latest-commit": "latest commit",
     "colophon-label": "Colophon",
+    "ai-label": "AI",
   },
 };
 

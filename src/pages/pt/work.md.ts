@@ -12,9 +12,12 @@ export const GET: APIRoute = async () => {
 
   if (page === undefined) return new Response("Not found", { status: 404 });
 
-  const experience = (await getCollection("workExperience")).sort(
-    (a, b) => b.data.dateStart.valueOf() - a.data.dateStart.valueOf(),
-  );
+  const experience = (
+    await getCollection(
+      "workExperience",
+      (entry) => entry.id.startsWith("pt/") || !entry.id.includes("/"),
+    )
+  ).sort((a, b) => b.data.dateStart.valueOf() - a.data.dateStart.valueOf());
 
   const projects = (await getCollection("projects"))
     .filter((project) => !project.data.draft)

@@ -23,7 +23,7 @@ export type Alternates = Partial<Record<Locale, string>>;
  * absent — it is English-only — and so is `/linkbio`, which does not use the
  * main layout.
  */
-const TRANSLATED_PATHS = new Set(["/", "/about", "/colophon", "/reading", "/work", "/writing"]);
+const TRANSLATED_PATHS = new Set(["/", "/about", "/ai", "/colophon", "/reading", "/work", "/writing"]);
 
 function isLocale(value: string): value is Locale {
   return (LOCALES as readonly string[]).includes(value);

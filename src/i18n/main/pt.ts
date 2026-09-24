@@ -14,6 +14,7 @@ const dict: MainDictionary = {
   footer: {
     "latest-commit": "último commit",
     "colophon-label": "Colofão",
+    "ai-label": "IA",
   },
 };
 

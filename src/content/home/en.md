@@ -11,4 +11,4 @@ I care deeply about the craft, quality, and excellence behind creating things th
 
 Here I try to muse on insights into software engineering, computer science, theology, philosophy, and other topics.
 
-Thanks for being here. If you want to know more about me, check the [About](https://phenrique.me/about) page. If you are interested in connecting, feel free to reach out by [e-mail](mailto:pauloh1288@gmail.com) or through my social links.
+Thanks for being here. If you want to know more about me, check the [About](/about) page. If you are interested in connecting, feel free to reach out by [e-mail](mailto:pauloh1288@gmail.com) or through my social links.

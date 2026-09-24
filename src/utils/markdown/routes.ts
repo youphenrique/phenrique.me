@@ -12,7 +12,7 @@ import { localizedPath, stripLocale } from "../i18n-routes.ts";
  * runtime. Adding an endpoint means adding it here, or the page ships a
  * Markdown version nothing links to.
  */
-const MARKDOWN_PATHS = new Set(["/about", "/work", "/reading", "/colophon"]);
+const MARKDOWN_PATHS = new Set(["/about", "/work", "/reading", "/ai", "/colophon"]);
 
 /** Every article has one; the index at `/writing` is a listing, not a document. */
 function isArticle(path: string): boolean {

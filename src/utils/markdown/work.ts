@@ -42,7 +42,7 @@ export function renderWorkBody({ page, experience, projects, dict, locale }: Wor
   const month = new Intl.DateTimeFormat(locale, { month: "short", year: "numeric", timeZone: "UTC" });
 
   const range = (start: Date, end: Date | null): string =>
-    `${month.format(start)} — ${end === null ? dict.present : month.format(end)}`;
+    `${month.format(start)} – ${end === null ? dict.present : month.format(end)}`;
 
   const sections: string[] = [
     page.body ?? "",
@@ -50,6 +50,21 @@ export function renderWorkBody({ page, experience, projects, dict, locale }: Wor
     section(
       dict.sections.highlights,
       page.data.highlights.map((h) => `- **${h.title}** — ${h.description}`).join("\n"),
+    ),
+    section(
+      dict.sections.experience,
+      experience
+        .map((entry) => {
+          const { company, companyURL, role, location, arrangement, dateStart, dateEnd } = entry.data;
+          const at = companyURL === undefined ? company : `[${company}](${companyURL})`;
+          const meta = metaLine([range(dateStart, dateEnd), location, dict.arrangement[arrangement]]);
+          // The body is the role's bullet list. Its own headings would collide
+          // with the page outline, so roles sit at `###` and the list follows.
+          const body = (entry.body ?? "").trim();
+
+          return `### ${role} — ${at}\n\n${meta}\n\n${body}`.trim();
+        })
+        .join("\n\n"),
     ),
   ];
 
@@ -70,21 +85,6 @@ export function renderWorkBody({ page, experience, projects, dict, locale }: Wor
   }
 
   sections.push(
-    section(
-      dict.sections.experience,
-      experience
-        .map((entry) => {
-          const { company, companyURL, role, location, arrangement, dateStart, dateEnd } = entry.data;
-          const at = companyURL === undefined ? company : `[${company}](${companyURL})`;
-          const meta = metaLine([range(dateStart, dateEnd), location, dict.arrangement[arrangement]]);
-          // The body is the role's bullet list. Its own headings would collide
-          // with the page outline, so roles sit at `###` and the list follows.
-          const body = (entry.body ?? "").trim();
-
-          return `### ${role} — ${at}\n\n${meta}\n\n${body}`.trim();
-        })
-        .join("\n\n"),
-    ),
     section(
       dict.sections.stack,
       page.data.stack.map((group) => `- **${group.label}**: ${group.items.join(", ")}`).join("\n"),

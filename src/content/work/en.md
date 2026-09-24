@@ -1,60 +1,60 @@
 ---
 metadata:
   title: "Work"
-  description: "Nine years building software products end to end — discovery, architecture, interface, production."
+  description: "Product engineering from the first conversation with users to software running in production: experience, projects, stack and education."
 
 resumeURL: "https://resume.phenrique.me/cv.pdf"
 
 highlights:
   - icon: "code"
     title: "Frontend expertise"
-    description: "Design systems, component architecture and accessible interfaces in React, Next.js and Vue — built to be extended rather than rewritten."
+    description: "Design systems, component architecture and accessible interfaces in React, Next and Vue."
   - icon: "lightbulb"
     title: "Product discovery"
-    description: "I find the requirements before I write the spec. On the Nordeste Painéis ERP I ran discovery with the shop floor and defined what \"good\" meant for that factory — with no product manager in between."
+    description: "Mapping real-world workflows alongside users and turning manual processes and messy documents into intuitive software."
   - icon: "layers"
     title: "End-to-end ownership"
-    description: "From Postgres and Spring Boot through to the pixel and the deploy pipeline. I own outcomes rather than tickets, so a feature does not stop at the boundary of one team's repository."
+    description: "From the database to the post-deploy pipeline: Postgres, Spring Boot, the interface, CI/CD, Observability."
   - icon: "package"
-    title: "Open source & tooling"
-    description: "brutils, an MIT-licensed TypeScript toolkit for Brazilian business rules, plus the design system behind this site. Libraries are where taste has to survive contact with other people's code."
+    title: "Tooling & developer experience"
+    description: "Building libraries and other developer tools with ergonomic APIs and clear contracts."
   - icon: "users"
-    title: "Mentorship"
-    description: "Code review, pairing and five years coaching students for the Maratona de Programação — including a state title."
+    title: "Teamwork & Leadership"
+    description: "Most effective with smaller teams, often as the first engineer. Fosters collaborative environments where everyone grows."
   - icon: "graduation"
     title: "Continuous learning"
-    description: "Self-taught across four production stacks in nine years, and a postgraduate degree earned entirely outside software — curiosity that holds up over years, not weekends."
+    description: "Self-taught engineer with a strong craving to learn from others in as many areas as possible."
 
 stack:
   - label: "Product & discovery"
-    items: ["Requirements discovery", "Stakeholder interviews", "Domain modelling", "Product specs", "Scope negotiation", "Analytics & telemetry"]
+    items: ["Requirements discovery", "Stakeholder interviews", "Domain modelling", "Product specs", "Scope negotiation"]
   - label: "Languages"
-    items: ["TypeScript", "JavaScript", "Kotlin", "PHP"]
+    items: ["TypeScript", "JavaScript", "HTML", "CSS", "Kotlin", "Java", "C++"]
   - label: "Frontend"
     items:
-      ["React", "Next.js", "Vue.js", "Vite", "Panda CSS", "Chakra UI", "Material UI", "Storybook", "i18next", "React Aria"]
+      ["React", "Next", "Vue", "Nuxt", "Vite", "Panda CSS", "Chakra UI", "Material UI", "Storybook", "i18next", "React Aria"]
   - label: "Backend & data"
     items:
       ["Node.js", "Spring Boot", "Laravel", "Hapi.js", "Express.js", "GraphQL", "REST", "Postgres", "MySQL", "MongoDB", "Redis", "BullMQ", "Strapi"]
   - label: "Cloud & DevOps"
     items:
-      ["Docker", "Docker Compose", "Git", "GitHub Actions", "Jenkins", "SonarQube", "AWS", "Oracle Cloud", "Coolify"]
+      ["Docker", "Docker Compose", "Git", "GitHub Actions", "Jenkins", "SonarQube", "AWS", "Oracle Cloud", "Coolify", "Vercel"]
   - label: "Quality"
     items: ["Vitest", "Playwright", "Cypress", "Jest", "JUnit", "React Testing Library", "Observability", "Accessibility"]
   - label: "Architecture"
-    items: ["Domain-Driven Design", "Hexagonal Architecture", "Modular Monoliths", "Design Systems"]
-  - label: "AI tools"
-    items: ["Claude", "Junie", "GitHub Copilot", "Codex", "Antigravity"]
+    items: ["Domain-Driven Design", "Hexagonal Architecture", "Layered architecture", "Modular Monoliths", "Design Systems"]
+  - label: "AI & Agentic Systems"
+    items: ["Model Context Protocol (MCP)", "LLM APIs & Tool Calling", "Agentic Workflows", "Evals & Prompting", "AI Agents"]
 
 education:
   - degree: "Postgraduate, Sacred Scripture"
     institution: "Faculdade Cidade Teológica Pentecostal"
     location: "Fortaleza, CE"
-    period: "2023 — 2025"
+    period: "2023 – 2025"
   - degree: "B.Sc. Computer Science"
     institution: "Universidade Estadual do Ceará"
     location: "Fortaleza, CE"
-    period: "2012 — 2019"
+    period: "2012 – 2019"
 
 languages:
   - name: "Portuguese"
@@ -65,10 +65,13 @@ languages:
     level: "Beginner"
 ---
 
-I'm a product-minded software engineer and developer-tools builder with :yoe years of experience. I take products from a conversation with the people who need them to something running in production — the discovery, the domain model, the architecture, the interface, the pipeline. My depth is at the frontend: design systems, component architecture, and the interfaces people actually touch. My range covers enough backend and infrastructure that the work never stops at a repository boundary.
+I'm a product-minded software engineer with :yoe years of experience. I take messy, manual operational workflows and turn them into web products people can use to make their work faster, easier, and more reliable.
 
-Most of that time has gone into three kinds of work. High-traffic products, where the interesting problems are performance, reliability and not breaking what already works. Legacy modernisation, where they are migration paths and keeping a business running while the ground moves under it. And greenfield software built directly with the people who will use it, which is the work I find most valuable and the hardest to get right.
+My expertise is the frontend: design systems, component architecture, and the interfaces people use every day. I also build and run the backend and infrastructure behind them, so I can take a feature from concept to production and maintain it over the years.
 
-That last kind is what I do now. At Nordeste Painéis I lead the design, architecture and delivery of a custom ERP for the assembly and sale of electrical panels — an operation that previously ran on spreadsheets, WhatsApp threads and the people who remembered how it all fit together. I owned both ends of it: working out with the shop floor what the system had to do, and shipping it to production myself.
+::callout{type="insight" title="What I'm open to"}
+I do my best work on small teams and startups, where engineers have autonomy and ownership over what they build. The roles I'm looking for:
 
-What I'm typically open to: product or frontend engineering where I'd talk to customers directly; the role now being posted as forward deployed, solutions, implementation or applied AI engineer; first product engineer at an early team; anything real-time or performance-critical; dev tooling and packages; a bug on this site or in one of mine; or an idea you want a second opinion on.
+- **Product Engineering:** Founding Engineer, Senior Product Engineer or AI Product Engineer, taking unclear business problems from discovery and domain modelling to production.
+- **Frontend Engineering:** Frontend roles centred on design systems, complex workflows, real-time performance and accessibility, with room to work across the stack when the product needs it.
+::

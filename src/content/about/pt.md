@@ -31,7 +31,7 @@ Criar uma interface traz uma grande responsabilidade. Em temas de nicho, a UI po
 
 No momento, tenho desenvolvido aplicações web de alta qualidade com `Kotlin` e `TypeScript`. Busco me especializar em soluções multiplataforma e web utilizando `Jetpack Compose`, `React Native` e `React`, e tenho um entusiasmo especial por `Kotlin Multiplatform`.
 
-Embora minha principal especialidade seja o frontend, tenho uma base sólida em sistemas de backend, o que me permite atuar com desenvoltura em toda a stack: automação, CI/CD, arquitetura de sistemas robustos e escaláveis, etc. Em resumo, desenvolvo aplicações web, APIs, bibliotecas e outras ferramentas — com ou sem IA. Recorro bastante a agentes para as partes que antes consumiam a semana inteira, justamente para que mais da semana sobre para descoberta e julgamento; a página de [IA](https://phenrique.me/ai) detalha como.
+Embora minha principal especialidade seja o frontend, tenho uma base sólida em sistemas de backend, o que me permite atuar com desenvoltura em toda a stack: automação, CI/CD, arquitetura de sistemas robustos e escaláveis, etc. Em resumo, desenvolvo aplicações web, APIs, bibliotecas e outras ferramentas — com ou sem IA. Recorro bastante a agentes para as partes que antes consumiam a semana inteira, justamente para que mais da semana sobre para descoberta e julgamento; a página de [IA](/pt/ai) detalha como.
 
 Neste momento, isso se traduz em um ERP que estou construindo para a Nordeste Painéis, uma fábrica que monta e vende painéis elétricos. Antes dele, a operação rodava em planilhas, conversas de WhatsApp e na memória das pessoas que sabiam como tudo se encaixava. Não havia product manager nem especificação escrita, então o primeiro trabalho foi caminhar pelo chão de fábrica e entender o que o sistema precisava fazer de fato — como são os pedidos, em que ponto da montagem está cada painel, do que um vendedor precisa no momento exato em que está orçando. Depois eu projetei, construí e coloquei em produção. A parte interessante desse projeto nunca foi a escolha do framework. Foi chegar a uma definição de "bom" que serve para esta fábrica e não serviria para quase nenhuma outra.
 
@@ -46,7 +46,7 @@ Sou cristão protestante, e essa não é uma dimensão isolada do restante da mi
 Para contextualizar, sou pós-graduado em Sagradas Escrituras pela FCTP. Isso reflete o quanto levo a sério a vida da mente racional lado a lado com a vida de fé. Minha intenção não é me tornar um teólogo no sentido acadêmico, mas acredito que compreender bem a Bíblia me ajuda a entender a mim mesmo, ao próximo, ao mundo em que vivemos e à maneira como tudo se relaciona dentro do Reino de Deus.
 
 ::callout{type="note" title="Para uma resposta mais detalhada"}
-Expliquei minhas convicções e como elas moldam minha identidade no texto ["No que creio e por que creio no que creio"](https://phenrique.me/writing/what-i-believe-and-why-i-believe-in-what-i-believe).
+Expliquei minhas convicções e como elas moldam minha identidade no texto ["No que creio e por que creio no que creio"](/writing/what-i-believe-and-why-i-believe-in-what-i-believe).
 ::
 
 ## Quando não estou programando
@@ -54,7 +54,7 @@ Expliquei minhas convicções e como elas moldam minha identidade no texto ["No 
 Quando não estou programando, você me encontrará escrevendo alguma coisa (principalmente neste site), passando tempo com minha família e amigos, servindo na minha comunidade de fé como professor bíblico e líder musical, treinando na academia, lendo um livro, jogando xadrez ou tocando violão ou teclado por aí com meus amigos de banda.
 
 ::callout{type="info" title="Este site"}
-Este site é construído com [Astro](https://astro.build) e hospedado na [Vercel](https://vercel.com). Se quiser saber mais sobre como ele foi feito, confira a página [Colophon](https://phenrique.me/colophon).
+Este site é construído com [Astro](https://astro.build) e hospedado na [Vercel](https://vercel.com). Se quiser saber mais sobre como ele foi feito, confira a página [Colophon](/pt/colophon).
 ::
 
 ## Contato

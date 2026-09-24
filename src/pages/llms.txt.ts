@@ -36,10 +36,11 @@ function section(heading: string, links: Link[]): string {
 /** In the header's order, which is the order a reader meets these pages in. */
 async function pagesFor(locale: Locale): Promise<Link[]> {
   const prefix = locale === "en" ? "" : `/${locale}`;
-  const [about, work, reading, colophon] = await Promise.all([
+  const [about, work, reading, ai, colophon] = await Promise.all([
     getEntry("aboutPages", locale),
     getEntry("work", locale),
     getEntry("readingPages", locale),
+    getEntry("aiPages", locale),
     getEntry("colophonPages", locale),
   ]);
 
@@ -66,6 +67,14 @@ async function pagesFor(locale: Locale): Promise<Link[]> {
       title: reading.data.metadata.title,
       path: `${prefix}/reading`,
       description: reading.data.metadata.description,
+    });
+  }
+
+  if (ai !== undefined) {
+    links.push({
+      title: ai.data.title,
+      path: `${prefix}/ai`,
+      description: ai.data.description,
     });
   }
 

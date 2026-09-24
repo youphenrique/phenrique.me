@@ -31,7 +31,7 @@ Crafting a UI holds a lot of responsibility. For more niche topics, the UI may i
 
 Right now I am building high-quality web apps with `Kotlin` and `TypeScript`. I am trying to specialize in cross-platform and web solutions using `Jetpack Compose`, `React Native`, and `React`, and I’m particularly excited about `Kotlin Multiplatform`. 
 
-Although my expertise lies on the frontend side, I bring a solid foundation in backend systems, which lets me work effectively across the entire stack: automation, CI/CD, designing robust, scalable systems, etc. In short, I build web applications, APIs, libraries and other tools — with or without AI. I lean on agents heavily for the parts that used to eat the week, precisely so that more of the week goes to discovery and judgment; the [AI](https://phenrique.me/ai) page goes into how.
+Although my expertise lies on the frontend side, I bring a solid foundation in backend systems, which lets me work effectively across the entire stack: automation, CI/CD, designing robust, scalable systems, etc. In short, I build web applications, APIs, libraries and other tools — with or without AI. I lean on agents heavily for the parts that used to eat the week, precisely so that more of the week goes to discovery and judgment; the [AI](/ai) page goes into how.
 
 Right now that looks like an ERP I am building for Nordeste Painéis, a factory that assembles and sells electrical panels. Before it, the operation ran on spreadsheets, WhatsApp threads and the people who remembered how it all fit together. There was no product manager and no written specification, so the first job was to walk the shop floor and work out what the system actually had to do — which orders look like, where a panel sits in its assembly, what a salesperson needs at the moment they are quoting. Then I designed it, built it, and put it into production myself. The interesting part of that project was never the framework choice. It was arriving at a definition of "good" that fits this factory and would fit almost no other.
 
@@ -46,16 +46,12 @@ I'm a (Protestant) Christian, and that's not a detail I tuck away from the rest 
 To give you an idea, I hold a postgraduate degree in Sacred Scripture from FCTP. This reflects how seriously I take the life of the rational mind alongside the life of faith. My intention is not to become a theologian in the academic sense. However, I believe understanding the Bible well helps me understand myself, my work, other people's life, the world we all live in, and how they are related within the Kingdom of God.
 
 ::callout{type="note" title="A longer answer"}
-I set out my beliefs, and how they shape my identity, in ["What I believe and why I believe in what I believe"](https://phenrique.me/writing/what-i-believe-and-why-i-believe-in-what-i-believe).
+I set out my beliefs, and how they shape my identity, in ["What I believe and why I believe in what I believe"](/writing/what-i-believe-and-why-i-believe-in-what-i-believe).
 ::
 
-## When I'm not coding
+## Away from computers
 
 When I'm not coding, you'll find me writing something (mainly in this website), spending time with family and friends, serving at my church community as a Bible teacher and musical leader, working out at the gym, reading a book, playing chess, or playing guitar or keyboard with my gig partners somewhere.
-
-::callout{type="info" title="This site"}
-This site is built with [Astro](https://astro.build) and hosted on [Vercel](https://vercel.com). If you want to know more about how it was made, have a look at the [Colophon](https://phenrique.me/colophon).
-::
 
 ## Contact
 
@@ -67,11 +63,15 @@ I’m on [GitHub](https://github.com/youphenrique), which is the right place for
 Please skip bulk outreach, link exchanges, guest post offers, and SEO services. I do not take paid placements or sponsored links anywhere on this site.
 ::
 
+::callout{type="info" title="This site"}
+This site is built with [Astro](https://astro.build) and hosted on [Vercel](https://vercel.com). If you want to know more about how it was made, have a look at the [Colophon](/colophon).
+::
+
 
 [^name]: People call me "Paulo", "Henrique", "Paulinho", "Rique" and, most frequently, "PH".
 [^fortaleza]: On the coast of [Ceará, in Brazil's northeast](https://maps.app.goo.gl/YbP1zDmW3U7A9MuBA) — timezone GMT−3.
 [^destiny]: I sat the entrance exam for electrical engineering three times and never got in.
-[^ai]: I’m not supposed to say that, but the em dashes here don’t mean this text was written by AI. With the advent of LLMs (Large Language Models), [much of AI-written text contains em dashes](https://togetherlearning.com/research/2025/assets/files/Hawkinson-EmDash-20251204.pdf), which depart from the standard pattern of informal/non-academic human-written text. However, em dashes existed long before AI, and I like to use them in order to make my writing clearer. If you want to know more about how I use AI, check out the [AI](https://phenrique.me/ai) page.
+[^ai]: I’m not supposed to say that, but the em dashes here don’t mean this text was written by AI. With the advent of LLMs (Large Language Models), [much of AI-written text contains em dashes](https://togetherlearning.com/research/2025/assets/files/Hawkinson-EmDash-20251204.pdf), which depart from the standard pattern of informal/non-academic human-written text. However, em dashes existed long before AI, and I like to use them in order to make my writing clearer. If you want to know more about how I use AI, check out the [AI](/ai) page.
 [^maratona]: [Maratona de Programação, 2016 regional results](https://www.facebook.com/maratona/posts/10154135897899118:0).
 [^productengineer]: Laurie Voss, ["We are all Product Engineers now"](https://seldo.com/posts/we-are-all-product-engineers-now/), which makes the argument better than I can: as the cost of writing code collapses, what remains is finding out what people actually want, defining it precisely, and making it pleasant to use.
 [^fullstack]: With all the affection, and all the suspicion, that the "full stack" meme on Twitter has earned.
