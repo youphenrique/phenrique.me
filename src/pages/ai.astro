@@ -1,6 +1,6 @@
 ---
 import { getEntry } from "astro:content";
-import LongformView from "../views/longform/view.astro";
+import LongformPage from "../ui/components/longform-page.astro";
 
 const entry = await getEntry("aiPages", "en");
 
@@ -9,4 +9,4 @@ if (entry === undefined) {
 }
 ---
 
-<LongformView title={entry.data.title} description={entry.data.description} body={entry.body} locale="en" />
+<LongformPage title={entry.data.title} description={entry.data.description} body={entry.body} locale="en" />
