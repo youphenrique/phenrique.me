@@ -7,44 +7,44 @@ resumeURL: "https://resume.phenrique.me/cv.pdf"
 
 highlights:
   - icon: "code"
-    title: "Arquitetura frontend"
-    description: "Design systems, arquitetura de componentes e interfaces acessíveis em React, Next.js e Vue. Construo tudo para que a próxima funcionalidade possa estender o que já existe, em vez de começar do zero."
+    title: "Especialidade em frontend"
+    description: "Design systems, arquitetura de componentes e interfaces acessíveis em React, Next e Vue."
   - icon: "lightbulb"
     title: "Descoberta de produto"
-    description: "Antes de escrever uma especificação, vou até quem faz o trabalho. Os requisitos de verdade costumam estar escondidos nas planilhas, e cabe a mim transformá-los em um modelo de domínio que o software consiga seguir."
+    description: "Mapeamento de fluxos de trabalho reais lado a lado com os usuários, transformando processos manuais e documentos desorganizados em software intuitivo."
   - icon: "layers"
     title: "Responsabilidade de ponta a ponta"
-    description: "Trabalho do banco de dados ao pipeline de deploy: Postgres, Spring Boot, a interface, CI/CD. Se uma funcionalidade exige mudanças em três lugares, eu faço as três."
+    description: "Do banco de dados ao pipeline pós-deploy: Postgres, Spring Boot, a interface, CI/CD, Observabilidade."
   - icon: "package"
     title: "Ferramentas e DX"
-    description: "Bibliotecas e design systems sobre os quais outros devs constroem. Mantenho as APIs pequenas e com tipagem estrita, e coloco as regras no build em vez de na revisão de código, para que os erros sejam pegos antes de alguém precisar apontá-los."
+    description: "Criação de bibliotecas e ferramentas para desenvolvedores com APIs ergonômicas e contratos claros."
   - icon: "users"
-    title: "Mentoria"
-    description: "Revisão de código e pair programming com devs júnior e pleno na T10. Antes disso, treinei estudantes para a Maratona de Programação na UECE, incluindo o ano em que a UECE ganhou o título estadual."
+    title: "Trabalho em equipe e liderança"
+    description: "Mais eficaz em times menores, frequentemente como o primeiro engenheiro. Promove ambientes colaborativos onde todos evoluem."
   - icon: "graduation"
     title: "Aprendizado contínuo"
-    description: "Aprendi sozinho as quatro stacks que já coloquei em produção, e concluí uma pós-graduação numa área que não tem nada a ver com software."
+    description: "Engenheiro autodidata com grande entusiasmo para aprender com os outros no maior número possível de áreas."
 
 stack:
   - label: "Produto e descoberta"
-    items: ["Descoberta de requisitos", "Entrevistas com stakeholders", "Modelagem de domínio", "Especificação de produto", "Negociação de escopo", "Analytics e telemetria"]
+    items: ["Descoberta de requisitos", "Entrevistas com stakeholders", "Modelagem de domínio", "Especificação de produto", "Negociação de escopo"]
   - label: "Linguagens"
-    items: ["TypeScript", "JavaScript", "Kotlin", "PHP"]
+    items: ["TypeScript", "JavaScript", "HTML", "CSS", "Kotlin", "Java", "C++"]
   - label: "Frontend"
     items:
-      ["React", "Next.js", "Vue.js", "Vite", "Panda CSS", "Chakra UI", "Material UI", "Storybook", "i18next", "React Aria"]
+      ["React", "Next", "Vue", "Nuxt", "Vite", "Panda CSS", "Chakra UI", "Material UI", "Storybook", "i18next", "React Aria"]
   - label: "Backend e dados"
     items:
       ["Node.js", "Spring Boot", "Laravel", "Hapi.js", "Express.js", "GraphQL", "REST", "Postgres", "MySQL", "MongoDB", "Redis", "BullMQ", "Strapi"]
   - label: "Cloud e DevOps"
     items:
-      ["Docker", "Docker Compose", "Git", "GitHub Actions", "Jenkins", "SonarQube", "AWS", "Oracle Cloud", "Coolify"]
+      ["Docker", "Docker Compose", "Git", "GitHub Actions", "Jenkins", "SonarQube", "AWS", "Oracle Cloud", "Coolify", "Vercel"]
   - label: "Qualidade"
     items: ["Vitest", "Playwright", "Cypress", "Jest", "JUnit", "React Testing Library", "Observabilidade", "Acessibilidade"]
   - label: "Arquitetura"
-    items: ["Domain-Driven Design", "Arquitetura Hexagonal", "Monólitos Modulares", "Design Systems"]
-  - label: "Ferramentas de IA"
-    items: ["Claude", "Antigravity", "GitHub Copilot"]
+    items: ["Domain-Driven Design", "Arquitetura Hexagonal", "Arquitetura em camadas", "Monólitos Modulares", "Design Systems"]
+  - label: "IA e Sistemas Agênticos"
+    items: ["Model Context Protocol (MCP)", "APIs de LLM & Tool Calling", "Fluxos Agênticos", "Evals & Engenharia de Prompt", "Agentes de IA"]
 
 education:
   - degree: "Pós-graduação em Sagradas Escrituras"
@@ -65,12 +65,12 @@ languages:
     level: "Iniciante"
 ---
 
-Sou um engenheiro de software orientado a produto, com :yoe anos de experiência. Pego fluxos operacionais bagunçados e os transformo em produtos web em que as pessoas podem confiar, desde as primeiras conversas sobre o que é preciso até a produção e tudo o que vem depois do lançamento.
+Sou um engenheiro de software orientado a produto, com :yoe anos de experiência. Transformo fluxos operacionais manuais e desorganizados em produtos web que as pessoas usam para tornar seu trabalho mais rápido, fácil e confiável.
 
-Meu lado mais forte é o frontend: design systems, arquitetura de componentes e as interfaces que as pessoas usam todos os dias. Também construo e opero o backend e a infraestrutura por trás delas, então consigo levar uma funcionalidade até o fim sem precisar passá-la adiante.
+Minha especialidade é o frontend: design systems, arquitetura de componentes e as interfaces que as pessoas usam todos os dias. Também construo e opero o backend e a infraestrutura por trás delas, para levar uma funcionalidade do conceito à produção e mantê-la ao longo dos anos.
 
 ::callout{type="insight" title="O que busco hoje"}
-Rendo mais em times pequenos e startups em estágio inicial, onde engenheiros têm bastante autonomia e conversam direto com os usuários. Os papéis que procuro:
+Rendo melhor em times pequenos e startups, onde engenheiros têm autonomia e ownership sobre o que constroem. Os papéis que procuro:
 
 - **Engenharia de Produto:** Founding Engineer, Senior Product Engineer ou AI Product Engineer, levando problemas de negócio pouco definidos da descoberta e modelagem de domínio até a produção.
 - **Engenharia de Frontend:** Vagas de frontend centradas em design systems, fluxos complexos, performance em tempo real e acessibilidade, com espaço para atuar em toda a stack quando o produto pedir.
