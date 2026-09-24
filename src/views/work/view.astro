@@ -35,9 +35,13 @@ function formatRange(start: Date, end: Date | null): string {
   return `${monthFormatter.format(start)} – ${end === null ? dict.present : monthFormatter.format(end)}`;
 }
 
-const experience = (await getCollection("workExperience")).sort(
-  (a, b) => b.data.dateStart.valueOf() - a.data.dateStart.valueOf(),
-);
+const currentLocale = Astro.currentLocale ?? "en";
+const experience = (
+  await getCollection(
+    "workExperience",
+    (entry) => entry.id.startsWith(`${currentLocale}/`) || !entry.id.includes("/"),
+  )
+).sort((a, b) => b.data.dateStart.valueOf() - a.data.dateStart.valueOf());
 
 const projects = (await getCollection("projects"))
   .filter((project) => !project.data.draft)
