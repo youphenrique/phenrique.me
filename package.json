@@ -26,7 +26,7 @@
     "@types/react-dom": "^19.2.5",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
-    "astro": "7.3.1",
+    "astro": "7.3.3",
     "comark": "^0.6.2",
     "geist": "^1.7.2",
     "react": "^19.2.8",
