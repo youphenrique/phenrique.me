@@ -78,6 +78,9 @@ const jsonLd = {
     <div
       class={css({
         position: "relative",
+        // Keeps the overlays' z-indexes local: the gradient's zIndex 2 would
+        // otherwise tie with the fixed header and, later in the DOM, paint over it.
+        isolation: "isolate",
         mt: 10,
         overflow: "hidden",
         borderRadius: "xl",
