@@ -5,23 +5,19 @@ metadata:
   description: "About Paulo Henrique: his work, his craft, and his faith."
 ---
 
-Hey, my name is Paulo Henrique[^name], and I'm a software engineer with a keen eye for design, from Fortaleza[^fortaleza], Brazil, working at the intersection of engineering and faith.
+My name is Paulo Henrique[^name], and I'm a software engineer from Fortaleza[^fortaleza], Brazil, working at the intersection of engineering and faith. I like to think, explore and ultimately write insights on software development, computer science, theology, philosophy, and other aspects of life that I think are important to talk about.
 
-## A brief (scholar) history
+## A brief history
 
 Although I initially intended to pursue a career in electrical engineering, "destiny"[^destiny] ultimately led me to study computer science. In the early years, I wasn't sure whether this was the career I wanted —[^ai] I really struggled with programming logic. But after being introduced to competitive programming, the uncertainty faded. In fact, I owe much of my programming knowledge — and consequently, my decision to follow that career — to my dedication to studying algorithmic code challenges.
 
 The result of that competitive programming passion went on to shape my university experience, earning me a scholarship, internship opportunities, and the chance to compete in programming contests. Between 2014 and 2016 I competed in the [Maratona de Programação Brasileira](https://maratona.sbc.org.br/), winning the regional championship in 2016[^maratona] and reaching the national finals that same year. Ultimately, all these experiences solidified my desire to pursue a professional career in software engineering.
 
-In late 2019, I earned my B\.Sc. in Computer Science from Universidade Estadual do Ceará. But since 2017 I had already taken my first steps as a professional developer, joining a company as an intern on the strength of those competition results. What started in competition arenas eventually became a career built around solving real problems — writing production code, working across the full stack, and paying close attention to the craft of quality software that users care about.
-
-Competitive programming taught me to solve a problem someone else had already stated precisely. Almost everything interesting since has been the opposite job: the problem arrives as a vague complaint from someone who cannot describe what they want, and the work is turning that into something exact enough to build.
+In late 2019, I earned my B\.Sc. in Computer Science from Universidade Estadual do Ceará. But since 2017 I had already taken my first steps as a professional developer, joining a company as an intern on the strength of those competition results. What started in competition environments eventually became a career built around solving real problems — writing production code, working across the full stack, and paying close attention to the craft of quality software that users care about.
 
 ## What I do
 
-Nowadays I work as a software product engineer[^productengineer] — full-stack by range[^fullstack], with my depth at the frontend. The label matters to me because the part of this job I am actually paid for is not the typing. It is working out what should exist, deciding what "good" means for this particular business and these particular people, and then building it well enough that they enjoy using it.
-
-That last part is not decoration. There's something deeply satisfying about crafting a beautiful, polished, thoughtful user interface and seamless experiences[^testimonial], whether on mobile, web, or desktop applications — and when everyone can build the thing that technically works, the thing people actually like using is what is left to compete on.
+Nowadays I work as a software product engineer[^productengineer] — full-stack by range[^fullstack], but with a particular expertise in frontend: design systems, UI libraries & frameworks, component architecture, and the interfaces people use every day. There's something deeply satisfying about crafting a beautiful, polished, thoughtful user interface along with seamless experiences[^testimonial].
 
 I think Paul Irish captures my natural inclination toward craft a great UI:
 
@@ -29,27 +25,25 @@ I think Paul Irish captures my natural inclination toward craft a great UI:
 Crafting a UI holds a lot of responsibility. For more niche topics, the UI may influence, or become (!), the mental model that people retain for these concepts and systems. At the same time, a UI can delight the user in a way that backend never can... ([one of my favorite examples](https://youtu.be/0Goz0PnhEg8?si=0pA3RZbSS2f6_MUf)).
 ::
 
-Right now I am building high-quality web apps with `Kotlin` and `TypeScript`. I am trying to specialize in cross-platform and web solutions using `Jetpack Compose`, `React Native`, and `React`, and I’m particularly excited about `Kotlin Multiplatform`. 
+Despite my expertise on the frontend, I also build and run the backend and infrastructure behind these interfaces, so I can take a feature from concept to production and maintain it over the years. In short, currently I build web applications, APIs, libraries and other tools. 
 
-Although my expertise lies on the frontend side, I bring a solid foundation in backend systems, which lets me work effectively across the entire stack: automation, CI/CD, designing robust, scalable systems, etc. In short, I build web applications, APIs, libraries and other tools — with or without AI. I lean on agents heavily for the parts that used to eat the week, precisely so that more of the week goes to discovery and judgment; the [AI](/ai) page goes into how.
-
-Right now that looks like an ERP I am building for Nordeste Painéis, a factory that assembles and sells electrical panels. Before it, the operation ran on spreadsheets, WhatsApp threads and the people who remembered how it all fit together. There was no product manager and no written specification, so the first job was to walk the shop floor and work out what the system actually had to do — which orders look like, where a panel sits in its assembly, what a salesperson needs at the moment they are quoting. Then I designed it, built it, and put it into production myself. The interesting part of that project was never the framework choice. It was arriving at a definition of "good" that fits this factory and would fit almost no other.
-
-::callout{type="insight" title="Where I think this is going"}
-The cost of producing code has collapsed, and the cost of reviewing, fixing and operating it is following. What does not collapse is the part that only ever existed in one person's head: what this business actually needs, and what "good" means for them and nobody else. That work is per-customer and does not transfer, which is exactly why it stays valuable.[^productengineer] So I aim my breadth at it — technologies and disciplines outside my core[^tshaped-1]<sup>,&nbsp;</sup>[^tshaped-2] — because in the era of agentic engineering, the engineer who can sit with the people who need the software and come back with a correct definition of good is the one still doing durable work.
+::callout{type="insight" title="The advent of AI"}
+The cost of producing code has collapsed, and the cost of reviewing, fixing and operating it is following. What does not collapse is the part that only ever existed in one person's head: what this business actually needs, and what "good" means for them and nobody else. So I aim my breadth at it — technologies and disciplines outside my core[^tshaped-1]<sup>,&nbsp;</sup>[^tshaped-2] — because in the era of agentic engineering, the engineer who can sit with the people who need the software and come back with a correct definition of good is the one still doing durable work.
 ::
 
-## We are all believers
+## My faith
 
 I'm a (Protestant) Christian, and that's not a detail I tuck away from the rest of my life. My faith in Jesus shapes how I think about everything. As Mortimer Adler observed, our conclusion about God bears on every other area of life — it is the key to finding ultimate meaning, and the most important question any human being has to address.[^geisler]
 
-To give you an idea, I hold a postgraduate degree in Sacred Scripture from FCTP. This reflects how seriously I take the life of the rational mind alongside the life of faith. My intention is not to become a theologian in the academic sense. However, I believe understanding the Bible well helps me understand myself, my work, other people's life, the world we all live in, and how they are related within the Kingdom of God.
+I hold a postgraduate degree in Sacred Scripture from FCTP. I take seriously the life of the rational mind alongside the life of faith. I believe these are two approaches to observing and interacting with reality that do not contradict each other; on the contrary, they complement one another.
+
+My appreciation for theological and philosophical knowledge is not intended to make me an intellectual or a researcher in the academic sense (maybe in the future?). Nevertheless, I believe that reflecting on life through the lens of the Bible helps me understand myself, my work & actions, other people's life & my relationships with them, the world we all live in, and how all of this are related within the God’s plan for existence.
 
 ::callout{type="note" title="A longer answer"}
-I set out my beliefs, and how they shape my identity, in ["What I believe and why I believe in what I believe"](/writing/what-i-believe-and-why-i-believe-in-what-i-believe).
+If you are interested in a longer answer about my faith, I set out my beliefs and how they shape my identity in ["What I believe and why I believe in what I believe"](/writing/what-i-believe-and-why-i-believe-in-what-i-believe).
 ::
 
-## Away from computers
+## Away from coding
 
 When I'm not coding, you'll find me writing something (mainly in this website), spending time with family and friends, serving at my church community as a Bible teacher and musical leader, working out at the gym, reading a book, playing chess, or playing guitar or keyboard with my gig partners somewhere.
 
