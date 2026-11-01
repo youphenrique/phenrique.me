@@ -67,10 +67,8 @@ languages:
 
 I'm a product-minded software engineer with :yoe years of experience. I take messy, manual operational workflows and turn them into web products people can use to make their work faster, easier, and more reliable.
 
-My expertise is the frontend: design systems, component architecture, and the interfaces people use every day. I also build and run the backend and infrastructure behind them, so I can take a feature from concept to production and maintain it over the years.
-
 ::callout{type="insight" title="What I'm open to"}
-I do my best work on small teams and startups, where engineers have autonomy and ownership over what they build. The roles I'm looking for:
+I do my best work on small teams and highly collaborative teams that have autonomy and ownership over what they build. The roles I'm looking for:
 
 - **Product Engineering:** Founding Engineer, Senior Product Engineer or AI Product Engineer, taking unclear business problems from discovery and domain modelling to production.
 - **Frontend Engineering:** Frontend roles centred on design systems, complex workflows, real-time performance and accessibility, with room to work across the stack when the product needs it.
