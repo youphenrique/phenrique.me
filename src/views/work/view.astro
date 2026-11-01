@@ -84,9 +84,15 @@ const sectionGap = css.raw({ mt: { base: 14, md: 16 } });
       The summary stands in for an "About" heading rather than sitting under
       one — on a page called Work, a paragraph in the first position is already
       understood to be the introduction.
+
+      Text keeps to the measure, but a callout has a hard edge that sits right
+      above the card grid, so it takes the full column to line up with the cards.
     */
     }
-    <Markdown body={page.body} class={"prose " + css({ mt: 6, maxW: "var(--prose-measure)" })} />
+    <Markdown
+      body={page.body}
+      class={"prose " + css({ mt: 6, "& > :not([data-prose-block])": { maxW: "var(--prose-measure)" } })}
+    />
 
     <div class={css({ mt: 8 })}>
       <ButtonLink href={page.data.resumeURL} variant="primary" icon="arrow" external>
