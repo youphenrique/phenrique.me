@@ -25,12 +25,8 @@ Crafting a UI holds a lot of responsibility. For more niche topics, the UI may i
 
 Despite my expertise on the frontend, I also build and run the backend and infrastructure behind these interfaces people use. So I can take a feature from concept to production and, mainly, maintain it with quality[^softwarequality] over the years — for me, this is the true test of seniority. In short, currently I build web applications, APIs, libraries and other software tools. 
 
-::callout{type="insight" title="Excerpt: the advent of AI"}
-Personally, I am excited to use AI to boost my productivity and expand even more the horizons of knowledge I need for the challenges of my work. At first, the feeling was strange — a mix of wonder at the power of AI and a professional identity crisis: I no longer write most of the code. But as time has passed, that identity crisis has begun to fade, giving way to a new perspective on how we build software in the era of agents.
-
-It is a challenge, though, because it requires adapting to a new work scenario. For example, this AI landscape encourages developers to become more generalists rather than specialists because AI has proven far more capable of handling specialized knowledge at scale. Yet, I believe there is a segment of the field where in-depth technical human knowledge is essential, especially for effectively utilizing AI models, interpreting and validating their outputs, and exploring their capabilities more efficiently. This will be a key differentiator for those who wish to stand out and remain relevant.
-
-That's why I am trying to enlarge my understanding of technologies and disciplines outside my core knowledge while simultaneously strengthening and enriching it[^tshaped-1]<sup>,&nbsp;</sup>[^tshaped-2]. 
+::callout{type="note" title="On building with AI"}
+I reflect on how AI is changing my relationship with software engineering in ["Building software in the era of AI"](/writing/building-software-in-the-era-of-ai).
 ::
 
 ## Faith: how I see the world
@@ -69,6 +65,4 @@ Please skip bulk outreach, link exchanges, guest post offers, and SEO services. 
 [^fullstack]: With all the affection, and all the suspicion, that the "full stack" meme on Twitter has earned.
 [^testimonial]: Maybe this website can be a compelling testimonial of how much I care about good design and quality software.
 [^softwarequality]: Of all the definitions of "quality software," [Alasdair Monk's definition](https://x.com/almonk/status/2079461952577802549) is the best I've seen so far.
-[^tshaped-1]: Paulo Silveira, ["Vibecoding, hipsters e o novo dev"](https://paulo.com.br/blog/vibecoding-hipsters-novo-dev/).
-[^tshaped-2]: Spotify Engineering, ["Why you should pair with non-engineers"](https://engineering.atspotify.com/2021/03/why-you-should-pair-with-non-engineers).
 [^geisler]: See Norman L. Geisler and Frank Turek, *I Don't Have Enough Faith to Be an Atheist*, p. 33.

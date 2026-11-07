@@ -1,0 +1,24 @@
+---
+import { css } from "../../../../styled-system/css";
+
+interface Props {
+  label: string;
+}
+---
+
+<span
+  class={css({
+    display: "inline-block",
+    verticalAlign: "baseline",
+    px: 2,
+    borderRadius: "full",
+    border: "1px solid",
+    borderColor: "border.subtle",
+    backgroundColor: "bg.raised",
+    color: "text.secondary",
+    fontSize: "xs",
+    fontWeight: "medium",
+    lineHeight: "1.5",
+    whiteSpace: "nowrap",
+  })}
+>{Astro.props.label}</span>

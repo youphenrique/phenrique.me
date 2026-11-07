@@ -57,6 +57,7 @@ const posts = listedPosts(await getCollection("writing"), (Astro.currentLocale ?
               <PostCard
                 href={post.data.locale === "pt" ? `/pt/writing/${post.data.slug}` : `/writing/${post.data.slug}`}
                 title={post.data.title}
+                draftLabel={post.data.draft ? Astro.props.dict["draft-label"] : undefined}
                 date={dateFormatter.format(post.data.date)}
                 dateTime={post.data.date.toISOString()}
                 description={post.data.description}

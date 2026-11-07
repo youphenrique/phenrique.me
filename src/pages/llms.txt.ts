@@ -92,10 +92,10 @@ async function pagesFor(locale: Locale): Promise<Link[]> {
 function articlesFor(posts: Awaited<ReturnType<typeof getCollection<"writing">>>, locale: Locale): Link[] {
   const prefix = locale === "en" ? "" : `/${locale}`;
 
-  // Drafts are excluded: `listedPosts` is what the writing index shows, and an
+  // `listedPosts` is what the writing index shows, and an
   // agent should see the site the way a reader does.
   return listedPosts(posts, locale).map((post) => ({
-    title: post.data.title,
+    title: post.data.draft ? `${post.data.title} (${locale === "pt" ? "Rascunho" : "Draft"})` : post.data.title,
     path: `${prefix}/writing/${post.data.slug}`,
     description: post.data.description,
   }));

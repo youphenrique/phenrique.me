@@ -27,6 +27,8 @@ export interface MarkdownPage {
   locale: Locale;
   /** Publication date, for the collections that have one. */
   date?: Date;
+  /** Whether this article is still in progress. */
+  draft?: boolean;
   /** Every locale's address for the page, as used for `hreflang`. */
   alternates?: Alternates;
 }
@@ -51,6 +53,8 @@ function frontmatter(page: MarkdownPage): string {
   if (page.date !== undefined) {
     lines.push(`date: ${page.date.toISOString().slice(0, 10)}`);
   }
+
+  if (page.draft === true) lines.push("draft: true");
 
   // Only genuine translations are listed. A single entry is the page itself,
   // which tells a reader nothing it does not already have.

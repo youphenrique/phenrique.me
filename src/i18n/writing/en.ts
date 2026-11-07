@@ -4,6 +4,7 @@ const en: WritingDictionary = {
   "page-title": "Writing",
   "page-description": "A collection of articles on topics I am passionate about.",
   "back-to-index": "Back to blog",
+  "draft-label": "Draft",
   "reading-time": "min read",
   "empty-state": {
     title: "Nothing here yet",

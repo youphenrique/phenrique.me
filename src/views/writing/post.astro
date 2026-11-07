@@ -11,6 +11,7 @@ import { readingTimeMinutes } from "../../utils/helpers.ts";
 import { postAlternates } from "../../utils/content.ts";
 import { SITE } from "../../consts.ts";
 import { css } from "../../../styled-system/css";
+import DraftBadge from "./_components/draft-badge.astro";
 import type { WritingDictionary } from "../../i18n/writing/types.ts";
 
 interface Props {
@@ -54,12 +55,14 @@ const jsonLd = {
   publishedTime={post.data.date}
   jsonLd={jsonLd}
 >
-  {/*
+  {
+    /*
     Wider than the site default so the article's `wide` grid track — figures,
     tables, code — has somewhere to go. The prose column inside stays at
     `--prose-measure`, and the header below is pinned to the same measure with
     `prose-column` so the title lines up with the text it introduces.
-  */}
+  */
+  }
   <Container styles={css.raw({ py: { base: 24, sm: 32 }, maxWidth: { base: "full", sm: "3xl", lg: "5xl" } })}>
     <div class={`animate ${css({ maxWidth: "var(--prose-measure)", marginInline: "auto" })}`}>
       <BackToPrev href={indexHref} label={dict["back-to-index"]} />
@@ -69,17 +72,26 @@ const jsonLd = {
         <div class={css({ fontSize: "sm" })}>
           <FormattedDate date={post.data.date} />
         </div>
+        {
+          post.data.draft && (
+            <>
+              &bull; <DraftBadge label={dict["draft-label"]} />
+            </>
+          )
+        }
         &bull;
         <div class={css({ fontSize: "sm" })}>
           {readingTimeMinutes(post.body ?? "")}&nbsp;{dict["reading-time"]}
         </div>
       </div>
-      {/*
+      {
+        /*
         `4xl`, matching the about and home titles: the `.prose` scale tops out at
         1.75rem for a body `#`, and a title the article can outrank is not a
         title. At `3xl` it led its own `##` sections by six pixels, which is not
         a hierarchy.
-      */}
+      */
+      }
       <h1
         class={`animate fraunces-font ${css({
           fontSize: "4xl",

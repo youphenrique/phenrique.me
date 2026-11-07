@@ -1,16 +1,6 @@
 import { LOCALES, localizedPath, type Alternates } from "./i18n-routes.ts";
 import type { CollectionEntry } from "astro:content";
 
-/**
- * Whether a draft entry should be rendered.
- *
- * Drafts are excluded from production builds, which keeps them out of the
- * index, the sitemap and the feed. They still need to be reachable while being
- * written, though; a draft nobody can open is a draft nobody checks. So
- * `npm run dev` builds them and `npm run build` does not.
- */
-export const showDrafts = import.meta.env.DEV;
-
 function postsForLocale(
   posts: CollectionEntry<"writing">[],
   locale: "en" | "pt",
@@ -20,20 +10,20 @@ function postsForLocale(
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
-/** Posts that belong on the public writing index. Drafts are never listed. */
+/** All posts are public; draft status is displayed to readers. */
 export function listedPosts(
   posts: CollectionEntry<"writing">[],
   locale: "en" | "pt",
 ): CollectionEntry<"writing">[] {
-  return postsForLocale(posts, locale).filter((post) => post.data.draft !== true);
+  return postsForLocale(posts, locale);
 }
 
-/** Posts with generated pages. Draft URLs remain directly previewable in dev. */
+/** Every post in the index has a generated page. */
 export function routablePosts(
   posts: CollectionEntry<"writing">[],
   locale: "en" | "pt",
 ): CollectionEntry<"writing">[] {
-  return postsForLocale(posts, locale).filter((post) => showDrafts || post.data.draft !== true);
+  return postsForLocale(posts, locale);
 }
 
 /**
@@ -45,9 +35,7 @@ export function routablePosts(
  * so the pair cannot be derived from the URL and is declared in frontmatter
  * instead, via a `translationKey` both files share.
  *
- * Only posts that actually have a page are included: a translation that is
- * still a draft is not a page a crawler or a reader can reach, and pointing
- * `hreflang` at a URL that 404s is worse than omitting it.
+ * Only translations that have a corresponding entry are included.
  */
 export function postAlternates(
   posts: CollectionEntry<"writing">[],

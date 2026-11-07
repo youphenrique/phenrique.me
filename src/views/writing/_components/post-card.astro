@@ -1,15 +1,17 @@
 ---
 import { css } from "../../../../styled-system/css";
+import DraftBadge from "./draft-badge.astro";
 
 interface Props {
   href: string;
   title: string;
+  draftLabel?: string;
   date: string;
   dateTime: string;
   description: string;
 }
 
-const { href, title, date, dateTime, description } = Astro.props;
+const { href, title, date, dateTime, description, draftLabel } = Astro.props;
 
 const transition = {
   transitionDuration: "250ms",
@@ -110,6 +112,7 @@ const transition = {
         color: "text.muted",
       })}
     >
+      {draftLabel && <><DraftBadge label={draftLabel} />{" "}</>}
       <time datetime={dateTime}>{date}</time>
       <span aria-hidden="true">&nbsp;·&nbsp;</span>
       {description}

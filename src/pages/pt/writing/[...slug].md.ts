@@ -32,6 +32,7 @@ export const GET: APIRoute = ({ props }) => {
       path: `/pt/writing/${post.data.slug}`,
       locale: "pt",
       date: post.data.date,
+      draft: post.data.draft,
       alternates,
     },
     post.body ?? "",
