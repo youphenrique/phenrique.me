@@ -3382,8 +3382,8 @@ packages:
     peerDependencies:
       postcss: ^8.5.23
 
-  postcss-selector-parser@7.1.5:
-    resolution: {integrity: sha512-KvvtD7SrlBP7dlgkBghEE3r84CABm5SmV2aNcG4oCA+qDnJ/tvKonFVvwWAyyWUEwxuNawdfEAZKP9zM3oZ2Uw==}
+  postcss-selector-parser@7.1.6:
+    resolution: {integrity: sha512-7qASPzhKF2l2KLboRZux8CCTRMdGiV08vWmyKzPz22qZ7ZjQBOeY7rNzNoCLSUiftJ7HUq0GERHmxw/t0dCdMw==}
     engines: {node: '>=4'}
 
   postcss-value-parser@4.2.0:
@@ -4627,13 +4627,13 @@ snapshots:
 
   '@csstools/postcss-cascade-layers@5.0.2(postcss@8.5.26)':
     dependencies:
-      '@csstools/selector-specificity': 5.0.0(postcss-selector-parser@7.1.5)
+      '@csstools/selector-specificity': 5.0.0(postcss-selector-parser@7.1.6)
       postcss: 8.5.26
-      postcss-selector-parser: 7.1.5
+      postcss-selector-parser: 7.1.6
 
-  '@csstools/selector-specificity@5.0.0(postcss-selector-parser@7.1.5)':
+  '@csstools/selector-specificity@5.0.0(postcss-selector-parser@7.1.6)':
     dependencies:
-      postcss-selector-parser: 7.1.5
+      postcss-selector-parser: 7.1.6
 
   '@emmetio/abbreviation@2.3.3':
     dependencies:
@@ -5144,7 +5144,7 @@ snapshots:
       postcss-minify-selectors: 7.0.5(postcss@8.5.26)
       postcss-nested: 7.0.2(postcss@8.5.26)
       postcss-normalize-whitespace: 7.0.1(postcss@8.5.26)
-      postcss-selector-parser: 7.1.5
+      postcss-selector-parser: 7.1.6
       ts-pattern: 5.9.0
 
   '@pandacss/dev@1.12.0(typescript@5.9.3)':
@@ -6568,7 +6568,7 @@ snapshots:
       eslint-compat-utils: 0.6.5(eslint@9.39.5(supports-color@7.2.0))
       globals: 16.5.0
       postcss: 8.5.26
-      postcss-selector-parser: 7.1.5
+      postcss-selector-parser: 7.1.6
     transitivePeerDependencies:
       - supports-color
 
@@ -7568,19 +7568,19 @@ snapshots:
     dependencies:
       cssesc: 3.0.0
       postcss: 8.5.26
-      postcss-selector-parser: 7.1.5
+      postcss-selector-parser: 7.1.6
 
   postcss-nested@7.0.2(postcss@8.5.26):
     dependencies:
       postcss: 8.5.26
-      postcss-selector-parser: 7.1.5
+      postcss-selector-parser: 7.1.6
 
   postcss-normalize-whitespace@7.0.1(postcss@8.5.26):
     dependencies:
       postcss: 8.5.26
       postcss-value-parser: 4.2.0
 
-  postcss-selector-parser@7.1.5:
+  postcss-selector-parser@7.1.6:
     dependencies:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
