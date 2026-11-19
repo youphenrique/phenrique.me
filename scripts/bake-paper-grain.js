@@ -12,7 +12,7 @@
  * about two thirds of the tile — and what ships is white with darker flecks. That
  * leaves the painted canvas a hair under the token rather than exactly on it: less
  * than one level at GAIN 1.0, which drifts each contrast ratio by at most 0.06 and
- * crosses no threshold (`text.accent`, the tightest, holds at 4.69:1). Raising GAIN
+ * crosses no threshold (`text.muted`, the tightest, holds above 5:1). Raising GAIN
  * deepens the flecks, so re-check that margin if you push it much past 1.5.
  *
  * GAIN scales that deviation, and is the knob for how rough the paper reads.

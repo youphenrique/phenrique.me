@@ -33,55 +33,60 @@ export default defineConfig({
       tokens: {
         colors: {
           /**
-           * Warm neutrals, light half. Light-mode surfaces read down from
-           * `sand.50`; dark-mode text reads up from `sand.500`.
-           * `sand` and `ink` are one continuous ramp split at the midpoint,
-           * because each theme draws from one half only.
+           * Neutrals, light half. Light-mode surfaces read down from
+           * `paper.50`; dark-mode text reads up from `paper.500`.
+           * `paper` and `graphite` are one continuous ramp split at the
+           * midpoint, because each theme draws from one half only.
+           *
+           * Near-neutral on purpose (OKLCH chroma ≤ 0.004, a whisper of warmth).
+           * The previous cream ramp (#F0EEE6, #FAF6F2) was claude.ai's own canvas;
+           * warmth now comes from the accent, not from every surface.
            */
-          sand: {
+          paper: {
             0: { value: "#FFFFFF" }, // code panel (light) — top of the surface ramp
-            50: { value: "#FAF6F2" }, // app canvas (light)
-            100: { value: "#F5F1E8" },
-            200: { value: "#F0EEE6" }, // raised surface (light)
-            300: { value: "#E7E3D9" }, // hover / sunken (light), primary text (dark)
-            400: { value: "#D9D3C6" }, // default border (light)
-            500: { value: "#C4BDAE" }, // strong border (light), secondary text (dark)
+            50: { value: "#FAFAF9" }, // app canvas (light)
+            100: { value: "#F7F7F5" }, // sunken (light)
+            200: { value: "#F4F4F2" }, // raised surface (light)
+            300: { value: "#ECECEA" }, // hover (light), primary text (dark)
+            400: { value: "#E0E0DC" }, // default border (light)
+            500: { value: "#C2C2BD" }, // strong border (light), secondary text (dark)
           },
 
           /**
-           * Warm neutrals, dark half. Dark-mode surfaces read up from
-           * `ink.950`; light-mode text reads down from `ink.400`.
+           * Neutrals, dark half. Dark-mode surfaces read up from
+           * `graphite.950`; light-mode text reads down from `graphite.400`.
            */
-          ink: {
-            300: { value: "#A8A199" }, // muted text (dark)
-            400: { value: "#8A837A" }, // decorative / disabled only — 3.5:1 on sand.50
-            500: { value: "#6E675E" }, // muted text (light)
-            600: { value: "#55504A" }, // secondary text (light)
-            700: { value: "#3D3A36" }, // strong border (dark)
-            800: { value: "#2C2A28" }, // default border (dark), hover (dark)
-            850: { value: "#232120" }, // primary text (light), raised-hover (dark)
-            900: { value: "#1A1918" }, // raised surface (dark)
-            950: { value: "#0D0B0A" }, // app canvas (dark)
+          graphite: {
+            300: { value: "#A1A19C" }, // muted text (dark)
+            400: { value: "#878782" }, // decorative / disabled only — 3.5:1 on paper.50
+            500: { value: "#6B6B66" }, // muted text (light)
+            600: { value: "#52524E" }, // secondary text (light)
+            700: { value: "#3A3A37" }, // strong border (dark)
+            800: { value: "#262625" }, // default border (dark), hover (dark)
+            850: { value: "#1C1C1B" }, // primary text (light), raised-hover (dark)
+            900: { value: "#151514" }, // raised surface (dark)
+            950: { value: "#0B0B0A" }, // app canvas (dark)
           },
 
           /**
-           * Brand accent. `coral.500` is the fixed brand value; the ramp exists
-           * so interactive states and — critically — small text have somewhere
-           * accessible to go. `coral.500` is only 2.9:1 on `sand.50`, so it must
-           * never carry small text in light mode. Use `coral.600` (4.7:1) there.
+           * Brand accent. `vermilion.500` is the fixed brand value — a saturated
+           * signal orange, deliberately far from the dusty clay it replaced. It is
+           * only 3.0:1 on `paper.50`, so it never carries small text in light
+           * mode: `vermilion.600` (oxide, 5.9:1) does. The jump between the two
+           * is intentional — one is a fill, the other is ink.
            */
-          coral: {
-            50: { value: "#FCF1EC" },
-            100: { value: "#F7DED2" },
-            200: { value: "#EFC2AE" },
-            300: { value: "#E5A184" },
-            400: { value: "#DF8968" },
-            500: { value: "#D97757" }, // brand
-            600: { value: "#B05334" }, // accessible on light surfaces
-            700: { value: "#8C4128" },
-            800: { value: "#63301F" },
-            900: { value: "#3A1D13" },
-            950: { value: "#241210" },
+          vermilion: {
+            50: { value: "#FFF1EA" },
+            100: { value: "#FFDCC9" },
+            200: { value: "#FFBE9C" },
+            300: { value: "#FF9A66" },
+            400: { value: "#FF7A33" },
+            500: { value: "#FF5B04" }, // brand
+            600: { value: "#A93F17" }, // accessible on light surfaces
+            700: { value: "#84310F" },
+            800: { value: "#5C220B" },
+            900: { value: "#3A1607" },
+            950: { value: "#220D04" },
           },
 
           /**
@@ -155,9 +160,9 @@ export default defineConfig({
             blueBright: { value: "#8DB2F2" },
             amber: { value: "#855700" },
             amberBright: { value: "#E3C173" },
-            // Comment neutral for the light theme. `ink.500` is 4.8:1 on `bg.raised`,
-            // under the 5:1 floor; `ink.600` is too close to punctuation to tell apart.
-            stone: { value: "#68615A" },
+            // Comment neutral for the light theme: 6.0:1 on `bg.code`, a step lighter
+            // than `graphite.600` so it stays distinct from punctuation.
+            stone: { value: "#63635E" },
           },
 
           /** Official gov.br digital brand colours (Manual da Marca v3). */
@@ -176,26 +181,26 @@ export default defineConfig({
         colors: {
           /** Surfaces. `canvas` is the page; everything else stacks on it. */
           bg: {
-            canvas: { value: { base: "{colors.sand.50}", _dark: "{colors.ink.950}" } },
-            raised: { value: { base: "{colors.sand.200}", _dark: "{colors.ink.900}" } },
-            raisedHover: { value: { base: "{colors.sand.300}", _dark: "{colors.ink.850}" } },
+            canvas: { value: { base: "{colors.paper.50}", _dark: "{colors.graphite.950}" } },
+            raised: { value: { base: "{colors.paper.200}", _dark: "{colors.graphite.900}" } },
+            raisedHover: { value: { base: "{colors.paper.300}", _dark: "{colors.graphite.850}" } },
             // Code panel only (see `code-block.tsx`). Deliberately NOT `raised`:
             // a fenced block reads as a quoted artefact, and the references this
-            // follows paint it crisp white rather than the warm surface cards,
+            // follows paint it crisp white rather than the grey surface cards,
             // sheets and the TOC rail share. Light mode inverts the usual stack
-            // — the panel is *brighter* than the cream canvas, and that is what
-            // separates it. Dark mode keeps `ink.900`: a lifted panel already
+            // — the panel is *brighter* than the off-white canvas, and that is what
+            // separates it. Dark mode keeps `graphite.900`: a lifted panel already
             // reads there, and going lighter would eat into the 5:1 floor the
             // syntax palette is held to.
-            code: { value: { base: "{colors.sand.0}", _dark: "{colors.ink.900}" } },
-            sunken: { value: { base: "{colors.sand.100}", _dark: "{colors.ink.900}" } },
+            code: { value: { base: "{colors.paper.0}", _dark: "{colors.graphite.900}" } },
+            sunken: { value: { base: "{colors.paper.100}", _dark: "{colors.graphite.900}" } },
             // Translucent wash for hover on an unknown surface. Deliberately not a
             // ramp step: it has to tint whatever it lands on.
             hover: { value: { base: "rgba(10, 10, 10, 0.05)", _dark: "rgba(255, 255, 255, 0.06)" } },
             // Track behind a progress fill.
-            track: { value: { base: "{colors.sand.400}", _dark: "{colors.ink.800}" } },
+            track: { value: { base: "{colors.paper.400}", _dark: "{colors.graphite.800}" } },
             // Blurred header pill. Alpha is required for the backdrop-filter.
-            overlay: { value: { base: "rgba(250, 246, 242, 0.5)", _dark: "rgba(13, 11, 10, 0.55)" } },
+            overlay: { value: { base: "rgba(250, 250, 249, 0.5)", _dark: "rgba(11, 11, 10, 0.55)" } },
             // Modal backdrop behind a sheet.
             scrim: { value: { base: "rgba(10, 10, 10, 0.32)", _dark: "rgba(0, 0, 0, 0.5)" } },
             // Radial bloom behind the home hero; invisible by design in light mode.
@@ -203,33 +208,34 @@ export default defineConfig({
             // Solid fill for a primary control: the canvas turned inside out, so
             // the pill reads as the darkest thing on a light page and the
             // lightest on a dark one. Pairs with `text.onInverted` and nothing
-            // else — 17.0:1 light, 15.3:1 dark.
-            inverted: { value: { base: "{colors.ink.850}", _dark: "{colors.sand.300}" } },
-            invertedHover: { value: { base: "{colors.ink.950}", _dark: "{colors.sand.500}" } },
+            // else — 16.3:1 light, 16.6:1 dark.
+            inverted: { value: { base: "{colors.graphite.850}", _dark: "{colors.paper.300}" } },
+            invertedHover: { value: { base: "{colors.graphite.950}", _dark: "{colors.paper.500}" } },
           },
 
           /** Foreground. Every role here clears 4.5:1 on `bg.canvas`. */
           text: {
-            primary: { value: { base: "{colors.ink.850}", _dark: "{colors.sand.300}" } }, // 15.5:1 / 15.3:1
-            secondary: { value: { base: "{colors.ink.600}", _dark: "{colors.sand.500}" } }, // 7.4:1 / 10.4:1
-            muted: { value: { base: "{colors.ink.500}", _dark: "{colors.ink.300}" } }, // 5.3:1 / 7.7:1
-            faint: { value: { base: "{colors.ink.400}", _dark: "{colors.ink.400}" } }, // decorative only
-            accent: { value: { base: "{colors.coral.600}", _dark: "{colors.coral.500}" } }, // 4.7:1 / 6.3:1
-            onAccent: { value: { base: "{colors.sand.50}", _dark: "{colors.sand.50}" } },
+            primary: { value: { base: "{colors.graphite.850}", _dark: "{colors.paper.300}" } }, // 16.3:1 / 16.6:1
+            secondary: { value: { base: "{colors.graphite.600}", _dark: "{colors.paper.500}" } }, // 7.5:1 / 11.0:1
+            muted: { value: { base: "{colors.graphite.500}", _dark: "{colors.graphite.300}" } }, // 5.1:1 / 7.6:1
+            faint: { value: { base: "{colors.graphite.400}", _dark: "{colors.graphite.400}" } }, // decorative only
+            accent: { value: { base: "{colors.vermilion.600}", _dark: "{colors.vermilion.500}" } }, // 5.9:1 / 6.3:1
+            // vermilion.500 is too bright for light text (3.0:1); dark ink sits on it at 6.3:1.
+            onAccent: { value: { base: "{colors.graphite.950}", _dark: "{colors.graphite.950}" } },
             // The only foreground allowed on `bg.inverted`.
-            onInverted: { value: { base: "{colors.sand.50}", _dark: "{colors.ink.950}" } },
+            onInverted: { value: { base: "{colors.paper.50}", _dark: "{colors.graphite.950}" } },
           },
 
           /** Strokes. `subtle` and `underline` are translucent so they work on
            *  any surface; `default` and `strong` are solid ramp steps. */
           border: {
             subtle: { value: { base: "rgba(10, 10, 10, 0.12)", _dark: "rgba(255, 255, 255, 0.12)" } },
-            default: { value: { base: "{colors.sand.400}", _dark: "{colors.ink.800}" } },
-            strong: { value: { base: "{colors.sand.500}", _dark: "{colors.ink.700}" } },
-            accent: { value: { base: "{colors.coral.500}", _dark: "{colors.coral.500}" } },
-            // Keyboard focus ring. Deliberately not `accent`: coral.500 is 2.9:1 on
-            // the light canvas, and a focus indicator needs 3:1.
-            focus: { value: { base: "{colors.coral.600}", _dark: "{colors.coral.500}" } }, // 4.7:1 / 6.3:1
+            default: { value: { base: "{colors.paper.400}", _dark: "{colors.graphite.800}" } },
+            strong: { value: { base: "{colors.paper.500}", _dark: "{colors.graphite.700}" } },
+            accent: { value: { base: "{colors.vermilion.500}", _dark: "{colors.vermilion.500}" } },
+            // Keyboard focus ring. Deliberately not `accent`: vermilion.500 is 3.0:1 on
+            // the light canvas — too close to the 3:1 a focus indicator needs.
+            focus: { value: { base: "{colors.vermilion.600}", _dark: "{colors.vermilion.500}" } }, // 5.9:1 / 6.3:1
             underline: { value: { base: "rgba(10, 10, 10, 0.15)", _dark: "rgba(255, 255, 255, 0.3)" } },
             underlineHover: { value: { base: "rgba(10, 10, 10, 0.3)", _dark: "rgba(255, 255, 255, 0.55)" } },
             // Hairline between rows of a grouped list.
@@ -239,10 +245,10 @@ export default defineConfig({
           /** Brand accent as an interactive role. `default` is for fills,
            *  indicators and rings; text must go through `text.accent`. */
           accent: {
-            default: { value: { base: "{colors.coral.500}", _dark: "{colors.coral.500}" } },
-            hover: { value: { base: "{colors.coral.600}", _dark: "{colors.coral.400}" } },
-            subtle: { value: { base: "{colors.coral.50}", _dark: "{colors.coral.950}" } },
-            emphasis: { value: { base: "{colors.coral.700}", _dark: "{colors.coral.300}" } },
+            default: { value: { base: "{colors.vermilion.500}", _dark: "{colors.vermilion.500}" } },
+            hover: { value: { base: "{colors.vermilion.600}", _dark: "{colors.vermilion.400}" } },
+            subtle: { value: { base: "{colors.vermilion.50}", _dark: "{colors.vermilion.950}" } },
+            emphasis: { value: { base: "{colors.vermilion.700}", _dark: "{colors.vermilion.300}" } },
           },
 
           /** Status. Reserved for machine-reported state, never decoration. */
@@ -258,9 +264,9 @@ export default defineConfig({
            *  well as hue: identifiers are near-black, colour sits at ~5–6:1, and
            *  comments recede without dropping under 4.5:1. */
           syntax: {
-            text: { value: { base: "{colors.ink.850}", _dark: "{colors.sand.300}" } }, // 13.8:1 / 13.7:1
-            punctuation: { value: { base: "{colors.ink.700}", _dark: "{colors.sand.500}" } },
-            comment: { value: { base: "{colors.code.stone}", _dark: "{colors.ink.300}" } }, // 5.3:1 / 6.9:1
+            text: { value: { base: "{colors.graphite.850}", _dark: "{colors.paper.300}" } }, // 17.1:1 / 15.4:1 on bg.code
+            punctuation: { value: { base: "{colors.graphite.700}", _dark: "{colors.paper.500}" } },
+            comment: { value: { base: "{colors.code.stone}", _dark: "{colors.graphite.300}" } }, // 6.0:1 / 7.0:1 on bg.code
             keyword: { value: { base: "{colors.code.plum}", _dark: "{colors.code.plumBright}" } },
             string: { value: { base: "{colors.code.green}", _dark: "{colors.code.greenBright}" } },
             constant: { value: { base: "{colors.code.vermilion}", _dark: "{colors.code.vermilionBright}" } },
@@ -268,7 +274,7 @@ export default defineConfig({
             parameter: { value: { base: "{colors.code.amber}", _dark: "{colors.code.amberBright}" } },
             // Diff lines. `signal.green`/`red` miss 4.5:1 on `bg.raised` in light mode.
             inserted: { value: { base: "{colors.moss.600}", _dark: "{colors.signal.greenBright}" } },
-            deleted: { value: { base: "{colors.coral.700}", _dark: "{colors.signal.redBright}" } },
+            deleted: { value: { base: "{colors.vermilion.700}", _dark: "{colors.signal.redBright}" } },
             changed: { value: { base: "{colors.ochre.600}", _dark: "{colors.ochre.400}" } },
           },
 
@@ -284,9 +290,9 @@ export default defineConfig({
           /** iOS-style bottom sheet with inset grouped lists. The card is always
            *  lighter than the backdrop it sits on, in both themes. */
           sheet: {
-            bg: { value: { base: "{colors.sand.200}", _dark: "{colors.ink.900}" } },
-            group: { value: { base: "{colors.sand.50}", _dark: "{colors.ink.850}" } },
-            groupActive: { value: { base: "{colors.sand.300}", _dark: "{colors.ink.800}" } },
+            bg: { value: { base: "{colors.paper.200}", _dark: "{colors.graphite.900}" } },
+            group: { value: { base: "{colors.paper.50}", _dark: "{colors.graphite.850}" } },
+            groupActive: { value: { base: "{colors.paper.300}", _dark: "{colors.graphite.800}" } },
             grabber: { value: { base: "rgba(10, 10, 10, 0.18)", _dark: "rgba(255, 255, 255, 0.22)" } },
           },
 
@@ -337,10 +343,10 @@ export default defineConfig({
             menuSurface: { value: "#262626" },
             menuBorder: { value: "#252525" },
             menuItemHover: { value: "#404040" },
-            // Keyboard focus ring: the same coral as `border.focus` in dark mode, so
-            // focus reads the same across the site. 6.7:1 on the canvas, 4.8:1 on
-            // `control` and `menuSurface`, 3.3:1 on a highlighted `menuItemHover`.
-            focus: { value: "{colors.coral.500}" },
+            // Keyboard focus ring: the same vermilion as `border.focus` in dark mode, so
+            // focus reads the same across the site. 6.8:1 on the canvas, 4.8:1 on
+            // `control` and 4.9:1 on `menuSurface`, 3.3:1 on a highlighted `menuItemHover`.
+            focus: { value: "{colors.vermilion.500}" },
             separator: { value: "#3F3F46" },
             headingFrom: { value: "#F5F5F5" },
             headingTo: { value: "#999999" },
