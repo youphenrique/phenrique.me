@@ -12,81 +12,38 @@ interface Props {
 }
 
 const { href, title, date, dateTime, description, draftLabel } = Astro.props;
-
-const transition = {
-  transitionDuration: "250ms",
-  transitionTimingFunction: "ease-in-out",
-  _motionReduce: { transitionDuration: "0ms" },
-} as const;
 ---
 
 <a
   href={href}
-  class={`group ${css({
+  class={css({
     display: "flex",
-    alignItems: "flex-start",
-    gap: 3.5,
+    flexDirection: "column",
+    minWidth: 0,
     py: 3,
-    px: 4,
+    // Hanging hover: the padding is pulled back out with a negative margin, so
+    // the text lines up with the page title and the hover surface bleeds into
+    // the gutter instead of indenting the list.
+    px: { base: 3, md: 4 },
+    mx: { base: -3, md: -4 },
     borderRadius: "xl",
     transitionProperty: "background-color",
-    ...transition,
+    transitionDuration: "250ms",
+    transitionTimingFunction: "ease-in-out",
+    _motionReduce: { transitionDuration: "0ms" },
     _hover: { backgroundColor: "bg.hover" },
     _focusVisible: {
       backgroundColor: "bg.hover",
       outline: "2px solid token(colors.border.focus)",
       outlineOffset: "2px",
     },
-  })}`}
+  })}
 >
-  <span
-    class={css({
-      display: "grid",
-      flexShrink: 0,
-      placeItems: "center",
-      w: 10,
-      h: 10,
-      borderRadius: "xl",
-      border: "1px solid",
-      borderColor: "border.hairline",
-      backgroundColor: "bg.raised",
-      color: "text.faint",
-    })}
-  >
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M6 3h7l5 5v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"></path>
-      <path d="M13 3v5h5"></path>
-      <g
-        class={css({
-          opacity: 0,
-          transitionProperty: "opacity",
-          ...transition,
-          _groupHover: { opacity: 1 },
-          _groupFocusVisible: { opacity: 1 },
-        })}
-      >
-        <path d="M8.5 12.5h7"></path>
-        <path d="M8.5 15.5h7"></path>
-        <path d="M8.5 18.5h4"></path>
-      </g>
-    </svg>
+  <span class={css({ fontSize: "md", fontWeight: "medium", color: "text.primary", lineHeight: "1.5" })}>
+    {title}
   </span>
-  <span class={css({ display: "flex", flexDirection: "column", minWidth: 0, flex: 1 })}>
-    <span class={css({ fontSize: "md", fontWeight: "medium", color: "text.primary", lineHeight: "1.5" })}>
-      {title}
-    </span>
-    {
-      /*
+  {
+    /*
       Always rendered, at every card. The description is what tells a reader
       whether to open the post, so it is not hover-only: a pointer is the one
       input that can reveal it, and it leaves touch and scanning with a bare
@@ -94,27 +51,46 @@ const transition = {
       hovering down the list from pushing the next card out from under the
       cursor.
     */
+  }
+  <span
+    class={css({
+      display: { base: "block", sm: "flex" },
+      minWidth: 0,
+      fontSize: "sm",
+      lineHeight: "1.5",
+      color: "text.muted",
+    })}
+  >
+    {
+      /*
+        The status follows the date, never leads it: in front, it pushed every
+        draft's date out of line with the others; after the title, it wrapped
+        onto a line of its own whenever the title filled the row. Here it reads
+        like the article header's own "date • Draft • 5 min read".
+      */
     }
+    <span class={css({ display: "flex", alignItems: "center", gap: 1.5, flexShrink: 0 })}>
+      <time datetime={dateTime}>{date}</time>
+      {draftLabel && <DraftBadge label={draftLabel} />}
+    </span>
+    <span aria-hidden="true" class={css({ display: { base: "none", sm: "inline" }, flexShrink: 0 })}>
+      &nbsp;·&nbsp;
+    </span>
     <span
       class={css({
-        // Two lines below `sm`, one above. A single line at 375px carries about
-        // four words of description, which is not enough to decide on a post;
-        // the wider card fits a useful clamp on one. Either way the height is
-        // fixed at render, so nothing moves under the cursor.
+        // Two lines on its own row below `sm`, one line after the date above.
+        // A single line at 375px carries about four words, which is not
+        // enough to decide on a post. Either way the height is fixed at
+        // render, so nothing moves under the cursor.
         display: { base: "-webkit-box", sm: "block" },
         boxOrient: "vertical",
         lineClamp: "2",
+        minWidth: 0,
         overflow: "hidden",
         textOverflow: "ellipsis",
         whiteSpace: { base: "normal", sm: "nowrap" },
-        fontSize: "sm",
-        lineHeight: "1.5",
-        color: "text.muted",
       })}
     >
-      {draftLabel && <><DraftBadge label={draftLabel} />{" "}</>}
-      <time datetime={dateTime}>{date}</time>
-      <span aria-hidden="true">&nbsp;·&nbsp;</span>
       {description}
     </span>
   </span>

@@ -51,7 +51,7 @@ const posts = listedPosts(await getCollection("writing"), (Astro.currentLocale ?
           />
         </div>
       ) : (
-        <ul class={vstack({ mt: 8, mb: 20, alignItems: "stretch", gap: 3 })}>
+        <ul class={vstack({ mt: 8, mb: 20, alignItems: "stretch", gap: 1 })}>
           {posts.map((post) => (
             <li>
               <PostCard
