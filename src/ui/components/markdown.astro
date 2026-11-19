@@ -40,22 +40,19 @@ const document = body === undefined ? null : await parseContent(body, resolvedLo
 const components = createProseComponents(resolvedLocale);
 
 const tocEntries = toc && document !== null ? flattenToc(document.meta.toc) : [];
-const proseDictionary = dictionaryFor(resolvedLocale);
-const tocLabel = proseDictionary["toc-label"];
-const topLabel = proseDictionary["top-label"];
+const tocLabel = dictionaryFor(resolvedLocale)["toc-label"];
 ---
 
 {document !== null && <MarkdownDocument value={document} components={components} className={className} />}
 {
   tocEntries.length >= TOC_MIN_ENTRIES && (
     <>
-      <TocRail entries={tocEntries} label={tocLabel} topLabel={topLabel} />
+      <TocRail entries={tocEntries} label={tocLabel} />
       {/* The inverse of the rail's media query: hydrated only where the rail is not drawn. */}
       <TocSheet
         client:media="not all and (min-width: 80rem) and (hover: hover)"
         entries={tocEntries}
         label={tocLabel}
-        topLabel={topLabel}
       />
     </>
   )

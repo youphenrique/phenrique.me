@@ -6,11 +6,9 @@ interface Props {
   entries: TocEntry[];
   /** Accessible name of the navigation, and the label above its links. */
   label: string;
-  /** Label for the card's first row, which returns to the top of the page. */
-  topLabel: string;
 }
 
-const { entries, label, topLabel } = Astro.props;
+const { entries, label } = Astro.props;
 ---
 
 {
@@ -100,43 +98,6 @@ const { entries, label, topLabel } = Astro.props;
       >
         {label}
       </p>
-      <div class={css({ pb: 1, mb: 1, borderBottom: "1px solid token(colors.border.hairline)" })}>
-        <a
-          href="#main"
-          class={css({
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-            px: 2.5,
-            py: 1.5,
-            borderRadius: "md",
-            fontSize: "0.8125rem",
-            color: "text.muted",
-            textDecoration: "none",
-            transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out",
-            _hover: { color: "text.primary", bg: "bg.hover" },
-            _focusVisible: { outline: "2px solid token(colors.border.focus)", outlineOffset: "-2px" },
-          })}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="13"
-            height="13"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path d="m5 12 7-7 7 7"></path>
-            <path d="M12 19V5"></path>
-          </svg>
-          {topLabel}
-        </a>
-      </div>
       <ol>
         {
           entries.map((entry) => (
@@ -204,27 +165,8 @@ const { entries, label, topLabel } = Astro.props;
   }
   <div
     aria-hidden="true"
-    class={css({ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 1.5, py: 10, pl: 8, pr: 5 })}
+    class={css({ display: "flex", flexDirection: "column", alignItems: "flex-end", py: 10, pl: 8, pr: 5 })}
   >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="10"
-      height="10"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="3.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class={css({
-        color: "border.strong",
-        transition: "color 0.2s ease",
-        _groupHover: { color: "text.accent" },
-        _motionReduce: { transition: "none" },
-      })}
-    >
-      <path d="m5 12 7-7 7 7"></path>
-    </svg>
     <ol class={css({ display: "flex", flexDirection: "column" })}>
       {
         entries.map((entry) => (
