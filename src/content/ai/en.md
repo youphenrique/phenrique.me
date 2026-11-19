@@ -5,6 +5,8 @@ description: "How artificial intelligence is used — and not used — on this s
 
 We live in an era where AI can produce endless content with minimal effort. That makes intentionality, human thought, and genuine care more valuable, not less. This page is the honest account of where the machines are in this space and where they are not: what I let them write, what I use them for, and what I have done to make this site legible to the ones that come here to read.
 
+https://www.slopmanifesto.com/
+
 ## What is written by a human
 
 ::callout{type="note" title="Human-authored writing"}

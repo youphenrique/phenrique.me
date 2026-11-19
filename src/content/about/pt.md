@@ -61,7 +61,7 @@ Este site é construído com [Astro](https://astro.build) e hospedado na [Vercel
  
 A forma mais confiável de falar comigo é por [e-mail](mailto:pauloh1288@gmail.com). Leio tudo e costumo responder à maioria das mensagens em poucos dias. Não há formulário de contato neste site por uma razão intencional: formulário exige banco de dados, e um site pessoal não tem por que manter um.
  
-Além disso, estou no [GitHub](https://github.com/youphenrique) como youphenrique — o lugar ideal para reports de bugs ou enviar pull requests em projetos que mantenho. Também estou no [X](https://x.com/youphenrique) e no [LinkedIn](https://www.linkedin.com/in/phenrique7/). Se quiser acompanhar conteúdos mais informais, não técnicos e do dia a dia, você também pode me seguir no [Instagram](https://www.instagram.com/youphenrique).
+Além disso, estou no [GitHub](https://github.com/mephenrique) como mephenrique — o lugar ideal para reports de bugs ou enviar pull requests em projetos que mantenho. Também estou no [X](https://x.com/mephenrique) e no [LinkedIn](https://www.linkedin.com/in/mephenrique/). Se quiser acompanhar conteúdos mais informais, não técnicos e do dia a dia, você também pode me seguir no [Instagram](https://www.instagram.com/mephenrique).
 
 ::callout{type="warning" title="Vale a pena escrever"}
 Por favor, evite mensagens genéricas em massa, troca de links, ofertas de guest posts e serviços de SEO. Não aceito parcerias pagas nem links patrocinados em nenhum lugar deste site.

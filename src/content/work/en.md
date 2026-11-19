@@ -65,7 +65,7 @@ languages:
     level: "Beginner"
 ---
 
-I'm a product-minded software engineer with :yoe years of experience. I take messy, manual operational workflows and turn them into web products people can use to make their work faster, easier, and more reliable.
+I'm a product-minded software engineer with :yoe years of experience. I take messy, manual operational workflows and turn them into software products people can use to make their work faster, easier, and more reliable.
 
 ::callout{type="insight" title="What I'm open to"}
 I do my best work on small teams and highly collaborative teams that have autonomy and ownership over what they build. The roles I'm looking for:
