@@ -3,7 +3,7 @@ title: "brutils"
 tagline: "The essential Brazilian toolkit for the modern web."
 description: "An open-source TypeScript toolkit for Brazilian business rules — validating, formatting and generating data like CPF and CNPJ."
 date: "2025-06-01"
-repoURL: "https://github.com/youphenrique/brutils"
+repoURL: "https://github.com/mephenrique/brutils"
 wordmark:
   segments:
     - text: "b"
