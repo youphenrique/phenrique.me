@@ -1,6 +1,7 @@
 import { defineCollection } from "astro:content";
 import { z } from "astro/zod";
 import { glob } from "astro/loaders";
+import { WRITING_KINDS } from "./utils/writing-kinds.ts";
 
 const homePages = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/home" }),
@@ -66,6 +67,13 @@ const writing = defineCollection({
     locale: z.enum(["en", "pt"]),
     date: z.coerce.date(),
     draft: z.boolean().optional(),
+    /**
+     * `article` is a comprehensive piece; `note` is a short, single-thought
+     * post — longer than a tweet, shorter than an argument. The writing index
+     * filters on it (`/writing/articles`, `/writing/notes`). Defaults to
+     * `article` so a post only says so when it is the exception.
+     */
+    kind: z.enum(WRITING_KINDS).default("article"),
     /**
      * Shared by the two files of one article, one per locale. Slugs are
      * translated too, so this is the only thing tying a pair together — see

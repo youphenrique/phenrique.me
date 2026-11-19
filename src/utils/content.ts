@@ -1,28 +1,24 @@
 import { LOCALES, localizedPath, type Alternates } from "./i18n-routes.ts";
 import type { CollectionEntry } from "astro:content";
+import { assertSlugIsFree } from "./writing-kinds.ts";
 
-function postsForLocale(
-  posts: CollectionEntry<"writing">[],
-  locale: "en" | "pt",
-): CollectionEntry<"writing">[] {
-  return posts
-    .filter((post) => post.data.locale === locale)
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+function postsForLocale(posts: CollectionEntry<"writing">[], locale: "en" | "pt"): CollectionEntry<"writing">[] {
+  const local = posts.filter((post) => post.data.locale === locale);
+
+  // Every listing and every route goes through here, so this is the one place
+  // a slug that would be shadowed by `/writing/notes` can be caught.
+  for (const post of local) assertSlugIsFree(post.data.slug);
+
+  return local.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
 /** All posts are public; draft status is displayed to readers. */
-export function listedPosts(
-  posts: CollectionEntry<"writing">[],
-  locale: "en" | "pt",
-): CollectionEntry<"writing">[] {
+export function listedPosts(posts: CollectionEntry<"writing">[], locale: "en" | "pt"): CollectionEntry<"writing">[] {
   return postsForLocale(posts, locale);
 }
 
 /** Every post in the index has a generated page. */
-export function routablePosts(
-  posts: CollectionEntry<"writing">[],
-  locale: "en" | "pt",
-): CollectionEntry<"writing">[] {
+export function routablePosts(posts: CollectionEntry<"writing">[], locale: "en" | "pt"): CollectionEntry<"writing">[] {
   return postsForLocale(posts, locale);
 }
 
@@ -37,10 +33,7 @@ export function routablePosts(
  *
  * Only translations that have a corresponding entry are included.
  */
-export function postAlternates(
-  posts: CollectionEntry<"writing">[],
-  post: CollectionEntry<"writing">,
-): Alternates {
+export function postAlternates(posts: CollectionEntry<"writing">[], post: CollectionEntry<"writing">): Alternates {
   const self = { [post.data.locale]: localizedPath(`/writing/${post.data.slug}`, post.data.locale) };
   const key = post.data.translationKey;
 

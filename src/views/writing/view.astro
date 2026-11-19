@@ -7,16 +7,22 @@ import { vstack } from "../../../styled-system/patterns";
 import { css } from "../../../styled-system/css";
 import PostCard from "./_components/post-card.astro";
 import EmptyState from "./_components/empty-state.astro";
+import KindFilter from "./_components/kind-filter.astro";
 import { listedPosts } from "../../utils/content";
+import { localizedPath, type Locale } from "../../utils/i18n-routes.ts";
+import { KIND_SEGMENTS, WRITING_KINDS, type WritingKind } from "../../utils/writing-kinds.ts";
 import type { WritingDictionary } from "../../i18n/writing/types.ts";
 
 interface Props {
-  title: string;
-  description: string;
   dict: WritingDictionary;
+  /** Narrows the index to one kind; unset is the full list. */
+  kind?: WritingKind;
 }
 
-const dateFormatter = new Intl.DateTimeFormat(Astro.currentLocale, {
+const { dict, kind } = Astro.props;
+const locale = (Astro.currentLocale ?? "en") as Locale;
+
+const dateFormatter = new Intl.DateTimeFormat(locale, {
   day: "numeric",
   month: "short",
   year: "numeric",
@@ -25,13 +31,39 @@ const dateFormatter = new Intl.DateTimeFormat(Astro.currentLocale, {
   timeZone: "UTC",
 });
 
-const posts = listedPosts(await getCollection("writing"), (Astro.currentLocale ?? "en") as "en" | "pt");
+const allPosts = listedPosts(await getCollection("writing"), locale);
+const posts = kind ? allPosts.filter((post) => post.data.kind === kind) : allPosts;
+
+const counts = Object.fromEntries(
+  WRITING_KINDS.map((k) => [k, allPosts.filter((post) => post.data.kind === k).length]),
+) as Record<WritingKind, number>;
+
+/*
+  A filter with one populated option filters nothing, so the full index only
+  shows it once both kinds exist in this locale. A filtered page always shows
+  it: that page is reachable by address, and the reader needs the way back.
+*/
+const showFilter = kind !== undefined || WRITING_KINDS.every((k) => counts[k] > 0);
+
+const filterOptions = [
+  { label: dict["filter-all"], href: localizedPath("/writing", locale), count: allPosts.length, current: !kind },
+  ...WRITING_KINDS.map((k) => ({
+    label: dict.kinds[k].plural,
+    href: localizedPath(`/writing/${KIND_SEGMENTS[k]}`, locale),
+    count: counts[k],
+    current: kind === k,
+  })),
+];
+
+const title = kind ? `${dict.kinds[kind].plural} · ${dict["page-title"]}` : dict["page-title"];
+const description = kind ? dict.kinds[kind].description : dict["page-description"];
 ---
 
-<MainLayout title={Astro.props.title} description={Astro.props.description} lang={Astro.currentLocale ?? "en"}>
+<MainLayout title={title} description={description} lang={locale}>
   <Container>
-    <div class={vstack({ mt: 32, alignItems: "stretch", gap: 8 })}>
+    <div class={vstack({ mt: 32, alignItems: "stretch", gap: 6 })}>
       <h1
+        transition:name="writing-title"
         class={"fraunces-font " +
           css({
             fontSize: "4xl",
@@ -39,25 +71,27 @@ const posts = listedPosts(await getCollection("writing"), (Astro.currentLocale ?
             color: "text.primary",
           })}
       >
-        {Astro.props.dict["page-title"]}
+        {dict["page-title"]}
       </h1>
+      {showFilter && <KindFilter label={dict["filter-label"]} options={filterOptions} />}
     </div>
     {
       posts.length === 0 ? (
         <div class={css({ mt: 8, mb: 20 })}>
           <EmptyState
-            title={Astro.props.dict["empty-state"].title}
-            description={Astro.props.dict["empty-state"].description}
+            title={kind ? dict.kinds[kind].empty : dict["empty-state"].title}
+            description={dict["empty-state"].description}
           />
         </div>
       ) : (
-        <ul class={vstack({ mt: 8, mb: 20, alignItems: "stretch", gap: 1 })}>
+        <ul class={vstack({ mt: showFilter ? 4 : 8, mb: 20, alignItems: "stretch", gap: 1 })}>
           {posts.map((post) => (
             <li>
               <PostCard
-                href={post.data.locale === "pt" ? `/pt/writing/${post.data.slug}` : `/writing/${post.data.slug}`}
+                href={localizedPath(`/writing/${post.data.slug}`, post.data.locale)}
                 title={post.data.title}
-                draftLabel={post.data.draft ? Astro.props.dict["draft-label"] : undefined}
+                draftLabel={post.data.draft ? dict["draft-label"] : undefined}
+                kindLabel={!kind && post.data.kind === "note" ? dict.kinds.note.singular : undefined}
                 date={dateFormatter.format(post.data.date)}
                 dateTime={post.data.date.toISOString()}
                 description={post.data.description}

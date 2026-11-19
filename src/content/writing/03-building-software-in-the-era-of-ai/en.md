@@ -4,6 +4,7 @@ description: "A personal reflection on professional identity, learning, and buil
 slug: "building-software-in-the-era-of-ai"
 locale: "en"
 date: "2026-11-07"
+kind: "note"
 draft: true
 ---
 

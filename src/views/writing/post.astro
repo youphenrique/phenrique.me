@@ -73,16 +73,30 @@ const jsonLd = {
           <FormattedDate date={post.data.date} />
         </div>
         {
+          post.data.kind === "note" && (
+            <>
+              &bull; <div class={css({ fontSize: "sm" })}>{dict.kinds.note.singular}</div>
+            </>
+          )
+        }
+        {
           post.data.draft && (
             <>
               &bull; <DraftBadge label={dict["draft-label"]} />
             </>
           )
         }
-        &bull;
-        <div class={css({ fontSize: "sm" })}>
-          {readingTimeMinutes(post.body ?? "")}&nbsp;{dict["reading-time"]}
-        </div>
+        {
+          /* A note is read in under a minute by definition; "1 min read" says nothing. */
+          post.data.kind !== "note" && (
+            <>
+              &bull;
+              <div class={css({ fontSize: "sm" })}>
+                {readingTimeMinutes(post.body ?? "")}&nbsp;{dict["reading-time"]}
+              </div>
+            </>
+          )
+        }
       </div>
       {
         /*

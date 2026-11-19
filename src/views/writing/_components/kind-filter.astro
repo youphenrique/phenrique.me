@@ -1,0 +1,81 @@
+---
+import { css } from "../../../../styled-system/css";
+
+interface Option {
+  label: string;
+  href: string;
+  count: number;
+  current: boolean;
+}
+
+interface Props {
+  label: string;
+  options: Option[];
+}
+
+const { label, options } = Astro.props;
+
+/*
+  Links, not buttons: each option is its own static page, so the filter needs
+  no script, every view has an address worth sharing, and the ClientRouter
+  turns the navigation into a cross-fade. `aria-current="page"` carries the
+  selected state for assistive tech; the styling reads it too, so the two
+  cannot disagree.
+
+  The row hangs by the pill's own padding, like the post cards below it, so the
+  first label lines up with the page title and the list's text.
+*/
+---
+
+<nav aria-label={label} transition:name="writing-kind-filter">
+  <ul class={css({ display: "flex", flexWrap: "wrap", gap: 1, ml: -3 })}>
+    {
+      options.map((option) => (
+        <li>
+          <a
+            href={option.href}
+            aria-current={option.current ? "page" : undefined}
+            class={css({
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 1.5,
+              h: 8,
+              px: 3,
+              borderRadius: "full",
+              border: "1px solid transparent",
+              fontSize: "sm",
+              fontWeight: "medium",
+              color: "text.muted",
+              transitionProperty: "color, background-color, border-color",
+              transitionDuration: "150ms",
+              transitionTimingFunction: "ease-out",
+              _motionReduce: { transitionDuration: "0ms" },
+              _hover: { color: "text.primary", backgroundColor: "bg.hover" },
+              _focusVisible: {
+                outline: "2px solid token(colors.border.focus)",
+                outlineOffset: "2px",
+              },
+              "&[aria-current=page]": {
+                color: "text.primary",
+                backgroundColor: "bg.raised",
+                borderColor: "border.hairline",
+              },
+            })}
+          >
+            {option.label}
+            {/* Incidental: the label alone is the option's name. */}
+            <span
+              class={css({
+                color: "text.faint",
+                fontWeight: "normal",
+                fontVariantNumeric: "tabular-nums",
+              })}
+            >
+              {option.count}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

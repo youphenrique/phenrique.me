@@ -89,13 +89,24 @@ async function pagesFor(locale: Locale): Promise<Link[]> {
   return links;
 }
 
+/** Title with the markers the index shows: "Building software (Note, Draft)". */
+function postTitle(post: Awaited<ReturnType<typeof getCollection<"writing">>>[number], locale: Locale): string {
+  const pt = locale === "pt";
+  const markers = [
+    post.data.kind === "note" ? (pt ? "Nota" : "Note") : undefined,
+    post.data.draft ? (pt ? "Rascunho" : "Draft") : undefined,
+  ].filter((marker) => marker !== undefined);
+
+  return markers.length > 0 ? `${post.data.title} (${markers.join(", ")})` : post.data.title;
+}
+
 function articlesFor(posts: Awaited<ReturnType<typeof getCollection<"writing">>>, locale: Locale): Link[] {
   const prefix = locale === "en" ? "" : `/${locale}`;
 
   // `listedPosts` is what the writing index shows, and an
   // agent should see the site the way a reader does.
   return listedPosts(posts, locale).map((post) => ({
-    title: post.data.draft ? `${post.data.title} (${locale === "pt" ? "Rascunho" : "Draft"})` : post.data.title,
+    title: postTitle(post, locale),
     path: `${prefix}/writing/${post.data.slug}`,
     description: post.data.description,
   }));
