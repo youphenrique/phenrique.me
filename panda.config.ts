@@ -251,11 +251,29 @@ export default defineConfig({
             emphasis: { value: { base: "{colors.vermilion.700}", _dark: "{colors.vermilion.300}" } },
           },
 
-          /** Status. Reserved for machine-reported state, never decoration. */
+          /** Status. Reserved for state, never decoration. */
           status: {
             success: { value: { base: "{colors.signal.green}", _dark: "{colors.signal.greenBright}" } },
             danger: { value: { base: "{colors.signal.red}", _dark: "{colors.signal.redBright}" } },
             rating: { value: { base: "{colors.ochre.500}", _dark: "{colors.ochre.400}" } },
+            /**
+             * Not final yet — a draft. A badge set (`surface`/`text`/`border`,
+             * used together) on the ochre steps the tints use, so it inherits
+             * their verified 4.5:1. It is its own role rather than borrowing
+             * `tint.ochre`: tints classify content, this reports state. Amber
+             * keeps it apart from the neutral grey of controls such as the
+             * writing filter, which a neutral badge was mistaken for.
+             */
+            pending: {
+              surface: { value: { base: "{colors.ochre.100}", _dark: "{colors.ochre.900}" } },
+              text: { value: { base: "{colors.ochre.600}", _dark: "{colors.ochre.400}" } },
+              border: {
+                value: {
+                  base: "color-mix(in oklab, {colors.ochre.600} 22%, transparent)",
+                  _dark: "color-mix(in oklab, {colors.ochre.400} 26%, transparent)",
+                },
+              },
+            },
           },
 
           /** Code highlighting. Shiki's css-variables theme writes every token as
@@ -296,32 +314,70 @@ export default defineConfig({
             grabber: { value: { base: "rgba(10, 10, 10, 0.18)", _dark: "rgba(255, 255, 255, 0.22)" } },
           },
 
-          /** Content classification. `surface` + `text` are a matched pair —
-           *  always use them together, never mix hues across a pair. */
+          /** Content classification. `surface` + `text` (+ `border`) are a
+           *  matched set — always use them together, never mix hues across a set.
+           *  `border` is the text hue at low strength, so the ring reads as a
+           *  slightly deeper edge of the same surface rather than an outline. */
           tint: {
             sage: {
               surface: { value: { base: "{colors.sage.100}", _dark: "{colors.sage.900}" } },
               text: { value: { base: "{colors.sage.600}", _dark: "{colors.sage.400}" } },
+              border: {
+                value: {
+                  base: "color-mix(in oklab, {colors.sage.600} 22%, transparent)",
+                  _dark: "color-mix(in oklab, {colors.sage.400} 26%, transparent)",
+                },
+              },
             },
             moss: {
               surface: { value: { base: "{colors.moss.100}", _dark: "{colors.moss.900}" } },
               text: { value: { base: "{colors.moss.600}", _dark: "{colors.moss.400}" } },
+              border: {
+                value: {
+                  base: "color-mix(in oklab, {colors.moss.600} 22%, transparent)",
+                  _dark: "color-mix(in oklab, {colors.moss.400} 26%, transparent)",
+                },
+              },
             },
             sky: {
               surface: { value: { base: "{colors.sky.100}", _dark: "{colors.sky.900}" } },
               text: { value: { base: "{colors.sky.600}", _dark: "{colors.sky.400}" } },
+              border: {
+                value: {
+                  base: "color-mix(in oklab, {colors.sky.600} 22%, transparent)",
+                  _dark: "color-mix(in oklab, {colors.sky.400} 26%, transparent)",
+                },
+              },
             },
             periwinkle: {
               surface: { value: { base: "{colors.periwinkle.100}", _dark: "{colors.periwinkle.900}" } },
               text: { value: { base: "{colors.periwinkle.600}", _dark: "{colors.periwinkle.400}" } },
+              border: {
+                value: {
+                  base: "color-mix(in oklab, {colors.periwinkle.600} 22%, transparent)",
+                  _dark: "color-mix(in oklab, {colors.periwinkle.400} 26%, transparent)",
+                },
+              },
             },
             clay: {
               surface: { value: { base: "{colors.clay.100}", _dark: "{colors.clay.900}" } },
               text: { value: { base: "{colors.clay.600}", _dark: "{colors.clay.400}" } },
+              border: {
+                value: {
+                  base: "color-mix(in oklab, {colors.clay.600} 22%, transparent)",
+                  _dark: "color-mix(in oklab, {colors.clay.400} 26%, transparent)",
+                },
+              },
             },
             ochre: {
               surface: { value: { base: "{colors.ochre.100}", _dark: "{colors.ochre.900}" } },
               text: { value: { base: "{colors.ochre.600}", _dark: "{colors.ochre.400}" } },
+              border: {
+                value: {
+                  base: "color-mix(in oklab, {colors.ochre.600} 22%, transparent)",
+                  _dark: "color-mix(in oklab, {colors.ochre.400} 26%, transparent)",
+                },
+              },
             },
           },
 

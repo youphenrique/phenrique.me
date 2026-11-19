@@ -236,7 +236,9 @@ The translucent ones are deliberate exceptions to "use a ramp step": a stroke th
 | `status.danger`  | `signal.red`   | `signal.redBright`   | diff deletions  |
 | `status.rating`  | `ochre.500`    | `ochre.400`          | filled stars    |
 
-Reserved for machine-reported state. Never decoration.
+Reserved for state. Never decoration.
+
+`status.pending` is a badge set — `surface` / `text` / `border`, used together like a tint — for content that is not final yet, i.e. drafts. It sits on the same ochre steps as `tint.ochre` (`100`/`600` light, `900`/`400` dark), so it carries that pair's verified contrast. It is a separate role because it reports state rather than classifying content, and it is amber because a neutral badge is the same grey pill as a selected control (the writing filter), and read as one. Use it through `<Badge tone="pending">`.
 
 ### `syntax.*` — code highlighting
 
@@ -282,23 +284,27 @@ The invariant: **the group card is always lighter than the backdrop it sits on**
 
 ### `tint.*` — content classification
 
-Twelve tokens, six matched pairs:
+Eighteen tokens, six matched sets:
 
 ```ts
-tint.sage.surface / tint.sage.text;
-tint.moss.surface / tint.moss.text;
-tint.sky.surface / tint.sky.text;
-tint.periwinkle.surface / tint.periwinkle.text;
-tint.clay.surface / tint.clay.text;
-tint.ochre.surface / tint.ochre.text;
+tint.sage.surface / tint.sage.text / tint.sage.border;
+tint.moss.surface / tint.moss.text / tint.moss.border;
+tint.sky.surface / tint.sky.text / tint.sky.border;
+tint.periwinkle.surface / tint.periwinkle.text / tint.periwinkle.border;
+tint.clay.surface / tint.clay.text / tint.clay.border;
+tint.ochre.surface / tint.ochre.text / tint.ochre.border;
 ```
 
-```ts
-// a genre or tag chip
-css({ bg: "tint.sage.surface", color: "tint.sage.text" });
+`border` is the set's text hue mixed to ~22% (light) / ~26% (dark) over transparent, so the ring reads as a slightly deeper edge of the same surface, not as an outline in a second colour.
+
+Don't hand-roll a chip: use `Badge` (`src/ui/components/badge.astro`), which applies a whole set from a `tone` prop — a hue, `pending` for a draft, or `neutral` (the default) for a plain label. Keep `neutral` away from controls: it is the same grey pill as a selected filter. It is a 20px pill (`xs` text, `full` radius, 1px border) sized to sit inside a `sm` metadata line without growing it.
+
+```astro
+<Badge tone={hue}>{genre}</Badge>
+<Badge tone="pending">{draftLabel}</Badge>
 ```
 
-**Always use a pair together.** Mixing `tint.sky.surface` with
+**Always use a set together.** Mixing `tint.sky.surface` with
 `tint.clay.text` is not a supported combination and its contrast is unverified.
 
 #### Assigning a hue to a category
@@ -342,14 +348,14 @@ Panda resolves styles statically, so a computed token path generates **no CSS**:
 css({ bg: `tint.${hue}.surface` })
 
 // ✅ literal strings per hue, selected at render time
-const TINT_CLASS: Record<TintHue, string> = {
-  sage: css({ bg: "tint.sage.surface", color: "tint.sage.text" }),
+const TONE_CLASS: Record<BadgeTone, string> = {
+  sage: css({ bg: "tint.sage.surface", color: "tint.sage.text", borderColor: "tint.sage.border" }),
   // …one entry per hue
 };
 
 class
 
-= { TINT_CLASS[hue] }
+= { TONE_CLASS[tone] }
 ```
 
 ### `linkbio.*` — scoped exception

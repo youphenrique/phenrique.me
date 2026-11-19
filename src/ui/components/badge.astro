@@ -1,0 +1,63 @@
+---
+import { css, cx } from "../../../styled-system/css";
+import type { TintHue } from "../../utils/tint.ts";
+
+/**
+ * A hue classifies content (a genre) and follows the `tint.*` rules — pick one
+ * with `tintForKey`, or pin a small known vocabulary, never by list index.
+ * `pending` reports state (a draft). `neutral` is a plain label; keep it away
+ * from controls, whose selected state is the same grey pill.
+ */
+export type BadgeTone = "neutral" | "pending" | TintHue;
+
+interface Props {
+  tone?: BadgeTone;
+  class?: string;
+}
+
+const { tone = "neutral", class: className } = Astro.props;
+
+// Literal token strings per tone: Panda extracts styles statically, so a
+// template literal like `tint.${hue}.surface` would generate no CSS at all.
+const TONE_CLASS: Record<BadgeTone, string> = {
+  neutral: css({ bg: "bg.raised", color: "text.secondary", borderColor: "border.subtle" }),
+  pending: css({ bg: "status.pending.surface", color: "status.pending.text", borderColor: "status.pending.border" }),
+  sage: css({ bg: "tint.sage.surface", color: "tint.sage.text", borderColor: "tint.sage.border" }),
+  moss: css({ bg: "tint.moss.surface", color: "tint.moss.text", borderColor: "tint.moss.border" }),
+  sky: css({ bg: "tint.sky.surface", color: "tint.sky.text", borderColor: "tint.sky.border" }),
+  periwinkle: css({
+    bg: "tint.periwinkle.surface",
+    color: "tint.periwinkle.text",
+    borderColor: "tint.periwinkle.border",
+  }),
+  clay: css({ bg: "tint.clay.surface", color: "tint.clay.text", borderColor: "tint.clay.border" }),
+  ochre: css({ bg: "tint.ochre.surface", color: "tint.ochre.text", borderColor: "tint.ochre.border" }),
+};
+---
+
+<span
+  class={cx(
+    css({
+      display: "inline-flex",
+      alignItems: "center",
+      flexShrink: 0,
+      w: "fit-content",
+      // 20px tall: 16px line + 1px padding + 1px border, each side. It sits
+      // inside a 14px/1.5 metadata line (21px) without growing it, so a draft
+      // card is the same height as every other card in the list.
+      px: 2.5,
+      py: "1px",
+      fontSize: "xs",
+      lineHeight: "1rem",
+      fontWeight: "medium",
+      whiteSpace: "nowrap",
+      borderRadius: "full",
+      borderWidth: "1px",
+      borderStyle: "solid",
+    }),
+    TONE_CLASS[tone],
+    className,
+  )}
+>
+  <slot />
+</span>
